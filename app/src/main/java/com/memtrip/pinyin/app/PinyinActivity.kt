@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.memtrip.pinyin.Presenter
 import com.memtrip.pinyin.PresenterActivity
 import com.memtrip.pinyin.R
+import com.memtrip.pinyin.app.search.PinyinSearchActivity
 import kotlinx.android.synthetic.main.pinyin_activity.*
 import javax.inject.Inject
 
@@ -23,6 +24,9 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
         pinyin_activity_viewpager.adapter = fragmentAdapter
         pinyin_activity_viewpager.offscreenPageLimit = 2
         pinyin_activity_tablayout.setupWithViewPager(pinyin_activity_viewpager)
+
+        onClickEvent(pinyin_activity_search_cardview)
+                .subscribe(presenter().event())
     }
 
     override fun inject() {
@@ -32,6 +36,10 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
     override fun presenter(): Presenter<PinyinView> = presenter
 
     override fun view(): PinyinView = this
+
+    override fun navigateToSearch() {
+        startActivity(PinyinSearchActivity.newIntent(this))
+    }
 
     companion object {
         fun newIntent(context: Context): Intent =

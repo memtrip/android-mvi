@@ -33,6 +33,9 @@ interface PinyinDao {
     @Query("SELECT * FROM Pinyin ORDER BY romanLetterText ASC LIMIT :skip, :limit")
     fun get(skip: Int, limit: Int): Single<List<PinyinEntity>>
 
+    @Query("SELECT * FROM Pinyin WHERE romanLetterText LIKE :terms ORDER BY romanLetterText ASC")
+    fun search(terms: String): Single<List<PinyinEntity>>
+
     @Insert
     fun insertAll(pinyin: List<PinyinEntity>)
 
@@ -93,6 +96,17 @@ class GetPinyin @Inject internal constructor(
 
     fun get(skip: Int, limit: Int, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
             pinyinDao.get(skip, limit)
+                    .observeOn(schedulerProvider.main())
+                    .subscribeOn(schedulerProvider.thread())
+                    .subscribe(pinyin, error)
+}
+
+class SearchPinyin @Inject internal constructor(
+        private val pinyinDao: PinyinDao,
+        private val schedulerProvider: SchedulerProvider) {
+
+    fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
+            pinyinDao.search( terms+"%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
                     .subscribe(pinyin, error)

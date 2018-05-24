@@ -22,7 +22,12 @@
         </activity>
 
         <activity
-            android:name=".app.PinyinActivity" />
+            android:name=".app.PinyinActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".app.search.PinyinSearchActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

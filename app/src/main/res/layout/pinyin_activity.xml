@@ -9,7 +9,7 @@
     tools:context="com.memtrip.pinyin.app.EntryActivity">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/pinyin_activity_cardview"
+        android:id="@+id/pinyin_activity_search_cardview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
@@ -39,7 +39,7 @@
         android:layout_marginEnd="@dimen/padding_large_16dp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pinyin_activity_cardview"
+        app:layout_constraintTop_toBottomOf="@+id/pinyin_activity_search_cardview"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <android.support.v4.view.ViewPager
