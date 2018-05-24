@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".app.PinyinActivity" />
+
     </application>
 
 </manifest>

@@ -6,4 +6,7 @@
 
     <color name="window_background_color">#2D3047</color>
 
+    <color name="colorText">@color/colorPrimary</color>
+    <color name="colorTextInverse">#FFFFFF</color>
+
 </resources>

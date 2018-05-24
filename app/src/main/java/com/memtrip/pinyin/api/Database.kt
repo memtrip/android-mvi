@@ -20,8 +20,8 @@ abstract class AppDatabase : RoomDatabase() {
 @Entity(tableName = "Pinyin")
 data class PinyinEntity(
         @ColumnInfo(name = "sourceUrl") val id: String,
-        @ColumnInfo(name = "phoneticScriptText") val type: String,
-        @ColumnInfo(name = "romanLetterText") val contentId: String,
+        @ColumnInfo(name = "phoneticScriptText") val phoneticScriptText: String,
+        @ColumnInfo(name = "romanLetterText") val romanLetterText: String,
         @ColumnInfo(name = "audioSrc") val audioSrc: String?,
         @ColumnInfo(name = "englishTranslationText") val englishTranslationText: String,
         @ColumnInfo(name = "characterImageSrc") val characterImageSrc: String,
@@ -30,7 +30,7 @@ data class PinyinEntity(
 @Dao
 interface PinyinDao {
 
-    @Query("SELECT * FROM Pinyin ORDER BY romanLetterText DESC LIMIT :skip, :limit")
+    @Query("SELECT * FROM Pinyin ORDER BY romanLetterText ASC LIMIT :skip, :limit")
     fun get(skip: Int, limit: Int): Single<List<PinyinEntity>>
 
     @Insert
@@ -85,4 +85,15 @@ class CountPinyin @Inject internal constructor(
             Single.fromCallable({ pinyinDao.count() }).observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
                     .subscribe(hasPinyin, error)
+}
+
+class GetPinyin @Inject internal constructor(
+        private val pinyinDao: PinyinDao,
+        private val schedulerProvider: SchedulerProvider) {
+
+    fun get(skip: Int, limit: Int, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
+            pinyinDao.get(skip, limit)
+                    .observeOn(schedulerProvider.main())
+                    .subscribeOn(schedulerProvider.thread())
+                    .subscribe(pinyin, error)
 }

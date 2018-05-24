@@ -36,7 +36,7 @@ class ApiModule {
     internal fun pinyinApi(retrofit: Retrofit): PinyinApi = retrofit.create(PinyinApi::class.java)
 }
 
-class GetPinyin @Inject internal constructor(
+class FetchPinyin @Inject internal constructor(
         retrofit: Retrofit,
         private val schedulerProvider: SchedulerProvider) {
 

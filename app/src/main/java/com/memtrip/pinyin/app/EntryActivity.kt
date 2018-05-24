@@ -1,9 +1,6 @@
 package com.memtrip.pinyin.app
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
-import android.os.Handler
 
 import com.memtrip.pinyin.*
 import com.memtrip.pinyin.kit.gone
@@ -25,13 +22,9 @@ class EntryActivity : PresenterActivity<EntryView>(), EntryView {
                 .subscribe(presenter().event())
     }
 
-    override fun presenter(): Presenter<EntryView> {
-        return presenter
-    }
+    override fun presenter(): Presenter<EntryView> = presenter
 
-    override fun view(): EntryView {
-        return this
-    }
+    override fun view(): EntryView = this
 
     override fun inject() {
         DaggerEntryComponent
@@ -42,7 +35,7 @@ class EntryActivity : PresenterActivity<EntryView>(), EntryView {
     }
 
     override fun navigateToPinyin() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        startActivity(PinyinActivity.newIntent(this))
     }
 
     override fun showProgress() {

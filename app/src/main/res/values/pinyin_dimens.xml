@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="pinyin_activity_search_height">48dp</dimen>
+
+</resources>

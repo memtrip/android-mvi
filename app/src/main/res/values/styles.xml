@@ -7,6 +7,14 @@
         <item name="android:windowBackground">@color/window_background_color</item>
     </style>
 
+    <style name="TabLayout" parent="Base.Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/Tab</item>
+        <item name="tabSelectedTextColor">@color/colorAccent</item>
+    </style>
 
+    <style name="Tab" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/typography_body2</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
 
 </resources>

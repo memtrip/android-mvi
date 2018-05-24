@@ -4,13 +4,13 @@ import com.memtrip.pinyin.Event
 import com.memtrip.pinyin.Presenter
 import com.memtrip.pinyin.R
 import com.memtrip.pinyin.api.CountPinyin
-import com.memtrip.pinyin.api.GetAndSavePinyin
+import com.memtrip.pinyin.api.FetchAndSavePinyin
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 class EntryPresenter @Inject internal  constructor(
-        val getAndSavePinyin: GetAndSavePinyin,
+        val fetchAndSavePinyin: FetchAndSavePinyin,
         val countPinyin: CountPinyin): Presenter<EntryView>() {
 
     override fun first() {
@@ -34,8 +34,9 @@ class EntryPresenter @Inject internal  constructor(
             if (it > 0) {
                 view.navigateToPinyin()
             } else {
-                i(getAndSavePinyin.save(Action {
+                i(fetchAndSavePinyin.save(Action {
                     view.hideProgress()
+                    view.close()
                     view.navigateToPinyin()
                 }, Consumer {
                     it.printStackTrace()

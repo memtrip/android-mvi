@@ -1,18 +1,23 @@
 <resources>
 
-    <style name="Typography.H6" parent="TextAppearance.AppCompat">
+    <style name="Typography.Large" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/typography_h6</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
+
+    <style name="Typography.Large.Bold" parent="Typography.Large">
+        <item name="android:textStyle">bold</item>
+    </style>
+
 
     <style name="Typography.Body1" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/typography_body1</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="Typography.Body2" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/typography_body2</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
 </resources>

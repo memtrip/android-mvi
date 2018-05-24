@@ -6,15 +6,15 @@ import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
-class GetAndSavePinyin @Inject internal constructor(
-        private val getPinyin: GetPinyin,
+class FetchAndSavePinyin @Inject internal constructor(
+        private val fetchPinyin: FetchPinyin,
         private val savePinyin: SavePinyin) {
 
     fun save(success: Action, error: Consumer<Throwable>) : Disposable {
 
         val d = CompositeDisposable()
 
-        d.add(getPinyin.values(Consumer {
+        d.add(fetchPinyin.values(Consumer {
             d.add(savePinyin.insert(it.pinyin, success, error))
         }, error))
 

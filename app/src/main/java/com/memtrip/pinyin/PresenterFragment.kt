@@ -2,19 +2,23 @@ package com.memtrip.pinyin
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
-abstract class PresenterActivity<V : PresenterView>(interact: Interact = RxInteract())
-    : AppCompatActivity(), PresenterView, Interact by interact {
+abstract class PresenterFragment<V : PresenterView>(interact: Interact = RxInteract())
+    : Fragment(), PresenterView, Interact by interact {
 
-    var init = false
+    private lateinit var presenterView: PresenterView;
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private var init = false
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
         inject()
-
         presenter().attach(view())
+        presenterView = context as PresenterView
     }
 
     override fun onStart() {
@@ -56,10 +60,10 @@ abstract class PresenterActivity<V : PresenterView>(interact: Interact = RxInter
     }
 
     override fun close() {
-        finish()
+        presenterView.close()
     }
 
-    override fun context(): Context = this
+    override fun context() = activity as Context
 
     abstract fun inject()
 
