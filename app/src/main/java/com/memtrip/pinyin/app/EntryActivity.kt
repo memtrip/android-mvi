@@ -18,7 +18,6 @@ class EntryActivity : PresenterActivity<EntryView>(), EntryView {
     @Inject lateinit var presenter: EntryPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DaggerEntryComponent.create().inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.entry_activity)
 
@@ -34,6 +33,14 @@ class EntryActivity : PresenterActivity<EntryView>(), EntryView {
         return this
     }
 
+    override fun inject() {
+        DaggerEntryComponent
+                .builder()
+                .application(application)
+                .build()
+                .inject(this)
+    }
+
     override fun navigateToPinyin() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -41,6 +48,10 @@ class EntryActivity : PresenterActivity<EntryView>(), EntryView {
     override fun showProgress() {
         entry_activity_progress.visible()
         entry_activity_error.gone()
+    }
+
+    override fun hideProgress() {
+        entry_activity_progress.gone()
     }
 
     override fun error() {

@@ -9,6 +9,8 @@ abstract class PresenterActivity<V : PresenterView> : InteractActivity(), Presen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        inject()
+
         presenter().attach(view())
     }
 
@@ -45,6 +47,8 @@ abstract class PresenterActivity<V : PresenterView> : InteractActivity(), Presen
     override fun showProgress() {
         TODO("not implemented")
     }
+
+    abstract fun inject()
 
     abstract fun presenter(): Presenter<V>
 

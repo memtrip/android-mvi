@@ -11,6 +11,17 @@ import retrofit2.http.GET
 import javax.inject.Inject
 import javax.inject.Singleton
 
+data class PinyinWrapper(
+        val pinyin: List<PinyinJson>)
+
+data class PinyinJson(
+        val sourceUrl: String,
+        val phoneticScriptText: String,
+        val romanLetterText: String,
+        val audioSrc: String?,
+        val englishTranslationText: String,
+        val characterImageSrc: String)
+
 internal interface PinyinApi {
 
     @get:GET("/pinyin/")
@@ -18,7 +29,7 @@ internal interface PinyinApi {
 }
 
 @Module
-class PinyinModule {
+class ApiModule {
 
     @Singleton
     @Provides
