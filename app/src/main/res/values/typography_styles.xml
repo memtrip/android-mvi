@@ -1,0 +1,18 @@
+<resources>
+
+    <style name="Typography.H6" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/typography_h6</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="Typography.Body1" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/typography_body1</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="Typography.Body2" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/typography_body2</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+</resources>

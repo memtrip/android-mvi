@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="typography_h6">20sp</dimen>
+    <dimen name="typography_body1">16sp</dimen>
+    <dimen name="typography_body2">14sp</dimen>
+</resources>

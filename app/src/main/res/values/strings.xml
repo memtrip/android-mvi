@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Pinyin</string>
+
+    <string name="app_retry">Retry</string>
+
+    <!-- entry_activity -->
+    <string name="entry_activity_loading">Downloading Pinyin</string>
+    <string name="entry_activity_error">Could not download Pinyin, please check your internet connection and try again.</string>
+
+    <!-- kit_error_retry -->
+    <string name="kit_error_retry_default_message">Sorry, something went wrong</string>
+
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+
+    <declare-styleable name="ErrorRetryView">
+        <attr name="ErrorRetryView_text" format="string"/>
+    </declare-styleable>
+
+</resources>
