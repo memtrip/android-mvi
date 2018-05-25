@@ -3,8 +3,8 @@
     <string name="pinyin_activity_search_hint">Search Pinyin…</string>
 
     <string name="pinyin_activity_list_tab">Pinyin</string>
-    <string name="pinyin_activity_list_item_phonetic_script">Phonetic script</string>
-    <string name="pinyin_activity_list_item_english_translation">English translation</string>
+    <string name="pinyin_phonetic_script_title">Phonetic script</string>
+    <string name="pinyin_english_translation_title">English translation</string>
 
     <string name="pinyin_activity_favourite_tab">Favourites</string>
 

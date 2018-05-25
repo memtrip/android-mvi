@@ -12,6 +12,7 @@ import com.memtrip.pinyin.Presenter
 import com.memtrip.pinyin.PresenterFragment
 import com.memtrip.pinyin.R
 import com.memtrip.pinyin.api.PinyinEntity
+import com.memtrip.pinyin.app.detail.PinyinDetailActivity
 import kotlinx.android.synthetic.main.pinyin_list_fragment.*
 import javax.inject.Inject
 
@@ -51,6 +52,10 @@ class PinyinListFragment : PresenterFragment<PinyinListView>(), PinyinListView {
 
     override fun error() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun navigateToPinyinDetails(pinyinEntity: PinyinEntity) {
+        startActivity(PinyinDetailActivity.newIntent(context!!, pinyinEntity))
     }
 
     companion object {

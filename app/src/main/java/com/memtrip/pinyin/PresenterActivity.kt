@@ -3,6 +3,7 @@ package com.memtrip.pinyin
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 
 abstract class PresenterActivity<V : PresenterView>(interact: Interact = RxInteract())
     : AppCompatActivity(), PresenterView, Interact by interact {
@@ -41,6 +42,17 @@ abstract class PresenterActivity<V : PresenterView>(interact: Interact = RxInter
     override fun onStop() {
         super.onStop()
         presenter().stop()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                view().close()
+                return true
+            }
+            else ->
+                return super.onOptionsItemSelected(item)
+        }
     }
 
     override fun sendEvent(event: Event) {

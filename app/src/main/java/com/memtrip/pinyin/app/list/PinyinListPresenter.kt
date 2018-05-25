@@ -84,7 +84,7 @@ class PinyinListPresenter @Inject internal constructor(val searchPinyin: SearchP
                           playPinyinAudio(it)
                         }
                     } else {
-
+                        view.navigateToPinyinDetails(it.value)
                     }
                 }
             }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pinyin_detail_activity_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/pinyin_detail_activity_appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/pinyin_detail_activity_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding_large_16dp"
+            app:cardBackgroundColor="@color/cardBackgroundColor">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/padding_large_16dp">
+
+                <com.memtrip.pinyin.kit.AppTextView
+                    style="@style/Typography.Body2"
+                    android:id="@+id/pinyin_detail_activity_phonetic_script_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/padding_large_16dp"
+                    android:text="@string/pinyin_phonetic_script_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.memtrip.pinyin.kit.AppTextView
+                    style="@style/Typography.Large.Bold"
+                    android:id="@+id/pinyin_detail_activity_phonetic_script_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_large_16dp"
+                    android:layout_marginEnd="@dimen/padding_medium_8dp"
+                    tools:text="Tang"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pinyin_detail_activity_phonetic_script_title"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.memtrip.pinyin.kit.AppTextView
+                    style="@style/Typography.Body2"
+                    android:id="@+id/pinyin_detail_activity_english_translation_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/padding_large_16dp"
+                    android:text="@string/pinyin_english_translation_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pinyin_detail_activity_phonetic_script_value"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.memtrip.pinyin.kit.AppTextView
+                    style="@style/Typography.Large.Bold"
+                    android:id="@+id/pinyin_detail_activity_english_translation_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/padding_large_16dp"
+                    android:paddingEnd="@dimen/padding_large_16dp"
+                    tools:text="Soup"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pinyin_detail_activity_english_translation_title"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

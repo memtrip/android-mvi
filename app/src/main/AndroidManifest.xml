@@ -26,6 +26,10 @@
             android:name=".app.PinyinActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".app.detail.PinyinDetailActivity"
+            android:screenOrientation="portrait" />
+
         <service
             android:name=".audio.PinyinStreamingService"
             android:stopWithTask="false" />

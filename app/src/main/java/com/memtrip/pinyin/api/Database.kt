@@ -19,7 +19,7 @@ abstract class AppDatabase : RoomDatabase() {
 
 @Entity(tableName = "Pinyin")
 data class PinyinEntity(
-        @ColumnInfo(name = "sourceUrl") val id: String,
+        @ColumnInfo(name = "sourceUrl") val sourceUrl: String,
         @ColumnInfo(name = "phoneticScriptText") val phoneticScriptText: String,
         @ColumnInfo(name = "romanLetterText") val romanLetterText: String,
         @ColumnInfo(name = "audioSrc") val audioSrc: String?,
