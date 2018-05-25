@@ -1,4 +1,4 @@
-package com.memtrip.pinyin.app.english
+package com.memtrip.pinyin.app.list.phonetic
 
 import android.content.Context
 import android.view.View
@@ -19,13 +19,13 @@ import com.memtrip.pinyin.kit.visible
 import io.reactivex.ObservableSource
 import io.reactivex.functions.Consumer
 
-class PinyinEnglishAdapter(
+class PinyinPhoneticAdapter(
         context: Context,
         interaction: Consumer<AdapterEvent<PinyinEntity>>) : SimpleAdapter<PinyinEntity>(context, interaction) {
 
     override fun createViewHolder(parent: ViewGroup): SimpleAdapterViewHolder<PinyinEntity> {
-        val viewHolder = PinyinEnglishViewHolder(inflater.inflate(
-                R.layout.pinyin_english_list_item, parent, false))
+        val viewHolder = PinyinPhoneticViewHolder(inflater.inflate(
+                R.layout.pinyin_phonetic_list_item, parent, false))
 
         RxView.clicks(viewHolder.audioButton).flatMap({
             ObservableSource<AdapterEvent<PinyinEntity>> {
@@ -38,12 +38,12 @@ class PinyinEnglishAdapter(
     }
 }
 
-class PinyinEnglishViewHolder(itemView: View) : SimpleAdapterViewHolder<PinyinEntity>(itemView) {
+class PinyinPhoneticViewHolder(itemView: View) : SimpleAdapterViewHolder<PinyinEntity>(itemView) {
 
-    @BindView(R.id.pinyin_english_list_item_value)
-    lateinit var englishTextView: TextView
+    @BindView(R.id.pinyin_phonetic_list_item_value)
+    lateinit var phoneticTextView: TextView
 
-    @BindView(R.id.pinyin_english_list_audio_button)
+    @BindView(R.id.pinyin_phonetic_list_audio_button)
     lateinit var audioButton: ImageButton
 
     init {
@@ -51,7 +51,7 @@ class PinyinEnglishViewHolder(itemView: View) : SimpleAdapterViewHolder<PinyinEn
     }
 
     override fun populate(position: Int, value: PinyinEntity) {
-        englishTextView.text = value.englishTranslationText
+        phoneticTextView.text = value.phoneticScriptText
         value.audioSrc?.let { audioButton.visible() } ?: audioButton.gone()
     }
 }

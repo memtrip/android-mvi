@@ -1,21 +1,22 @@
-package com.memtrip.pinyin.app.character
+package com.memtrip.pinyin.app.list.english
 
 import com.memtrip.pinyin.*
-import com.memtrip.pinyin.api.CharacterSearch
+
+import com.memtrip.pinyin.api.EnglishSearch
 import com.memtrip.pinyin.api.PinyinEntity
 import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
-class PinyinCharacterPresenter @Inject internal constructor(
-        val characterSearch: CharacterSearch) : Presenter<PinyinCharacterView>() {
+class PinyinEnglishPresenter @Inject internal constructor(
+        val englishSearch: EnglishSearch) : Presenter<PinyinEnglishView>() {
 
     override fun first() {
         super.first()
         search()
     }
 
-    fun search(terms: String = "拼音") {
-        i(characterSearch.search(terms, Consumer {
+    fun search(terms: String = "pinyin") {
+        i(englishSearch.search(terms, Consumer {
             view.populate(it)
         }, Consumer {
             view.error()
@@ -38,7 +39,7 @@ class PinyinCharacterPresenter @Inject internal constructor(
         return Consumer {
             when (it) {
                 is AdapterClick -> {
-                    if (it.id == R.id.pinyin_character_list_audio_button) {
+                    if (it.id == R.id.pinyin_english_list_audio_button) {
                         it.value.audioSrc?.let {
 
                         }

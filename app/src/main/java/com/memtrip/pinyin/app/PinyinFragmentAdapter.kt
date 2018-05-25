@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.memtrip.pinyin.Event
 import com.memtrip.pinyin.PresenterFragment
 import com.memtrip.pinyin.R
-import com.memtrip.pinyin.app.character.PinyinCharacterFragment
-import com.memtrip.pinyin.app.english.PinyinEnglishFragment
-import com.memtrip.pinyin.app.list.PinyinPhoneticFragment
+import com.memtrip.pinyin.app.list.character.PinyinCharacterFragment
+import com.memtrip.pinyin.app.list.english.PinyinEnglishFragment
+import com.memtrip.pinyin.app.list.phonetic.PinyinPhoneticFragment
 
 internal class PinyinFragmentAdapter(context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

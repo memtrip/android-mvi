@@ -1,4 +1,4 @@
-package com.memtrip.pinyin.app.list
+package com.memtrip.pinyin.app.list.phonetic
 
 import android.content.BroadcastReceiver
 import android.content.Context

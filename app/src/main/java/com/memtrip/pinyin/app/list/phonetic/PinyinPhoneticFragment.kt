@@ -1,4 +1,4 @@
-package com.memtrip.pinyin.app.english
+package com.memtrip.pinyin.app.list.phonetic
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
@@ -14,49 +14,49 @@ import com.memtrip.pinyin.api.PinyinEntity
 import com.memtrip.pinyin.app.detail.PinyinDetailActivity
 import javax.inject.Inject
 
-class PinyinEnglishFragment : PresenterFragment<PinyinEnglishView>(), PinyinEnglishView {
+class PinyinPhoneticFragment : PresenterFragment<PinyinPhoneticView>(), PinyinPhoneticView {
 
-    @Inject lateinit var presenter: PinyinEnglishPresenter
+    @Inject lateinit var presenter: PinyinPhoneticPresenter
 
-    @BindView(R.id.pinyin_english_fragment_recyclerview)
+    @BindView(R.id.pinyin_phonetic_fragment_recyclerview)
     lateinit var recyclerView: RecyclerView
 
-    private lateinit var adapter: PinyinEnglishAdapter
+    private lateinit var adapter: PinyinPhoneticAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.pinyin_english_fragment, container, false)
+        val view = inflater.inflate(R.layout.pinyin_phonetic_fragment, container, false)
         ButterKnife.bind(this, view)
-        adapter = PinyinEnglishAdapter(context!!, presenter.adapterEvent())
+        adapter = PinyinPhoneticAdapter(context!!, presenter.adapterEvent())
         recyclerView.adapter = adapter
         return view
     }
 
     override fun inject() {
-        DaggerPinyinEnglishComponent
+        DaggerPinyinPhoneticComponent
                 .builder()
                 .application(activity!!.application)
                 .build()
                 .inject(this)
     }
 
-    override fun presenter(): Presenter<PinyinEnglishView> = presenter
+    override fun presenter(): Presenter<PinyinPhoneticView> = presenter
 
-    override fun view(): PinyinEnglishView  = this
-
-    companion object {
-        fun newInstance() : PinyinEnglishFragment = PinyinEnglishFragment()
-    }
+    override fun view(): PinyinPhoneticView = this
 
     override fun populate(pinyin: List<PinyinEntity>) {
         adapter.clear()
         adapter.populate(pinyin)
     }
 
+    override fun error() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun navigateToPinyinDetails(pinyinEntity: PinyinEntity) {
         startActivity(PinyinDetailActivity.newIntent(context!!, pinyinEntity))
     }
 
-    override fun error() {
-
+    companion object {
+        fun newInstance() : PinyinPhoneticFragment = PinyinPhoneticFragment()
     }
 }
