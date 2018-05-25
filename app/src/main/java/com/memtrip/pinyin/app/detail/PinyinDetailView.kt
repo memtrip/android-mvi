@@ -17,6 +17,7 @@ class PinyinParcel(val sourceUrl: String,
                    val romanLetterText: String,
                    val audioSrc: String?,
                    val englishTranslationText: String,
+                   val chineseCharacters: String,
                    val characterImageSrc: String) : Parcelable {
 
     companion object {
@@ -30,6 +31,7 @@ class PinyinParcel(val sourceUrl: String,
                     entity.romanLetterText,
                     entity.audioSrc,
                     entity.englishTranslationText,
+                    entity.chineseCharacters,
                     entity.characterImageSrc))
         }
 

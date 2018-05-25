@@ -20,6 +20,7 @@ data class PinyinJson(
         val romanLetterText: String,
         val audioSrc: String?,
         val englishTranslationText: String,
+        val chineseCharacters: String,
         val characterImageSrc: String)
 
 internal interface PinyinApi {

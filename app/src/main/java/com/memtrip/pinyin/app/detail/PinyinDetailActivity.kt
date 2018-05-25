@@ -41,6 +41,7 @@ class PinyinDetailActivity : PresenterActivity<PinyinDetailView>(), PinyinDetail
         supportActionBar!!.setTitle(pinyinParcel.phoneticScriptText)
         pinyin_detail_activity_phonetic_script_value.text = pinyinParcel.phoneticScriptText
         pinyin_detail_activity_english_translation_value.text = pinyinParcel.englishTranslationText
+        pinyin_detail_activity_chinese_character_value.text = pinyinParcel.chineseCharacters
     }
 
     companion object {

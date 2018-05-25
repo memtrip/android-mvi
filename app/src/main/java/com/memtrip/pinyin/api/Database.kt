@@ -12,7 +12,7 @@ import io.reactivex.functions.Consumer
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Database(entities = arrayOf(PinyinEntity::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(PinyinEntity::class), version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun pinyinDao(): PinyinDao
 }
@@ -24,6 +24,7 @@ data class PinyinEntity(
         @ColumnInfo(name = "romanLetterText") val romanLetterText: String,
         @ColumnInfo(name = "audioSrc") val audioSrc: String?,
         @ColumnInfo(name = "englishTranslationText") val englishTranslationText: String,
+        @ColumnInfo(name = "chineseCharacters") val chineseCharacters: String,
         @ColumnInfo(name = "characterImageSrc") val characterImageSrc: String,
         @PrimaryKey(autoGenerate = true) val uid: Int = 0)
 
@@ -73,6 +74,7 @@ class SavePinyin @Inject internal constructor(
                     it.romanLetterText,
                     it.audioSrc,
                     it.englishTranslationText,
+                    it.chineseCharacters,
                     it.characterImageSrc)
         })
     }).observeOn(schedulerProvider.main())
