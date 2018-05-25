@@ -6,14 +6,14 @@ import android.content.Intent
 import android.support.v4.content.LocalBroadcastManager
 import com.memtrip.pinyin.*
 import com.memtrip.pinyin.api.PinyinEntity
-import com.memtrip.pinyin.api.SearchPinyin
+import com.memtrip.pinyin.api.PhoneticSearch
 import com.memtrip.pinyin.audio.PinyinAudio
 import com.memtrip.pinyin.audio.PinyinStreamingNavigator
 import com.memtrip.pinyin.audio.stream.Notify
 import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
-class PinyinListPresenter @Inject internal constructor(val searchPinyin: SearchPinyin) : Presenter<PinyinListView>() {
+class PinyinPhoneticPresenter @Inject internal constructor(val phoneticSearch: PhoneticSearch) : Presenter<PinyinPhoneticView>() {
 
     val pinyinStream = PinyinStreamingNavigator()
 
@@ -36,7 +36,7 @@ class PinyinListPresenter @Inject internal constructor(val searchPinyin: SearchP
 
     override fun first() {
         super.first()
-        search("pinyin")
+        search()
     }
 
     override fun start() {
@@ -55,8 +55,8 @@ class PinyinListPresenter @Inject internal constructor(val searchPinyin: SearchP
                 .unregisterReceiver(broadcastReceiver)
     }
 
-    fun search(terms: String = "") {
-        i(searchPinyin.search(terms, Consumer {
+    fun search(terms: String = "pinyin") {
+        i(phoneticSearch.search(terms, Consumer {
             view.populate(it)
         }, Consumer {
             view.error()
@@ -79,7 +79,7 @@ class PinyinListPresenter @Inject internal constructor(val searchPinyin: SearchP
         return Consumer {
             when (it) {
                 is AdapterClick -> {
-                    if (it.id == R.id.pinyin_list_item_audio_button) {
+                    if (it.id == R.id.pinyin_phonetic_list_audio_button) {
                         it.value.audioSrc?.let {
                           playPinyinAudio(it)
                         }

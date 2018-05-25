@@ -9,12 +9,12 @@
 
     <style name="TabLayout" parent="Base.Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/Tab</item>
-        <item name="tabSelectedTextColor">@color/colorAccent</item>
+        <item name="tabSelectedTextColor">@color/colorTextInverse</item>
     </style>
 
     <style name="Tab" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">@dimen/typography_body2</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorTextInverse</item>
     </style>
 
 </resources>

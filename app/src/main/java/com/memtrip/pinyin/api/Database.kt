@@ -35,7 +35,10 @@ interface PinyinDao {
     fun get(skip: Int, limit: Int): Single<List<PinyinEntity>>
 
     @Query("SELECT * FROM Pinyin WHERE romanLetterText LIKE :terms ORDER BY romanLetterText ASC LIMIT 0, 100")
-    fun search(terms: String): Single<List<PinyinEntity>>
+    fun phoneticSearch(terms: String): Single<List<PinyinEntity>>
+
+    @Query("SELECT * FROM Pinyin WHERE chineseCharacters LIKE :terms ORDER BY chineseCharacters ASC LIMIT 0, 100")
+    fun characterSearch(terms: String): Single<List<PinyinEntity>>
 
     @Insert
     fun insertAll(pinyin: List<PinyinEntity>)
@@ -103,12 +106,23 @@ class GetPinyin @Inject internal constructor(
                     .subscribe(pinyin, error)
 }
 
-class SearchPinyin @Inject internal constructor(
+class PhoneticSearch @Inject internal constructor(
         private val pinyinDao: PinyinDao,
         private val schedulerProvider: SchedulerProvider) {
 
     fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
-            pinyinDao.search( terms+"%")
+            pinyinDao.phoneticSearch( terms+"%")
+                    .observeOn(schedulerProvider.main())
+                    .subscribeOn(schedulerProvider.thread())
+                    .subscribe(pinyin, error)
+}
+
+class CharacterSearch @Inject internal constructor(
+        private val pinyinDao: PinyinDao,
+        private val schedulerProvider: SchedulerProvider) {
+
+    fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
+            pinyinDao.characterSearch( "%" + terms+"%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
                     .subscribe(pinyin, error)

@@ -7,15 +7,18 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.memtrip.pinyin.Event
 import com.memtrip.pinyin.PresenterFragment
 import com.memtrip.pinyin.R
-import com.memtrip.pinyin.app.favourites.PinyinFavouriteFragment
-import com.memtrip.pinyin.app.list.PinyinListFragment
+import com.memtrip.pinyin.app.favourites.PinyinCharacterFragment
+import com.memtrip.pinyin.app.list.PinyinPhoneticFragment
 
 internal class PinyinFragmentAdapter(context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    private var pinyinListFragment: PinyinListFragment? = null
-    private var pinyinFavouriteFragment: PinyinFavouriteFragment? = null
+    private var pinyinPhoneticFragment: PinyinPhoneticFragment? = null
+    private var pinyinCharacterFragment: PinyinCharacterFragment? = null
 
-    val pages: Array<PageSet> = arrayOf(PageSet(Page.LIST, context.getString(R.string.pinyin_activity_list_tab)))
+    val pages: Array<PageSet> = arrayOf(
+            PageSet(Page.PHONETIC, context.getString(R.string.pinyin_activity_phonetic_tab)),
+            PageSet(Page.CHARACTER, context.getString(R.string.pinyin_activity_character_tab))
+    )
 
     fun sendEvent(position: Int, event: Event) {
         val fragment = getItem(position) as PresenterFragment<*>
@@ -24,27 +27,27 @@ internal class PinyinFragmentAdapter(context: Context, fm: FragmentManager) : Fr
         }
     }
 
-    fun createPinyinListFragment() : PinyinListFragment {
-        return pinyinListFragment?.let { it }
-                ?: return PinyinListFragment.newInstance()
+    fun createPinyinPhoneticFragment() : PinyinPhoneticFragment {
+        return pinyinPhoneticFragment?.let { it }
+                ?: return PinyinPhoneticFragment.newInstance()
     }
 
-    fun createPinyinFavouriteFragment() : PinyinFavouriteFragment {
-        return pinyinFavouriteFragment?.let { it }
-                ?: return PinyinFavouriteFragment.newInstance()
+    fun createPinyinCharacterFragment() : PinyinCharacterFragment {
+        return pinyinCharacterFragment?.let { it }
+                ?: return PinyinCharacterFragment.newInstance()
     }
 
     override fun getItem(position: Int): Fragment {
         val (page) = this.pages[position]
 
         when (page) {
-            Page.LIST -> {
-                pinyinListFragment = createPinyinListFragment()
-                return pinyinListFragment as Fragment
+            Page.PHONETIC -> {
+                pinyinPhoneticFragment = createPinyinPhoneticFragment()
+                return pinyinPhoneticFragment as Fragment
             }
-            Page.FAVOURITE -> {
-                pinyinFavouriteFragment = createPinyinFavouriteFragment()
-                return pinyinFavouriteFragment as Fragment
+            Page.CHARACTER -> {
+                pinyinCharacterFragment = createPinyinCharacterFragment()
+                return pinyinCharacterFragment as Fragment
             }
             else ->
                 throw IllegalStateException("Page Fragment has not been defined.")
@@ -63,6 +66,6 @@ internal data class PageSet constructor(
         val title: String)
 
 internal enum class Page {
-    LIST,
-    FAVOURITE
+    PHONETIC,
+    CHARACTER
 }

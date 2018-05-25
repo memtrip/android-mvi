@@ -27,7 +27,7 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
 
         fragmentAdapter = PinyinFragmentAdapter(this, supportFragmentManager)
         pinyin_activity_viewpager.adapter = fragmentAdapter
-        pinyin_activity_viewpager.offscreenPageLimit = 2
+        pinyin_activity_viewpager.offscreenPageLimit = 3
         pinyin_activity_tablayout.setupWithViewPager(pinyin_activity_viewpager)
 
         pinyin_activity_searchview.setOnQueryTextFocusChangeListener { _ , hasFocus ->
@@ -44,6 +44,8 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
 
             override fun onQueryTextChange(terms: String): Boolean {
                 fragmentAdapter.sendEvent(0, SearchEvent(
+                        R.id.pinyin_activity_search_terms, terms))
+                fragmentAdapter.sendEvent(1, SearchEvent(
                         R.id.pinyin_activity_search_terms, terms))
                 return true
             }

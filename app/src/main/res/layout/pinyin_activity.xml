@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pinyin_activity_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.memtrip.pinyin.app.EntryActivity">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.SearchView
         android:id="@+id/pinyin_activity_searchview"
@@ -39,7 +38,6 @@
         android:layout_marginStart="@dimen/padding_large_16dp"
         android:layout_marginBottom="@dimen/padding_large_16dp"
         android:layout_marginEnd="@dimen/padding_large_16dp"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pinyin_activity_searchview"
         app:layout_constraintEnd_toEndOf="parent"/>

@@ -19,13 +19,13 @@ import com.memtrip.pinyin.kit.visible
 import io.reactivex.ObservableSource
 import io.reactivex.functions.Consumer
 
-class PinyinListAdapter(
+class PinyinPhoneticAdapter(
         context: Context,
         interaction: Consumer<AdapterEvent<PinyinEntity>>) : SimpleAdapter<PinyinEntity>(context, interaction) {
 
     override fun createViewHolder(parent: ViewGroup): SimpleAdapterViewHolder<PinyinEntity> {
-        val viewHolder = PinyinListViewHolder(inflater.inflate(
-                R.layout.pinyin_list_item, parent, false))
+        val viewHolder = PinyinPhoneticViewHolder(inflater.inflate(
+                R.layout.pinyin_phonetic_list_item, parent, false))
 
         RxView.clicks(viewHolder.audioButton).flatMap({
             ObservableSource<AdapterEvent<PinyinEntity>> {
@@ -38,12 +38,12 @@ class PinyinListAdapter(
     }
 }
 
-class PinyinListViewHolder(itemView: View) : SimpleAdapterViewHolder<PinyinEntity>(itemView) {
+class PinyinPhoneticViewHolder(itemView: View) : SimpleAdapterViewHolder<PinyinEntity>(itemView) {
 
-    @BindView(R.id.pinyin_list_item_phonetic_script_value)
+    @BindView(R.id.pinyin_phonetic_list_item_value)
     lateinit var phoneticTextView: TextView
 
-    @BindView(R.id.pinyin_list_item_audio_button)
+    @BindView(R.id.pinyin_phonetic_list_audio_button)
     lateinit var audioButton: ImageButton
 
     init {
