@@ -40,6 +40,9 @@ interface PinyinDao {
     @Query("SELECT * FROM Pinyin WHERE chineseCharacters LIKE :terms ORDER BY chineseCharacters ASC LIMIT 0, 100")
     fun characterSearch(terms: String): Single<List<PinyinEntity>>
 
+    @Query("SELECT * FROM Pinyin WHERE englishTranslationText LIKE :terms ORDER BY englishTranslationText ASC LIMIT 0, 100")
+    fun englishSearch(terms: String): Single<List<PinyinEntity>>
+
     @Insert
     fun insertAll(pinyin: List<PinyinEntity>)
 
@@ -123,6 +126,17 @@ class CharacterSearch @Inject internal constructor(
 
     fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
             pinyinDao.characterSearch( "%" + terms+"%")
+                    .observeOn(schedulerProvider.main())
+                    .subscribeOn(schedulerProvider.thread())
+                    .subscribe(pinyin, error)
+}
+
+class EnglishSearch @Inject internal constructor(
+        private val pinyinDao: PinyinDao,
+        private val schedulerProvider: SchedulerProvider) {
+
+    fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
+            pinyinDao.englishSearch( "%" + terms+"%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
                     .subscribe(pinyin, error)

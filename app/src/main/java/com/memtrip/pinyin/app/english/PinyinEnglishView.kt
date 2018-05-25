@@ -1,4 +1,4 @@
-package com.memtrip.pinyin.app.favourites
+package com.memtrip.pinyin.app.english
 
 import android.app.Application
 import com.memtrip.pinyin.PresenterView
@@ -9,7 +9,7 @@ import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
-interface PinyinCharacterView : PresenterView {
+interface PinyinEnglishView : PresenterView {
     fun populate(pinyin: List<PinyinEntity>)
     fun navigateToPinyinDetails(pinyinEntity: PinyinEntity)
     fun error()
@@ -17,7 +17,7 @@ interface PinyinCharacterView : PresenterView {
 
 @Singleton
 @Component(modules = [ NetworkModule::class, DatabaseModule::class ])
-interface PinyinCharacterComponent {
+interface PinyinEnglishComponent {
 
     @Component.Builder
     interface Builder {
@@ -25,8 +25,8 @@ interface PinyinCharacterComponent {
         @BindsInstance
         fun application(application: Application): Builder
 
-        fun build(): PinyinCharacterComponent
+        fun build(): PinyinEnglishComponent
     }
 
-    fun inject(pinyinCharacterFragment: PinyinCharacterFragment)
+    fun inject(pinyinCharacterFragment: PinyinEnglishFragment)
 }

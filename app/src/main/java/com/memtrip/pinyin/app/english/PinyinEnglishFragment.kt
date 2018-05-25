@@ -1,4 +1,4 @@
-package com.memtrip.pinyin.app.favourites
+package com.memtrip.pinyin.app.english
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
@@ -12,40 +12,39 @@ import com.memtrip.pinyin.PresenterFragment
 import com.memtrip.pinyin.R
 import com.memtrip.pinyin.api.PinyinEntity
 import com.memtrip.pinyin.app.detail.PinyinDetailActivity
-import com.memtrip.pinyin.app.list.PinyinPhoneticAdapter
 import javax.inject.Inject
 
-class PinyinCharacterFragment : PresenterFragment<PinyinCharacterView>(), PinyinCharacterView {
+class PinyinEnglishFragment : PresenterFragment<PinyinEnglishView>(), PinyinEnglishView {
 
-    @Inject lateinit var presenter: PinyinCharacterPresenter
+    @Inject lateinit var presenter: PinyinEnglishPresenter
 
-    @BindView(R.id.pinyin_character_fragment_recyclerview)
+    @BindView(R.id.pinyin_english_fragment_recyclerview)
     lateinit var recyclerView: RecyclerView
 
-    private lateinit var adapter: PinyinCharacterAdapter
+    private lateinit var adapter: PinyinEnglishAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.pinyin_character_fragment, container, false)
+        val view = inflater.inflate(R.layout.pinyin_english_fragment, container, false)
         ButterKnife.bind(this, view)
-        adapter = PinyinCharacterAdapter(context!!, presenter.adapterEvent())
+        adapter = PinyinEnglishAdapter(context!!, presenter.adapterEvent())
         recyclerView.adapter = adapter
         return view
     }
 
     override fun inject() {
-        DaggerPinyinCharacterComponent
+        DaggerPinyinEnglishComponent
                 .builder()
                 .application(activity!!.application)
                 .build()
                 .inject(this)
     }
 
-    override fun presenter(): Presenter<PinyinCharacterView> = presenter
+    override fun presenter(): Presenter<PinyinEnglishView> = presenter
 
-    override fun view(): PinyinCharacterView  = this
+    override fun view(): PinyinEnglishView  = this
 
     companion object {
-        fun newInstance() : PinyinCharacterFragment = PinyinCharacterFragment()
+        fun newInstance() : PinyinEnglishFragment = PinyinEnglishFragment()
     }
 
     override fun populate(pinyin: List<PinyinEntity>) {

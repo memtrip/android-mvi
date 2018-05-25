@@ -7,16 +7,19 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.memtrip.pinyin.Event
 import com.memtrip.pinyin.PresenterFragment
 import com.memtrip.pinyin.R
-import com.memtrip.pinyin.app.favourites.PinyinCharacterFragment
+import com.memtrip.pinyin.app.character.PinyinCharacterFragment
+import com.memtrip.pinyin.app.english.PinyinEnglishFragment
 import com.memtrip.pinyin.app.list.PinyinPhoneticFragment
 
 internal class PinyinFragmentAdapter(context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     private var pinyinPhoneticFragment: PinyinPhoneticFragment? = null
     private var pinyinCharacterFragment: PinyinCharacterFragment? = null
+    private var pinyinEnglishFragment: PinyinEnglishFragment? = null
 
     val pages: Array<PageSet> = arrayOf(
             PageSet(Page.PHONETIC, context.getString(R.string.pinyin_activity_phonetic_tab)),
+            PageSet(Page.ENGLISH, context.getString(R.string.pinyin_activity_english_tab)),
             PageSet(Page.CHARACTER, context.getString(R.string.pinyin_activity_character_tab))
     )
 
@@ -37,6 +40,11 @@ internal class PinyinFragmentAdapter(context: Context, fm: FragmentManager) : Fr
                 ?: return PinyinCharacterFragment.newInstance()
     }
 
+    fun createPinyinEnglishFragment() : PinyinEnglishFragment {
+        return pinyinEnglishFragment?.let { it }
+                ?: return PinyinEnglishFragment.newInstance()
+    }
+
     override fun getItem(position: Int): Fragment {
         val (page) = this.pages[position]
 
@@ -44,6 +52,10 @@ internal class PinyinFragmentAdapter(context: Context, fm: FragmentManager) : Fr
             Page.PHONETIC -> {
                 pinyinPhoneticFragment = createPinyinPhoneticFragment()
                 return pinyinPhoneticFragment as Fragment
+            }
+            Page.ENGLISH -> {
+                pinyinEnglishFragment = createPinyinEnglishFragment()
+                return pinyinEnglishFragment as Fragment
             }
             Page.CHARACTER -> {
                 pinyinCharacterFragment = createPinyinCharacterFragment()
@@ -67,5 +79,6 @@ internal data class PageSet constructor(
 
 internal enum class Page {
     PHONETIC,
+    ENGLISH,
     CHARACTER
 }

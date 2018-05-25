@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/padding_large_16dp"
+    android:layout_marginBottom="@dimen/padding_medium_large_12dp"
+    android:layout_marginEnd="@dimen/padding_large_16dp"
+    app:cardBackgroundColor="@color/cardBackgroundColor">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/padding_large_16dp">
+
+        <com.memtrip.pinyin.kit.AppTextView
+            style="@style/Typography.Body2"
+            android:id="@+id/pinyin_english_list_item_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding_large_16dp"
+            android:text="@string/pinyin_english_translation_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/pinyin_english_list_audio_button"/>
+
+        <com.memtrip.pinyin.kit.AppTextView
+            style="@style/Typography.Large.Bold"
+            android:id="@+id/pinyin_english_list_item_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_large_16dp"
+            android:layout_marginEnd="@dimen/padding_medium_8dp"
+            tools:text="Zhiyi"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pinyin_english_list_item_title"
+            app:layout_constraintRight_toLeftOf="@+id/pinyin_english_list_audio_button"/>
+
+        <ImageButton
+            android:id="@+id/pinyin_english_list_audio_button"
+            android:layout_width="@dimen/pinyin_list_play_size"
+            android:layout_height="@dimen/pinyin_list_play_size"
+            android:layout_margin="@dimen/padding_large_16dp"
+            android:background="@color/cardBackgroundColor"
+            android:src="@drawable/ic_play"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

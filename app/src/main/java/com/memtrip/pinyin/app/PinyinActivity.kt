@@ -47,6 +47,8 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
                         R.id.pinyin_activity_search_terms, terms))
                 fragmentAdapter.sendEvent(1, SearchEvent(
                         R.id.pinyin_activity_search_terms, terms))
+                fragmentAdapter.sendEvent(2, SearchEvent(
+                        R.id.pinyin_activity_search_terms, terms))
                 return true
             }
         })

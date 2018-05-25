@@ -1,4 +1,4 @@
-package com.memtrip.pinyin.app.favourites
+package com.memtrip.pinyin.app.character
 
 import android.content.Context
 import android.view.View

@@ -1,4 +1,4 @@
-package com.memtrip.pinyin.app.favourites
+package com.memtrip.pinyin.app.character
 
 import com.memtrip.pinyin.*
 import com.memtrip.pinyin.api.CharacterSearch

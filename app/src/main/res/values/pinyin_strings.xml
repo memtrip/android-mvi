@@ -2,7 +2,8 @@
 
     <string name="pinyin_activity_search_hint">Search Pinyin…</string>
 
-    <string name="pinyin_activity_phonetic_tab">Phonetic</string>
+    <string name="pinyin_activity_phonetic_tab">Pinyin</string>
+    <string name="pinyin_activity_english_tab">English</string>
     <string name="pinyin_activity_character_tab">汉语</string>
 
     <string name="pinyin_phonetic_script_title">Phonetic script</string>
