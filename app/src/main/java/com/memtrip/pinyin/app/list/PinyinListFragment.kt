@@ -45,6 +45,7 @@ class PinyinListFragment : PresenterFragment<PinyinListView>(), PinyinListView {
     override fun view(): PinyinListView = this
 
     override fun populate(pinyin: List<PinyinEntity>) {
+        adapter.clear()
         adapter.populate(pinyin)
     }
 
@@ -53,6 +54,6 @@ class PinyinListFragment : PresenterFragment<PinyinListView>(), PinyinListView {
     }
 
     companion object {
-        fun newInstance() : Fragment = PinyinListFragment()
+        fun newInstance() : PinyinListFragment = PinyinListFragment()
     }
 }

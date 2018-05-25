@@ -12,7 +12,7 @@ import io.reactivex.functions.Consumer
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Database(entities = arrayOf(PinyinEntity::class), version = 1)
+@Database(entities = arrayOf(PinyinEntity::class), version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun pinyinDao(): PinyinDao
 }
@@ -33,7 +33,7 @@ interface PinyinDao {
     @Query("SELECT * FROM Pinyin ORDER BY romanLetterText ASC LIMIT :skip, :limit")
     fun get(skip: Int, limit: Int): Single<List<PinyinEntity>>
 
-    @Query("SELECT * FROM Pinyin WHERE romanLetterText LIKE :terms ORDER BY romanLetterText ASC")
+    @Query("SELECT * FROM Pinyin WHERE romanLetterText LIKE :terms ORDER BY romanLetterText ASC LIMIT 0, 100")
     fun search(terms: String): Single<List<PinyinEntity>>
 
     @Insert

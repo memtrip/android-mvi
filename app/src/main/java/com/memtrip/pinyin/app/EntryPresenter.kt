@@ -32,12 +32,10 @@ class EntryPresenter @Inject internal  constructor(
 
         i(countPinyin.count(Consumer {
             if (it > 0) {
-                view.navigateToPinyin()
+                navigateToPinyin()
             } else {
                 i(fetchAndSavePinyin.save(Action {
-                    view.hideProgress()
-                    view.close()
-                    view.navigateToPinyin()
+                    navigateToPinyin()
                 }, Consumer {
                     it.printStackTrace()
                     view.error()
@@ -46,5 +44,12 @@ class EntryPresenter @Inject internal  constructor(
         }, Consumer {
             view.error()
         }))
+    }
+
+
+    private fun navigateToPinyin() {
+        view.hideProgress()
+        view.navigateToPinyin()
+        view.close()
     }
 }

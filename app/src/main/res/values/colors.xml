@@ -4,9 +4,11 @@
     <color name="colorPrimaryDark">#1E2030</color>
     <color name="colorAccent">#e94b35</color>
 
-    <color name="window_background_color">#2D3047</color>
+    <color name="windowBackgroundColor">#2D3047</color>
 
     <color name="colorText">@color/colorPrimary</color>
-    <color name="colorTextInverse">#FFFFFF</color>
+    <color name="colorTextInverse">#AAFFFFFF</color>
+
+    <color name="cardBackgroundColor">#FFFFFF</color>
 
 </resources>

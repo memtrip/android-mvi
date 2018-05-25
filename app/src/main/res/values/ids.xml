@@ -2,4 +2,6 @@
 
     <item type="id" name="presenter_start" />
 
+    <item type="id" name="pinyin_activity_search_terms" />
+
 </resources>

@@ -5,7 +5,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 interface PinyinView : PresenterView {
-    fun navigateToSearch()
+
 }
 
 @Singleton

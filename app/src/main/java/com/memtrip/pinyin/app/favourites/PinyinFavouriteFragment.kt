@@ -32,6 +32,6 @@ class PinyinFavouriteFragment : PresenterFragment<PinyinFavouriteView>(), Pinyin
     override fun view(): PinyinFavouriteView  = this
 
     companion object {
-        fun newInstance() : Fragment = PinyinFavouriteFragment()
+        fun newInstance() : PinyinFavouriteFragment = PinyinFavouriteFragment()
     }
 }
