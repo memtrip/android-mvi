@@ -66,7 +66,7 @@ abstract class SimpleAdapter<T>(
     }
 
     internal fun atEnd(id: Int) {
-        interaction.accept(AdapterEnd(id, data.last()))
+        //interaction.accept(AdapterEnd(id, data.last()))
     }
 
     abstract fun createViewHolder(parent: ViewGroup): SimpleAdapterViewHolder<T>

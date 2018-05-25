@@ -65,7 +65,13 @@ class PinyinPhoneticPresenter @Inject internal constructor(val phoneticSearch: P
 
     override fun event(): Consumer<Event> = Consumer {
         when (it) {
-            is SearchEvent -> search(it.terms)
+            is SearchEvent -> {
+                if (it.terms.isEmpty()) {
+                    search()
+                } else {
+                    search(it.terms)
+                }
+            }
         }
     }
 

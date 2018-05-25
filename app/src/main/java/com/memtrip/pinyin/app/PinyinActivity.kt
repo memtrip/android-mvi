@@ -43,19 +43,31 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
             override fun onQueryTextSubmit(p: String): Boolean { return false }
 
             override fun onQueryTextChange(terms: String): Boolean {
-                fragmentAdapter.sendEvent(0, SearchEvent(
-                        R.id.pinyin_activity_search_terms, terms))
-                fragmentAdapter.sendEvent(1, SearchEvent(
-                        R.id.pinyin_activity_search_terms, terms))
-                fragmentAdapter.sendEvent(2, SearchEvent(
-                        R.id.pinyin_activity_search_terms, terms))
+                sendSearchEvent(terms)
                 return true
+            }
+        })
+
+        pinyin_activity_searchview.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                sendSearchEvent("")
+                return false
             }
         })
 
         pinyin_activity_searchview_label.setOnClickListener({
             pinyin_activity_searchview.isIconified = false
         })
+    }
+
+
+    private fun sendSearchEvent(terms:String = "") {
+        fragmentAdapter.sendEvent(0, SearchEvent(
+                R.id.pinyin_activity_search_terms, terms))
+        fragmentAdapter.sendEvent(1, SearchEvent(
+                R.id.pinyin_activity_search_terms, terms))
+        fragmentAdapter.sendEvent(2, SearchEvent(
+                R.id.pinyin_activity_search_terms, terms))
     }
 
     override fun inject() {

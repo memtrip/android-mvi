@@ -125,7 +125,7 @@ class CharacterSearch @Inject internal constructor(
         private val schedulerProvider: SchedulerProvider) {
 
     fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
-            pinyinDao.characterSearch( "%" + terms+"%")
+            pinyinDao.characterSearch(  terms+"%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
                     .subscribe(pinyin, error)
@@ -136,7 +136,7 @@ class EnglishSearch @Inject internal constructor(
         private val schedulerProvider: SchedulerProvider) {
 
     fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
-            pinyinDao.englishSearch( "%" + terms+"%")
+            pinyinDao.englishSearch( "%" + terms + "%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
                     .subscribe(pinyin, error)
