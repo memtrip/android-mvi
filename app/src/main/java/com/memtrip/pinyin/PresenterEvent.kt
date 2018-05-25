@@ -14,13 +14,13 @@ class SearchEvent(@IdRes override val id: Int, val terms: String) : Event
 
 interface AdapterEvent<T> : Event {
     override val id: Int
-    val value: T?
+    val value: T
 }
 
 class AdapterClick<T>(
         override val id: Int,
-        override val value: T?) : AdapterEvent<T>
+        override val value: T) : AdapterEvent<T>
 
 class AdapterEnd<T>(
         override val id: Int,
-        override val value: T?) : AdapterEvent<T>
+        override val value: T) : AdapterEvent<T>

@@ -23,9 +23,9 @@ abstract class PresenterActivity<V : PresenterView>(interact: Interact = RxInter
         if (!init) {
             init = true
             presenter().first()
-        } else {
-            presenter().start()
         }
+
+        presenter().start()
     }
 
     override fun onResume() {
