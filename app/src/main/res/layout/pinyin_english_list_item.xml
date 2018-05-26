@@ -24,7 +24,7 @@
             android:text="@string/pinyin_english_translation_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/pinyin_english_list_audio_button"/>
+            app:layout_constraintEnd_toStartOf="@+id/pinyin_list_audio_button"/>
 
         <com.memtrip.pinyin.kit.AppTextView
             style="@style/Typography.Large.Bold"
@@ -36,10 +36,10 @@
             tools:text="part-time job, side job, or, still, as well, nevertheless, same, none the less"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pinyin_english_list_item_title"
-            app:layout_constraintEnd_toStartOf="@+id/pinyin_english_list_audio_button"/>
+            app:layout_constraintEnd_toStartOf="@+id/pinyin_list_audio_button"/>
 
         <ImageButton
-            android:id="@+id/pinyin_english_list_audio_button"
+            android:id="@+id/pinyin_list_audio_button"
             android:layout_width="@dimen/pinyin_list_play_size"
             android:layout_height="@dimen/pinyin_list_play_size"
             android:layout_margin="@dimen/padding_large_16dp"

@@ -43,7 +43,7 @@ class PinyinPhoneticViewHolder(itemView: View) : SimpleAdapterViewHolder<PinyinE
     @BindView(R.id.pinyin_phonetic_list_item_value)
     lateinit var phoneticTextView: TextView
 
-    @BindView(R.id.pinyin_phonetic_list_audio_button)
+    @BindView(R.id.pinyin_list_audio_button)
     lateinit var audioButton: ImageButton
 
     init {

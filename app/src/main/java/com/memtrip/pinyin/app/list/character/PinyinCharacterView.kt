@@ -5,15 +5,12 @@ import com.memtrip.pinyin.PresenterView
 import com.memtrip.pinyin.api.DatabaseModule
 import com.memtrip.pinyin.api.NetworkModule
 import com.memtrip.pinyin.api.PinyinEntity
+import com.memtrip.pinyin.app.list.PinyinListView
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
-interface PinyinCharacterView : PresenterView {
-    fun populate(pinyin: List<PinyinEntity>)
-    fun navigateToPinyinDetails(pinyinEntity: PinyinEntity)
-    fun error()
-}
+interface PinyinCharacterView : PinyinListView
 
 @Singleton
 @Component(modules = [ NetworkModule::class, DatabaseModule::class ])

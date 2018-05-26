@@ -43,7 +43,7 @@ class PinyinEnglishViewHolder(itemView: View) : SimpleAdapterViewHolder<PinyinEn
     @BindView(R.id.pinyin_english_list_item_value)
     lateinit var englishTextView: TextView
 
-    @BindView(R.id.pinyin_english_list_audio_button)
+    @BindView(R.id.pinyin_list_audio_button)
     lateinit var audioButton: ImageButton
 
     init {

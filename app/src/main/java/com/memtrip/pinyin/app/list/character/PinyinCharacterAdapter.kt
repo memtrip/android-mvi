@@ -43,7 +43,7 @@ class PinyinCharacterViewHolder(itemView: View) : SimpleAdapterViewHolder<Pinyin
     @BindView(R.id.pinyin_character_list_item_value)
     lateinit var characterTextView: TextView
 
-    @BindView(R.id.pinyin_character_list_audio_button)
+    @BindView(R.id.pinyin_list_audio_button)
     lateinit var audioButton: ImageButton
 
     init {
