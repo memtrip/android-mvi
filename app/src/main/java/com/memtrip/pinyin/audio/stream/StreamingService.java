@@ -1,7 +1,6 @@
 package com.memtrip.pinyin.audio.stream;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -11,7 +10,6 @@ import android.os.Looper;
 import com.memtrip.pinyin.audio.stream.interrupt.AudioFocusInterrupt;
 import com.memtrip.pinyin.audio.stream.interrupt.BecomingNoisyInterrupt;
 import com.memtrip.pinyin.audio.stream.interrupt.InterruptAudio;
-
 
 import timber.log.Timber;
 

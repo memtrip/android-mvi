@@ -21,9 +21,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
-
 import com.memtrip.pinyin.BuildConfig;
-import com.memtrip.pinyin.audio.stream.OnPlayerStateListener;
 
 import java.io.IOException;
 

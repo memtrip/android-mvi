@@ -1,14 +1,15 @@
 package com.memtrip.pinyin.kit
 
 import android.content.Context
-import android.view.ViewGroup
-import android.support.v7.widget.RecyclerView
-import io.reactivex.ObservableSource
-import com.jakewharton.rxbinding2.view.RxView
-import android.view.LayoutInflater
 import android.support.annotation.StringRes
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
-import com.memtrip.pinyin.*
+import android.view.ViewGroup
+import com.jakewharton.rxbinding2.view.RxView
+import com.memtrip.pinyin.AdapterClick
+import com.memtrip.pinyin.AdapterEvent
+import io.reactivex.ObservableSource
 import io.reactivex.functions.Consumer
 
 abstract class SimpleAdapter<T>(

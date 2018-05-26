@@ -1,14 +1,14 @@
 package com.memtrip.pinyin.app
 
 import android.os.Bundle
-
-import com.memtrip.pinyin.*
+import com.memtrip.pinyin.Presenter
+import com.memtrip.pinyin.PresenterActivity
+import com.memtrip.pinyin.R
 import com.memtrip.pinyin.kit.gone
 import com.memtrip.pinyin.kit.visible
-import javax.inject.Inject
-
 import kotlinx.android.synthetic.main.entry_activity.*
 import kotlinx.android.synthetic.main.kit_error_retry.view.*
+import javax.inject.Inject
 
 class EntryActivity : PresenterActivity<EntryView>(), EntryView {
 

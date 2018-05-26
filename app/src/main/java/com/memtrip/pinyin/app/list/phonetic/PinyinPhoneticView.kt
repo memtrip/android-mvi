@@ -1,10 +1,8 @@
 package com.memtrip.pinyin.app.list.phonetic
 
 import android.app.Application
-import com.memtrip.pinyin.PresenterView
 import com.memtrip.pinyin.api.DatabaseModule
 import com.memtrip.pinyin.api.NetworkModule
-import com.memtrip.pinyin.api.PinyinEntity
 import com.memtrip.pinyin.app.list.PinyinListView
 import dagger.BindsInstance
 import dagger.Component

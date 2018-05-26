@@ -2,11 +2,10 @@ package com.memtrip.pinyin.app
 
 import android.app.Application
 import com.memtrip.pinyin.PresenterView
+import com.memtrip.pinyin.api.ApiModule
 import com.memtrip.pinyin.api.DatabaseModule
 import com.memtrip.pinyin.api.NetworkModule
-import com.memtrip.pinyin.api.ApiModule
 import dagger.BindsInstance
-
 import dagger.Component
 import javax.inject.Singleton
 

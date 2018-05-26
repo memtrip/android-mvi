@@ -1,8 +1,6 @@
 package com.memtrip.pinyin.app.list.character
 
-import com.memtrip.pinyin.*
 import com.memtrip.pinyin.api.CharacterSearch
-import com.memtrip.pinyin.api.PinyinEntity
 import com.memtrip.pinyin.app.list.PinyinListPresenter
 import io.reactivex.functions.Consumer
 import javax.inject.Inject

@@ -3,7 +3,7 @@ package com.memtrip.pinyin.audio.stream;
 import android.content.Context;
 import android.content.Intent;
 
-import static com.memtrip.pinyin.audio.stream.StreamingAction.*;
+import static com.memtrip.pinyin.audio.stream.StreamingAction.ACTION_NOTIFICATION_PLAY;
 
 public abstract class StreamingNavigator<T extends Stream> implements Navigator<T> {
 

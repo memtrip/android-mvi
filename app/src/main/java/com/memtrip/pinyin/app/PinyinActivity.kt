@@ -50,7 +50,7 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
 
         pinyin_activity_searchview.setOnCloseListener(object : SearchView.OnCloseListener {
             override fun onClose(): Boolean {
-                sendSearchEvent("")
+                sendSearchEvent()
                 return false
             }
         })

@@ -4,9 +4,7 @@ import com.memtrip.pinyin.Event
 import com.memtrip.pinyin.Presenter
 import com.memtrip.pinyin.R
 import com.memtrip.pinyin.audio.PlayPinyAudioInPresenter
-import com.memtrip.pinyin.audio.PlayPinyinAudio
 import io.reactivex.functions.Consumer
-import kotlinx.android.synthetic.main.pinyin_detail_activity.view.*
 import javax.inject.Inject
 
 class PinyinDetailPresenter @Inject internal constructor(
