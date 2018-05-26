@@ -42,6 +42,8 @@ class PinyinParcel(val sourceUrl: String,
 interface PinyinDetailView : PresenterView {
 
     fun populate(pinyinParcel: PinyinParcel)
+
+    fun showAudioControl()
 }
 
 @Singleton

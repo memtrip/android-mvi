@@ -7,6 +7,7 @@ import com.memtrip.pinyin.Presenter
 import com.memtrip.pinyin.PresenterActivity
 import com.memtrip.pinyin.R
 import com.memtrip.pinyin.api.PinyinEntity
+import com.memtrip.pinyin.kit.visible
 import kotlinx.android.synthetic.main.pinyin_detail_activity.*
 import javax.inject.Inject
 
@@ -23,6 +24,9 @@ class PinyinDetailActivity : PresenterActivity<PinyinDetailView>(), PinyinDetail
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_home_up)
+
+        onClickEvent(pinyin_detail_activity_audio_button)
+                .subscribe(presenter.event())
     }
 
     override fun inject() {
@@ -42,6 +46,10 @@ class PinyinDetailActivity : PresenterActivity<PinyinDetailView>(), PinyinDetail
         pinyin_detail_activity_phonetic_script_value.text = pinyinParcel.phoneticScriptText
         pinyin_detail_activity_english_translation_value.text = pinyinParcel.englishTranslationText
         pinyin_detail_activity_chinese_character_value.text = pinyinParcel.chineseCharacters
+    }
+
+    override fun showAudioControl() {
+        pinyin_detail_activity_audio_button.visible()
     }
 
     companion object {
