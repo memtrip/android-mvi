@@ -13,13 +13,14 @@ import com.memtrip.pinyin.app.list.english.PinyinEnglishFragment
 import com.memtrip.pinyin.app.list.phonetic.PinyinPhoneticFragment
 
 internal class PinyinFragmentAdapter(@IdRes val container: Int,
-                                     val tabLayout: TabLayout,
+                                     tabLayout: TabLayout,
                                      val fm: FragmentManager,
                                      context: Context) {
 
     val pages: LinkedHashMap<Page, PageFragment> = LinkedHashMap()
 
     var currentPosition = 0
+    var firstFragment = true
 
     init {
         pages.put(Page.PHONETIC, PhoneticPageFragment(context))
@@ -57,10 +58,13 @@ internal class PinyinFragmentAdapter(@IdRes val container: Int,
 
         val transaction = fm.beginTransaction()
 
-        if (newPosition > currentPosition) {
-            transaction.setCustomAnimations(R.anim.fragment_transition_enter_left, R.anim.fragment_transition_exit_left)
+        if (firstFragment) {
+            firstFragment = false
+            transaction.setCustomAnimations(R.anim.pinyin_list_transition_enter_bottom, R.anim.pinyin_list_transition_exit_left)
+        } else if (newPosition > currentPosition) {
+            transaction.setCustomAnimations(R.anim.pinyin_list_transition_enter_bottom, R.anim.pinyin_list_transition_exit_left)
         } else {
-            transaction.setCustomAnimations(R.anim.fragment_transition_enter_right, R.anim.fragment_transition_exit_right)
+            transaction.setCustomAnimations(R.anim.pinyin_list_transition_enter_bottom, R.anim.pinyin_list_transition_exit_right)
         }
 
         transaction.replace(container, fragment)
