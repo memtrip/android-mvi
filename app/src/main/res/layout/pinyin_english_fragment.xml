@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.memtrip.pinyin.kit.SimpleRecyclerView
+    <com.consistence.pinyin.kit.SimpleRecyclerView
         android:id="@+id/pinyin_english_fragment_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"

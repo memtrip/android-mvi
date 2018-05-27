@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <com.memtrip.pinyin.kit.AppTextView
+    <com.consistence.pinyin.kit.AppTextView
         style="@style/Typography.Body1"
         android:id="@+id/kit_error_retry_message"
         android:layout_width="wrap_content"

@@ -6,7 +6,7 @@
     android:id="@+id/entry_activity_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.memtrip.pinyin.app.EntryActivity">
+    tools:context="com.consistence.pinyin.app.EntryActivity">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/entry_activity_animation"
@@ -30,7 +30,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entry_activity_animation" />
 
-    <com.memtrip.pinyin.kit.ErrorRetryView
+    <com.consistence.pinyin.kit.ErrorRetryView
         android:id="@+id/entry_activity_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

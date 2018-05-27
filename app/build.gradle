@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.memtrip.pinyin"
+        applicationId "com.consistence.pinyin"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1

@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/padding_large_16dp">
 
-                <com.memtrip.pinyin.kit.AppTextView
+                <com.consistence.pinyin.kit.AppTextView
                     style="@style/Typography.Body2"
                     android:id="@+id/pinyin_detail_activity_phonetic_script_title"
                     android:layout_width="0dp"
@@ -53,7 +53,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/pinyin_detail_activity_audio_button"/>
 
-                <com.memtrip.pinyin.kit.AppTextView
+                <com.consistence.pinyin.kit.AppTextView
                     style="@style/Typography.Large.Bold"
                     android:id="@+id/pinyin_detail_activity_phonetic_script_value"
                     android:layout_width="0dp"
@@ -77,7 +77,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <com.memtrip.pinyin.kit.AppTextView
+                <com.consistence.pinyin.kit.AppTextView
                     style="@style/Typography.Body2"
                     android:id="@+id/pinyin_detail_activity_english_translation_title"
                     android:layout_width="0dp"
@@ -88,7 +88,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/pinyin_detail_activity_phonetic_script_value"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-                <com.memtrip.pinyin.kit.AppTextView
+                <com.consistence.pinyin.kit.AppTextView
                     style="@style/Typography.Large.Bold"
                     android:id="@+id/pinyin_detail_activity_english_translation_value"
                     android:layout_width="0dp"
@@ -100,7 +100,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/pinyin_detail_activity_english_translation_title"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-                <com.memtrip.pinyin.kit.AppTextView
+                <com.consistence.pinyin.kit.AppTextView
                     style="@style/Typography.Body2"
                     android:id="@+id/pinyin_detail_activity_chinese_character_title"
                     android:layout_width="0dp"
@@ -111,7 +111,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/pinyin_detail_activity_english_translation_value"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
-                <com.memtrip.pinyin.kit.AppTextView
+                <com.consistence.pinyin.kit.AppTextView
                     style="@style/Typography.Large.Bold"
                     android:id="@+id/pinyin_detail_activity_chinese_character_value"
                     android:layout_width="0dp"
