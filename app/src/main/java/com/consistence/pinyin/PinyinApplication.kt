@@ -1,10 +1,10 @@
 package com.consistence.pinyin
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 
-class PinyinApplication : Application() {
+class PinyinApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
