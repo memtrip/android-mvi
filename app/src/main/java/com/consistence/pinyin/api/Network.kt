@@ -64,7 +64,7 @@ class NetworkModule {
     @Singleton @Provides
     fun retrofit(httpClient: OkHttpClient, converterFactory: Converter.Factory) : Retrofit {
         return Retrofit.Builder()
-                .baseUrl("http://192.168.0.13:8000/")
+                .baseUrl("http://pinyin.consistence.io/")
                 .client(httpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(converterFactory)
