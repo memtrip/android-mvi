@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
         android:gravity="center_horizontal"
-        android:text="@string/pinyin_activity_search_hint"
+        android:text="@string/pinyin_activity_search_pinyin_hint"
         android:textColor="@color/colorTextInverse"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pinyin_activity_searchview"

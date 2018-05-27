@@ -6,6 +6,8 @@ import javax.inject.Singleton
 
 interface PinyinView : PresenterView {
     var currentSearchQuery : String
+
+    fun updateSearchHint(hint: String)
 }
 
 @Singleton

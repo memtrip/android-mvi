@@ -3,13 +3,10 @@ package com.memtrip.pinyin.app
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 
 import android.support.v7.widget.SearchView
-
-import com.memtrip.pinyin.Presenter
-import com.memtrip.pinyin.PresenterActivity
-import com.memtrip.pinyin.R
-import com.memtrip.pinyin.SearchEvent
+import com.memtrip.pinyin.*
 
 import com.memtrip.pinyin.kit.gone
 import com.memtrip.pinyin.kit.visible
@@ -33,6 +30,13 @@ class PinyinActivity(override var currentSearchQuery: String = "")
                 pinyin_activity_tablayout,
                 supportFragmentManager,
                 context())
+
+        pinyin_activity_tablayout.addOnTabSelectedListener(object : OnTabSelectedListenerAdapter() {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                super.onTabSelected(tab)
+                sendEvent(TabSelectedEvent(R.id.pinyin_activity_tablayout, tab!!.position))
+            }
+        })
 
         pinyin_activity_searchview.setOnQueryTextFocusChangeListener { _ , hasFocus ->
             if (hasFocus) {
@@ -65,7 +69,6 @@ class PinyinActivity(override var currentSearchQuery: String = "")
         })
     }
 
-
     private fun sendSearchEvent(terms:CharSequence = "") {
         fragmentAdapter.sendEvent(SearchEvent(
                 R.id.pinyin_activity_search_terms, terms))
@@ -78,6 +81,11 @@ class PinyinActivity(override var currentSearchQuery: String = "")
     override fun presenter(): Presenter<PinyinView> = presenter
 
     override fun view(): PinyinView = this
+
+    override fun updateSearchHint(hint: String) {
+        pinyin_activity_searchview.queryHint = hint
+        pinyin_activity_searchview_label.text = hint
+    }
 
     companion object {
         fun newIntent(context: Context): Intent =

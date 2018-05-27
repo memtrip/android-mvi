@@ -12,6 +12,8 @@ class ClickEvent(@IdRes override val id: Int) : Event
 
 class SearchEvent(@IdRes override val id: Int, val terms: CharSequence) : Event
 
+class TabSelectedEvent(@IdRes override val id: Int, val position: Int) : Event
+
 interface AdapterEvent<T> : Event {
     override val id: Int
     val value: T
