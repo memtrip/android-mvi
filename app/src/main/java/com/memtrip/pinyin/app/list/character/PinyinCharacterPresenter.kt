@@ -10,11 +10,6 @@ class PinyinCharacterPresenter @Inject internal constructor(
 
     override val defaultSearch = "拼音"
 
-    override fun first() {
-        super.first()
-        search()
-    }
-
     override fun search(terms: String) {
         i(characterSearch.search(terms, Consumer {
             view.populate(it)

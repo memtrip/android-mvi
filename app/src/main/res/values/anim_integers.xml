@@ -1,0 +1,6 @@
+<resources>
+
+    <integer name="fragment_transition_translate_duration">@android:integer/config_mediumAnimTime</integer>
+    <integer name="fragment_transition_fade_duration">@android:integer/config_longAnimTime</integer>
+
+</resources>

@@ -3,7 +3,7 @@
         google play title:
             Chinese/Pinyin Dictionary (拼音 词典)
     -->
-    <string name="app_name">Pinyin[拼音]</string>
+    <string name="app_name">拼音</string>
 
     <string name="app_retry">Retry</string>
 

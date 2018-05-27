@@ -3,6 +3,7 @@ package com.memtrip.pinyin.app.list
 import com.memtrip.pinyin.*
 
 import com.memtrip.pinyin.api.PinyinEntity
+import com.memtrip.pinyin.app.PinyinView
 
 import com.memtrip.pinyin.audio.PlayPinyAudioInPresenter
 import com.memtrip.pinyin.audio.PlayPinyinAudio
@@ -17,10 +18,17 @@ abstract class PinyinListPresenter<V : PinyinListView> : Presenter<V>() {
 
     abstract val defaultSearch: String
 
+    override fun first() {
+        super.first()
+        search()
+    }
+
     override fun start() {
         super.start()
 
         pinyinAudio.attach(view.context())
+
+        searchWith((view.context() as PinyinView).currentSearchQuery)
     }
 
     override fun stop() {
@@ -29,15 +37,18 @@ abstract class PinyinListPresenter<V : PinyinListView> : Presenter<V>() {
         pinyinAudio.detach(view.context())
     }
 
+    private fun searchWith(terms: String) {
+        if (terms.isEmpty()) {
+            search()
+        } else {
+            search(terms)
+        }
+    }
+
     override fun event(): Consumer<Event> = Consumer {
         when (it) {
-            is SearchEvent -> {
-                if (it.terms.isEmpty()) {
-                    search()
-                } else {
-                    search(it.terms)
-                }
-            }
+            is SearchEvent ->
+                searchWith(it.terms.toString())
         }
     }
 

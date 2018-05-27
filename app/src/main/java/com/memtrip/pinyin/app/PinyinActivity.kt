@@ -3,6 +3,7 @@ package com.memtrip.pinyin.app
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+
 import android.support.v7.widget.SearchView
 
 import com.memtrip.pinyin.Presenter
@@ -12,10 +13,12 @@ import com.memtrip.pinyin.SearchEvent
 
 import com.memtrip.pinyin.kit.gone
 import com.memtrip.pinyin.kit.visible
+
 import kotlinx.android.synthetic.main.pinyin_activity.*
 import javax.inject.Inject
 
-class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
+class PinyinActivity(override var currentSearchQuery: String = "")
+    : PresenterActivity<PinyinView>(), PinyinView {
 
     @Inject lateinit var presenter: PinyinPresenter
 
@@ -25,16 +28,17 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pinyin_activity)
 
-        fragmentAdapter = PinyinFragmentAdapter(this, supportFragmentManager)
-        pinyin_activity_viewpager.adapter = fragmentAdapter
-        pinyin_activity_viewpager.offscreenPageLimit = 3
-        pinyin_activity_tablayout.setupWithViewPager(pinyin_activity_viewpager)
+        fragmentAdapter = PinyinFragmentAdapter(
+                R.id.pinyin_activity_fragment_container,
+                pinyin_activity_tablayout,
+                supportFragmentManager,
+                context())
 
         pinyin_activity_searchview.setOnQueryTextFocusChangeListener { _ , hasFocus ->
             if (hasFocus) {
                 pinyin_activity_searchview_label.gone()
             } else {
-                if (pinyin_activity_searchview.query.length == 0)
+                if (pinyin_activity_searchview.query.isEmpty())
                     pinyin_activity_searchview_label.visible()
             }
         }
@@ -43,6 +47,7 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
             override fun onQueryTextSubmit(p: String): Boolean { return false }
 
             override fun onQueryTextChange(terms: String): Boolean {
+                currentSearchQuery = terms
                 sendSearchEvent(terms)
                 return true
             }
@@ -61,12 +66,8 @@ class PinyinActivity : PresenterActivity<PinyinView>(), PinyinView {
     }
 
 
-    private fun sendSearchEvent(terms:String = "") {
-        fragmentAdapter.sendEvent(0, SearchEvent(
-                R.id.pinyin_activity_search_terms, terms))
-        fragmentAdapter.sendEvent(1, SearchEvent(
-                R.id.pinyin_activity_search_terms, terms))
-        fragmentAdapter.sendEvent(2, SearchEvent(
+    private fun sendSearchEvent(terms:CharSequence = "") {
+        fragmentAdapter.sendEvent(SearchEvent(
                 R.id.pinyin_activity_search_terms, terms))
     }
 

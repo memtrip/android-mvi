@@ -40,8 +40,8 @@
         app:layout_constraintTop_toBottomOf="@+id/pinyin_activity_searchview"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pinyin_activity_viewpager"
+    <FrameLayout
+        android:id="@+id/pinyin_activity_fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/padding_large_16dp"

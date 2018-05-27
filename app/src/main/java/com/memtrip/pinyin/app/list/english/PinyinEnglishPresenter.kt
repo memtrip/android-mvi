@@ -11,11 +11,6 @@ class PinyinEnglishPresenter @Inject internal constructor(
 
     override val defaultSearch = "pinyin"
 
-    override fun first() {
-        super.first()
-        search()
-    }
-
     override fun search(terms: String) {
         i(englishSearch.search(terms, Consumer {
             view.populate(it)
