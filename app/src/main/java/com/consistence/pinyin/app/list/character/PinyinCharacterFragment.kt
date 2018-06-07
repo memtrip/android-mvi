@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.consistence.pinyin.Presenter
-import com.consistence.pinyin.PresenterFragment
+import com.consistence.pinyin.legacy.Presenter
+import com.consistence.pinyin.legacy.PresenterFragment
 import com.consistence.pinyin.R
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.detail.PinyinDetailActivity

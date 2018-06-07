@@ -1,4 +1,4 @@
-package com.consistence.pinyin
+package com.consistence.pinyin.legacy
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

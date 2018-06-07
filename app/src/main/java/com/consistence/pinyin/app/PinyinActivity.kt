@@ -10,6 +10,10 @@ import com.consistence.pinyin.*
 
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
+import com.consistence.pinyin.legacy.Presenter
+import com.consistence.pinyin.legacy.PresenterActivity
+import com.consistence.pinyin.legacy.SearchEvent
+import com.consistence.pinyin.legacy.TabSelectedEvent
 
 import kotlinx.android.synthetic.main.pinyin_activity.*
 import javax.inject.Inject

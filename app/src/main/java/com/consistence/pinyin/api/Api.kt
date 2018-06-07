@@ -3,8 +3,6 @@ package com.consistence.pinyin.api
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Single
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 
 import retrofit2.Retrofit
 import retrofit2.http.GET
@@ -43,10 +41,7 @@ class FetchPinyin @Inject internal constructor(
 
     private val api = retrofit.create(PinyinApi::class.java)
 
-    fun values(success: Consumer<PinyinWrapper>, error: Consumer<Throwable>): Disposable {
-        return api.pinyin
-                .subscribeOn(schedulerProvider.thread())
-                .observeOn(schedulerProvider.main())
-                .subscribe(success, error)
-    }
+    fun values(): Single<PinyinWrapper> = api.pinyin
+            .subscribeOn(schedulerProvider.thread())
+            .observeOn(schedulerProvider.main())
 }

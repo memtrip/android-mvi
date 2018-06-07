@@ -1,9 +1,9 @@
 package com.consistence.pinyin.app
 
-import com.consistence.pinyin.Event
-import com.consistence.pinyin.Presenter
+import com.consistence.pinyin.legacy.Event
+import com.consistence.pinyin.legacy.Presenter
 import com.consistence.pinyin.R
-import com.consistence.pinyin.TabSelectedEvent
+import com.consistence.pinyin.legacy.TabSelectedEvent
 import io.reactivex.functions.Consumer
 
 import javax.inject.Inject

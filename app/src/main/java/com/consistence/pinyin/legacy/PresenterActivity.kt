@@ -1,4 +1,4 @@
-package com.consistence.pinyin
+package com.consistence.pinyin.legacy
 
 import android.content.Context
 import android.os.Bundle

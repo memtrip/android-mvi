@@ -8,7 +8,7 @@ import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 class PinyinPhoneticPresenter @Inject internal constructor(
-        val phoneticSearch: PhoneticSearch) : PinyinListPresenter<PinyinPhoneticView>() {
+        private val phoneticSearch: PhoneticSearch) : PinyinListPresenter<PinyinPhoneticView>() {
 
     override val defaultSearch = "pinyin"
 

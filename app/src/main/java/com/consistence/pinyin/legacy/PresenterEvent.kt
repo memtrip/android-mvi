@@ -1,6 +1,7 @@
-package com.consistence.pinyin
+package com.consistence.pinyin.legacy
 
 import android.support.annotation.IdRes
+import com.consistence.pinyin.R
 
 interface Event {
     val id: Int

@@ -7,6 +7,7 @@ import com.consistence.pinyin.app.PinyinView
 
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import com.consistence.pinyin.audio.PlayPinyinAudio
+import com.consistence.pinyin.legacy.*
 
 import io.reactivex.functions.Consumer
 

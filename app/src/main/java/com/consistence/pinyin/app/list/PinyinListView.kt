@@ -1,6 +1,6 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.PresenterView
+import com.consistence.pinyin.legacy.PresenterView
 import com.consistence.pinyin.api.PinyinEntity
 
 interface PinyinListView : PresenterView {

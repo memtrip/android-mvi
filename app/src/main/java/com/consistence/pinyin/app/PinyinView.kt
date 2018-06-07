@@ -1,6 +1,6 @@
 package com.consistence.pinyin.app
 
-import com.consistence.pinyin.PresenterView
+import com.consistence.pinyin.legacy.PresenterView
 import dagger.Component
 import javax.inject.Singleton
 

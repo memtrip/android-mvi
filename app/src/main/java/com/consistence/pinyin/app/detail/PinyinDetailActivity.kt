@@ -3,8 +3,8 @@ package com.consistence.pinyin.app.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.consistence.pinyin.Presenter
-import com.consistence.pinyin.PresenterActivity
+import com.consistence.pinyin.legacy.Presenter
+import com.consistence.pinyin.legacy.PresenterActivity
 import com.consistence.pinyin.R
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.kit.visible

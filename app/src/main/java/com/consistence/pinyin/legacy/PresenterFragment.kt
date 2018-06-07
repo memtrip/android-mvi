@@ -1,11 +1,7 @@
-package com.consistence.pinyin
+package com.consistence.pinyin.legacy
 
 import android.content.Context
-import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 
 abstract class PresenterFragment<V : PresenterView>(interact: Interact = RxInteract())
     : Fragment(), PresenterView, Interact by interact {

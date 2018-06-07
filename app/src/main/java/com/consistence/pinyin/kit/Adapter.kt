@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxbinding2.view.RxView
-import com.consistence.pinyin.AdapterClick
-import com.consistence.pinyin.AdapterEvent
+import com.consistence.pinyin.legacy.AdapterClick
+import com.consistence.pinyin.legacy.AdapterEvent
 import io.reactivex.ObservableSource
 import io.reactivex.functions.Consumer
 

@@ -5,8 +5,8 @@ import android.support.annotation.IdRes
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import com.consistence.pinyin.Event
-import com.consistence.pinyin.PresenterFragment
+import com.consistence.pinyin.legacy.Event
+import com.consistence.pinyin.legacy.PresenterFragment
 import com.consistence.pinyin.R
 import com.consistence.pinyin.app.list.character.PinyinCharacterFragment
 import com.consistence.pinyin.app.list.english.PinyinEnglishFragment

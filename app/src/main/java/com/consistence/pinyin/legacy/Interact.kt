@@ -1,4 +1,4 @@
-package com.consistence.pinyin
+package com.consistence.pinyin.legacy
 
 import android.view.View
 import com.jakewharton.rxbinding2.view.RxView

@@ -5,9 +5,10 @@ import android.arch.persistence.room.*
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Completable
+
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Action
+
 import io.reactivex.functions.Consumer
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -70,11 +71,9 @@ class SavePinyin @Inject internal constructor(
         private val pinyinDao: PinyinDao,
         private val schedulerProvider: SchedulerProvider) {
 
-    fun insert(pinyin: List<PinyinJson>,
-               success: Action,
-               error: Consumer<Throwable>): Disposable = Completable.fromAction({
+    fun insert(pinyin: List<PinyinJson>): Single<List<PinyinEntity>> {
 
-        pinyinDao.insertAll(pinyin.map {
+        val pinyinEntities = pinyin.map {
             PinyinEntity(it.sourceUrl,
                     it.phoneticScriptText,
                     it.romanLetterText,
@@ -82,20 +81,23 @@ class SavePinyin @Inject internal constructor(
                     it.englishTranslationText,
                     it.chineseCharacters,
                     it.characterImageSrc)
-        })
-    }).observeOn(schedulerProvider.main())
-            .subscribeOn(schedulerProvider.thread())
-            .subscribe(success, error)
+        }
+
+        return Completable
+                .fromAction({ pinyinDao.insertAll(pinyinEntities) })
+                .observeOn(schedulerProvider.main())
+                .subscribeOn(schedulerProvider.thread())
+                .toSingle({ pinyinEntities })
+    }
 }
 
 class CountPinyin @Inject internal constructor(
         private val pinyinDao: PinyinDao,
         private val schedulerProvider: SchedulerProvider) {
 
-    fun count(hasPinyin: Consumer<Int>, error: Consumer<Throwable>): Disposable =
-            Single.fromCallable({ pinyinDao.count() }).observeOn(schedulerProvider.main())
-                    .subscribeOn(schedulerProvider.thread())
-                    .subscribe(hasPinyin, error)
+    fun count(): Single<Int> = Single.fromCallable({ pinyinDao.count() })
+            .observeOn(schedulerProvider.main())
+            .subscribeOn(schedulerProvider.thread())
 }
 
 class GetPinyin @Inject internal constructor(

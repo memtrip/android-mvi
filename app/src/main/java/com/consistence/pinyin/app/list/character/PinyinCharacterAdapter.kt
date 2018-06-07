@@ -8,8 +8,8 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.jakewharton.rxbinding2.view.RxView
-import com.consistence.pinyin.AdapterClick
-import com.consistence.pinyin.AdapterEvent
+import com.consistence.pinyin.legacy.AdapterClick
+import com.consistence.pinyin.legacy.AdapterEvent
 import com.consistence.pinyin.R
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.kit.SimpleAdapter

@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app.detail
 
-import com.consistence.pinyin.Event
-import com.consistence.pinyin.Presenter
+import com.consistence.pinyin.legacy.Event
+import com.consistence.pinyin.legacy.Presenter
 import com.consistence.pinyin.R
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import io.reactivex.functions.Consumer

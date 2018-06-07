@@ -2,7 +2,7 @@ package com.consistence.pinyin.app.detail
 
 import android.content.Intent
 import android.os.Parcelable
-import com.consistence.pinyin.PresenterView
+import com.consistence.pinyin.legacy.PresenterView
 
 import com.consistence.pinyin.api.PinyinEntity
 
