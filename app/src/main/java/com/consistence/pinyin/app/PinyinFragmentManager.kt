@@ -88,9 +88,8 @@ internal class PhoneticPageFragment(context: Context) : PageFragment(
 
     private var pinyinPhoneticFragment: PinyinPhoneticFragment? = null
 
-    fun createPinyinPhoneticFragment() : PinyinPhoneticFragment =
+    private fun createPinyinPhoneticFragment() : PinyinPhoneticFragment =
             pinyinPhoneticFragment?.let { it } ?: PinyinPhoneticFragment.newInstance()
-
 
     override fun getFragment(): PinyinListFragment {
         pinyinPhoneticFragment = createPinyinPhoneticFragment()
@@ -103,7 +102,7 @@ internal class EnglishPageFragment(context: Context) : PageFragment(
 
     private var pinyinEnglishFragment: PinyinEnglishFragment? = null
 
-    fun createPinyinEnglishFragment() : PinyinEnglishFragment =
+    private fun createPinyinEnglishFragment() : PinyinEnglishFragment =
             pinyinEnglishFragment?.let { it } ?: PinyinEnglishFragment.newInstance()
 
 
@@ -118,7 +117,7 @@ internal class CharacterPageFragment(context: Context) : PageFragment(
 
     private var pinyinCharacterFragment: PinyinCharacterFragment? = null
 
-    fun createPinyinCharacterFragment() : PinyinCharacterFragment =
+    private fun createPinyinCharacterFragment() : PinyinCharacterFragment =
             pinyinCharacterFragment?.let { it } ?: PinyinCharacterFragment.newInstance()
 
     override fun getFragment(): PinyinListFragment {

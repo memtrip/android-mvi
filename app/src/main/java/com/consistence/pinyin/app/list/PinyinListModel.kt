@@ -14,7 +14,7 @@ abstract class PinyinListModel(application: Application)
     abstract val defaultSearch: String
 
     private fun searchQuery(terms: String = defaultSearch): Observable<PinyinListState> {
-        return search(terms)
+        return search(if (terms.isEmpty()) defaultSearch else terms)
                 .map<PinyinListState> { PinyinListState.Populate(it) }
                 .toObservable()
     }
