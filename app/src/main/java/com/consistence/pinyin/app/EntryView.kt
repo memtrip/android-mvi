@@ -60,6 +60,5 @@ interface EntryComponent {
         fun build(): EntryComponent
     }
 
-
     fun inject(entryActivity: EntryActivity)
 }

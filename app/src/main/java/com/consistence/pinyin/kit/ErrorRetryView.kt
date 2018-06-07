@@ -14,8 +14,6 @@ class ErrorRetryView @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    fun retryButton() : Button = kit_error_retry_button
-
     init {
         LayoutInflater.from(getContext()).inflate(R.layout.kit_error_retry, this)
 

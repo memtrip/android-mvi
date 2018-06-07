@@ -1,7 +1,6 @@
 package com.consistence.pinyin.app.list.phonetic
 
 import com.consistence.pinyin.api.PhoneticSearch
-import com.consistence.pinyin.app.PinyinView
 import com.consistence.pinyin.app.list.PinyinListPresenter
 
 import io.reactivex.functions.Consumer

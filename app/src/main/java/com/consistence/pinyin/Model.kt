@@ -1,13 +1,16 @@
 package com.consistence.pinyin
 
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
+import android.content.Context
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 import io.reactivex.subjects.PublishSubject
 
-abstract class Model<I : ViewIntent, S : ViewState> : ViewModel() {
+abstract class Model<I : ViewIntent, S : ViewState>(application: Application) : AndroidViewModel(application) {
 
     val intents: PublishSubject<I> = PublishSubject.create<I>()
 
@@ -22,6 +25,8 @@ abstract class Model<I : ViewIntent, S : ViewState> : ViewModel() {
     internal fun publish(intent: I) {
         intents.onNext(intent)
     }
+
+    protected fun context(): Context = getApplication()
 
     abstract fun processor(intent: I): Observable<S>
 }

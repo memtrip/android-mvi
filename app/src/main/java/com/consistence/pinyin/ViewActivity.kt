@@ -12,7 +12,7 @@ abstract class ViewActivity<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
-        d.add(presenter().states().subscribe(render()::state))
+        d.add(model().states().subscribe(render()::state))
     }
 
     override fun onStart() {
@@ -20,13 +20,13 @@ abstract class ViewActivity<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
 
         if (!init) {
             init = true
-            initIntent()?.let { presenter().publish(it) }
+            initIntent()?.let { model().publish(it) }
         }
     }
 
     abstract fun inject()
 
-    abstract fun presenter(): M
+    abstract fun model(): M
 
     abstract fun render() : R
 

@@ -3,7 +3,6 @@ package com.consistence.pinyin.app.list
 import com.consistence.pinyin.*
 
 import com.consistence.pinyin.api.PinyinEntity
-import com.consistence.pinyin.app.PinyinView
 
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import com.consistence.pinyin.audio.PlayPinyinAudio
@@ -29,7 +28,7 @@ abstract class PinyinListPresenter<V : PinyinListView> : Presenter<V>() {
 
         pinyinAudio.attach(view.context())
 
-        searchWith((view.context() as PinyinView).currentSearchQuery)
+        //searchWith((view.context() as PinyinView).currentSearchQuery)
     }
 
     override fun stop() {

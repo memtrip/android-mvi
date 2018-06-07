@@ -10,18 +10,16 @@ import com.consistence.pinyin.*
 
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
-import com.consistence.pinyin.legacy.Presenter
-import com.consistence.pinyin.legacy.PresenterActivity
+
 import com.consistence.pinyin.legacy.SearchEvent
-import com.consistence.pinyin.legacy.TabSelectedEvent
 
 import kotlinx.android.synthetic.main.pinyin_activity.*
 import javax.inject.Inject
 
 class PinyinActivity(override var currentSearchQuery: String = "")
-    : PresenterActivity<PinyinView>(), PinyinView {
+    : ViewActivity<PinyinIntent, PinyinState, PinyinModel, PinyinRender>(), PinyinLayout {
 
-    @Inject lateinit var presenter: PinyinPresenter
+    @Inject lateinit var model: PinyinModel
 
     internal lateinit var fragmentAdapter: PinyinFragmentAdapter
 
@@ -33,12 +31,12 @@ class PinyinActivity(override var currentSearchQuery: String = "")
                 R.id.pinyin_activity_fragment_container,
                 pinyin_activity_tablayout,
                 supportFragmentManager,
-                context())
+                this)
 
         pinyin_activity_tablayout.addOnTabSelectedListener(object : OnTabSelectedListenerAdapter() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 super.onTabSelected(tab)
-                sendEvent(TabSelectedEvent(R.id.pinyin_activity_tablayout, tab!!.position))
+                model().intents.onNext(PinyinIntent.TabSelected(Page.values().get(tab!!.position)))
             }
         })
 
@@ -79,12 +77,16 @@ class PinyinActivity(override var currentSearchQuery: String = "")
     }
 
     override fun inject() {
-        DaggerPinyinComponent.create().inject(this)
+        DaggerPinyinComponent
+                .builder()
+                .application(application)
+                .build()
+                .inject(this)
     }
 
-    override fun presenter(): Presenter<PinyinView> = presenter
+    override fun model() = model
 
-    override fun view(): PinyinView = this
+    override fun render() = lazy { PinyinRender(this) }.value
 
     override fun updateSearchHint(hint: String) {
         pinyin_activity_searchview.queryHint = hint
@@ -92,7 +94,6 @@ class PinyinActivity(override var currentSearchQuery: String = "")
     }
 
     companion object {
-        fun newIntent(context: Context): Intent =
-                Intent(context, PinyinActivity::class.java)
+        fun newIntent(context: Context) = Intent(context, PinyinActivity::class.java)
     }
 }

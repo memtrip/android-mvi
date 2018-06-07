@@ -23,7 +23,7 @@ class EntryActivity : ViewActivity<EntryIntent, EntryState, EntryModel, EntryRen
 
         RxView.clicks(entry_activity_error.kit_error_retry_button)
                 .map({ EntryIntent.Init })
-                .subscribe(presenter().intents)
+                .subscribe(model().intents)
     }
 
     override fun showProgress() {
@@ -54,7 +54,7 @@ class EntryActivity : ViewActivity<EntryIntent, EntryState, EntryModel, EntryRen
 
     override fun render() = lazy { EntryRender(this) }.value
 
-    override fun presenter(): EntryModel = model
+    override fun model(): EntryModel = model
 
     override fun initIntent(): EntryIntent? = EntryIntent.Init
 }

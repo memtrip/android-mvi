@@ -6,15 +6,12 @@ import android.support.v4.app.Fragment
 abstract class PresenterFragment<V : PresenterView>(interact: Interact = RxInteract())
     : Fragment(), PresenterView, Interact by interact {
 
-    private lateinit var presenterView: PresenterView;
-
     private var init = false
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         inject()
         presenter().attach(view())
-        presenterView = context as PresenterView
     }
 
     override fun onStart() {
@@ -56,7 +53,7 @@ abstract class PresenterFragment<V : PresenterView>(interact: Interact = RxInter
     }
 
     override fun close() {
-        presenterView.close()
+
     }
 
     override fun context() = activity as Context

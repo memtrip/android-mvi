@@ -14,13 +14,13 @@ import com.consistence.pinyin.app.list.phonetic.PinyinPhoneticFragment
 
 internal class PinyinFragmentAdapter(@IdRes val container: Int,
                                      tabLayout: TabLayout,
-                                     val fm: FragmentManager,
+                                     private val fm: FragmentManager,
                                      context: Context) {
 
-    val pages: LinkedHashMap<Page, PageFragment> = LinkedHashMap()
+    private val pages: LinkedHashMap<Page, PageFragment> = LinkedHashMap()
 
-    var currentPosition = 0
-    var firstFragment = true
+    private var currentPosition = 0
+    private var firstFragment = true
 
     init {
         pages.put(Page.PHONETIC, PhoneticPageFragment(context))
