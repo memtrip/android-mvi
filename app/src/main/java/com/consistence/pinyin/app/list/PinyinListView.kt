@@ -7,7 +7,6 @@ import com.consistence.pinyin.ViewState
 import com.consistence.pinyin.api.PinyinEntity
 
 sealed class PinyinListIntent : ViewIntent {
-    object Init : PinyinListIntent()
     data class Search(val terms: String) : PinyinListIntent()
     data class SelectItem(val pinyin: PinyinEntity) : PinyinListIntent()
     data class PlayAudio(val audioSrc: String) : PinyinListIntent()

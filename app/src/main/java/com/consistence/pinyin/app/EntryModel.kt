@@ -30,7 +30,7 @@ class EntryModel @Inject internal constructor(
             }
             .toObservable()
 
-    override fun processor(intent: EntryIntent): Observable<EntryState> = when(intent) {
+    override fun reducer(intent: EntryIntent): Observable<EntryState> = when(intent) {
         EntryIntent.OnProgress -> Observable.just(EntryState.OnProgress)
         EntryIntent.Init -> getPinyin()
         EntryIntent.Retry -> getPinyin()

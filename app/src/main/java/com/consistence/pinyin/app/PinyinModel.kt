@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class PinyinModel @Inject internal constructor(application: Application) : Model<PinyinIntent, PinyinState>(application) {
 
-    override fun processor(intent: PinyinIntent): Observable<PinyinState> = when(intent) {
+    override fun reducer(intent: PinyinIntent): Observable<PinyinState> = when(intent) {
         is PinyinIntent.TabSelected -> {
             Observable.just(
                     when (intent.page) {

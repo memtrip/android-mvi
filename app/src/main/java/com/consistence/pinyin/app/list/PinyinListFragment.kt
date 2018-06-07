@@ -2,6 +2,7 @@ package com.consistence.pinyin.app.list
 
 import com.consistence.pinyin.ViewFragment
 import com.consistence.pinyin.api.PinyinEntity
+import com.consistence.pinyin.app.PinyinLayout
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 
@@ -20,9 +21,13 @@ abstract class PinyinListFragment
         context?.let { pinyinAudio.detach(it) }
     }
 
-    override fun render() = PinyinListRender(this)
+    override fun render() = lazy {
+        PinyinListRender(this)
+    }.value
 
-    override fun initIntent() = PinyinListIntent.Init
+    override fun initIntent(): PinyinListIntent {
+        return PinyinListIntent.Search((context as PinyinLayout).currentSearchQuery)
+    }
 
     override fun navigateToPinyinDetails(pinyinEntity: PinyinEntity) {
         startActivity(PinyinDetailActivity.newIntent(context!!, pinyinEntity))

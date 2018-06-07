@@ -42,7 +42,7 @@ class PinyinCharacterFragment : PinyinListFragment() {
                 else ->
                     PinyinListIntent.SelectItem(it.data)
             }
-        }).subscribe(model.intents)
+        }).subscribe(model.incomingIntents)
 
         return view
     }

@@ -24,6 +24,11 @@ abstract class ViewFragment<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        init = false
+    }
+
     abstract fun inject()
 
     abstract fun model(): M

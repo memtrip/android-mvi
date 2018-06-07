@@ -33,7 +33,7 @@ class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState,
 
         RxView.clicks(pinyin_detail_activity_audio_button)
                 .map({ PinyinDetailIntent.PlayAudio })
-                .subscribe(model.intents)
+                .subscribe(model.incomingIntents)
     }
 
     override fun onStart() {

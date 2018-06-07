@@ -44,7 +44,7 @@ internal class PinyinFragmentAdapter(@IdRes val container: Int,
         pages.values.toTypedArray().map {
             val viewFragment = it.getFragment()
             if (viewFragment.isAdded) {
-                viewFragment.model().intents.onNext(intent)
+                viewFragment.model().incomingIntents.onNext(intent)
             }
         }
     }
@@ -86,43 +86,33 @@ internal abstract class PageFragment constructor(val title: String) {
 internal class PhoneticPageFragment(context: Context) : PageFragment(
         context.getString(R.string.pinyin_activity_phonetic_tab)) {
 
-    private var pinyinPhoneticFragment: PinyinPhoneticFragment? = null
-
-    private fun createPinyinPhoneticFragment() : PinyinPhoneticFragment =
-            pinyinPhoneticFragment?.let { it } ?: PinyinPhoneticFragment.newInstance()
+    private var fragment: PinyinPhoneticFragment? = null
 
     override fun getFragment(): PinyinListFragment {
-        pinyinPhoneticFragment = createPinyinPhoneticFragment()
-        return pinyinPhoneticFragment as PinyinListFragment
+        fragment =  fragment?.let { it } ?: PinyinPhoneticFragment.newInstance()
+        return fragment as PinyinListFragment
     }
 }
 
 internal class EnglishPageFragment(context: Context) : PageFragment(
         context.getString(R.string.pinyin_activity_english_tab)) {
 
-    private var pinyinEnglishFragment: PinyinEnglishFragment? = null
-
-    private fun createPinyinEnglishFragment() : PinyinEnglishFragment =
-            pinyinEnglishFragment?.let { it } ?: PinyinEnglishFragment.newInstance()
-
+    private var fragment: PinyinEnglishFragment? = null
 
     override fun getFragment(): PinyinListFragment {
-        pinyinEnglishFragment = createPinyinEnglishFragment()
-        return pinyinEnglishFragment as PinyinListFragment
+        fragment = fragment?.let { it } ?: PinyinEnglishFragment.newInstance()
+        return fragment as PinyinListFragment
     }
 }
 
 internal class CharacterPageFragment(context: Context) : PageFragment(
         context.getString(R.string.pinyin_activity_character_tab)) {
 
-    private var pinyinCharacterFragment: PinyinCharacterFragment? = null
-
-    private fun createPinyinCharacterFragment() : PinyinCharacterFragment =
-            pinyinCharacterFragment?.let { it } ?: PinyinCharacterFragment.newInstance()
+    private var fragment: PinyinCharacterFragment? = null
 
     override fun getFragment(): PinyinListFragment {
-        pinyinCharacterFragment = createPinyinCharacterFragment()
-        return pinyinCharacterFragment as PinyinListFragment
+        fragment = fragment?.let { it } ?: PinyinCharacterFragment.newInstance()
+        return fragment as PinyinListFragment
     }
 }
 

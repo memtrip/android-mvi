@@ -23,7 +23,7 @@ class EntryActivity : ViewActivity<EntryIntent, EntryState, EntryModel, EntryRen
 
         RxView.clicks(entry_activity_error.kit_error_retry_button)
                 .map({ EntryIntent.Init })
-                .subscribe(model().intents)
+                .subscribe(model().incomingIntents)
     }
 
     override fun showProgress() {

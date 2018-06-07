@@ -33,7 +33,7 @@ class PinyinActivity(override var currentSearchQuery: String = "")
         pinyin_activity_tablayout.addOnTabSelectedListener(object : OnTabSelectedListenerAdapter() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 super.onTabSelected(tab)
-                model().intents.onNext(PinyinIntent.TabSelected(Page.values().get(tab!!.position)))
+                model().incomingIntents.onNext(PinyinIntent.TabSelected(Page.values().get(tab!!.position)))
             }
         })
 
@@ -56,12 +56,10 @@ class PinyinActivity(override var currentSearchQuery: String = "")
             }
         })
 
-        pinyin_activity_searchview.setOnCloseListener(object : SearchView.OnCloseListener {
-            override fun onClose(): Boolean {
-                sendSearchEvent()
-                return false
-            }
-        })
+        pinyin_activity_searchview.setOnCloseListener {
+            sendSearchEvent()
+            false
+        }
 
         pinyin_activity_searchview_label.setOnClickListener({
             pinyin_activity_searchview.isIconified = false
