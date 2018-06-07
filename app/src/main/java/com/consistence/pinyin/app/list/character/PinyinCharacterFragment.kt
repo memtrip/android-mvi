@@ -12,11 +12,16 @@ import com.consistence.pinyin.legacy.PresenterFragment
 import com.consistence.pinyin.R
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
+import com.consistence.pinyin.app.list.PinyinListFragment
+import com.consistence.pinyin.app.list.PinyinListIntent
+import com.consistence.pinyin.app.list.PinyinListModel
+import com.consistence.pinyin.kit.Interaction
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
-class PinyinCharacterFragment : PresenterFragment<PinyinCharacterView>(), PinyinCharacterView {
+class PinyinCharacterFragment : PinyinListFragment() {
 
-    @Inject lateinit var presenter: PinyinCharacterPresenter
+    @Inject lateinit var model: PinyinCharacterModel
 
     @BindView(R.id.pinyin_character_fragment_recyclerview)
     lateinit var recyclerView: RecyclerView
@@ -26,8 +31,20 @@ class PinyinCharacterFragment : PresenterFragment<PinyinCharacterView>(), Pinyin
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.pinyin_character_fragment, container, false)
         ButterKnife.bind(this, view)
-        adapter = PinyinCharacterAdapter(context!!, presenter.adapterEvent())
+
+        val adapterInteraction: PublishSubject<Interaction<PinyinEntity>> = PublishSubject.create()
+        adapter = PinyinCharacterAdapter(context!!, adapterInteraction)
         recyclerView.adapter = adapter
+
+        adapterInteraction.map({
+            when (it.id) {
+                R.id.pinyin_list_audio_button ->
+                    PinyinListIntent.PlayAudio(it.data.audioSrc!!)
+                else ->
+                    PinyinListIntent.SelectItem(it.data)
+            }
+        }).subscribe(model.intents)
+
         return view
     }
 
@@ -39,9 +56,7 @@ class PinyinCharacterFragment : PresenterFragment<PinyinCharacterView>(), Pinyin
                 .inject(this)
     }
 
-    override fun presenter(): Presenter<PinyinCharacterView> = presenter
-
-    override fun view(): PinyinCharacterView  = this
+    override fun model() = model
 
     companion object {
         fun newInstance() : PinyinCharacterFragment = PinyinCharacterFragment()

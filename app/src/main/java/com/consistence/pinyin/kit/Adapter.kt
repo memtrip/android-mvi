@@ -1,20 +1,19 @@
 package com.consistence.pinyin.kit
 
 import android.content.Context
+import android.support.annotation.IdRes
 import android.support.annotation.StringRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import com.jakewharton.rxbinding2.view.RxView
-import com.consistence.pinyin.legacy.AdapterClick
-import com.consistence.pinyin.legacy.AdapterEvent
-import io.reactivex.ObservableSource
-import io.reactivex.functions.Consumer
+import io.reactivex.subjects.PublishSubject
 
 abstract class SimpleAdapter<T>(
         context: Context,
-        protected val interaction: Consumer<AdapterEvent<T>>,
+        protected val interaction: PublishSubject<Interaction<T>>,
         protected val inflater: LayoutInflater = LayoutInflater.from(context),
         internal val data: MutableList<T> = ArrayList()) : RecyclerView.Adapter<SimpleAdapterViewHolder<T>>() {
 
@@ -39,12 +38,9 @@ abstract class SimpleAdapter<T>(
 
         val viewHolder = createViewHolder(parent)
 
-        RxView.clicks(viewHolder.itemView).flatMap({
-            ObservableSource<AdapterEvent<T>> {
-                val position = viewHolder.getAdapterPosition()
-                it.onNext(AdapterClick(viewHolder.itemView.getId(), data[position]))
-            }
-        }).subscribe(interaction)
+        RxView.clicks(viewHolder.itemView)
+                .map({ Interaction(viewHolder.itemView.id, data[viewHolder.adapterPosition]) })
+                .subscribe(interaction)
 
         return viewHolder
     }
@@ -85,3 +81,5 @@ abstract class SimpleAdapterViewHolder<T>(itemView: View) : RecyclerView.ViewHol
         return itemView.context.getString(id)
     }
 }
+
+data class Interaction<T>(@IdRes val id: Int, val data: T)

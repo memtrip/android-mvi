@@ -115,31 +115,28 @@ class PhoneticSearch @Inject internal constructor(
         private val pinyinDao: PinyinDao,
         private val schedulerProvider: SchedulerProvider) {
 
-    fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
+    fun search(terms: String): Single<List<PinyinEntity>> =
             pinyinDao.phoneticSearch( terms+"%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
-                    .subscribe(pinyin, error)
 }
 
 class CharacterSearch @Inject internal constructor(
         private val pinyinDao: PinyinDao,
         private val schedulerProvider: SchedulerProvider) {
 
-    fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
+    fun search(terms: String): Single<List<PinyinEntity>> =
             pinyinDao.characterSearch(  terms+"%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
-                    .subscribe(pinyin, error)
 }
 
 class EnglishSearch @Inject internal constructor(
         private val pinyinDao: PinyinDao,
         private val schedulerProvider: SchedulerProvider) {
 
-    fun search(terms: String, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
-            pinyinDao.englishSearch( "%" + terms + "%")
+    fun search(terms: String): Single<List<PinyinEntity>>  =
+            pinyinDao.englishSearch("%$terms%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
-                    .subscribe(pinyin, error)
 }

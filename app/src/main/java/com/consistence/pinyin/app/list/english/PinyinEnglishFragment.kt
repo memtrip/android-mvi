@@ -12,11 +12,16 @@ import com.consistence.pinyin.legacy.PresenterFragment
 import com.consistence.pinyin.R
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
+import com.consistence.pinyin.app.list.PinyinListFragment
+import com.consistence.pinyin.app.list.PinyinListIntent
+import com.consistence.pinyin.app.list.PinyinListModel
+import com.consistence.pinyin.kit.Interaction
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
-class PinyinEnglishFragment : PresenterFragment<PinyinEnglishView>(), PinyinEnglishView {
+class PinyinEnglishFragment : PinyinListFragment() {
 
-    @Inject lateinit var presenter: PinyinEnglishPresenter
+    @Inject lateinit var model: PinyinEnglishModel
 
     @BindView(R.id.pinyin_english_fragment_recyclerview)
     lateinit var recyclerView: RecyclerView
@@ -26,8 +31,20 @@ class PinyinEnglishFragment : PresenterFragment<PinyinEnglishView>(), PinyinEngl
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.pinyin_english_fragment, container, false)
         ButterKnife.bind(this, view)
-        adapter = PinyinEnglishAdapter(context!!, presenter.adapterEvent())
+
+        val adapterInteraction: PublishSubject<Interaction<PinyinEntity>> = PublishSubject.create()
+        adapter = PinyinEnglishAdapter(context!!, adapterInteraction)
         recyclerView.adapter = adapter
+
+        adapterInteraction.map({
+            when (it.id) {
+                R.id.pinyin_list_audio_button ->
+                    PinyinListIntent.PlayAudio(it.data.audioSrc!!)
+                else ->
+                    PinyinListIntent.SelectItem(it.data)
+            }
+        }).subscribe(model.intents)
+
         return view
     }
 
@@ -39,12 +56,10 @@ class PinyinEnglishFragment : PresenterFragment<PinyinEnglishView>(), PinyinEngl
                 .inject(this)
     }
 
-    override fun presenter(): Presenter<PinyinEnglishView> = presenter
-
-    override fun view(): PinyinEnglishView  = this
+    override fun model() = model
 
     companion object {
-        fun newInstance() : PinyinEnglishFragment = PinyinEnglishFragment()
+        fun newInstance() = PinyinEnglishFragment()
     }
 
     override fun populate(pinyin: List<PinyinEntity>) {

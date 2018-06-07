@@ -8,31 +8,24 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.jakewharton.rxbinding2.view.RxView
-import com.consistence.pinyin.legacy.AdapterClick
-import com.consistence.pinyin.legacy.AdapterEvent
+
 import com.consistence.pinyin.R
 import com.consistence.pinyin.api.PinyinEntity
-import com.consistence.pinyin.kit.SimpleAdapter
-import com.consistence.pinyin.kit.SimpleAdapterViewHolder
-import com.consistence.pinyin.kit.gone
-import com.consistence.pinyin.kit.visible
-import io.reactivex.ObservableSource
-import io.reactivex.functions.Consumer
+import com.consistence.pinyin.kit.*
+
+import io.reactivex.subjects.PublishSubject
 
 class PinyinCharacterAdapter(
         context: Context,
-        interaction: Consumer<AdapterEvent<PinyinEntity>>) : SimpleAdapter<PinyinEntity>(context, interaction) {
+        interaction: PublishSubject<Interaction<PinyinEntity>>) : SimpleAdapter<PinyinEntity>(context, interaction) {
 
     override fun createViewHolder(parent: ViewGroup): SimpleAdapterViewHolder<PinyinEntity> {
         val viewHolder = PinyinCharacterViewHolder(inflater.inflate(
                 R.layout.pinyin_character_list_item, parent, false))
 
-        RxView.clicks(viewHolder.audioButton).flatMap({
-            ObservableSource<AdapterEvent<PinyinEntity>> {
-                val position = viewHolder.getAdapterPosition()
-                it.onNext(AdapterClick(viewHolder.audioButton.getId(), data[position]))
-            }
-        }).subscribe(interaction)
+        RxView.clicks(viewHolder.audioButton)
+                .map({Interaction(viewHolder.audioButton.id, data[viewHolder.adapterPosition])})
+                .subscribe(interaction)
 
         return viewHolder
     }

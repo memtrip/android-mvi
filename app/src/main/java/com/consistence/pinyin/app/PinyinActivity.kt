@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout
 
 import android.support.v7.widget.SearchView
 import com.consistence.pinyin.*
+import com.consistence.pinyin.app.list.PinyinListIntent
 
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
@@ -71,9 +72,8 @@ class PinyinActivity(override var currentSearchQuery: String = "")
         })
     }
 
-    private fun sendSearchEvent(terms:CharSequence = "") {
-        fragmentAdapter.sendEvent(SearchEvent(
-                R.id.pinyin_activity_search_terms, terms))
+    private fun sendSearchEvent(terms:String = "") {
+        fragmentAdapter.sendIntent(PinyinListIntent.Search(terms))
     }
 
     override fun inject() {

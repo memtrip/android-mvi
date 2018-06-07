@@ -8,9 +8,12 @@ import android.support.v4.app.FragmentManager
 import com.consistence.pinyin.legacy.Event
 import com.consistence.pinyin.legacy.PresenterFragment
 import com.consistence.pinyin.R
+import com.consistence.pinyin.ViewFragment
+import com.consistence.pinyin.app.list.*
 import com.consistence.pinyin.app.list.character.PinyinCharacterFragment
 import com.consistence.pinyin.app.list.english.PinyinEnglishFragment
 import com.consistence.pinyin.app.list.phonetic.PinyinPhoneticFragment
+import com.consistence.pinyin.audio.PinyinStreamIntent
 
 internal class PinyinFragmentAdapter(@IdRes val container: Int,
                                      tabLayout: TabLayout,
@@ -41,11 +44,11 @@ internal class PinyinFragmentAdapter(@IdRes val container: Int,
         })
     }
 
-    fun sendEvent(event: Event) {
+    fun sendIntent(intent: PinyinListIntent) {
         pages.values.toTypedArray().map {
-            val presenterFragment = it.getFragment() as PresenterFragment<*>
-            if (presenterFragment.isAdded) {
-                presenterFragment.sendEvent(event)
+            val viewFragment = it.getFragment()
+            if (viewFragment.isAdded) {
+                viewFragment.model().intents.onNext(intent)
             }
         }
     }
@@ -81,7 +84,7 @@ internal class PinyinFragmentAdapter(@IdRes val container: Int,
 }
 
 internal abstract class PageFragment constructor(val title: String) {
-    abstract fun getFragment() : Fragment
+    abstract fun getFragment() : ViewFragment<PinyinListIntent, PinyinListState, PinyinListModel, PinyinListRender>
 }
 
 internal class PhoneticPageFragment(context: Context) : PageFragment(
@@ -93,9 +96,9 @@ internal class PhoneticPageFragment(context: Context) : PageFragment(
             pinyinPhoneticFragment?.let { it } ?: PinyinPhoneticFragment.newInstance()
 
 
-    override fun getFragment(): Fragment {
+    override fun getFragment(): PinyinListFragment {
         pinyinPhoneticFragment = createPinyinPhoneticFragment()
-        return pinyinPhoneticFragment as Fragment
+        return pinyinPhoneticFragment as PinyinListFragment
     }
 }
 
@@ -108,9 +111,9 @@ internal class EnglishPageFragment(context: Context) : PageFragment(
             pinyinEnglishFragment?.let { it } ?: PinyinEnglishFragment.newInstance()
 
 
-    override fun getFragment(): Fragment {
+    override fun getFragment(): PinyinListFragment {
         pinyinEnglishFragment = createPinyinEnglishFragment()
-        return pinyinEnglishFragment as Fragment
+        return pinyinEnglishFragment as PinyinListFragment
     }
 }
 
@@ -122,9 +125,9 @@ internal class CharacterPageFragment(context: Context) : PageFragment(
     fun createPinyinCharacterFragment() : PinyinCharacterFragment =
             pinyinCharacterFragment?.let { it } ?: PinyinCharacterFragment.newInstance()
 
-    override fun getFragment(): Fragment {
+    override fun getFragment(): PinyinListFragment {
         pinyinCharacterFragment = createPinyinCharacterFragment()
-        return pinyinCharacterFragment as Fragment
+        return pinyinCharacterFragment as PinyinListFragment
     }
 }
 

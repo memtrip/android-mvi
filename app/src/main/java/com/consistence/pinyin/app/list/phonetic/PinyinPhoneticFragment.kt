@@ -7,16 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.consistence.pinyin.legacy.Presenter
-import com.consistence.pinyin.legacy.PresenterFragment
+
 import com.consistence.pinyin.R
+
 import com.consistence.pinyin.api.PinyinEntity
+
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
+import com.consistence.pinyin.app.list.*
+import com.consistence.pinyin.kit.Interaction
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
-class PinyinPhoneticFragment : PresenterFragment<PinyinPhoneticView>(), PinyinPhoneticView {
+class PinyinPhoneticFragment : PinyinListFragment() {
 
-    @Inject lateinit var presenter: PinyinPhoneticPresenter
+    @Inject lateinit var model: PinyinPhoneticModel
 
     @BindView(R.id.pinyin_phonetic_fragment_recyclerview)
     lateinit var recyclerView: RecyclerView
@@ -26,8 +30,20 @@ class PinyinPhoneticFragment : PresenterFragment<PinyinPhoneticView>(), PinyinPh
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.pinyin_phonetic_fragment, container, false)
         ButterKnife.bind(this, view)
-        adapter = PinyinPhoneticAdapter(context!!, presenter.adapterEvent())
+
+        val adapterInteraction: PublishSubject<Interaction<PinyinEntity>> = PublishSubject.create()
+        adapter = PinyinPhoneticAdapter(context!!, adapterInteraction)
         recyclerView.adapter = adapter
+
+        adapterInteraction.map({
+            when (it.id) {
+                R.id.pinyin_list_audio_button ->
+                    PinyinListIntent.PlayAudio(it.data.audioSrc!!)
+                else ->
+                    PinyinListIntent.SelectItem(it.data)
+            }
+        }).subscribe(model.intents)
+
         return view
     }
 
@@ -39,9 +55,11 @@ class PinyinPhoneticFragment : PresenterFragment<PinyinPhoneticView>(), PinyinPh
                 .inject(this)
     }
 
-    override fun presenter(): Presenter<PinyinPhoneticView> = presenter
+    override fun model() = model
 
-    override fun view(): PinyinPhoneticView = this
+    override fun render() = lazy {
+        PinyinListRender(this)
+    }.value
 
     override fun populate(pinyin: List<PinyinEntity>) {
         adapter.clear()
@@ -57,6 +75,6 @@ class PinyinPhoneticFragment : PresenterFragment<PinyinPhoneticView>(), PinyinPh
     }
 
     companion object {
-        fun newInstance() : PinyinPhoneticFragment = PinyinPhoneticFragment()
+        fun newInstance() = PinyinPhoneticFragment()
     }
 }
