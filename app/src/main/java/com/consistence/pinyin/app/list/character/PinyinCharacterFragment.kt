@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.consistence.pinyin.legacy.Presenter
-import com.consistence.pinyin.legacy.PresenterFragment
+
 import com.consistence.pinyin.R
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.app.list.PinyinListFragment
 import com.consistence.pinyin.app.list.PinyinListIntent
-import com.consistence.pinyin.app.list.PinyinListModel
+
 import com.consistence.pinyin.kit.Interaction
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
@@ -58,10 +57,6 @@ class PinyinCharacterFragment : PinyinListFragment() {
 
     override fun model() = model
 
-    companion object {
-        fun newInstance() : PinyinCharacterFragment = PinyinCharacterFragment()
-    }
-
     override fun populate(pinyin: List<PinyinEntity>) {
         adapter.clear()
         adapter.populate(pinyin)
@@ -74,4 +69,6 @@ class PinyinCharacterFragment : PinyinListFragment() {
     override fun error() {
 
     }
+
+    companion object { fun newInstance()  = PinyinCharacterFragment() }
 }

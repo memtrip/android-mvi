@@ -4,16 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-
 import android.support.v7.widget.SearchView
-import com.consistence.pinyin.*
+import com.consistence.pinyin.R
+import com.consistence.pinyin.ViewActivity
 import com.consistence.pinyin.app.list.PinyinListIntent
-
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
-
-import com.consistence.pinyin.legacy.SearchEvent
-
 import kotlinx.android.synthetic.main.pinyin_activity.*
 import javax.inject.Inject
 

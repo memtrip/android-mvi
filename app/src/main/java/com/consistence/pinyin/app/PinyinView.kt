@@ -5,10 +5,9 @@ import com.consistence.pinyin.ViewIntent
 import com.consistence.pinyin.ViewLayout
 import com.consistence.pinyin.ViewRender
 import com.consistence.pinyin.ViewState
-
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
-import dagger.BindsInstance
 
 sealed class PinyinIntent : ViewIntent {
     data class TabSelected(val page: Page) : PinyinIntent()

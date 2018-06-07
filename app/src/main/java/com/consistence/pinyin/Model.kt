@@ -2,12 +2,10 @@ package com.consistence.pinyin
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.ViewModel
 import android.content.Context
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-
 import io.reactivex.subjects.PublishSubject
 
 abstract class Model<I : ViewIntent, S : ViewState>(application: Application) : AndroidViewModel(application) {

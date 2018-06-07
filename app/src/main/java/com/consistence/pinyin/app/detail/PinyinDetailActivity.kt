@@ -3,13 +3,11 @@ package com.consistence.pinyin.app.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.consistence.pinyin.legacy.Presenter
-import com.consistence.pinyin.legacy.PresenterActivity
+
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewActivity
 import com.consistence.pinyin.api.PinyinEntity
-import com.consistence.pinyin.app.PinyinModel
-import com.consistence.pinyin.app.PinyinRender
+
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView

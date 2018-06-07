@@ -22,6 +22,8 @@ abstract class PinyinListFragment
 
     override fun render() = PinyinListRender(this)
 
+    override fun initIntent() = PinyinListIntent.Init
+
     override fun navigateToPinyinDetails(pinyinEntity: PinyinEntity) {
         startActivity(PinyinDetailActivity.newIntent(context!!, pinyinEntity))
     }

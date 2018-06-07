@@ -4,9 +4,7 @@ import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.Button
 import com.consistence.pinyin.R
-
 import kotlinx.android.synthetic.main.kit_error_retry.view.*
 
 class ErrorRetryView @JvmOverloads constructor(

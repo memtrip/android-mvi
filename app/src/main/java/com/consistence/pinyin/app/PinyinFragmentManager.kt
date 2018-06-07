@@ -3,17 +3,13 @@ package com.consistence.pinyin.app
 import android.content.Context
 import android.support.annotation.IdRes
 import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import com.consistence.pinyin.legacy.Event
-import com.consistence.pinyin.legacy.PresenterFragment
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewFragment
 import com.consistence.pinyin.app.list.*
 import com.consistence.pinyin.app.list.character.PinyinCharacterFragment
 import com.consistence.pinyin.app.list.english.PinyinEnglishFragment
 import com.consistence.pinyin.app.list.phonetic.PinyinPhoneticFragment
-import com.consistence.pinyin.audio.PinyinStreamIntent
 
 internal class PinyinFragmentAdapter(@IdRes val container: Int,
                                      tabLayout: TabLayout,
