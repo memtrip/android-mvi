@@ -1,53 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pinyin_activity_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.SearchView
-        android:id="@+id/pinyin_activity_searchview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_large_16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/main_listen_fragment_appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        style="@style/Typography.Body1"
-        android:id="@+id/pinyin_activity_searchview_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_large_16dp"
-        android:gravity="center_horizontal"
-        android:text="@string/pinyin_activity_search_pinyin_hint"
-        android:textColor="@color/colorTextInverse"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pinyin_activity_searchview"
-        app:layout_constraintBottom_toBottomOf="@+id/pinyin_activity_searchview"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <android.support.design.widget.TabLayout
-        style="@style/TabLayout"
-        android:id="@+id/pinyin_activity_tablayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_large_16dp"
-        android:layout_marginBottom="@dimen/padding_large_16dp"
-        android:layout_marginEnd="@dimen/padding_large_16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pinyin_activity_searchview"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp">
+
+                <android.support.v7.widget.SearchView
+                    android:id="@+id/pinyin_activity_searchview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/padding_large_16dp"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    style="@style/Typography.Body1"
+                    android:id="@+id/pinyin_activity_searchview_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/padding_large_16dp"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/pinyin_activity_search_pinyin_hint"
+                    android:textColor="@color/colorTextInverse" />
+
+            </FrameLayout>
+
+            <android.support.design.widget.TabLayout
+                style="@style/TabLayout"
+                android:id="@+id/pinyin_activity_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_large_16dp"
+                android:layout_marginEnd="@dimen/padding_large_16dp" />
+
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/pinyin_activity_fragment_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/padding_large_16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pinyin_activity_tablayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>
