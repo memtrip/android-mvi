@@ -7,11 +7,8 @@ import android.support.v4.content.LocalBroadcastManager
 import com.consistence.pinyin.audio.stream.Notify
 
 interface PlayPinyinAudio {
-
     fun attach(context: Context)
-
     fun detach(context: Context)
-
     fun playPinyinAudio(src: String, context: Context)
 }
 
@@ -25,6 +22,7 @@ class PlayPinyAudioInPresenter : PlayPinyinAudio {
         override fun onReceive(context: Context?, intent: Intent?) {
             val type = Notify.getNotifyType(intent)
 
+            @Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
             when (type) {
                 Notify.NotifyType.PLAYING -> {
                     pinyinAudioPlaying = true

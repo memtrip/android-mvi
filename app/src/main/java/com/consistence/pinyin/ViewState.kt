@@ -1,5 +1,3 @@
 package com.consistence.pinyin
 
-interface ViewState {
-
-}
+interface ViewState

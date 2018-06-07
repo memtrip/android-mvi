@@ -1,49 +1,44 @@
 package com.consistence.pinyin.app.detail
 
-import android.content.Intent
-import android.os.Parcelable
-import com.consistence.pinyin.legacy.PresenterView
-
-import com.consistence.pinyin.api.PinyinEntity
+import android.app.Application
+import com.consistence.pinyin.ViewIntent
+import com.consistence.pinyin.ViewLayout
+import com.consistence.pinyin.ViewRender
+import com.consistence.pinyin.ViewState
 
 import dagger.BindsInstance
 import dagger.Component
-import kotlinx.android.parcel.Parcelize
+
 import javax.inject.Singleton
 
-@Parcelize
-class PinyinParcel(val sourceUrl: String,
-                   val phoneticScriptText: String,
-                   val romanLetterText: String,
-                   val audioSrc: String?,
-                   val englishTranslationText: String,
-                   val chineseCharacters: String,
-                   val characterImageSrc: String) : Parcelable {
-
-    companion object {
-
-        val PINYIN_PARCEL = "PINYIN_PARCEL"
-
-        fun into(entity: PinyinEntity, intent: Intent) {
-            intent.putExtra(PINYIN_PARCEL, PinyinParcel(
-                    entity.sourceUrl,
-                    entity.phoneticScriptText,
-                    entity.romanLetterText,
-                    entity.audioSrc,
-                    entity.englishTranslationText,
-                    entity.chineseCharacters,
-                    entity.characterImageSrc))
-        }
-
-        fun out(intent: Intent) : PinyinParcel = intent.getParcelableExtra(PINYIN_PARCEL)
-    }
+sealed class PinyinDetailIntent : ViewIntent {
+    object Init: PinyinDetailIntent()
+    object PlayAudio: PinyinDetailIntent()
 }
 
-interface PinyinDetailView : PresenterView {
+sealed class PinyinDetailState : ViewState {
+    data class Populate(val pinyinParcel: PinyinParcel) : PinyinDetailState()
+    data class PlayAudio(val audioSrc: String) : PinyinDetailState()
+}
 
+interface PinyinDetailLayout : ViewLayout {
     fun populate(pinyinParcel: PinyinParcel)
-
     fun showAudioControl()
+    fun playAudio(audioSrc: String)
+}
+
+class PinyinDetailRender(private val layout: PinyinDetailLayout) : ViewRender<PinyinDetailState> {
+    override fun state(state: PinyinDetailState) = when(state) {
+        is PinyinDetailState.Populate -> {
+            state.pinyinParcel.audioSrc?.let {
+                layout.showAudioControl()
+            }
+            layout.populate(state.pinyinParcel)
+        }
+        is PinyinDetailState.PlayAudio -> {
+            layout.playAudio(state.audioSrc)
+        }
+    }
 }
 
 @Singleton
@@ -54,7 +49,10 @@ interface PinyinDetailComponent {
     interface Builder {
 
         @BindsInstance
-        fun pinyinEntity(pinyinParcel: PinyinParcel): Builder
+        fun pinyinParcel(pinyinParcel: PinyinParcel): Builder
+
+        @BindsInstance
+        fun application(application: Application): Builder
 
         fun build(): PinyinDetailComponent
     }

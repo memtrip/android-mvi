@@ -6,14 +6,22 @@ import android.os.Bundle
 import com.consistence.pinyin.legacy.Presenter
 import com.consistence.pinyin.legacy.PresenterActivity
 import com.consistence.pinyin.R
+import com.consistence.pinyin.ViewActivity
 import com.consistence.pinyin.api.PinyinEntity
+import com.consistence.pinyin.app.PinyinModel
+import com.consistence.pinyin.app.PinyinRender
+import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import com.consistence.pinyin.kit.visible
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.pinyin_detail_activity.*
 import javax.inject.Inject
 
-class PinyinDetailActivity : PresenterActivity<PinyinDetailView>(), PinyinDetailView {
+class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState, PinyinDetailModel,
+        PinyinDetailRender>(), PinyinDetailLayout {
 
-    @Inject lateinit var presenter: PinyinDetailPresenter
+    @Inject lateinit var model: PinyinDetailModel
+
+    val pinyinAudio = PlayPinyAudioInPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,21 +33,35 @@ class PinyinDetailActivity : PresenterActivity<PinyinDetailView>(), PinyinDetail
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_home_up)
 
-        onClickEvent(pinyin_detail_activity_audio_button)
-                .subscribe(presenter.event())
+        RxView.clicks(pinyin_detail_activity_audio_button)
+                .map({ PinyinDetailIntent.PlayAudio })
+                .subscribe(model.intents)
     }
+
+    override fun onStart() {
+        super.onStart()
+        pinyinAudio.attach(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        pinyinAudio.detach(this)
+    }
+
+    override fun initIntent() = PinyinDetailIntent.Init
 
     override fun inject() {
         DaggerPinyinDetailComponent
                 .builder()
-                .pinyinEntity(PinyinParcel.out(intent))
+                .pinyinParcel(PinyinParcel.out(intent))
+                .application(application)
                 .build()
                 .inject(this)
     }
 
-    override fun presenter(): Presenter<PinyinDetailView> = presenter
+    override fun model() = model
 
-    override fun view(): PinyinDetailView = this
+    override fun render() = lazy { PinyinDetailRender(this) }.value
 
     override fun populate(pinyinParcel: PinyinParcel) {
         supportActionBar!!.setTitle(pinyinParcel.phoneticScriptText)
@@ -50,6 +72,10 @@ class PinyinDetailActivity : PresenterActivity<PinyinDetailView>(), PinyinDetail
 
     override fun showAudioControl() {
         pinyin_detail_activity_audio_button.visible()
+    }
+
+    override fun playAudio(audioSrc: String) {
+        pinyinAudio.playPinyinAudio(audioSrc, this)
     }
 
     companion object {

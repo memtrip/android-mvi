@@ -37,6 +37,7 @@ class EntryActivity : ViewActivity<EntryIntent, EntryState, EntryModel, EntryRen
 
     override fun navigateToPinyin() {
         startActivity(PinyinActivity.newIntent(this))
+        finish()
     }
 
     override fun error() {
