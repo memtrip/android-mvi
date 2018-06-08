@@ -42,9 +42,6 @@ class PinyinActivity(override var currentSearchQuery: String = "")
         pinyin_activity_searchview.setOnQueryTextFocusChangeListener { _ , hasFocus ->
             if (hasFocus) {
                 pinyin_activity_searchview_label.gone()
-            } else {
-                if (pinyin_activity_searchview.query.isEmpty())
-                    pinyin_activity_searchview_label.visible()
             }
         }
 
@@ -60,6 +57,7 @@ class PinyinActivity(override var currentSearchQuery: String = "")
 
         pinyin_activity_searchview.setOnCloseListener {
             sendSearchEvent()
+            pinyin_activity_searchview_label.visible()
             false
         }
 
@@ -85,7 +83,5 @@ class PinyinActivity(override var currentSearchQuery: String = "")
         pinyin_activity_searchview_label.text = hint
     }
 
-    companion object {
-        fun newIntent(context: Context) = Intent(context, PinyinActivity::class.java)
-    }
+    companion object { fun newIntent(context: Context) = Intent(context, PinyinActivity::class.java) }
 }

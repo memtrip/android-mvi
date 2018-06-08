@@ -10,7 +10,6 @@ import dagger.android.support.HasSupportFragmentInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-
 class PinyinApplication : Application(), HasActivityInjector, HasSupportFragmentInjector {
 
     @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
@@ -23,11 +22,7 @@ class PinyinApplication : Application(), HasActivityInjector, HasSupportFragment
     override fun onCreate() {
         super.onCreate()
 
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return
-        }
+        if (LeakCanary.isInAnalyzerProcess(this)) { return }
 
         LeakCanary.install(this)
 
