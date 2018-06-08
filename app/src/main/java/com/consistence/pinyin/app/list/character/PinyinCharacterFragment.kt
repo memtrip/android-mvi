@@ -7,15 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
-
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.app.list.PinyinListFragment
 import com.consistence.pinyin.app.list.PinyinListIntent
-
 import com.consistence.pinyin.kit.Interaction
+import dagger.android.support.AndroidSupportInjection
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
@@ -49,11 +48,7 @@ class PinyinCharacterFragment : PinyinListFragment() {
     }
 
     override fun inject() {
-        DaggerPinyinCharacterComponent
-                .builder()
-                .application(activity!!.application)
-                .build()
-                .inject(this)
+        AndroidSupportInjection.inject(this)
     }
 
     override fun model():PinyinCharacterModel = getViewModel(model)

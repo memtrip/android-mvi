@@ -11,6 +11,7 @@ import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.pinyin_activity.*
 import javax.inject.Inject
 
@@ -72,11 +73,7 @@ class PinyinActivity(override var currentSearchQuery: String = "")
     }
 
     override fun inject() {
-        DaggerPinyinComponent
-                .builder()
-                .application(application)
-                .build()
-                .inject(this)
+        AndroidInjection.inject(this)
     }
 
     override fun model():PinyinModel = getViewModel(viewModelFactory)

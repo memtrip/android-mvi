@@ -14,6 +14,7 @@ import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.app.list.PinyinListFragment
 import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.kit.Interaction
+import dagger.android.support.AndroidSupportInjection
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
@@ -47,11 +48,7 @@ class PinyinPhoneticFragment : PinyinListFragment() {
     }
 
     override fun inject() {
-        DaggerPinyinPhoneticComponent
-                .builder()
-                .application(activity!!.application)
-                .build()
-                .inject(this)
+        AndroidSupportInjection.inject(this)
     }
 
     override fun model():PinyinPhoneticModel = getViewModel(viewModelFactory)

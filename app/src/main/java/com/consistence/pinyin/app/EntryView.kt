@@ -1,16 +1,11 @@
 package com.consistence.pinyin.app
 
-import android.app.Application
 import com.consistence.pinyin.ViewIntent
 import com.consistence.pinyin.ViewLayout
 import com.consistence.pinyin.ViewRender
 import com.consistence.pinyin.ViewState
-import com.consistence.pinyin.api.ApiModule
-import com.consistence.pinyin.api.DatabaseModule
-import com.consistence.pinyin.api.NetworkModule
-import dagger.BindsInstance
-import dagger.Component
-import javax.inject.Singleton
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 sealed class EntryIntent : ViewIntent {
     object OnProgress : EntryIntent()
@@ -47,18 +42,8 @@ class EntryRender(private val entryLayout: EntryLayout) : ViewRender<EntryState>
     }
 }
 
-@Singleton
-@Component(modules = [ NetworkModule::class, DatabaseModule::class, ApiModule::class ])
-interface EntryComponent {
-
-    @Component.Builder
-    interface Builder {
-
-        @BindsInstance
-        fun application(application: Application): Builder
-
-        fun build(): EntryComponent
-    }
-
-    fun inject(entryActivity: EntryActivity)
+@Module
+abstract class EntryActivityModule {
+    @ContributesAndroidInjector
+    internal abstract fun contributesEntryActivity() : EntryActivity
 }

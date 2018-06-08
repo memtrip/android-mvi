@@ -1,15 +1,11 @@
 package com.consistence.pinyin.app.detail
 
-import android.app.Application
 import com.consistence.pinyin.ViewIntent
 import com.consistence.pinyin.ViewLayout
 import com.consistence.pinyin.ViewRender
 import com.consistence.pinyin.ViewState
-
-import dagger.BindsInstance
-import dagger.Component
-
-import javax.inject.Singleton
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 sealed class PinyinDetailIntent : ViewIntent {
     object Init: PinyinDetailIntent()
@@ -41,21 +37,8 @@ class PinyinDetailRender(private val layout: PinyinDetailLayout) : ViewRender<Pi
     }
 }
 
-@Singleton
-@Component
-interface PinyinDetailComponent {
-
-    @Component.Builder
-    interface Builder {
-
-        @BindsInstance
-        fun pinyinParcel(pinyinParcel: PinyinParcel): Builder
-
-        @BindsInstance
-        fun application(application: Application): Builder
-
-        fun build(): PinyinDetailComponent
-    }
-
-    fun inject(pinyinDetailsActivity: PinyinDetailActivity)
+@Module
+abstract class PinyinDetailActivityModule {
+    @ContributesAndroidInjector
+    internal abstract fun contributesPinyinDetailActivity() : PinyinDetailActivity
 }

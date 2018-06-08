@@ -6,12 +6,10 @@ import com.consistence.pinyin.ViewActivity
 import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
-
 import com.jakewharton.rxbinding2.view.RxView
-
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.entry_activity.*
 import kotlinx.android.synthetic.main.kit_error_retry.view.*
-
 import javax.inject.Inject
 
 class EntryActivity : ViewActivity<EntryIntent, EntryState, EntryModel, EntryRender>(), EntryLayout {
@@ -47,11 +45,7 @@ class EntryActivity : ViewActivity<EntryIntent, EntryState, EntryModel, EntryRen
     }
 
     override fun inject() {
-        DaggerEntryComponent
-                .builder()
-                .application(application)
-                .build()
-                .inject(this)
+        AndroidInjection.inject(this)
     }
 
     override fun render() = lazy { EntryRender(this) }.value

@@ -12,6 +12,7 @@ import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.pinyin_detail_activity.*
 import javax.inject.Inject
 
@@ -50,12 +51,7 @@ class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState,
     override fun initIntent() = PinyinDetailIntent.Init
 
     override fun inject() {
-        DaggerPinyinDetailComponent
-                .builder()
-                .pinyinParcel(PinyinParcel.out(intent))
-                .application(application)
-                .build()
-                .inject(this)
+        AndroidInjection.inject(this)
     }
 
     override fun model(): PinyinDetailModel = getViewModel(viewModelFactory)
