@@ -15,9 +15,6 @@ class EntryModel @Inject internal constructor(
 
     private fun getPinyin() : Observable<EntryState> = countPinyin
             .count()
-            .doOnSubscribe {
-                publish(EntryIntent.OnProgress)
-            }
             .flatMap<EntryState>({ count ->
                 if (count > 0) {
                     Single.just(EntryState.OnPinyinLoaded)
@@ -29,10 +26,9 @@ class EntryModel @Inject internal constructor(
                 Single.just(EntryState.OnError)
             }
             .toObservable()
+            .startWith(EntryState.OnProgress)
 
     override fun reducer(intent: EntryIntent): Observable<EntryState> = when(intent) {
-        EntryIntent.OnProgress -> Observable.just(EntryState.OnProgress)
-        EntryIntent.Init -> getPinyin()
-        EntryIntent.Retry -> getPinyin()
+        EntryIntent.Init, EntryIntent.Retry -> getPinyin()
     }
 }

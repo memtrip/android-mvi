@@ -8,7 +8,6 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 sealed class EntryIntent : ViewIntent {
-    object OnProgress : EntryIntent()
     object Init : EntryIntent()
     object Retry : EntryIntent()
 }
