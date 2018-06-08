@@ -6,6 +6,7 @@ import android.os.Bundle
 
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewActivity
+import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.api.PinyinEntity
 
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
@@ -17,7 +18,7 @@ import javax.inject.Inject
 class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState, PinyinDetailModel,
         PinyinDetailRender>(), PinyinDetailLayout {
 
-    @Inject lateinit var model: PinyinDetailModel
+    @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinDetailModel>
 
     val pinyinAudio = PlayPinyAudioInPresenter()
 
@@ -33,7 +34,7 @@ class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState,
 
         RxView.clicks(pinyin_detail_activity_audio_button)
                 .map({ PinyinDetailIntent.PlayAudio })
-                .subscribe(model.incomingIntents)
+                .subscribe(model().intents)
     }
 
     override fun onStart() {
@@ -57,7 +58,7 @@ class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState,
                 .inject(this)
     }
 
-    override fun model() = model
+    override fun model(): PinyinDetailModel = getViewModel(viewModelFactory)
 
     override fun render() = lazy { PinyinDetailRender(this) }.value
 

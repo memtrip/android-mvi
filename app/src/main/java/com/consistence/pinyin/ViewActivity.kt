@@ -1,5 +1,8 @@
 package com.consistence.pinyin
 
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -35,6 +38,9 @@ abstract class ViewActivity<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
                 return super.onOptionsItemSelected(item)
         }
     }
+
+    protected inline fun <reified T : ViewModel> getViewModel(viewModelFactory: ViewModelProvider.Factory): T =
+        ViewModelProviders.of(this, viewModelFactory)[T::class.java]
 
     abstract fun inject()
 

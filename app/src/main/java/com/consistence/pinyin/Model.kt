@@ -10,7 +10,7 @@ import io.reactivex.subjects.PublishSubject
 
 abstract class Model<I : ViewIntent, S : ViewState>(application: Application) : AndroidViewModel(application) {
 
-    val incomingIntents: PublishSubject<I> = PublishSubject.create<I>()
+    val intents: PublishSubject<I> = PublishSubject.create<I>()
 
     private val disposable = CompositeDisposable()
 
@@ -20,11 +20,11 @@ abstract class Model<I : ViewIntent, S : ViewState>(application: Application) : 
 
     internal fun <T> o(item: T) = Observable.just(item)
 
-    internal fun states(): Observable<S> = incomingIntents
+    internal fun states(): Observable<S> = intents
             .flatMap({ reducer(it) })
 
     internal fun publish(intent: I) {
-        incomingIntents.onNext(intent)
+        intents.onNext(intent)
     }
 
     protected fun context(): Context = getApplication()

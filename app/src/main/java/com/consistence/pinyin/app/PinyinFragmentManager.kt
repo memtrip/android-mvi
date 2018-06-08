@@ -44,7 +44,7 @@ internal class PinyinFragmentAdapter(@IdRes val container: Int,
         pages.values.toTypedArray().map {
             val viewFragment = it.getFragment()
             if (viewFragment.isAdded) {
-                viewFragment.model().incomingIntents.onNext(intent)
+                viewFragment.model().intents.onNext(intent)
             }
         }
     }

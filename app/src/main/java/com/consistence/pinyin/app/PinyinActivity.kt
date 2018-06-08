@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout
 import android.support.v7.widget.SearchView
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewActivity
+import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
@@ -16,9 +17,9 @@ import javax.inject.Inject
 class PinyinActivity(override var currentSearchQuery: String = "")
     : ViewActivity<PinyinIntent, PinyinState, PinyinModel, PinyinRender>(), PinyinLayout {
 
-    @Inject lateinit var model: PinyinModel
+    @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinModel>
 
-    internal lateinit var fragmentAdapter: PinyinFragmentAdapter
+    private lateinit var fragmentAdapter: PinyinFragmentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class PinyinActivity(override var currentSearchQuery: String = "")
         pinyin_activity_tablayout.addOnTabSelectedListener(object : OnTabSelectedListenerAdapter() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 super.onTabSelected(tab)
-                model().incomingIntents.onNext(PinyinIntent.TabSelected(Page.values().get(tab!!.position)))
+                model().intents.onNext(PinyinIntent.TabSelected(Page.values().get(tab!!.position)))
             }
         })
 
@@ -78,7 +79,7 @@ class PinyinActivity(override var currentSearchQuery: String = "")
                 .inject(this)
     }
 
-    override fun model() = model
+    override fun model():PinyinModel = getViewModel(viewModelFactory)
 
     override fun render() = lazy { PinyinRender(this) }.value
 

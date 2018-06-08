@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.consistence.pinyin.R
+import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.app.list.PinyinListFragment
@@ -18,7 +19,7 @@ import javax.inject.Inject
 
 class PinyinPhoneticFragment : PinyinListFragment() {
 
-    @Inject lateinit var model: PinyinPhoneticModel
+    @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinPhoneticModel>
 
     @BindView(R.id.pinyin_phonetic_fragment_recyclerview)
     lateinit var recyclerView: RecyclerView
@@ -40,7 +41,7 @@ class PinyinPhoneticFragment : PinyinListFragment() {
                 else ->
                     PinyinListIntent.SelectItem(it.data)
             }
-        }).subscribe(model.incomingIntents)
+        }).subscribe(model().intents)
 
         return view
     }
@@ -53,7 +54,7 @@ class PinyinPhoneticFragment : PinyinListFragment() {
                 .inject(this)
     }
 
-    override fun model() = model
+    override fun model():PinyinPhoneticModel = getViewModel(viewModelFactory)
 
     override fun populate(pinyin: List<PinyinEntity>) {
         adapter.clear()
