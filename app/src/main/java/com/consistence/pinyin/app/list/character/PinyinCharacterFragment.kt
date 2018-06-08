@@ -58,10 +58,6 @@ class PinyinCharacterFragment : PinyinListFragment() {
         adapter.populate(pinyin)
     }
 
-    override fun navigateToPinyinDetails(pinyinEntity: PinyinEntity) {
-        startActivity(PinyinDetailActivity.newIntent(context!!, pinyinEntity))
-    }
-
     override fun error() {
 
     }

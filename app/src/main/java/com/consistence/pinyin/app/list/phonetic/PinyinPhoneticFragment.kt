@@ -10,7 +10,7 @@ import butterknife.ButterKnife
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.api.PinyinEntity
-import com.consistence.pinyin.app.detail.PinyinDetailActivity
+
 import com.consistence.pinyin.app.list.PinyinListFragment
 import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.kit.Interaction
@@ -60,10 +60,6 @@ class PinyinPhoneticFragment : PinyinListFragment() {
 
     override fun error() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun navigateToPinyinDetails(pinyinEntity: PinyinEntity) {
-        startActivity(PinyinDetailActivity.newIntent(context!!, pinyinEntity))
     }
 
     companion object { fun newInstance() = PinyinPhoneticFragment() }

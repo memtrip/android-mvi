@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.os.Bundle
 
 import android.support.v4.app.Fragment
 
@@ -20,12 +21,15 @@ abstract class ViewFragment<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
         d.add(model().states().subscribe(render()::state))
     }
 
-    override fun onStart() {
-        super.onStart()
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         if (!init) {
             init = true
             initIntent()?.let { model().publish(it) }
+        } else {
+            if (savedInstanceState != null) {
+                restoreStateIntent(savedInstanceState)?.let { model().publish(it) }
+            }
         }
     }
 
@@ -39,4 +43,6 @@ abstract class ViewFragment<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
     abstract fun render() : R
 
     open fun initIntent() : I? = ViewIntent.NONE
+
+    open fun restoreStateIntent(savedInstanceState: Bundle) : I? = ViewIntent.NONE
 }
