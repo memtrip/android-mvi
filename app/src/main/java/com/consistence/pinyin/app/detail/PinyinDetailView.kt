@@ -1,6 +1,9 @@
 package com.consistence.pinyin.app.detail
 
-import com.consistence.pinyin.*
+import com.consistence.pinyin.ViewIntent
+import com.consistence.pinyin.ViewLayout
+import com.consistence.pinyin.ViewRender
+import com.consistence.pinyin.ViewState
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector

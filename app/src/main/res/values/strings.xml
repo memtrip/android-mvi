@@ -7,8 +7,9 @@
 
     <string name="app_retry">Retry</string>
 
+    <string name="app_audio_play_content_description">Play audio</string>
+
     <!-- entry_activity -->
-    <string name="entry_activity_loading">Downloading Pinyin</string>
     <string name="entry_activity_error">Could not download Pinyin</string>
 
     <!-- kit_error_retry -->

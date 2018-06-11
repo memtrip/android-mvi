@@ -45,6 +45,7 @@
             android:layout_margin="@dimen/padding_large_16dp"
             android:background="@color/cardBackgroundColor"
             android:src="@drawable/ic_play"
+            android:contentDescription="@string/app_audio_play_content_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 

@@ -3,17 +3,14 @@ package com.consistence.pinyin.app.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewActivity
 import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.api.PinyinEntity
-
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
 import kotlinx.android.synthetic.main.pinyin_detail_activity.*
 import javax.inject.Inject
 

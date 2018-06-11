@@ -1,7 +1,5 @@
 <resources>
 
-    <dimen name="pinyin_activity_search_height">48dp</dimen>
-
     <dimen name="pinyin_list_play_size">52dp</dimen>
 
 </resources>
