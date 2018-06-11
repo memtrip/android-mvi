@@ -58,11 +58,13 @@ class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState,
 
     override fun render() = lazy { PinyinDetailRender(this) }.value
 
-    override fun populate(pinyinParcel: PinyinParcel) {
-        supportActionBar!!.setTitle(pinyinParcel.phoneticScriptText)
-        pinyin_detail_activity_phonetic_script_value.text = pinyinParcel.phoneticScriptText
-        pinyin_detail_activity_english_translation_value.text = pinyinParcel.englishTranslationText
-        pinyin_detail_activity_chinese_character_value.text = pinyinParcel.chineseCharacters
+    override fun populate(phoneticScriptText: String,
+                          englishTranslationText: String,
+                          chineseCharacters: String) {
+        supportActionBar!!.title = phoneticScriptText
+        pinyin_detail_activity_phonetic_script_value.text = phoneticScriptText
+        pinyin_detail_activity_english_translation_value.text = englishTranslationText
+        pinyin_detail_activity_chinese_character_value.text = chineseCharacters
     }
 
     override fun showAudioControl() {

@@ -13,12 +13,17 @@ sealed class PinyinDetailIntent : ViewIntent {
 }
 
 sealed class PinyinDetailState : ViewState {
-    data class Populate(val pinyinParcel: PinyinParcel) : PinyinDetailState()
+    data class Populate(val phoneticScriptText: String,
+                        val englishTranslationText: String,
+                        val chineseCharacters: String,
+                        val audioSrc: String?) : PinyinDetailState()
     data class PlayAudio(val audioSrc: String) : PinyinDetailState()
 }
 
 interface PinyinDetailLayout : ViewLayout {
-    fun populate(pinyinParcel: PinyinParcel)
+    fun populate(phoneticScriptText: String,
+                 englishTranslationText: String,
+                 chineseCharacters: String)
     fun showAudioControl()
     fun playAudio(audioSrc: String)
 }
@@ -26,10 +31,13 @@ interface PinyinDetailLayout : ViewLayout {
 class PinyinDetailRender(private val layout: PinyinDetailLayout) : ViewRender<PinyinDetailState> {
     override fun state(state: PinyinDetailState) = when(state) {
         is PinyinDetailState.Populate -> {
-            state.pinyinParcel.audioSrc?.let {
+            state.audioSrc?.let {
                 layout.showAudioControl()
             }
-            layout.populate(state.pinyinParcel)
+            layout.populate(
+                    state.phoneticScriptText,
+                    state.englishTranslationText,
+                    state.chineseCharacters)
         }
         is PinyinDetailState.PlayAudio -> {
             layout.playAudio(state.audioSrc)
