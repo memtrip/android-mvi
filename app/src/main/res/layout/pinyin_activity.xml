@@ -36,7 +36,7 @@
                     android:layout_margin="@dimen/padding_large_16dp"
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
-                    android:text="@string/pinyin_activity_search_pinyin_hint"
+                    android:text="@string/pinyin_activity_search_phonetic_hint"
                     android:textColor="@color/colorTextInverse" />
 
             </FrameLayout>

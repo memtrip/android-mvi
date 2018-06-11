@@ -31,8 +31,8 @@ class EntryModelTest: Spek({
 
             val countPinyin = CountPinyin(pinyinDao, TestSchedulerProvider())
 
-            val entryModel = EntryModel(mock(), countPinyin, mock())
-            val stateSequence = entryModel.reducer(EntryIntent.Init).blockingIterable().asSequence()
+            val model = EntryModel(mock(), countPinyin, mock())
+            val stateSequence = model.reducer(EntryIntent.Init).blockingIterable().asSequence()
 
             it("should return EntryState.OnPinyinLoaded", {
                 assertEquals(EntryState.OnProgress, stateSequence.elementAt(0))
@@ -48,8 +48,8 @@ class EntryModelTest: Spek({
 
             val countPinyin = CountPinyin(pinyinDao, TestSchedulerProvider())
 
-            val entryModel = EntryModel(mock(), countPinyin, mock())
-            val stateSequence = entryModel.reducer(EntryIntent.Init).blockingIterable().asSequence()
+            val model = EntryModel(mock(), countPinyin, mock())
+            val stateSequence = model.reducer(EntryIntent.Init).blockingIterable().asSequence()
 
             it("should return EntryState.OnPinyinLoaded", {
                 assertEquals(EntryState.OnProgress, stateSequence.elementAt(0))
@@ -67,8 +67,8 @@ class EntryModelTest: Spek({
             val fetchAndSavePinyin:FetchAndSavePinyin = mock()
             whenever(fetchAndSavePinyin.save()).thenReturn(Single.just(asList(mock())))
 
-            val entryModel = EntryModel(fetchAndSavePinyin, countPinyin, mock())
-            val stateSequence = entryModel.reducer(EntryIntent.Init).blockingIterable().asSequence()
+            val model = EntryModel(fetchAndSavePinyin, countPinyin, mock())
+            val stateSequence = model.reducer(EntryIntent.Init).blockingIterable().asSequence()
 
             it("should return EntryState.OnPinyinLoaded", {
                 assertEquals(EntryState.OnProgress, stateSequence.elementAt(0))
@@ -86,8 +86,8 @@ class EntryModelTest: Spek({
             val fetchAndSavePinyin:FetchAndSavePinyin = mock()
             whenever(fetchAndSavePinyin.save()).thenReturn(Single.error(Exception()))
 
-            val entryModel = EntryModel(fetchAndSavePinyin, countPinyin, mock())
-            val stateSequence = entryModel.reducer(EntryIntent.Init).blockingIterable().asSequence()
+            val model = EntryModel(fetchAndSavePinyin, countPinyin, mock())
+            val stateSequence = model.reducer(EntryIntent.Init).blockingIterable().asSequence()
 
             it("should return EntryState.OnPinyinLoaded", {
                 assertEquals(EntryState.OnProgress, stateSequence.elementAt(0))

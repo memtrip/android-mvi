@@ -13,7 +13,7 @@ class PinyinModel @Inject internal constructor(application: Application) : Model
             Observable.just(
                     when (intent.page) {
                         Page.PHONETIC -> PinyinState.SearchHint(
-                                context().getString(R.string.pinyin_activity_search_pinyin_hint))
+                                context().getString(R.string.pinyin_activity_search_phonetic_hint))
                         Page.ENGLISH -> PinyinState.SearchHint(
                                 context().getString(R.string.pinyin_activity_search_english_hint))
                         Page.CHARACTER -> PinyinState.SearchHint(
