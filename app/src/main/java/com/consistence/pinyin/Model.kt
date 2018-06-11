@@ -18,7 +18,7 @@ abstract class Model<I : ViewIntent, S : ViewState>(application: Application) : 
         this.disposable.add(disposable)
     }
 
-    internal fun <T> o(item: T) = Observable.just(item)
+    internal fun <T> observable(item: T) = Observable.just(item)
 
     internal fun states(): Observable<S> = intents
             .flatMap({ reducer(it) })

@@ -1,10 +1,8 @@
 package com.consistence.pinyin.app.detail
 
-import com.consistence.pinyin.ViewIntent
-import com.consistence.pinyin.ViewLayout
-import com.consistence.pinyin.ViewRender
-import com.consistence.pinyin.ViewState
+import com.consistence.pinyin.*
 import dagger.Module
+import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 
 sealed class PinyinDetailIntent : ViewIntent {
@@ -47,6 +45,14 @@ class PinyinDetailRender(private val layout: PinyinDetailLayout) : ViewRender<Pi
 
 @Module
 abstract class PinyinDetailActivityModule {
-    @ContributesAndroidInjector
+
+    @ContributesAndroidInjector(modules = [PinyinParcelModule::class])
     internal abstract fun contributesPinyinDetailActivity() : PinyinDetailActivity
+}
+
+@Module
+class PinyinParcelModule {
+
+    @Provides
+    fun bindPinyinParcel(activity: PinyinDetailActivity) = PinyinParcel.out(activity.intent)
 }

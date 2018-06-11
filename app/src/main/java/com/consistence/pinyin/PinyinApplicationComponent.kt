@@ -6,6 +6,7 @@ import com.consistence.pinyin.api.DatabaseModule
 import com.consistence.pinyin.api.NetworkModule
 import com.consistence.pinyin.app.EntryActivityModule
 import com.consistence.pinyin.app.PinyinActivityModule
+import com.consistence.pinyin.app.detail.PinyinDetailActivityModule
 import com.consistence.pinyin.app.list.PinyinCharacterFragmentModule
 import com.consistence.pinyin.app.list.PinyinEnglishFragmentModule
 import com.consistence.pinyin.app.list.PinyinPhoneticFragmentModule
@@ -27,7 +28,8 @@ import javax.inject.Singleton
     PinyinActivityModule::class,
     PinyinPhoneticFragmentModule::class,
     PinyinEnglishFragmentModule::class,
-    PinyinCharacterFragmentModule::class
+    PinyinCharacterFragmentModule::class,
+    PinyinDetailActivityModule::class
 ])
 interface PinyinApplicationComponent : AndroidInjector<PinyinApplication> {
 

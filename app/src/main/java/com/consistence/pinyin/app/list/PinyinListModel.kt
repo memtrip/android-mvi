@@ -22,7 +22,7 @@ abstract class PinyinListModel(application: Application)
 
     override fun reducer(intent: PinyinListIntent): Observable<PinyinListState> = when(intent) {
         is PinyinListIntent.Search -> searchQuery(intent.terms)
-        is PinyinListIntent.SelectItem -> o(PinyinListState.NavigateToDetails(intent.pinyin))
-        is PinyinListIntent.PlayAudio -> o(PinyinListState.PlayAudio(intent.audioSrc))
+        is PinyinListIntent.SelectItem -> observable(PinyinListState.NavigateToDetails(intent.pinyin))
+        is PinyinListIntent.PlayAudio -> observable(PinyinListState.PlayAudio(intent.audioSrc))
     }
 }

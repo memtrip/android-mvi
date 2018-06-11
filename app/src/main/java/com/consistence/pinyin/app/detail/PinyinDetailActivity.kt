@@ -13,6 +13,7 @@ import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView
 import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
 import kotlinx.android.synthetic.main.pinyin_detail_activity.*
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState,
 
     @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinDetailModel>
 
-    val pinyinAudio = PlayPinyAudioInPresenter()
+    private val pinyinAudio = PlayPinyAudioInPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

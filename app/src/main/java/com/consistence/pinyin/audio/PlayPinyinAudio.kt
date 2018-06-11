@@ -14,7 +14,7 @@ interface PlayPinyinAudio {
 
 class PlayPinyAudioInPresenter : PlayPinyinAudio {
 
-    val pinyinStream = PinyinStreamingNavigator()
+    private val pinyinStream = PinyinStreamingNavigator()
 
     var pinyinAudioPlaying = false
 

@@ -17,13 +17,6 @@ abstract class SimpleAdapter<T>(
         protected val inflater: LayoutInflater = LayoutInflater.from(context),
         internal val data: MutableList<T> = ArrayList()) : RecyclerView.Adapter<SimpleAdapterViewHolder<T>>() {
 
-    private lateinit var recyclerView: RecyclerView
-
-    fun insert(item: T) {
-        data.add(0, item)
-        notifyDataSetChanged()
-    }
-
     fun populate(items: List<T>) {
         this.data.addAll(items)
         notifyDataSetChanged()
@@ -55,15 +48,6 @@ abstract class SimpleAdapter<T>(
 
     override fun getItemViewType(position: Int): Int {
         return DEFAULT_ITEM_TYPE
-    }
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        this.recyclerView = recyclerView
-    }
-
-    internal fun atEnd(id: Int) {
-        //interaction.accept(AdapterEnd(id, data.last()))
     }
 
     abstract fun createViewHolder(parent: ViewGroup): SimpleAdapterViewHolder<T>

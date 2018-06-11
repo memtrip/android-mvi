@@ -51,7 +51,7 @@ class NetworkModule {
             .build()
 
     @Singleton @Provides
-    fun converterFactory(moshi: Moshi): MoshiConverterFactory = MoshiConverterFactory.create(moshi);
+    fun converterFactory(moshi: Moshi): Converter.Factory = MoshiConverterFactory.create(moshi);
 
     @Singleton @Provides
     fun retrofit(httpClient: OkHttpClient, converterFactory: Converter.Factory): Retrofit =

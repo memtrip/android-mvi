@@ -16,7 +16,8 @@ class PinyinDetailModel @Inject internal constructor(
     }
 
     private fun populate(pinyinParcel: PinyinParcel): Observable<PinyinDetailState> =
-            o(PinyinDetailState.Populate(
+            observable(
+                    PinyinDetailState.Populate(
                     pinyinParcel.phoneticScriptText,
                     pinyinParcel.englishTranslationText,
                     pinyinParcel.chineseCharacters,
@@ -24,5 +25,5 @@ class PinyinDetailModel @Inject internal constructor(
             ))
 
     private fun playAudio(audioSrc: String): Observable<PinyinDetailState> =
-            o(PinyinDetailState.PlayAudio(audioSrc))
+            observable(PinyinDetailState.PlayAudio(audioSrc))
 }
