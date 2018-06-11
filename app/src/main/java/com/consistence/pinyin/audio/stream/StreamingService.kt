@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import com.consistence.pinyin.audio.stream.interrupt.AudioFocusInterrupt
 import com.consistence.pinyin.audio.stream.interrupt.BecomingNoisyInterrupt
-import timber.log.Timber
 
 abstract class StreamingService<T : Stream> : Service() {
 
@@ -22,9 +21,6 @@ abstract class StreamingService<T : Stream> : Service() {
                                         context: Context): Player
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-
-        Timber.d(">> Streaming service onStartCommand: " + this + "" +
-                "\n data: " + intent)
 
         val stream = streamIntent().get(intent)
 
@@ -44,8 +40,6 @@ abstract class StreamingService<T : Stream> : Service() {
     }
 
     private fun start(stream: T, notify: Notify) {
-
-        Timber.d(">> Start with stream: %s", stream)
 
         player = createPlayer(
                 stream.streamUrl(),

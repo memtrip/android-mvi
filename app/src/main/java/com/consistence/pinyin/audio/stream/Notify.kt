@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.support.v4.content.LocalBroadcastManager
-import timber.log.Timber
 
 class Notify internal constructor(private val context: Context) {
 
@@ -14,38 +13,24 @@ class Notify internal constructor(private val context: Context) {
     }
 
     internal fun startBuffering() {
-
-        Timber.v("<<>> Notify: startBuffering")
-
         val intent = notifyIntent()
         intent.putExtra(EXTRA_NOTIFY_TYPE, NotifyType.PLAYING)
-
         sendBroadcast(intent)
     }
 
     internal fun bufferingError() {
-
-        Timber.v("<<>> Notify: bufferingError")
-
         val intent = notifyIntent()
         intent.putExtra(EXTRA_NOTIFY_TYPE, NotifyType.COMPLETED)
-
         sendBroadcast(intent)
     }
 
     internal fun play() {
-
-        Timber.v("<<>> Notify: play")
-
         val intent = notifyIntent()
         intent.putExtra(EXTRA_NOTIFY_TYPE, NotifyType.PLAYING)
         sendBroadcast(intent)
     }
 
     internal fun completed() {
-
-        Timber.v("<<>> Notify: completed")
-
         val intent = notifyIntent()
         intent.putExtra(EXTRA_NOTIFY_TYPE, NotifyType.COMPLETED)
         sendBroadcast(intent)

@@ -7,7 +7,6 @@ import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
-import timber.log.Timber
 import javax.inject.Inject
 
 class PinyinApplication : Application(), HasActivityInjector, HasSupportFragmentInjector {
@@ -25,8 +24,6 @@ class PinyinApplication : Application(), HasActivityInjector, HasSupportFragment
         if (LeakCanary.isInAnalyzerProcess(this)) { return }
 
         LeakCanary.install(this)
-
-        Timber.plant(Timber.DebugTree())
 
         DaggerPinyinApplicationComponent
                 .builder()
