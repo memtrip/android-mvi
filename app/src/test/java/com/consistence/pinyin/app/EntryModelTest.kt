@@ -23,13 +23,11 @@ class EntryModelTest: Spek({
 
     given("EntryIntent.Init", {
 
-        on("Pinyin characters already exist", {
+        on("Pinyin entries already exist", {
 
-            val pinyinDao: PinyinDao = mock {
-                on { count() }.doReturn(1)
+            val countPinyin: CountPinyin = mock {
+                on { count() }.doReturn(Single.just(1))
             }
-
-            val countPinyin = CountPinyin(pinyinDao, TestSchedulerProvider())
 
             val model = EntryModel(mock(), countPinyin, mock())
             val stateSequence = model.reducer(EntryIntent.Init).blockingIterable().asSequence()
@@ -43,7 +41,7 @@ class EntryModelTest: Spek({
         on("Failed to count pinyin", {
 
             val pinyinDao: PinyinDao = mock {
-                on { count() }.doThrow(RuntimeException())
+                on { count() }.doThrow(IllegalStateException())
             }
 
             val countPinyin = CountPinyin(pinyinDao, TestSchedulerProvider())
@@ -51,18 +49,17 @@ class EntryModelTest: Spek({
             val model = EntryModel(mock(), countPinyin, mock())
             val stateSequence = model.reducer(EntryIntent.Init).blockingIterable().asSequence()
 
-            it("should return EntryState.OnPinyinLoaded", {
+            it("should return EntryState.OnError", {
                 assertEquals(EntryState.OnProgress, stateSequence.elementAt(0))
                 assertEquals(EntryState.OnError, stateSequence.elementAt(1))
             })
         })
 
-        on("Fetch pinyin characters", {
-            val pinyinDao: PinyinDao = mock {
-                on { count() }.doReturn(0)
-            }
+        on("Fetch pinyin entries", {
 
-            val countPinyin = CountPinyin(pinyinDao, TestSchedulerProvider())
+            val countPinyin: CountPinyin = mock {
+                on { count() }.doReturn(Single.just(0))
+            }
 
             val fetchAndSavePinyin:FetchAndSavePinyin = mock()
             whenever(fetchAndSavePinyin.save()).thenReturn(Single.just(asList(mock())))
@@ -76,20 +73,19 @@ class EntryModelTest: Spek({
             })
         })
 
-        on("Failed to fetch pinyin characters", {
-            val pinyinDao: PinyinDao = mock {
-                on { count() }.doReturn(0)
+        on("Failed to fetch pinyin entries", {
+
+            val countPinyin: CountPinyin = mock {
+                on { count() }.doReturn(Single.just(0))
             }
 
-            val countPinyin = CountPinyin(pinyinDao, TestSchedulerProvider())
-
             val fetchAndSavePinyin:FetchAndSavePinyin = mock()
-            whenever(fetchAndSavePinyin.save()).thenReturn(Single.error(Exception()))
+            whenever(fetchAndSavePinyin.save()).thenReturn(Single.error(IllegalStateException()))
 
             val model = EntryModel(fetchAndSavePinyin, countPinyin, mock())
             val stateSequence = model.reducer(EntryIntent.Init).blockingIterable().asSequence()
 
-            it("should return EntryState.OnPinyinLoaded", {
+            it("should return EntryState.OnError", {
                 assertEquals(EntryState.OnProgress, stateSequence.elementAt(0))
                 assertEquals(EntryState.OnError, stateSequence.elementAt(1))
             })

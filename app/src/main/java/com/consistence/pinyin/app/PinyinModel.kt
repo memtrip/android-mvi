@@ -10,7 +10,7 @@ class PinyinModel @Inject internal constructor(application: Application) : Model
 
     override fun reducer(intent: PinyinIntent): Observable<PinyinState> = when(intent) {
         is PinyinIntent.TabSelected -> {
-            Observable.just(
+            o(
                     when (intent.page) {
                         Page.PHONETIC -> PinyinState.SearchHint(
                                 context().getString(R.string.pinyin_activity_search_phonetic_hint))

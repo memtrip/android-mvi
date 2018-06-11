@@ -17,7 +17,7 @@ class PinyinModelTest: Spek({
 
     given("PinyinIntent.TabSelected", {
 
-        val context: Application = mock() {
+        val context: Application = mock {
             on {
                 getString(R.string.pinyin_activity_search_phonetic_hint)
             } doReturn ("phonetic hint")

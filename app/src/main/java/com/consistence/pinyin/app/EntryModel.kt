@@ -19,12 +19,12 @@ class EntryModel @Inject internal constructor(
                 if (count > 0) {
                     Single.just(EntryState.OnPinyinLoaded)
                 } else {
-                    fetchAndSavePinyin.save().map { EntryState.OnPinyinLoaded }
+                    fetchAndSavePinyin
+                            .save()
+                            .map { EntryState.OnPinyinLoaded }
                 }
             })
-            .onErrorResumeNext {
-                Single.just(EntryState.OnError)
-            }
+            .onErrorReturnItem(EntryState.OnError)
             .toObservable()
             .startWith(EntryState.OnProgress)
 

@@ -116,7 +116,7 @@ class PhoneticSearch @Inject internal constructor(
         private val schedulerProvider: SchedulerProvider) {
 
     fun search(terms: String): Single<List<PinyinEntity>> =
-            pinyinDao.phoneticSearch( terms+"%")
+            pinyinDao.phoneticSearch("$terms%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
 }
@@ -126,7 +126,7 @@ class CharacterSearch @Inject internal constructor(
         private val schedulerProvider: SchedulerProvider) {
 
     fun search(terms: String): Single<List<PinyinEntity>> =
-            pinyinDao.characterSearch(  terms+"%")
+            pinyinDao.characterSearch("$terms%")
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
 }

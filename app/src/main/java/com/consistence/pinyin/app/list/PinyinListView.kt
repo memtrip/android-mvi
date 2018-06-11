@@ -21,7 +21,7 @@ sealed class PinyinListState : ViewState {
     data class Populate(val pinyinList: List<PinyinEntity>) : PinyinListState()
     data class NavigateToDetails(val pinyin: PinyinEntity) : PinyinListState()
     data class PlayAudio(val audioSrc: String) : PinyinListState()
-    object Error : PinyinListState()
+    object OnError : PinyinListState()
 }
 
 interface PinyinListLayout : ViewLayout {
@@ -37,7 +37,7 @@ class PinyinListRender(val layout: PinyinListLayout) : ViewRender<PinyinListStat
             layout.populate(state.pinyinList)
         is PinyinListState.NavigateToDetails ->
             layout.navigateToPinyinDetails(state.pinyin)
-        PinyinListState.Error ->
+        PinyinListState.OnError ->
             layout.error()
         is PinyinListState.PlayAudio ->
             layout.playAudio(state.audioSrc)

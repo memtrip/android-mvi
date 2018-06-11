@@ -8,7 +8,7 @@ import com.consistence.pinyin.app.list.PinyinListModel
 import javax.inject.Inject
 
 class PinyinCharacterModel @Inject internal constructor(
-        val characterSearch: CharacterSearch,
+        private val characterSearch: CharacterSearch,
         application: Application) : PinyinListModel(application) {
 
     override val defaultSearch = "拼音"
