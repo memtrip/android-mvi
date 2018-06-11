@@ -28,8 +28,8 @@ class PinyinStreamingService : StreamingService<PinyinAudio>() {
 
 class PinyinStreamIntent : StreamIntent<PinyinAudio> {
 
-    override fun into(pinyinAudio: PinyinAudio, intent: Intent) {
-        intent.putExtra(STREAM_URL, pinyinAudio.streamUrl())
+    override fun into(data: PinyinAudio, intent: Intent) {
+        intent.putExtra(STREAM_URL, data.streamUrl())
     }
 
     override fun get(intent: Intent): PinyinAudio {

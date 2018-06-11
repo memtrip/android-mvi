@@ -19,10 +19,9 @@ class PlayPinyAudioInPresenter : PlayPinyinAudio {
     var pinyinAudioPlaying = false
 
     private val broadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
+        override fun onReceive(context: Context, intent: Intent) {
             val type = Notify.getNotifyType(intent)
 
-            @Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
             when (type) {
                 Notify.NotifyType.PLAYING -> {
                     pinyinAudioPlaying = true
@@ -37,7 +36,7 @@ class PlayPinyAudioInPresenter : PlayPinyinAudio {
     override fun attach(context: Context) {
         LocalBroadcastManager
                 .getInstance(context)
-                .registerReceiver(broadcastReceiver, Notify.getIntentFilter())
+                .registerReceiver(broadcastReceiver, Notify.intentFilter)
     }
 
     override fun detach(context: Context) {

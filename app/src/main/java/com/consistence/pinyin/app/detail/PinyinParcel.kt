@@ -1,6 +1,5 @@
 package com.consistence.pinyin.app.detail
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Parcelable
 import com.consistence.pinyin.api.PinyinEntity
