@@ -7,6 +7,7 @@ import com.consistence.pinyin.ViewState
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
+import javax.inject.Inject
 
 sealed class PinyinDetailIntent : ViewIntent {
     object Init: PinyinDetailIntent()
@@ -29,8 +30,8 @@ interface PinyinDetailLayout : ViewLayout {
     fun playAudio(audioSrc: String)
 }
 
-class PinyinDetailRender(private val layout: PinyinDetailLayout) : ViewRender<PinyinDetailState> {
-    override fun state(state: PinyinDetailState) = when(state) {
+class PinyinDetailRender @Inject internal constructor(): ViewRender<PinyinDetailLayout, PinyinDetailState> {
+    override fun state(layout: PinyinDetailLayout, state: PinyinDetailState) = when(state) {
         is PinyinDetailState.Populate -> {
             state.audioSrc?.let {
                 layout.showAudioControl()

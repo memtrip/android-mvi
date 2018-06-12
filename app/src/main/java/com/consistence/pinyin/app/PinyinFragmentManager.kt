@@ -6,7 +6,10 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentManager
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewFragment
-import com.consistence.pinyin.app.list.*
+import com.consistence.pinyin.app.list.PinyinListFragment
+import com.consistence.pinyin.app.list.PinyinListIntent
+import com.consistence.pinyin.app.list.PinyinListLayout
+import com.consistence.pinyin.app.list.PinyinListState
 import com.consistence.pinyin.app.list.character.PinyinCharacterFragment
 import com.consistence.pinyin.app.list.english.PinyinEnglishFragment
 import com.consistence.pinyin.app.list.phonetic.PinyinPhoneticFragment
@@ -80,7 +83,7 @@ internal class PinyinFragmentAdapter(@IdRes val container: Int,
 }
 
 internal abstract class PageFragment constructor(val title: String) {
-    abstract fun getFragment() : ViewFragment<PinyinListIntent, PinyinListState, PinyinListModel, PinyinListRender>
+    abstract fun getFragment() : ViewFragment<PinyinListIntent, PinyinListState, PinyinListLayout>
 }
 
 internal class PhoneticPageFragment(context: Context) : PageFragment(

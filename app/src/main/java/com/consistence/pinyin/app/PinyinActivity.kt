@@ -16,11 +16,13 @@ import kotlinx.android.synthetic.main.pinyin_activity.*
 import javax.inject.Inject
 
 class PinyinActivity(override var currentSearchQuery: String = "")
-    : ViewActivity<PinyinIntent, PinyinState, PinyinModel, PinyinRender>(), PinyinLayout {
+    : ViewActivity<PinyinIntent, PinyinState, PinyinLayout>(), PinyinLayout {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinModel>
+    @Inject lateinit var render: PinyinRender
 
     private lateinit var fragmentAdapter: PinyinFragmentAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,9 +76,11 @@ class PinyinActivity(override var currentSearchQuery: String = "")
         AndroidInjection.inject(this)
     }
 
-    override fun model():PinyinModel = getViewModel(viewModelFactory)
+    override fun layout(): PinyinLayout = this
 
-    override fun render() = lazy { PinyinRender(this) }.value
+    override fun model(): PinyinModel = getViewModel(viewModelFactory)
+
+    override fun render(): PinyinRender = render
 
     override fun updateSearchHint(hint: String) {
         pinyin_activity_searchview.queryHint = hint

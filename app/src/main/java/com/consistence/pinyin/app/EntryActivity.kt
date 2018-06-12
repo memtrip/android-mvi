@@ -12,9 +12,10 @@ import kotlinx.android.synthetic.main.entry_activity.*
 import kotlinx.android.synthetic.main.kit_error_retry.view.*
 import javax.inject.Inject
 
-class EntryActivity : ViewActivity<EntryIntent, EntryState, EntryModel, EntryRender>(), EntryLayout {
+class EntryActivity : ViewActivity<EntryIntent, EntryState, EntryLayout>(), EntryLayout {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory<EntryModel>
+    @Inject lateinit var render: EntryRender
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +49,9 @@ class EntryActivity : ViewActivity<EntryIntent, EntryState, EntryModel, EntryRen
         AndroidInjection.inject(this)
     }
 
-    override fun render() = lazy { EntryRender(this) }.value
+    override fun layout(): EntryLayout = this
+
+    override fun render(): EntryRender = render
 
     override fun model(): EntryModel = getViewModel(viewModelFactory)
 

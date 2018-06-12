@@ -10,6 +10,7 @@ import com.consistence.pinyin.app.list.english.PinyinEnglishFragment
 import com.consistence.pinyin.app.list.phonetic.PinyinPhoneticFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import javax.inject.Inject
 
 sealed class PinyinListIntent : ViewIntent {
     data class Search(val terms: String) : PinyinListIntent()
@@ -31,8 +32,8 @@ interface PinyinListLayout : ViewLayout {
     fun playAudio(audioSrc: String)
 }
 
-class PinyinListRender(val layout: PinyinListLayout) : ViewRender<PinyinListState> {
-    override fun state(state: PinyinListState) = when(state) {
+class PinyinListRender @Inject internal constructor() : ViewRender<PinyinListLayout, PinyinListState> {
+    override fun state(layout: PinyinListLayout, state: PinyinListState) = when(state) {
         is PinyinListState.Populate ->
             layout.populate(state.pinyinList)
         is PinyinListState.NavigateToDetails ->

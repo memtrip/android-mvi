@@ -6,6 +6,7 @@ import com.consistence.pinyin.ViewRender
 import com.consistence.pinyin.ViewState
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import javax.inject.Inject
 
 sealed class PinyinIntent : ViewIntent {
     data class TabSelected(val page: Page) : PinyinIntent()
@@ -20,9 +21,9 @@ interface PinyinLayout: ViewLayout {
     fun updateSearchHint(hint: String)
 }
 
-class PinyinRender(private val layout: PinyinLayout) : ViewRender<PinyinState> {
+class PinyinRender @Inject internal constructor() : ViewRender<PinyinLayout, PinyinState> {
 
-    override fun state(state: PinyinState) = when(state) {
+    override fun state(layout: PinyinLayout, state: PinyinState) = when(state) {
         is PinyinState.SearchHint -> {
             layout.updateSearchHint(state.hint)
         }

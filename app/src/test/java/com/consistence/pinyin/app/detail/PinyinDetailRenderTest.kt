@@ -17,9 +17,9 @@ class PinyinDetailRenderTest: Spek({
 
         on("PinyinDetailState.Populate without audio", {
             val layout: PinyinDetailLayout = mock()
-            val render = PinyinDetailRender(layout)
+            val render = PinyinDetailRender()
 
-            render.state(PinyinDetailState.Populate(
+            render.state(layout, PinyinDetailState.Populate(
                     "nĭ",
                     "you",
                     "你",
@@ -36,9 +36,9 @@ class PinyinDetailRenderTest: Spek({
 
         on("PinyinDetailState.Populate with audio", {
             val layout: PinyinDetailLayout = mock()
-            val render = PinyinDetailRender(layout)
+            val render = PinyinDetailRender()
 
-            render.state(PinyinDetailState.Populate(
+            render.state(layout, PinyinDetailState.Populate(
                     "nĭ",
                     "you",
                     "你",
@@ -55,9 +55,9 @@ class PinyinDetailRenderTest: Spek({
 
         on("PinyinDetailState.PlayAudio", {
             val layout: PinyinDetailLayout = mock()
-            val render = PinyinDetailRender(layout)
+            val render = PinyinDetailRender()
 
-            render.state(PinyinDetailState.PlayAudio("file://audio"))
+            render.state(layout, PinyinDetailState.PlayAudio("file://audio"))
 
             it("populates the details and show audio controls", {
                 verify(layout).playAudio("file://audio")

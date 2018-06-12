@@ -14,10 +14,10 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.pinyin_detail_activity.*
 import javax.inject.Inject
 
-class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState, PinyinDetailModel,
-        PinyinDetailRender>(), PinyinDetailLayout {
+class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState, PinyinDetailLayout>(), PinyinDetailLayout {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinDetailModel>
+    @Inject lateinit var render: PinyinDetailRender
 
     private val pinyinAudio = PlayPinyAudioInPresenter()
 
@@ -52,9 +52,11 @@ class PinyinDetailActivity : ViewActivity<PinyinDetailIntent, PinyinDetailState,
         AndroidInjection.inject(this)
     }
 
+    override fun layout(): PinyinDetailLayout = this
+
     override fun model(): PinyinDetailModel = getViewModel(viewModelFactory)
 
-    override fun render() = lazy { PinyinDetailRender(this) }.value
+    override fun render(): PinyinDetailRender = render
 
     override fun populate(phoneticScriptText: String,
                           englishTranslationText: String,

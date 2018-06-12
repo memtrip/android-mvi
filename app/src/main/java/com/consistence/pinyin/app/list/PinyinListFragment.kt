@@ -6,9 +6,12 @@ import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.PinyinLayout
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
+import javax.inject.Inject
 
 abstract class PinyinListFragment
-    : ViewFragment<PinyinListIntent, PinyinListState, PinyinListModel, PinyinListRender>(), PinyinListLayout {
+    : ViewFragment<PinyinListIntent, PinyinListState, PinyinListLayout>(), PinyinListLayout {
+
+    @Inject lateinit var render: PinyinListRender
 
     private val pinyinAudio = PlayPinyAudioInPresenter()
 
@@ -32,9 +35,7 @@ abstract class PinyinListFragment
         outState.putString("currentSearchQuery", (context as PinyinLayout).currentSearchQuery)
     }
 
-    override fun render() = lazy {
-        PinyinListRender(this)
-    }.value
+    override fun render(): PinyinListRender = render
 
     override fun initIntent() =
             PinyinListIntent.Search((context as PinyinLayout).currentSearchQuery)

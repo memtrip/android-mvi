@@ -18,9 +18,9 @@ class EntryRenderTest: Spek({
 
         on("EntryState.OnProgress", {
             val layout: EntryLayout = mock()
-            val render = EntryRender(layout)
+            val render = EntryRender()
 
-            render.state(EntryState.OnProgress)
+            render.state(layout, EntryState.OnProgress)
 
             it("shows progress indicator", {
                 verify(layout).showProgress()
@@ -29,9 +29,9 @@ class EntryRenderTest: Spek({
 
         on("EntryState.OnError", {
             val layout: EntryLayout = mock()
-            val render = EntryRender(layout)
+            val render = EntryRender()
 
-            render.state(EntryState.OnError)
+            render.state(layout, EntryState.OnError)
 
             it("hides layout indicator and shows the error", {
                 verify(layout).hideProgress()
@@ -41,9 +41,9 @@ class EntryRenderTest: Spek({
 
         on("EntryState.OnPinyinLoaded", {
             val layout: EntryLayout = mock()
-            val render = EntryRender(layout)
+            val render = EntryRender()
 
-            render.state(EntryState.OnPinyinLoaded)
+            render.state(layout, EntryState.OnPinyinLoaded)
 
             it("hides layout indicator and navigate to pinyin list", {
                 verify(layout).hideProgress()

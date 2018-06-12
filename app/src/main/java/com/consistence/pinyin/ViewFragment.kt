@@ -10,7 +10,7 @@ import android.support.v4.app.Fragment
 
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class ViewFragment<I : ViewIntent, S : ViewState, M : Model<I, S>, R : ViewRender<S>> : Fragment() {
+abstract class ViewFragment<I : ViewIntent, S : ViewState, L : ViewLayout> : Fragment() {
 
     private val d = CompositeDisposable()
     private var init = false
@@ -18,7 +18,7 @@ abstract class ViewFragment<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         inject()
-        d.add(model().states().subscribe(render()::state))
+        d.add(model().states().subscribe({ render().state(layout(), it) }))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -38,9 +38,11 @@ abstract class ViewFragment<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
 
     abstract fun inject()
 
-    abstract fun model(): M
+    abstract fun layout(): L
 
-    abstract fun render() : R
+    abstract fun model(): Model<I, S>
+
+    abstract fun render() : ViewRender<L, S>
 
     open fun initIntent() : I? = ViewIntent.NONE
 

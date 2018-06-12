@@ -6,6 +6,7 @@ import com.consistence.pinyin.ViewRender
 import com.consistence.pinyin.ViewState
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import javax.inject.Inject
 
 sealed class EntryIntent : ViewIntent {
     object Init : EntryIntent()
@@ -25,18 +26,18 @@ interface EntryLayout : ViewLayout {
     fun error()
 }
 
-class EntryRender(private val entryLayout: EntryLayout) : ViewRender<EntryState> {
-    override fun state(state: EntryState) = when(state) {
+class EntryRender @Inject internal constructor(): ViewRender<EntryLayout, EntryState> {
+    override fun state(layout: EntryLayout, state: EntryState) = when(state) {
         EntryState.OnProgress -> {
-            entryLayout.showProgress()
+            layout.showProgress()
         }
         EntryState.OnError -> {
-            entryLayout.hideProgress()
-            entryLayout.error()
+            layout.hideProgress()
+            layout.error()
         }
         EntryState.OnPinyinLoaded -> {
-            entryLayout.hideProgress()
-            entryLayout.navigateToPinyin()
+            layout.hideProgress()
+            layout.navigateToPinyin()
         }
     }
 }

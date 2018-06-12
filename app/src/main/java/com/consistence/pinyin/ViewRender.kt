@@ -1,5 +1,5 @@
 package com.consistence.pinyin
 
-interface ViewRender<S : ViewState> {
-    fun state(state: S)
+interface ViewRender<L : ViewLayout, S : ViewState> {
+    fun state(layout: L, state: S)
 }

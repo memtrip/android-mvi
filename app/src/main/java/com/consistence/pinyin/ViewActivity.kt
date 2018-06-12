@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class ViewActivity<I : ViewIntent, S : ViewState, M : Model<I, S>, R : ViewRender<S>> : AppCompatActivity() {
+abstract class ViewActivity<I : ViewIntent, S : ViewState, L : ViewLayout> : AppCompatActivity() {
 
     private val d = CompositeDisposable()
     private var init = false
@@ -16,7 +16,7 @@ abstract class ViewActivity<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
-        d.add(model().states().subscribe(render()::state))
+        d.add(model().states().subscribe({render().state(layout(), it)}))
     }
 
     override fun onStart() {
@@ -44,9 +44,11 @@ abstract class ViewActivity<I : ViewIntent, S : ViewState, M : Model<I, S>, R : 
 
     abstract fun inject()
 
-    abstract fun model(): M
+    abstract fun layout(): L
 
-    abstract fun render() : R
+    abstract fun model(): Model<I, S>
+
+    abstract fun render() : ViewRender<L, S>
 
     open fun initIntent() : I? = ViewIntent.NONE
 }

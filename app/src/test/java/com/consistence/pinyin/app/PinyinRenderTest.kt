@@ -16,9 +16,9 @@ class PinyinRenderTest: Spek({
 
         on("PinyinState.SearchHint", {
             val layout: PinyinLayout = mock()
-            val render = PinyinRender(layout)
+            val render = PinyinRender()
 
-            render.state(PinyinState.SearchHint("hello"))
+            render.state(layout, PinyinState.SearchHint("hello"))
 
             it("shows search hint", {
                 verify(layout).updateSearchHint("hello")

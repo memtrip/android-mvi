@@ -13,6 +13,7 @@ import com.consistence.pinyin.api.PinyinEntity
 
 import com.consistence.pinyin.app.list.PinyinListFragment
 import com.consistence.pinyin.app.list.PinyinListIntent
+import com.consistence.pinyin.app.list.PinyinListLayout
 import com.consistence.pinyin.kit.Interaction
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.subjects.PublishSubject
@@ -51,6 +52,8 @@ class PinyinPhoneticFragment : PinyinListFragment() {
         AndroidSupportInjection.inject(this)
     }
 
+    override fun layout(): PinyinListLayout = this
+    
     override fun model():PinyinPhoneticModel = getViewModel(viewModelFactory)
 
     override fun populate(pinyin: List<PinyinEntity>) {
