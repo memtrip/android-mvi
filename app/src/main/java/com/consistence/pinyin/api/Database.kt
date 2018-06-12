@@ -5,11 +5,7 @@ import android.arch.persistence.room.*
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Completable
-
 import io.reactivex.Single
-import io.reactivex.disposables.Disposable
-
-import io.reactivex.functions.Consumer
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,17 +28,14 @@ data class PinyinEntity(
 @Dao
 interface PinyinDao {
 
-    @Query("SELECT * FROM Pinyin ORDER BY romanLetterText ASC LIMIT :skip, :limit")
-    fun get(skip: Int, limit: Int): Single<List<PinyinEntity>>
-
     @Query("SELECT * FROM Pinyin WHERE romanLetterText LIKE :terms ORDER BY romanLetterText ASC LIMIT 0, 100")
-    fun phoneticSearch(terms: String): Single<List<PinyinEntity>>
+    fun phoneticSearch(terms: String): List<PinyinEntity>
 
     @Query("SELECT * FROM Pinyin WHERE chineseCharacters LIKE :terms ORDER BY chineseCharacters ASC LIMIT 0, 100")
-    fun characterSearch(terms: String): Single<List<PinyinEntity>>
+    fun characterSearch(terms: String): List<PinyinEntity>
 
     @Query("SELECT * FROM Pinyin WHERE englishTranslationText LIKE :terms ORDER BY englishTranslationText ASC LIMIT 0, 100")
-    fun englishSearch(terms: String): Single<List<PinyinEntity>>
+    fun englishSearch(terms: String): List<PinyinEntity>
 
     @Insert
     fun insertAll(pinyin: List<PinyinEntity>)
@@ -100,23 +93,12 @@ class CountPinyin @Inject internal constructor(
             .subscribeOn(schedulerProvider.thread())
 }
 
-class GetPinyin @Inject internal constructor(
-        private val pinyinDao: PinyinDao,
-        private val schedulerProvider: SchedulerProvider) {
-
-    fun get(skip: Int, limit: Int, pinyin: Consumer<List<PinyinEntity>>, error: Consumer<Throwable>): Disposable =
-            pinyinDao.get(skip, limit)
-                    .observeOn(schedulerProvider.main())
-                    .subscribeOn(schedulerProvider.thread())
-                    .subscribe(pinyin, error)
-}
-
 class PhoneticSearch @Inject internal constructor(
         private val pinyinDao: PinyinDao,
         private val schedulerProvider: SchedulerProvider) {
 
     fun search(terms: String): Single<List<PinyinEntity>> =
-            pinyinDao.phoneticSearch("$terms%")
+            Single.fromCallable({ pinyinDao.phoneticSearch("$terms%") })
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
 }
@@ -126,7 +108,7 @@ class CharacterSearch @Inject internal constructor(
         private val schedulerProvider: SchedulerProvider) {
 
     fun search(terms: String): Single<List<PinyinEntity>> =
-            pinyinDao.characterSearch("$terms%")
+            Single.fromCallable({ pinyinDao.characterSearch("$terms%") })
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
 }
@@ -136,7 +118,7 @@ class EnglishSearch @Inject internal constructor(
         private val schedulerProvider: SchedulerProvider) {
 
     fun search(terms: String): Single<List<PinyinEntity>>  =
-            pinyinDao.englishSearch("%$terms%")
+            Single.fromCallable({ pinyinDao.englishSearch("%$terms%") })
                     .observeOn(schedulerProvider.main())
                     .subscribeOn(schedulerProvider.thread())
 }

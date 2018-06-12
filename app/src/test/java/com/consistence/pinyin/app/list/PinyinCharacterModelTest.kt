@@ -13,7 +13,8 @@ import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
-import org.junit.Assert
+
+import org.junit.Assert.assertEquals
 
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
@@ -36,7 +37,7 @@ class PinyinCharacterModelTest: Spek({
             val stateSequence = model.reducer(PinyinListIntent.Search("汉语")).blockingIterable().asSequence()
 
             it("should return PinyinListState.Populate", {
-                Assert.assertEquals(PinyinListState.Populate(pinyinList), stateSequence.elementAt(0))
+                assertEquals(PinyinListState.Populate(pinyinList), stateSequence.elementAt(0))
             })
         })
 
@@ -52,7 +53,7 @@ class PinyinCharacterModelTest: Spek({
             val stateSequence = model.reducer(PinyinListIntent.Search("汉语")).blockingIterable().asSequence()
 
             it("should return PinyinListState.OnError", {
-                Assert.assertEquals(PinyinListState.OnError, stateSequence.elementAt(0))
+                assertEquals(PinyinListState.OnError, stateSequence.elementAt(0))
             })
         })
     })
@@ -67,7 +68,7 @@ class PinyinCharacterModelTest: Spek({
             val stateSequence = model.reducer(PinyinListIntent.SelectItem(pinyin)).blockingIterable().asSequence()
 
             it("should return PinyinListState.NavigateToDetails", {
-                Assert.assertEquals(PinyinListState.NavigateToDetails(pinyin), stateSequence.elementAt(0))
+                assertEquals(PinyinListState.NavigateToDetails(pinyin), stateSequence.elementAt(0))
             })
         })
     })
@@ -81,7 +82,7 @@ class PinyinCharacterModelTest: Spek({
                     .blockingIterable().asSequence()
 
             it("should return PinyinListState.NavigateToDetails", {
-                Assert.assertEquals(PinyinListState.PlayAudio("file://audio"), stateSequence.elementAt(0))
+                assertEquals(PinyinListState.PlayAudio("file://audio"), stateSequence.elementAt(0))
             })
         })
     })
