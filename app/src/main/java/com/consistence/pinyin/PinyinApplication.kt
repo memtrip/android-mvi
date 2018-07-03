@@ -1,7 +1,7 @@
 package com.consistence.pinyin
 
 import android.app.Activity
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import android.support.v4.app.Fragment
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
@@ -9,7 +9,7 @@ import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class PinyinApplication : Application(), HasActivityInjector, HasSupportFragmentInjector {
+class PinyinApplication : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInjector {
 
     @Inject lateinit var activityInjector: DispatchingAndroidInjector<Activity>
     @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
