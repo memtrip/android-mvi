@@ -3,26 +3,27 @@ package com.consistence.pinyin.app
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.support.v7.widget.SearchView
+import com.consistence.pinyin.MxViewActivity
 import com.consistence.pinyin.R
-import com.consistence.pinyin.ViewActivity
 import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
+import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout
 import dagger.android.AndroidInjection
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.pinyin_activity.*
 import javax.inject.Inject
 
-class PinyinActivity(override var currentSearchQuery: String = "")
-    : ViewActivity<PinyinIntent, PinyinState, PinyinLayout>(), PinyinLayout {
+class PinyinActivity(
+    override var currentSearchQuery: String = ""
+) : MxViewActivity<PinyinIntent, PinyinRenderAction, PinyinViewState, PinyinLayout>(), PinyinLayout {
 
-    @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinModel>
-    @Inject lateinit var render: PinyinRender
+    @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinViewModel>
+    @Inject lateinit var render: PinyinRenderer
 
     private lateinit var fragmentAdapter: PinyinFragmentAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +35,7 @@ class PinyinActivity(override var currentSearchQuery: String = "")
                 supportFragmentManager,
                 this)
 
-        pinyin_activity_tablayout.addOnTabSelectedListener(object : OnTabSelectedListenerAdapter() {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                super.onTabSelected(tab)
-                model().intents.onNext(PinyinIntent.TabSelected(Page.values().get(tab!!.position)))
-            }
-        })
-
-        pinyin_activity_searchview.setOnQueryTextFocusChangeListener { _ , hasFocus ->
+        pinyin_activity_searchview.setOnQueryTextFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 pinyin_activity_searchview_label.gone()
             }
@@ -68,7 +62,14 @@ class PinyinActivity(override var currentSearchQuery: String = "")
         })
     }
 
-    private fun sendSearchEvent(terms:String = "") {
+    override fun intents(): Observable<PinyinIntent> = Observable.merge(
+            Observable.just(PinyinIntent.Init),
+            RxTabLayout
+                    .selectionEvents(pinyin_activity_tablayout)
+                    .map({ PinyinIntent.TabSelected(Page.values()[it.tab().position]) })
+    )
+
+    private fun sendSearchEvent(terms: String = "") {
         fragmentAdapter.sendIntent(PinyinListIntent.Search(terms))
     }
 
@@ -78,9 +79,9 @@ class PinyinActivity(override var currentSearchQuery: String = "")
 
     override fun layout(): PinyinLayout = this
 
-    override fun model(): PinyinModel = getViewModel(viewModelFactory)
+    override fun model(): PinyinViewModel = getViewModel(viewModelFactory)
 
-    override fun render(): PinyinRender = render
+    override fun render(): PinyinRenderer = render
 
     override fun updateSearchHint(hint: String) {
         pinyin_activity_searchview.queryHint = hint

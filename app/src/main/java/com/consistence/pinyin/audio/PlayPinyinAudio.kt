@@ -22,13 +22,9 @@ class PlayPinyAudioInPresenter : PlayPinyinAudio {
         override fun onReceive(context: Context, intent: Intent) {
             val type = Notify.getNotifyType(intent)
 
-            when (type) {
-                Notify.NotifyType.PLAYING -> {
-                    pinyinAudioPlaying = true
-                }
-                Notify.NotifyType.COMPLETED -> {
-                    pinyinAudioPlaying = false
-                }
+            pinyinAudioPlaying = when (type) {
+                Notify.NotifyType.PLAYING -> true
+                Notify.NotifyType.COMPLETED -> false
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.consistence.pinyin
 
-interface ViewIntent {
+interface MxViewIntent {
 
     companion object {
         val NONE = null

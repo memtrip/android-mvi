@@ -12,60 +12,60 @@ import org.junit.runner.RunWith
 import java.util.Arrays.asList
 
 @RunWith(JUnitPlatform::class)
-class PinyinListRenderTest: Spek({
+class PinyinListRenderTest : Spek({
 
-    given("PinyinListRender", {
+    given("PinyinListRenderer") {
 
-        on("populate", {
+        on("populate") {
 
             val layout: PinyinListLayout = mock()
-            val render = PinyinListRender()
+            val render = PinyinListRenderer()
 
             val pinyinList: List<PinyinEntity> = asList(mock())
 
-            render.state(layout, PinyinListState.Populate(pinyinList))
+            render.layout(layout, PinyinListViewState(view = PinyinListViewState.View.Populate(pinyinList)))
 
-            it("populates the pinyin list items", {
+            it("populates the pinyin list items") {
                 verify(layout).populate(pinyinList)
-            })
-        })
+            }
+        }
 
-        on("navigateToPinyinDetails", {
+        on("navigateToPinyinDetails") {
 
             val layout: PinyinListLayout = mock()
-            val render = PinyinListRender()
+            val render = PinyinListRenderer()
 
             val pinyinItem: PinyinEntity = mock()
 
-            render.state(layout, PinyinListState.NavigateToDetails(pinyinItem))
+            render.layout(layout, PinyinListViewState(view = PinyinListViewState.View.SelectItem(pinyinItem)))
 
-            it("navigates to pinyin details with the selected pinyin item", {
+            it("navigates to pinyin details with the selected pinyin item") {
                 verify(layout).navigateToPinyinDetails(pinyinItem)
-            })
-        })
+            }
+        }
 
-        on("error", {
-
-            val layout: PinyinListLayout = mock()
-            val render = PinyinListRender()
-
-            render.state(layout, PinyinListState.OnError)
-
-            it("displays the error", {
-                verify(layout).error()
-            })
-        })
-
-        on("playAudio", {
+        on("showError") {
 
             val layout: PinyinListLayout = mock()
-            val render = PinyinListRender()
+            val render = PinyinListRenderer()
 
-            render.state(layout, PinyinListState.PlayAudio("file://audio"))
+            render.layout(layout, PinyinListViewState(view = PinyinListViewState.View.OnError))
 
-            it("plays the audio src", {
+            it("displays the showError") {
+                verify(layout).showError()
+            }
+        }
+
+        on("playAudio") {
+
+            val layout: PinyinListLayout = mock()
+            val render = PinyinListRenderer()
+
+            render.layout(layout, PinyinListViewState(view = PinyinListViewState.View.PlayAudio("file://audio")))
+
+            it("plays the audio src") {
                 verify(layout).playAudio("file://audio")
-            })
-        })
-    })
+            }
+        }
+    }
 })

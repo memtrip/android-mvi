@@ -9,17 +9,17 @@ import retrofit2.http.GET
 import javax.inject.Inject
 import javax.inject.Singleton
 
-data class PinyinWrapper(
-        val pinyin: List<PinyinJson>)
+data class PinyinWrapper(val pinyin: List<PinyinJson>)
 
 data class PinyinJson(
-        val sourceUrl: String,
-        val phoneticScriptText: String,
-        val romanLetterText: String,
-        val audioSrc: String?,
-        val englishTranslationText: String,
-        val chineseCharacters: String,
-        val characterImageSrc: String)
+    val sourceUrl: String,
+    val phoneticScriptText: String,
+    val romanLetterText: String,
+    val audioSrc: String?,
+    val englishTranslationText: String,
+    val chineseCharacters: String,
+    val characterImageSrc: String
+)
 
 internal interface PinyinApi {
 
@@ -36,12 +36,15 @@ class ApiModule {
 }
 
 class FetchPinyin @Inject internal constructor(
-        retrofit: Retrofit,
-        private val schedulerProvider: SchedulerProvider) {
+    retrofit: Retrofit,
+    private val schedulerProvider: SchedulerProvider
+) {
 
     private val api = retrofit.create(PinyinApi::class.java)
 
-    fun values(): Single<PinyinWrapper> = api.pinyin
-            .subscribeOn(schedulerProvider.thread())
-            .observeOn(schedulerProvider.main())
+    fun values(): Single<PinyinWrapper> {
+        return api.pinyin
+                .subscribeOn(schedulerProvider.thread())
+                .observeOn(schedulerProvider.main())
+    }
 }

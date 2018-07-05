@@ -12,41 +12,39 @@ import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 
 @RunWith(JUnitPlatform::class)
-class EntryRenderTest: Spek({
+class EntryRenderTest : Spek({
 
-    given("EntryRender") {
+    given("EntryRenderer") {
 
-        on("EntryState.OnProgress") {
+        on("EntryRenderAction.OnProgress") {
             val layout: EntryLayout = mock()
-            val render = EntryRender()
+            val render = EntryRenderer()
 
-            render.state(layout, EntryState.OnProgress)
+            render.layout(layout, EntryViewState(view = EntryViewState.View.OnProgress))
 
             it("shows progress indicator") {
                 verify(layout).showProgress()
             }
         }
 
-        on("EntryState.OnError") {
+        on("EntryRenderAction.OnError") {
             val layout: EntryLayout = mock()
-            val render = EntryRender()
+            val render = EntryRenderer()
 
-            render.state(layout, EntryState.OnError)
+            render.layout(layout, EntryViewState(view = EntryViewState.View.OnError))
 
-            it("hides layout indicator and shows the error") {
-                verify(layout).hideProgress()
-                verify(layout).error()
+            it("hides layout indicator and shows the showError") {
+                verify(layout).showError()
             }
         }
 
-        on("EntryState.OnPinyinLoaded") {
+        on("EntryRenderAction.OnPinyinLoaded") {
             val layout: EntryLayout = mock()
-            val render = EntryRender()
+            val render = EntryRenderer()
 
-            render.state(layout, EntryState.OnPinyinLoaded)
+            render.layout(layout, EntryViewState(view = EntryViewState.View.OnPinyinLoaded))
 
             it("hides layout indicator and navigate to pinyin list") {
-                verify(layout).hideProgress()
                 verify(layout).navigateToPinyin()
             }
         }

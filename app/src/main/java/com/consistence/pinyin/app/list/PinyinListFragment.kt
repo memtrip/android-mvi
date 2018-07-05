@@ -1,23 +1,24 @@
 package com.consistence.pinyin.app.list
 
 import android.os.Bundle
-import com.consistence.pinyin.ViewFragment
+import com.consistence.pinyin.MxViewFragment
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.PinyinLayout
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
+import io.reactivex.Observable
 import javax.inject.Inject
 
 abstract class PinyinListFragment
-    : ViewFragment<PinyinListIntent, PinyinListState, PinyinListLayout>(), PinyinListLayout {
+    : MxViewFragment<PinyinListIntent, PinyinListRenderAction, PinyinListViewState, PinyinListLayout>(), PinyinListLayout {
 
-    @Inject lateinit var render: PinyinListRender
+    @Inject lateinit var render: PinyinListRenderer
 
     private val pinyinAudio = PlayPinyAudioInPresenter()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        model().intents.onNext(PinyinListIntent.Search((context as PinyinLayout).currentSearchQuery))
+        model().publish(PinyinListIntent.Search((context as PinyinLayout).currentSearchQuery))
     }
 
     override fun onStart() {
@@ -30,20 +31,13 @@ abstract class PinyinListFragment
         context?.let { pinyinAudio.detach(it) }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString("currentSearchQuery", (context as PinyinLayout).currentSearchQuery)
-    }
+    override fun intents(): Observable<PinyinListIntent> =
+            Observable.just(PinyinListIntent.Init((context as PinyinLayout).currentSearchQuery))
 
-    override fun render(): PinyinListRender = render
-
-    override fun initIntent() =
-            PinyinListIntent.Search((context as PinyinLayout).currentSearchQuery)
-
-    override fun restoreStateIntent(savedInstanceState: Bundle) =
-            PinyinListIntent.Search(savedInstanceState.getString("currentSearchQuery"))
+    override fun render(): PinyinListRenderer = render
 
     override fun navigateToPinyinDetails(pinyinEntity: PinyinEntity) {
+        model().publish(PinyinListIntent.Idle)
         startActivity(PinyinDetailActivity.newIntent(context!!, pinyinEntity))
     }
 

@@ -1,3 +1,3 @@
 package com.consistence.pinyin
 
-interface ViewState
+interface MxViewState

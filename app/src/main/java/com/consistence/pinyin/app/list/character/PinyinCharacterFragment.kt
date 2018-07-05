@@ -15,12 +15,13 @@ import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.app.list.PinyinListLayout
 import com.consistence.pinyin.kit.Interaction
 import dagger.android.support.AndroidSupportInjection
+import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class PinyinCharacterFragment : PinyinListFragment() {
 
-    @Inject lateinit var model: ViewModelFactory<PinyinCharacterModel>
+    @Inject lateinit var model: ViewModelFactory<PinyinCharacterViewModel>
 
     @BindView(R.id.pinyin_character_fragment_recyclerview)
     lateinit var recyclerView: RecyclerView
@@ -35,17 +36,18 @@ class PinyinCharacterFragment : PinyinListFragment() {
         adapter = PinyinCharacterAdapter(context!!, adapterInteraction)
         recyclerView.adapter = adapter
 
-        adapterInteraction.map({
-            when (it.id) {
-                R.id.pinyin_list_audio_button ->
-                    PinyinListIntent.PlayAudio(it.data.audioSrc!!)
-                else ->
-                    PinyinListIntent.SelectItem(it.data)
-            }
-        }).subscribe(model().intents)
-
         return view
     }
+
+    override fun intents(): Observable<PinyinListIntent> = Observable.merge(
+            super.intents(),
+            adapter.interaction.map({
+                when (it.id) {
+                    R.id.pinyin_list_audio_button -> PinyinListIntent.PlayAudio(it.data.audioSrc!!)
+                    else -> PinyinListIntent.SelectItem(it.data)
+                }
+            })
+    )
 
     override fun inject() {
         AndroidSupportInjection.inject(this)
@@ -53,16 +55,17 @@ class PinyinCharacterFragment : PinyinListFragment() {
 
     override fun layout(): PinyinListLayout = this
 
-    override fun model():PinyinCharacterModel = getViewModel(model)
+    override fun model(): PinyinCharacterViewModel = getViewModel(model)
 
     override fun populate(pinyin: List<PinyinEntity>) {
         adapter.clear()
         adapter.populate(pinyin)
     }
 
-    override fun error() {
-
+    override fun showError() {
     }
 
-    companion object { fun newInstance()  = PinyinCharacterFragment() }
+    companion object {
+        fun newInstance() = PinyinCharacterFragment()
+    }
 }

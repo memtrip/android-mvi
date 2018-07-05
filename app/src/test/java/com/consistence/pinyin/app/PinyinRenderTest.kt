@@ -10,19 +10,19 @@ import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 
 @RunWith(JUnitPlatform::class)
-class PinyinRenderTest: Spek({
+class PinyinRenderTest : Spek({
 
-    given("PinyinRender", {
+    given("PinyinRenderer") {
 
-        on("PinyinState.SearchHint", {
+        on("PinyinRenderAction.SearchHint") {
             val layout: PinyinLayout = mock()
-            val render = PinyinRender()
+            val render = PinyinRenderer()
 
-            render.state(layout, PinyinState.SearchHint("hello"))
+            render.layout(layout, PinyinViewState("hello"))
 
-            it("shows search hint", {
+            it("shows search hint") {
                 verify(layout).updateSearchHint("hello")
-            })
-        })
-    })
+            }
+        }
+    }
 })

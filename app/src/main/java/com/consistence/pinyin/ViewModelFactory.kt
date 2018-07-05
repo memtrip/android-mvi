@@ -7,7 +7,8 @@ import javax.inject.Inject
 import kotlin.reflect.KClass
 
 class ViewModelFactory<T : ViewModel> @Inject constructor(
-        private val viewModel: T) : ViewModelProvider.Factory {
+    private val viewModel: T
+) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T = viewModel as T

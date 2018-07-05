@@ -4,20 +4,23 @@ import android.content.Context
 import android.support.annotation.IdRes
 import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentManager
+import com.consistence.pinyin.MxViewFragment
 import com.consistence.pinyin.R
-import com.consistence.pinyin.ViewFragment
 import com.consistence.pinyin.app.list.PinyinListFragment
 import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.app.list.PinyinListLayout
-import com.consistence.pinyin.app.list.PinyinListState
+import com.consistence.pinyin.app.list.PinyinListRenderAction
+import com.consistence.pinyin.app.list.PinyinListViewState
 import com.consistence.pinyin.app.list.character.PinyinCharacterFragment
 import com.consistence.pinyin.app.list.english.PinyinEnglishFragment
 import com.consistence.pinyin.app.list.phonetic.PinyinPhoneticFragment
 
-internal class PinyinFragmentAdapter(@IdRes val container: Int,
-                                     tabLayout: TabLayout,
-                                     private val fm: FragmentManager,
-                                     context: Context) {
+internal class PinyinFragmentAdapter(
+    @IdRes val container: Int,
+    tabLayout: TabLayout,
+    private val fm: FragmentManager,
+    context: Context
+) {
 
     private val pages: LinkedHashMap<Page, PageFragment> = LinkedHashMap()
 
@@ -47,7 +50,7 @@ internal class PinyinFragmentAdapter(@IdRes val container: Int,
         pages.values.toTypedArray().map {
             val viewFragment = it.getFragment()
             if (viewFragment.isAdded) {
-                viewFragment.model().intents.onNext(intent)
+                viewFragment.model().publish(intent)
             }
         }
     }
@@ -83,7 +86,7 @@ internal class PinyinFragmentAdapter(@IdRes val container: Int,
 }
 
 internal abstract class PageFragment constructor(val title: String) {
-    abstract fun getFragment() : ViewFragment<PinyinListIntent, PinyinListState, PinyinListLayout>
+    abstract fun getFragment(): MxViewFragment<PinyinListIntent, PinyinListRenderAction, PinyinListViewState, PinyinListLayout>
 }
 
 internal class PhoneticPageFragment(context: Context) : PageFragment(
@@ -92,7 +95,9 @@ internal class PhoneticPageFragment(context: Context) : PageFragment(
     private var fragment: PinyinPhoneticFragment? = null
 
     override fun getFragment(): PinyinListFragment {
-        fragment =  fragment?.let { it } ?: PinyinPhoneticFragment.newInstance()
+        fragment = fragment?.let {
+            it
+        } ?: PinyinPhoneticFragment.newInstance()
         return fragment as PinyinListFragment
     }
 }

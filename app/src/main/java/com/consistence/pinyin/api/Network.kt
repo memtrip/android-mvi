@@ -1,8 +1,9 @@
 package com.consistence.pinyin.api
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import com.squareup.moshi.KotlinJsonAdapterFactory
+
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -26,7 +27,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun schedules(): SchedulerProvider = object: SchedulerProvider {
+    fun schedules(): SchedulerProvider = object : SchedulerProvider {
         override fun main(): Scheduler {
             return AndroidSchedulers.mainThread()
         }
@@ -37,28 +38,32 @@ class NetworkModule {
     }
 
     @Singleton @Provides
-    fun okhttpClient(): OkHttpClient  = OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
-            .build();
-
-
-    @Singleton @Provides
-    fun moshi(): Moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
+    fun okhttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .build()
+    }
 
     @Singleton @Provides
-    fun converterFactory(moshi: Moshi): Converter.Factory = MoshiConverterFactory.create(moshi);
+    fun moshi(): Moshi {
+        return Moshi.Builder()
+                .add(KotlinJsonAdapterFactory())
+                .build()
+    }
 
     @Singleton @Provides
-    fun retrofit(httpClient: OkHttpClient, converterFactory: Converter.Factory): Retrofit =
-            Retrofit.Builder()
-                    .baseUrl("http://pinyin.consistence.io/")
-                    .client(httpClient)
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(converterFactory)
-                    .build()
+    fun converterFactory(moshi: Moshi): Converter.Factory = MoshiConverterFactory.create(moshi)
+
+    @Singleton @Provides
+    fun retrofit(httpClient: OkHttpClient, converterFactory: Converter.Factory): Retrofit {
+        return Retrofit.Builder()
+                .baseUrl("http://pinyin.consistence.io/")
+                .client(httpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(converterFactory)
+                .build()
+    }
 }

@@ -3,13 +3,14 @@ package com.consistence.pinyin.app.list.character
 import android.app.Application
 import com.consistence.pinyin.api.CharacterSearch
 
-import com.consistence.pinyin.app.list.PinyinListModel
+import com.consistence.pinyin.app.list.PinyinListViewModel
 
 import javax.inject.Inject
 
-class PinyinCharacterModel @Inject internal constructor(
-        private val characterSearch: CharacterSearch,
-        application: Application) : PinyinListModel(application) {
+class PinyinCharacterViewModel @Inject internal constructor(
+    private val characterSearch: CharacterSearch,
+    application: Application
+) : PinyinListViewModel(application) {
 
     override val defaultSearch = "拼音"
 

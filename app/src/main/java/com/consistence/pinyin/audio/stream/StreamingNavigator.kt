@@ -3,8 +3,10 @@ package com.consistence.pinyin.audio.stream
 import android.content.Context
 import android.content.Intent
 
-abstract class StreamingNavigator<T : Stream>(private val streamIntent: StreamIntent<T>,
-                                              private val classDef: Class<out StreamingService<T>>) : Navigator<T> {
+abstract class StreamingNavigator<T : Stream>(
+    private val streamIntent: StreamIntent<T>,
+    private val classDef: Class<out StreamingService<T>>
+) : Navigator<T> {
 
     override fun play(data: T, context: Context) {
         val intent = Intent(context, classDef)

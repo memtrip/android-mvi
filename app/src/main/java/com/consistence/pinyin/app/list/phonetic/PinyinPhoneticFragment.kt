@@ -16,12 +16,13 @@ import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.app.list.PinyinListLayout
 import com.consistence.pinyin.kit.Interaction
 import dagger.android.support.AndroidSupportInjection
+import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class PinyinPhoneticFragment : PinyinListFragment() {
 
-    @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinPhoneticModel>
+    @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinPhoneticViewModel>
 
     @BindView(R.id.pinyin_phonetic_fragment_recyclerview)
     lateinit var recyclerView: RecyclerView
@@ -36,33 +37,33 @@ class PinyinPhoneticFragment : PinyinListFragment() {
         adapter = PinyinPhoneticAdapter(context!!, adapterInteraction)
         recyclerView.adapter = adapter
 
-        adapterInteraction.map({
-            when (it.id) {
-                R.id.pinyin_list_audio_button ->
-                    PinyinListIntent.PlayAudio(it.data.audioSrc!!)
-                else ->
-                    PinyinListIntent.SelectItem(it.data)
-            }
-        }).subscribe(model().intents)
-
         return view
     }
+
+    override fun intents(): Observable<PinyinListIntent> = Observable.merge(
+            super.intents(),
+            adapter.interaction.map({
+                when (it.id) {
+                    R.id.pinyin_list_audio_button -> PinyinListIntent.PlayAudio(it.data.audioSrc!!)
+                    else -> PinyinListIntent.SelectItem(it.data)
+                }
+            })
+    )
 
     override fun inject() {
         AndroidSupportInjection.inject(this)
     }
 
     override fun layout(): PinyinListLayout = this
-    
-    override fun model():PinyinPhoneticModel = getViewModel(viewModelFactory)
+
+    override fun model(): PinyinPhoneticViewModel = getViewModel(viewModelFactory)
 
     override fun populate(pinyin: List<PinyinEntity>) {
         adapter.clear()
         adapter.populate(pinyin)
     }
 
-    override fun error() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showError() {
     }
 
     companion object { fun newInstance() = PinyinPhoneticFragment() }

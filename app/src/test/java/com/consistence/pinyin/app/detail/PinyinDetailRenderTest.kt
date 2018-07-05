@@ -11,57 +11,61 @@ import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 
 @RunWith(JUnitPlatform::class)
-class PinyinDetailRenderTest: Spek({
+class PinyinDetailRenderTest : Spek({
 
-    given("PinyinDetailRender", {
+    given("PinyinDetailRenderer") {
 
-        on("PinyinDetailState.Populate without audio", {
+        on("PinyinDetailRenderAction.Populate without audio") {
             val layout: PinyinDetailLayout = mock()
-            val render = PinyinDetailRender()
+            val render = PinyinDetailRenderer()
 
-            render.state(layout, PinyinDetailState.Populate(
+            render.layout(layout, PinyinDetailViewState(
                     "nĭ",
                     "you",
-                    "你",
-                    null))
+                    "你"))
 
-            it("populates the details, but does not show audio controls", {
+            it("populates the details, but does not show audio controls") {
                 verify(layout, never()).showAudioControl()
                 verify(layout).populate(
                         "nĭ",
                         "you",
                         "你")
-            })
-        })
+            }
+        }
 
-        on("PinyinDetailState.Populate with audio", {
+        on("PinyinDetailRenderAction.Populate with audio") {
             val layout: PinyinDetailLayout = mock()
-            val render = PinyinDetailRender()
+            val render = PinyinDetailRenderer()
 
-            render.state(layout, PinyinDetailState.Populate(
+            render.layout(layout, PinyinDetailViewState(
                     "nĭ",
                     "you",
                     "你",
                     "file://audio"))
 
-            it("populates the details and show audio controls", {
+            it("populates the details and show audio controls") {
                 verify(layout).showAudioControl()
                 verify(layout).populate(
                         "nĭ",
                         "you",
                         "你")
-            })
-        })
+            }
+        }
 
-        on("PinyinDetailState.PlayAudio", {
+        on("PinyinDetailRenderAction.PlayAudio") {
             val layout: PinyinDetailLayout = mock()
-            val render = PinyinDetailRender()
+            val render = PinyinDetailRenderer()
 
-            render.state(layout, PinyinDetailState.PlayAudio("file://audio"))
+            render.layout(layout, PinyinDetailViewState(
+                    "nĭ",
+                    "you",
+                    "你",
+                    "file://audio",
+                    action = PinyinDetailViewState.Action.PlayAudio("file://audio")))
 
-            it("populates the details and show audio controls", {
+            it("populates the details and show audio controls") {
                 verify(layout).playAudio("file://audio")
-            })
-        })
-    })
+            }
+        }
+    }
 })

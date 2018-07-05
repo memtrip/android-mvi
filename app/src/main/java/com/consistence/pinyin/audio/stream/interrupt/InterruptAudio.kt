@@ -10,9 +10,10 @@ import android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
 typealias InterruptAudio = () -> Unit
 
 class BecomingNoisyInterrupt constructor(
-        private val interruptAudio: InterruptAudio,
-        private val context: Context,
-        private val intentFilter: IntentFilter = IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)) : BroadcastReceiver() {
+    private val interruptAudio: InterruptAudio,
+    private val context: Context,
+    private val intentFilter: IntentFilter = IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
+) : BroadcastReceiver() {
 
     fun register() {
         context.registerReceiver(this, intentFilter)
@@ -31,10 +32,10 @@ class BecomingNoisyInterrupt constructor(
 
 @Suppress("DEPRECATION")
 class AudioFocusInterrupt constructor(
-        private val interruptAudio: InterruptAudio,
-        context: Context,
-        private val audioManager: AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager)
-    : AudioManager.OnAudioFocusChangeListener {
+    private val interruptAudio: InterruptAudio,
+    context: Context,
+    private val audioManager: AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+) : AudioManager.OnAudioFocusChangeListener {
 
     fun attach() {
         audioManager.requestAudioFocus(this,

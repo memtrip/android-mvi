@@ -12,10 +12,11 @@ import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.subjects.PublishSubject
 
 abstract class SimpleAdapter<T>(
-        context: Context,
-        protected val interaction: PublishSubject<Interaction<T>>,
-        protected val inflater: LayoutInflater = LayoutInflater.from(context),
-        internal val data: MutableList<T> = ArrayList()) : RecyclerView.Adapter<SimpleAdapterViewHolder<T>>() {
+    context: Context,
+    val interaction: PublishSubject<Interaction<T>>,
+    protected val inflater: LayoutInflater = LayoutInflater.from(context),
+    internal val data: MutableList<T> = ArrayList()
+) : RecyclerView.Adapter<SimpleAdapterViewHolder<T>>() {
 
     fun populate(items: List<T>) {
         this.data.addAll(items)

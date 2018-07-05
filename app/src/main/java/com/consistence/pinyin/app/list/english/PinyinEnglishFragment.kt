@@ -15,12 +15,13 @@ import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.app.list.PinyinListLayout
 import com.consistence.pinyin.kit.Interaction
 import dagger.android.support.AndroidSupportInjection
+import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class PinyinEnglishFragment : PinyinListFragment() {
 
-    @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinEnglishModel>
+    @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinEnglishViewModel>
 
     @BindView(R.id.pinyin_english_fragment_recyclerview)
     lateinit var recyclerView: RecyclerView
@@ -35,17 +36,18 @@ class PinyinEnglishFragment : PinyinListFragment() {
         adapter = PinyinEnglishAdapter(context!!, adapterInteraction)
         recyclerView.adapter = adapter
 
-        adapterInteraction.map({
-            when (it.id) {
-                R.id.pinyin_list_audio_button ->
-                    PinyinListIntent.PlayAudio(it.data.audioSrc!!)
-                else ->
-                    PinyinListIntent.SelectItem(it.data)
-            }
-        }).subscribe(model().intents)
-
         return view
     }
+
+    override fun intents(): Observable<PinyinListIntent> = Observable.merge(
+            super.intents(),
+            adapter.interaction.map({
+                when (it.id) {
+                    R.id.pinyin_list_audio_button -> PinyinListIntent.PlayAudio(it.data.audioSrc!!)
+                    else -> PinyinListIntent.SelectItem(it.data)
+                }
+            })
+    )
 
     override fun inject() {
         AndroidSupportInjection.inject(this)
@@ -53,15 +55,14 @@ class PinyinEnglishFragment : PinyinListFragment() {
 
     override fun layout(): PinyinListLayout = this
 
-    override fun model(): PinyinEnglishModel = getViewModel(viewModelFactory)
+    override fun model(): PinyinEnglishViewModel = getViewModel(viewModelFactory)
 
     override fun populate(pinyin: List<PinyinEntity>) {
         adapter.clear()
         adapter.populate(pinyin)
     }
 
-    override fun error() {
-
+    override fun showError() {
     }
 
     companion object { fun newInstance() = PinyinEnglishFragment() }

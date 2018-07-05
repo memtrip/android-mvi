@@ -2,13 +2,13 @@ package com.consistence.pinyin.app.list.english
 
 import android.app.Application
 import com.consistence.pinyin.api.EnglishSearch
-import com.consistence.pinyin.app.list.PinyinListModel
-
+import com.consistence.pinyin.app.list.PinyinListViewModel
 import javax.inject.Inject
 
-class PinyinEnglishModel @Inject internal constructor(
-        val englishSearch: EnglishSearch,
-        application: Application) : PinyinListModel(application) {
+class PinyinEnglishViewModel @Inject internal constructor(
+    private val englishSearch: EnglishSearch,
+    application: Application
+) : PinyinListViewModel(application) {
 
     override val defaultSearch = "pinyin"
 

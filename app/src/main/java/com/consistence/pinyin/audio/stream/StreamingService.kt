@@ -16,9 +16,11 @@ abstract class StreamingService<T : Stream> : Service() {
 
     protected abstract fun streamIntent(): StreamIntent<T>
 
-    protected abstract fun createPlayer(audioStreamUrl: String,
-                                        onPlayerStateListener: OnPlayerStateListener,
-                                        context: Context): Player
+    protected abstract fun createPlayer(
+        audioStreamUrl: String,
+        onPlayerStateListener: OnPlayerStateListener,
+        context: Context
+    ): Player
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
 
@@ -61,5 +63,5 @@ abstract class StreamingService<T : Stream> : Service() {
         stopSelf()
     }
 
-    override fun onBind(intent: Intent)= null
+    override fun onBind(intent: Intent) = null
 }

@@ -8,9 +8,10 @@ import com.consistence.pinyin.R
 import kotlinx.android.synthetic.main.kit_error_retry.view.*
 
 class ErrorRetryView @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     init {
         LayoutInflater.from(getContext()).inflate(R.layout.kit_error_retry, this)

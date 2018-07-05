@@ -2,7 +2,12 @@ package com.consistence.pinyin.audio
 
 import android.content.Context
 import android.content.Intent
-import com.consistence.pinyin.audio.stream.*
+import com.consistence.pinyin.audio.stream.OnPlayerStateListener
+import com.consistence.pinyin.audio.stream.Player
+import com.consistence.pinyin.audio.stream.Stream
+import com.consistence.pinyin.audio.stream.StreamIntent
+import com.consistence.pinyin.audio.stream.StreamingNavigator
+import com.consistence.pinyin.audio.stream.StreamingService
 
 class PinyinAudio(private val audioUrl: String) : Stream {
 
@@ -10,8 +15,9 @@ class PinyinAudio(private val audioUrl: String) : Stream {
 }
 
 class PinyinStreamingNavigator : StreamingNavigator<PinyinAudio>(
-        PinyinStreamIntent(),
-        PinyinStreamingService::class.java)
+    PinyinStreamIntent(),
+    PinyinStreamingService::class.java
+)
 
 class PinyinStreamingService : StreamingService<PinyinAudio>() {
 
@@ -19,9 +25,11 @@ class PinyinStreamingService : StreamingService<PinyinAudio>() {
         return PinyinStreamIntent()
     }
 
-    override fun createPlayer(audioStreamUrl: String,
-                              onPlayerStateListener: OnPlayerStateListener,
-                              context: Context): Player {
+    override fun createPlayer(
+        audioStreamUrl: String,
+        onPlayerStateListener: OnPlayerStateListener,
+        context: Context
+    ): Player {
         return Player(audioStreamUrl, onPlayerStateListener, context)
     }
 }
