@@ -48,8 +48,7 @@ class Player constructor(
     )
 ) {
 
-    internal fun prepare() {
-
+    init {
         player.addListener(object : EventListenerAdapter {
 
             override fun onLoadingChanged(isLoading: Boolean) {
@@ -72,7 +71,9 @@ class Player constructor(
                 onPlayerStateListener.onBufferingError()
             }
         })
+    }
 
+    internal fun prepare() {
         player.prepare(mediaSource)
         player.playWhenReady = true
     }

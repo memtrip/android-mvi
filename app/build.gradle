@@ -20,7 +20,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -37,7 +37,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     /* */
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.51"
 
     /* */
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -95,7 +95,7 @@ dependencies {
 
     /* junit */
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.junit.platform:junit-platform-runner:1.0.0'
+    testImplementation 'org.junit.platform:junit-platform-runner:1.0.1'
 
     /* spek */
     testImplementation 'org.jetbrains.spek:spek-api:1.1.5'
@@ -107,7 +107,6 @@ dependencies {
 
     /* assertj */
     testImplementation 'org.assertj:assertj-core:3.10.0'
-
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

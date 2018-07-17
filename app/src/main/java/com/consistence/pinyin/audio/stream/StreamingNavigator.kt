@@ -14,6 +14,7 @@ abstract class StreamingNavigator<T : Stream>(
 
         streamIntent.into(data, intent)
 
+        context.stopService(intent)
         context.startService(intent)
     }
 

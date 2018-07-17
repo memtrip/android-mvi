@@ -1,21 +1,44 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+-printmapping build/mapping.txt
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+-repackageclasses ''
+-allowaccessmodification
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-dontwarn javax.annotation.**
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Android architecture components
+-keep class android.arch.** { *; }
+
+# RxJava
+-dontwarn sun.misc.Unsafe
+
+# Okhttp
+-dontwarn okhttp3.**
+-dontwarn okio.**
+
+# Kotlin
+-dontwarn kotlin.**
+-dontwarn org.jetbrains.annotations.**
+-keep class kotlin.Metadata { *; }
+
+# Moshi
+# https://github.com/square/moshi/issues/402
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+-keep @com.squareup.moshi.JsonQualifier interface *
+-keep public class kotlin.reflect.jvm.internal.impl.builtins.* { public *; }
+-keep public class kotlin.reflect.jvm.internal.impl.load.** { public *; }
+
+# Retrofit2
+-dontnote retrofit2.Platform
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+-keepattributes Exceptions
+-keepclassmembers class com.consistence.pinyin.api.** {
+  <init>(...);
+  <fields>;
+}
+-keep class retrofit.** { *; }
