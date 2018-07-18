@@ -1,28 +1,33 @@
 package com.consistence.pinyin.app.list
 
+import com.consistence.pinyin.MxViewState
 import com.consistence.pinyin.api.CharacterSearch
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.list.character.PinyinCharacterViewModel
 import com.consistence.pinyin.get
 import com.nhaarman.mockito_kotlin.doReturn
-
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import io.mockk.every
+import io.mockk.mockkObject
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
-
 import org.junit.Assert.assertEquals
-
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 import java.util.Arrays.asList
 
 @RunWith(JUnitPlatform::class)
 class PinyinCharacterViewModelTest : Spek({
+
+    mockkObject(MxViewState)
+    every {
+        MxViewState.id()
+    } returns 0
 
     given("a PinyinCharacterViewModel") {
 
@@ -85,7 +90,7 @@ class PinyinCharacterViewModelTest : Spek({
 
             it("should play the audio") {
                 assertEquals(
-                        PinyinListViewState(view = PinyinListViewState.View.PlayAudio("file://audio")),
+                        PinyinListViewState(view = PinyinListViewState.View.PlayAudio("file://audio", 0)),
                         states.get(0))
             }
         }

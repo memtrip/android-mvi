@@ -1,11 +1,14 @@
 package com.consistence.pinyin.app.list
 
+import com.consistence.pinyin.MxViewState
 import com.consistence.pinyin.api.PhoneticSearch
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.list.phonetic.PinyinPhoneticViewModel
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import io.mockk.every
+import io.mockk.mockkObject
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.jetbrains.spek.api.Spek
@@ -19,6 +22,11 @@ import java.util.Arrays.asList
 
 @RunWith(JUnitPlatform::class)
 class PinyinPhoneticViewModelTest : Spek({
+
+    mockkObject(MxViewState)
+    every {
+        MxViewState.id()
+    } returns 0
 
     given("a PinyinPhoneticViewModel") {
 
