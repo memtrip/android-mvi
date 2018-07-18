@@ -54,7 +54,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/pinyin_detail_activity_audio_button"/>
 
                 <com.consistence.pinyin.kit.AppTextView
-                    style="@style/Typography.Large.Bold"
+                    style="@style/Typography.H6.Bold"
                     android:id="@+id/pinyin_detail_activity_phonetic_script_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                     app:layout_constraintEnd_toEndOf="parent"/>
 
                 <com.consistence.pinyin.kit.AppTextView
-                    style="@style/Typography.Large.Bold"
+                    style="@style/Typography.H6.Bold"
                     android:id="@+id/pinyin_detail_activity_english_translation_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                     app:layout_constraintEnd_toEndOf="parent"/>
 
                 <com.consistence.pinyin.kit.AppTextView
-                    style="@style/Typography.Large.Bold"
+                    style="@style/Typography.H6.Bold"
                     android:id="@+id/pinyin_detail_activity_chinese_character_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

@@ -1,5 +1,7 @@
 <resources>
+    <dimen name="typography_h5">24sp</dimen>
     <dimen name="typography_h6">20sp</dimen>
     <dimen name="typography_body1">16sp</dimen>
     <dimen name="typography_body2">14sp</dimen>
+    <dimen name="typography_caption">12sp</dimen>
 </resources>

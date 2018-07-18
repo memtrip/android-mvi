@@ -1,14 +1,22 @@
 <resources>
 
-    <style name="Typography.Large" parent="TextAppearance.AppCompat">
+    <style name="Typography.H5" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/typography_h5</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="Typography.H5.Bold" parent="Typography.H5">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Typography.H6" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/typography_h6</item>
         <item name="android:textColor">@color/colorText</item>
     </style>
 
-    <style name="Typography.Large.Bold" parent="Typography.Large">
+    <style name="Typography.H6.Bold" parent="Typography.H6">
         <item name="android:textStyle">bold</item>
     </style>
-
 
     <style name="Typography.Body1" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/typography_body1</item>
@@ -18,6 +26,15 @@
     <style name="Typography.Body2" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/typography_body2</item>
         <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="Typography.Caption" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/typography_caption</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="Typography.Caption.Bold" parent="Typography.Caption">
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

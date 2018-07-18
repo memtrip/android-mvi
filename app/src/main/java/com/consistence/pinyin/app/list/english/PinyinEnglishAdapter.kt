@@ -4,9 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
+
 import com.consistence.pinyin.R
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.kit.Interaction
@@ -16,6 +14,7 @@ import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.pinyin_english_list_item.view.*
 
 class PinyinEnglishAdapter(
     context: Context,
@@ -38,18 +37,12 @@ class PinyinEnglishAdapter(
 
 class PinyinEnglishViewHolder(itemView: View) : SimpleAdapterViewHolder<PinyinEntity>(itemView) {
 
-    @BindView(R.id.pinyin_english_list_item_value)
-    lateinit var englishTextView: TextView
-
-    @BindView(R.id.pinyin_list_audio_button)
-    lateinit var audioButton: ImageButton
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
+    val audioButton: ImageButton = itemView.pinyin_list_audio_button
 
     override fun populate(position: Int, value: PinyinEntity) {
-        englishTextView.text = value.englishTranslationText
-        value.audioSrc?.let { audioButton.visible() } ?: audioButton.gone()
+        itemView.pinyin_english_list_item_value.text = value.englishTranslationText
+        itemView.pinyin_english_list_item_phonetic_translation_value.text = value.phoneticScriptText
+        itemView.pinyin_english_list_item_chinese_character_value.text = value.chineseCharacters
+        value.audioSrc?.let { itemView.pinyin_list_audio_button.visible() } ?: itemView.pinyin_list_audio_button.gone()
     }
 }

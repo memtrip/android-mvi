@@ -1,12 +1,10 @@
 package com.consistence.pinyin.app.list.english
 
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.BindView
-import butterknife.ButterKnife
+
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.api.PinyinEntity
@@ -17,24 +15,22 @@ import com.consistence.pinyin.kit.Interaction
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.pinyin_english_fragment.view.*
+
 import javax.inject.Inject
 
 class PinyinEnglishFragment : PinyinListFragment() {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinEnglishViewModel>
 
-    @BindView(R.id.pinyin_english_fragment_recyclerview)
-    lateinit var recyclerView: RecyclerView
-
     private lateinit var adapter: PinyinEnglishAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.pinyin_english_fragment, container, false)
-        ButterKnife.bind(this, view)
 
         val adapterInteraction: PublishSubject<Interaction<PinyinEntity>> = PublishSubject.create()
         adapter = PinyinEnglishAdapter(context!!, adapterInteraction)
-        recyclerView.adapter = adapter
+        view.pinyin_english_fragment_recyclerview.adapter = adapter
 
         return view
     }

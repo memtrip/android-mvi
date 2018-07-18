@@ -9,7 +9,7 @@ data class PinyinListViewState(val view: View) : MxViewState {
         object Idle : View()
         data class Populate(val pinyin: List<PinyinEntity>) : View()
         object OnError : View()
-        data class PlayAudio(val audioSrc: String) : View()
+        data class PlayAudio(val audioSrc: String, val eventId: Int = MxViewState.id()) : View()
         data class SelectItem(val pinyin: PinyinEntity) : View()
     }
 }

@@ -27,6 +27,7 @@ abstract class MxViewModel<VI : MxViewIntent, RA : MxRenderAction, VS : MxViewSt
                 logViewState(it)
                 it
             }
+            .distinctUntilChanged()
             .replay(1)
             .autoConnect(0)
 

@@ -15,28 +15,79 @@
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/padding_large_16dp">
 
-        <com.consistence.pinyin.kit.AppTextView
-            style="@style/Typography.Body2"
-            android:id="@+id/pinyin_phonetic_list_item_title"
-            android:layout_width="0dp"
+        <android.support.constraint.Guideline
+            android:id="@+id/pinyin_phonetic_list_audio_guideline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/padding_large_16dp"
-            android:text="@string/pinyin_phonetic_script_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/pinyin_list_audio_button"/>
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="84dp" />
 
         <com.consistence.pinyin.kit.AppTextView
-            style="@style/Typography.Large.Bold"
+            style="@style/Typography.H5.Bold"
             android:id="@+id/pinyin_phonetic_list_item_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_large_16dp"
+            android:layout_marginTop="@dimen/padding_large_16dp"
             android:layout_marginEnd="@dimen/padding_medium_8dp"
             tools:text="Zhiyi"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pinyin_phonetic_list_item_title"
-            app:layout_constraintRight_toLeftOf="@+id/pinyin_list_audio_button"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/pinyin_phonetic_list_audio_guideline"/>
+
+        <com.consistence.pinyin.kit.AppTextView
+            style="@style/Typography.Caption.Bold"
+            android:id="@+id/pinyin_phonetic_list_item_english_translation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_large_16dp"
+            android:layout_marginTop="@dimen/padding_medium_8dp"
+            android:layout_marginEnd="@dimen/padding_medium_8dp"
+            android:text="@string/pinyin_english_translation_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pinyin_phonetic_list_item_value"
+            app:layout_constraintRight_toLeftOf="@+id/pinyin_phonetic_list_audio_guideline"/>
+
+        <com.consistence.pinyin.kit.AppTextView
+            style="@style/Typography.Body2"
+            android:id="@+id/pinyin_phonetic_list_item_english_translation_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_large_16dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            app:layout_constraintEnd_toStartOf="@+id/pinyin_phonetic_list_audio_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pinyin_phonetic_list_item_english_translation"
+            tools:text="Pork, Other, Definition, More, This, That, He, Said, She, Said" />
+
+        <com.consistence.pinyin.kit.AppTextView
+            style="@style/Typography.Caption.Bold"
+            android:id="@+id/pinyin_phonetic_list_item_chinese_character"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_large_16dp"
+            android:layout_marginTop="@dimen/padding_small_4dp"
+            android:layout_marginEnd="@dimen/padding_medium_8dp"
+            android:text="@string/pinyin_chinese_character_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pinyin_phonetic_list_item_english_translation_value"
+            app:layout_constraintRight_toLeftOf="@+id/pinyin_phonetic_list_audio_guideline"/>
+
+        <com.consistence.pinyin.kit.AppTextView
+            style="@style/Typography.Body2"
+            android:id="@+id/pinyin_phonetic_list_item_chinese_character_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_large_16dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            app:layout_constraintEnd_toStartOf="@+id/pinyin_phonetic_list_audio_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pinyin_phonetic_list_item_chinese_character"
+            tools:text="拼音" />
 
         <ImageButton
             android:id="@+id/pinyin_list_audio_button"
