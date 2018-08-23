@@ -1,10 +1,10 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.MxViewState
 import com.consistence.pinyin.api.CharacterSearch
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.list.character.PinyinCharacterViewModel
 import com.consistence.pinyin.get
+import com.memtrip.mxandroid.MxViewState
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever

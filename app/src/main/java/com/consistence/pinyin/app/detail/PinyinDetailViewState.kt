@@ -1,6 +1,6 @@
 package com.consistence.pinyin.app.detail
 
-import com.consistence.pinyin.MxViewState
+import com.memtrip.mxandroid.MxViewState
 
 data class PinyinDetailViewState(
     val phoneticScriptText: String,

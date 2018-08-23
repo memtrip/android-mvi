@@ -1,8 +1,8 @@
 package com.consistence.pinyin.app.detail
 
-import com.consistence.pinyin.MxRenderAction
-import com.consistence.pinyin.MxViewLayout
-import com.consistence.pinyin.MxViewRenderer
+import com.memtrip.mxandroid.MxRenderAction
+import com.memtrip.mxandroid.MxViewLayout
+import com.memtrip.mxandroid.MxViewRenderer
 import javax.inject.Inject
 
 sealed class PinyinDetailRenderAction : MxRenderAction {

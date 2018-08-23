@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.MxViewIntent
 import com.consistence.pinyin.api.PinyinEntity
+import com.memtrip.mxandroid.MxViewIntent
 
 sealed class PinyinListIntent : MxViewIntent {
     data class Init(val terms: String) : PinyinListIntent()

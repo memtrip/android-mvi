@@ -1,9 +1,9 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.MxViewState
 import com.consistence.pinyin.api.EnglishSearch
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.list.english.PinyinEnglishViewModel
+import com.memtrip.mxandroid.MxViewState
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever

@@ -1,8 +1,8 @@
 package com.consistence.pinyin
 
 import android.app.Activity
-import android.support.multidex.MultiDexApplication
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
+import androidx.multidex.MultiDexApplication
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

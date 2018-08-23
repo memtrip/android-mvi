@@ -1,13 +1,12 @@
 package com.consistence.pinyin.kit
 
 import android.content.Context
-import android.support.annotation.IdRes
-import android.support.annotation.StringRes
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
+import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.subjects.PublishSubject
 

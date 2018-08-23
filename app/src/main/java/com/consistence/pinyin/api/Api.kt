@@ -1,5 +1,6 @@
 package com.consistence.pinyin.api
 
+import com.squareup.moshi.JsonClass
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Single
@@ -9,8 +10,10 @@ import retrofit2.http.GET
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@JsonClass(generateAdapter = true)
 data class PinyinWrapper(val pinyin: List<PinyinJson>)
 
+@JsonClass(generateAdapter = true)
 data class PinyinJson(
     val sourceUrl: String,
     val phoneticScriptText: String,

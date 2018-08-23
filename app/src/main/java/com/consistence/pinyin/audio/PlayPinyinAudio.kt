@@ -1,10 +1,11 @@
 package com.consistence.pinyin.audio
 
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.support.v4.content.LocalBroadcastManager
-import com.consistence.pinyin.audio.stream.Notify
+
+import com.memtrip.exoeasy.AudioStreamController
+import com.memtrip.exoeasy.NotificationInfo
+import com.memtrip.exoeasy.broadcast.PlayBackState
+import com.memtrip.exoeasy.broadcast.PlayBackStateUpdates
 
 interface PlayPinyinAudio {
     fun attach(context: Context)
@@ -14,36 +15,46 @@ interface PlayPinyinAudio {
 
 class PlayPinyAudioInPresenter : PlayPinyinAudio {
 
-    private val pinyinStream = PinyinStreamingNavigator()
-
-    var pinyinAudioPlaying = false
-
-    private val broadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val type = Notify.getNotifyType(intent)
-
-            pinyinAudioPlaying = when (type) {
-                Notify.NotifyType.PLAYING -> true
-                Notify.NotifyType.COMPLETED -> false
-            }
-        }
-    }
+    private var playBackStateUpdates: PlayBackStateUpdates<PinyinAudio>? = null
+    private var pinyinAudioPlaying = false
 
     override fun attach(context: Context) {
-        LocalBroadcastManager
-                .getInstance(context)
-                .registerReceiver(broadcastReceiver, Notify.intentFilter)
+        playBackStateUpdates?.register(context)
     }
 
     override fun detach(context: Context) {
-        LocalBroadcastManager
-                .getInstance(context)
-                .unregisterReceiver(broadcastReceiver)
+        playBackStateUpdates?.unregister(context)
     }
 
     override fun playPinyinAudio(src: String, context: Context) {
+
         if (!pinyinAudioPlaying) {
-            pinyinStream.play(PinyinAudio(src), context)
+
+            val pinyinAudio = PinyinAudio(src)
+
+            playBackStateUpdates = PlayBackStateUpdates(pinyinAudio)
+
+            playBackStateUpdates!!.playBackStateChanges().subscribe {
+                pinyinAudioPlaying = isPlaying(it)
+            }
+
+            AudioStreamController(
+                pinyinAudio,
+                PinyinAudioIntent(),
+                NotificationInfo("", "", null),
+                PinyinStreamingService::class.java,
+                context
+            ).play()
         }
+    }
+
+    private fun isPlaying(state: PlayBackState): Boolean = when (state) {
+        PlayBackState.Play -> true
+        PlayBackState.Completed -> false
+        PlayBackState.Buffering -> true
+        PlayBackState.Pause -> false
+        PlayBackState.Stop -> false
+        is PlayBackState.Progress -> false
+        is PlayBackState.BufferingError -> false
     }
 }

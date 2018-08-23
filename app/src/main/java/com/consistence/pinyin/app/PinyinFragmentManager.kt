@@ -1,10 +1,8 @@
 package com.consistence.pinyin.app
 
 import android.content.Context
-import android.support.annotation.IdRes
-import android.support.design.widget.TabLayout
-import android.support.v4.app.FragmentManager
-import com.consistence.pinyin.MxViewFragment
+import androidx.annotation.IdRes
+import androidx.fragment.app.FragmentManager
 import com.consistence.pinyin.R
 import com.consistence.pinyin.app.list.PinyinListFragment
 import com.consistence.pinyin.app.list.PinyinListIntent
@@ -14,6 +12,8 @@ import com.consistence.pinyin.app.list.PinyinListViewState
 import com.consistence.pinyin.app.list.character.PinyinCharacterFragment
 import com.consistence.pinyin.app.list.english.PinyinEnglishFragment
 import com.consistence.pinyin.app.list.phonetic.PinyinPhoneticFragment
+import com.google.android.material.tabs.TabLayout
+import com.memtrip.mxandroid.MxViewFragment
 
 internal class PinyinFragmentAdapter(
     @IdRes val container: Int,

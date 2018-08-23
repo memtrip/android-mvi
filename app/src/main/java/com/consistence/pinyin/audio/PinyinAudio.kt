@@ -1,50 +1,33 @@
 package com.consistence.pinyin.audio
 
-import android.content.Context
 import android.content.Intent
-import com.consistence.pinyin.audio.stream.OnPlayerStateListener
-import com.consistence.pinyin.audio.stream.Player
-import com.consistence.pinyin.audio.stream.Stream
-import com.consistence.pinyin.audio.stream.StreamIntent
-import com.consistence.pinyin.audio.stream.StreamingNavigator
-import com.consistence.pinyin.audio.stream.StreamingService
+import com.consistence.pinyin.BuildConfig
 
-class PinyinAudio(private val audioUrl: String) : Stream {
+import com.memtrip.exoeasy.AudioResource
+import com.memtrip.exoeasy.AudioResourceIntent
 
-    override fun streamUrl(): String = audioUrl
+import com.memtrip.exoeasy.notification.NotificationConfig
+
+import com.memtrip.exoeasy.player.StreamingService
+
+data class PinyinAudio(
+    override val url: String,
+    override val userAgent: String = "${BuildConfig.VERSION_NAME}/${BuildConfig.VERSION_CODE}",
+    override val trackProgress: Boolean = false
+) : AudioResource
+
+class PinyinAudioIntent : AudioResourceIntent<PinyinAudio>() {
+
+    override fun get(intent: Intent): PinyinAudio {
+        return PinyinAudio(
+            intent.getStringExtra(HTTP_AUDIO_STREAM_URL),
+            intent.getStringExtra(HTTP_AUDIO_STREAM_USER_AGENT),
+            intent.getBooleanExtra(HTTP_AUDIO_STREAM_TRACK_PROGRESS, false)
+        )
+    }
 }
-
-class PinyinStreamingNavigator : StreamingNavigator<PinyinAudio>(
-    PinyinStreamIntent(),
-    PinyinStreamingService::class.java
-)
 
 class PinyinStreamingService : StreamingService<PinyinAudio>() {
 
-    override fun streamIntent(): StreamIntent<PinyinAudio> {
-        return PinyinStreamIntent()
-    }
-
-    override fun createPlayer(
-        audioStreamUrl: String,
-        onPlayerStateListener: OnPlayerStateListener,
-        context: Context
-    ): Player {
-        return Player(audioStreamUrl, onPlayerStateListener, context)
-    }
-}
-
-class PinyinStreamIntent : StreamIntent<PinyinAudio> {
-
-    override fun into(data: PinyinAudio, intent: Intent) {
-        intent.putExtra(STREAM_URL, data.streamUrl())
-    }
-
-    override fun get(intent: Intent): PinyinAudio {
-        return PinyinAudio(intent.getStringExtra(STREAM_URL))
-    }
-
-    companion object {
-        private val STREAM_URL = "pinyin.streamUrl"
-    }
+    override fun audioResourceIntent(): PinyinAudioIntent = PinyinAudioIntent()
 }

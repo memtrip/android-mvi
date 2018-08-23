@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app.detail
 
 import android.app.Application
-import com.consistence.pinyin.MxViewModel
+import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
 import javax.inject.Inject
 

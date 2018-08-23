@@ -3,7 +3,8 @@ A production ready Kotlin example of the Android MVI (model view intent) pattern
 
 ### How to navigate the code
 - Start by reviewing the Model/Render unit tests in `src/test/java` 
-- Get the big picture from the MVI pattern interfaces at the root of `com.consistence.pinyin` 
+- Get the big picture from the MVI pattern interfaces at: 
+  https://github.com/memtrip/mxandroid
 - See the pattern in action at `EntryActivity -> EntryModel -> EntryView`
 
 ### The app in Google play

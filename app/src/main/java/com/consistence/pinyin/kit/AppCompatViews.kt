@@ -1,10 +1,10 @@
 package com.consistence.pinyin.kit
 
 import android.content.Context
-import android.support.v7.widget.AppCompatButton
-import android.support.v7.widget.AppCompatEditText
-import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 
 class AppEditText @JvmOverloads constructor(
     context: Context,

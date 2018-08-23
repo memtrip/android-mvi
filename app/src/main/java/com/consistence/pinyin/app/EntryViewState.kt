@@ -1,6 +1,6 @@
 package com.consistence.pinyin.app
 
-import com.consistence.pinyin.MxViewState
+import com.memtrip.mxandroid.MxViewState
 
 data class EntryViewState(val view: View) : MxViewState {
     sealed class View : MxViewState {

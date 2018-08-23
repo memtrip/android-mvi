@@ -1,8 +1,8 @@
 package com.consistence.pinyin.app.list
 
 import android.app.Application
-import com.consistence.pinyin.MxViewModel
 import com.consistence.pinyin.api.PinyinEntity
+import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
 import io.reactivex.Single
 

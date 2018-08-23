@@ -25,11 +25,9 @@ class PinyinPhoneticAdapter(
         val viewHolder = PinyinPhoneticViewHolder(inflater.inflate(
                 R.layout.pinyin_phonetic_list_item, parent, false))
 
-        RxView.clicks(viewHolder.audioButton)
-                .map({
-                    Interaction(viewHolder.audioButton.id, data[viewHolder.adapterPosition])
-                })
-                .subscribe(interaction)
+        RxView.clicks(viewHolder.audioButton).map {
+            Interaction(viewHolder.audioButton.id, data[viewHolder.adapterPosition])
+        }.subscribe(interaction)
 
         return viewHolder
     }

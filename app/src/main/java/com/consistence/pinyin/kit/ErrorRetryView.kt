@@ -1,9 +1,10 @@
 package com.consistence.pinyin.kit
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
+
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.consistence.pinyin.R
 import kotlinx.android.synthetic.main.kit_error_retry.view.*
 

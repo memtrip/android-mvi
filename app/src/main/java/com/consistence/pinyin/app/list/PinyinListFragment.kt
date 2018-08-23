@@ -1,11 +1,11 @@
 package com.consistence.pinyin.app.list
 
 import android.os.Bundle
-import com.consistence.pinyin.MxViewFragment
 import com.consistence.pinyin.api.PinyinEntity
 import com.consistence.pinyin.app.PinyinLayout
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
+import com.memtrip.mxandroid.MxViewFragment
 import io.reactivex.Observable
 import javax.inject.Inject
 

@@ -3,14 +3,14 @@ package com.consistence.pinyin.app
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.SearchView
-import com.consistence.pinyin.MxViewActivity
+import androidx.appcompat.widget.SearchView
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.app.list.PinyinListIntent
+import com.consistence.pinyin.kit.RxTabLayout2
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
-import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout
+import com.memtrip.mxandroid.MxViewActivity
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.pinyin_activity.*
@@ -57,16 +57,16 @@ class PinyinActivity(
             false
         }
 
-        pinyin_activity_searchview_label.setOnClickListener({
+        pinyin_activity_searchview_label.setOnClickListener {
             pinyin_activity_searchview.isIconified = false
-        })
+        }
     }
 
     override fun intents(): Observable<PinyinIntent> = Observable.merge(
             Observable.just(PinyinIntent.Init),
-            RxTabLayout
+            RxTabLayout2
                     .selectionEvents(pinyin_activity_tablayout)
-                    .map({ PinyinIntent.TabSelected(Page.values()[it.tab().position]) })
+                    .map { PinyinIntent.TabSelected(Page.values()[it.tab().position]) }
     )
 
     private fun sendSearchEvent(terms: String = "") {

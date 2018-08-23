@@ -1,6 +1,6 @@
 package com.consistence.pinyin.app
 
-import com.consistence.pinyin.MxViewIntent
+import com.memtrip.mxandroid.MxViewIntent
 
 sealed class PinyinIntent : MxViewIntent {
     object Init : PinyinIntent()

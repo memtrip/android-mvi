@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.MxViewState
 import com.consistence.pinyin.api.PinyinEntity
+import com.memtrip.mxandroid.MxViewState
 
 data class PinyinListViewState(val view: View) : MxViewState {
 

@@ -3,7 +3,7 @@ package com.consistence.pinyin.api
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -50,7 +50,6 @@ class NetworkModule {
     @Singleton @Provides
     fun moshi(): Moshi {
         return Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
                 .build()
     }
 

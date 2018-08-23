@@ -1,10 +1,9 @@
 package com.consistence.pinyin.app
 
 import android.app.Application
-import com.consistence.pinyin.MxViewModel
-
 import com.consistence.pinyin.api.CountPinyin
 import com.consistence.pinyin.api.FetchAndSavePinyin
+import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -20,16 +19,16 @@ class EntryViewModel @Inject internal constructor(
 
     private fun getPinyin(): Observable<EntryRenderAction> {
         return countPinyin.count()
-                .flatMap<EntryRenderAction>({ count ->
+                .flatMap<EntryRenderAction> { count ->
                     if (count > 0) {
                         Single.just(EntryRenderAction.OnPinyinLoaded)
                     } else {
                         fetchAndSavePinyin
-                                .save()
-                                .map { EntryRenderAction.OnPinyinLoaded }
+                            .save()
+                            .map { EntryRenderAction.OnPinyinLoaded }
                     }
-                })
-                .onErrorReturnItem(EntryRenderAction.OnError)
+                }
+            .onErrorReturnItem(EntryRenderAction.OnError)
                 .toObservable()
                 .startWith(EntryRenderAction.OnProgress)
     }
