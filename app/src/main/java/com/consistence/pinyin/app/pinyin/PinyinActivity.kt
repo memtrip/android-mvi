@@ -10,6 +10,7 @@ import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
 import com.consistence.pinyin.app.study.StudyActivity
 import com.consistence.pinyin.kit.RxTabLayout2
 import com.consistence.pinyin.kit.gone
+import com.consistence.pinyin.kit.invisible
 import com.consistence.pinyin.kit.visible
 import com.memtrip.mxandroid.MxViewActivity
 import dagger.android.AndroidInjection
@@ -38,7 +39,7 @@ class PinyinActivity(
 
         pinyin_activity_searchview.setOnQueryTextFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                pinyin_activity_searchview_label.gone()
+                pinyin_activity_searchview_label.invisible()
             }
         }
 
