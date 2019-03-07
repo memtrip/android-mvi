@@ -1,8 +1,8 @@
-package com.consistence.pinyin.database.pinyin
+package com.consistence.pinyin.domain.pinyin
 
-import com.consistence.pinyin.api.FetchPinyin
-import com.consistence.pinyin.database.pinyin.PinyinEntity
-import com.consistence.pinyin.database.pinyin.SavePinyin
+import com.consistence.pinyin.domain.pinyin.api.FetchPinyin
+import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.db.SavePinyin
 import io.reactivex.Single
 
 import javax.inject.Inject

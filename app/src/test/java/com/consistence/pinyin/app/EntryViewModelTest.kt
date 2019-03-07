@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app
 
-import com.consistence.pinyin.database.pinyin.CountPinyin
-import com.consistence.pinyin.database.pinyin.FetchAndSavePinyin
+import com.consistence.pinyin.domain.pinyin.db.CountPinyin
+import com.consistence.pinyin.domain.pinyin.FetchAndSavePinyin
 import com.consistence.pinyin.get
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.doThrow

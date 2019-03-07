@@ -1,18 +1,20 @@
-package com.consistence.pinyin.database
+package com.consistence.pinyin.domain
 
 import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.consistence.pinyin.database.pinyin.PinyinDao
-import com.consistence.pinyin.database.pinyin.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.db.PinyinDao
+import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
+import com.consistence.pinyin.domain.study.db.StudyDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Database(entities = [PinyinEntity::class], version = 2, exportSchema = false)
+@Database(entities = [PinyinEntity::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun pinyinDao(): PinyinDao
+    abstract fun studyDao(): StudyDao
 }
 
 @Module
@@ -28,5 +30,10 @@ class DatabaseModule {
     @Provides @Singleton
     fun pinyinDao(appDatabase: AppDatabase): PinyinDao {
         return appDatabase.pinyinDao()
+    }
+
+    @Provides @Singleton
+    fun studoDao(appDatabase: AppDatabase): StudyDao {
+        return appDatabase.studyDao()
     }
 }

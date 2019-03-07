@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 
 import com.consistence.pinyin.R
-import com.consistence.pinyin.database.pinyin.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.consistence.pinyin.kit.Interaction
 import com.consistence.pinyin.kit.SimpleAdapter
 import com.consistence.pinyin.kit.SimpleAdapterViewHolder

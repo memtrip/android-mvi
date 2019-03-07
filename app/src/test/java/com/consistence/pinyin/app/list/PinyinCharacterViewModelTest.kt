@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.database.pinyin.CharacterSearch
-import com.consistence.pinyin.database.pinyin.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.db.CharacterSearch
+import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.consistence.pinyin.app.list.character.PinyinCharacterViewModel
 import com.consistence.pinyin.get
 import com.memtrip.mxandroid.MxViewState

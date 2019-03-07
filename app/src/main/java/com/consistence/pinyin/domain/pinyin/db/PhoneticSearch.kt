@@ -1,16 +1,16 @@
-package com.consistence.pinyin.database.pinyin
+package com.consistence.pinyin.domain.pinyin.db
 
-import com.consistence.pinyin.api.SchedulerProvider
+import com.consistence.pinyin.domain.SchedulerProvider
 import io.reactivex.Single
 import javax.inject.Inject
 
-class EnglishSearch @Inject internal constructor(
+class PhoneticSearch @Inject internal constructor(
     private val pinyinDao: PinyinDao,
     private val schedulerProvider: SchedulerProvider
 ) {
 
     fun search(terms: String): Single<List<PinyinEntity>> {
-        return Single.fromCallable { pinyinDao.englishSearch("%$terms%") }
+        return Single.fromCallable { pinyinDao.phoneticSearch("$terms%") }
             .observeOn(schedulerProvider.main())
             .subscribeOn(schedulerProvider.thread())
     }

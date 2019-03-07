@@ -1,5 +1,6 @@
-package com.consistence.pinyin.api
+package com.consistence.pinyin.domain
 
+import com.consistence.pinyin.domain.pinyin.api.PinyinApi
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 import com.squareup.moshi.Moshi
@@ -16,11 +17,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-
-interface SchedulerProvider {
-    fun main(): Scheduler
-    fun thread(): Scheduler
-}
 
 @Module
 class NetworkModule {
@@ -65,4 +61,12 @@ class NetworkModule {
                 .addConverterFactory(converterFactory)
                 .build()
     }
+}
+
+@Module
+class ApiModule {
+
+    @Singleton
+    @Provides
+    internal fun pinyinApi(retrofit: Retrofit): PinyinApi = retrofit.create(PinyinApi::class.java)
 }

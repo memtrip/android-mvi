@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.database.pinyin.EnglishSearch
-import com.consistence.pinyin.database.pinyin.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.db.EnglishSearch
+import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.consistence.pinyin.app.list.english.PinyinEnglishViewModel
 import com.memtrip.mxandroid.MxViewState
 import com.nhaarman.mockito_kotlin.doReturn

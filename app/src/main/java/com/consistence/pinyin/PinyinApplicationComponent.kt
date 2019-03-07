@@ -1,9 +1,9 @@
 package com.consistence.pinyin
 
 import android.app.Application
-import com.consistence.pinyin.api.ApiModule
-import com.consistence.pinyin.database.DatabaseModule
-import com.consistence.pinyin.api.NetworkModule
+import com.consistence.pinyin.domain.ApiModule
+import com.consistence.pinyin.domain.DatabaseModule
+import com.consistence.pinyin.domain.NetworkModule
 import com.consistence.pinyin.app.EntryActivityModule
 import com.consistence.pinyin.app.PinyinActivityModule
 import com.consistence.pinyin.app.detail.PinyinDetailActivityModule

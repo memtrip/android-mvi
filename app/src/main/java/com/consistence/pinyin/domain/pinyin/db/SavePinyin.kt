@@ -1,7 +1,7 @@
-package com.consistence.pinyin.database.pinyin
+package com.consistence.pinyin.domain.pinyin.db
 
-import com.consistence.pinyin.api.PinyinJson
-import com.consistence.pinyin.api.SchedulerProvider
+import com.consistence.pinyin.domain.pinyin.api.PinyinJson
+import com.consistence.pinyin.domain.SchedulerProvider
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject

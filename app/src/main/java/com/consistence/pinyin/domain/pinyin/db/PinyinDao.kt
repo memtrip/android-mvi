@@ -1,4 +1,4 @@
-package com.consistence.pinyin.database.pinyin
+package com.consistence.pinyin.domain.pinyin.db
 
 import androidx.room.Dao
 import androidx.room.Insert

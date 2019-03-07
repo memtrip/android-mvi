@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app.list
 
 import android.os.Bundle
-import com.consistence.pinyin.database.pinyin.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.consistence.pinyin.app.PinyinLayout
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter

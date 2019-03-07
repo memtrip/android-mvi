@@ -1,6 +1,6 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.database.pinyin.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.memtrip.mxandroid.MxViewIntent
 
 sealed class PinyinListIntent : MxViewIntent {
