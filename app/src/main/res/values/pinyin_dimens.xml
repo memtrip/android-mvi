@@ -1,5 +1,6 @@
 <resources>
 
     <dimen name="pinyin_list_play_size">52dp</dimen>
+    <dimen name="pinyin_activity_header">64dp</dimen>
 
 </resources>

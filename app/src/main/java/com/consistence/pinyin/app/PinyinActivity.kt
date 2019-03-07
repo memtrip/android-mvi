@@ -30,10 +30,10 @@ class PinyinActivity(
         setContentView(R.layout.pinyin_activity)
 
         fragmentAdapter = PinyinFragmentAdapter(
-                R.id.pinyin_activity_fragment_container,
-                pinyin_activity_tablayout,
-                supportFragmentManager,
-                this)
+            R.id.pinyin_activity_fragment_container,
+            pinyin_activity_tablayout,
+            supportFragmentManager,
+            this)
 
         pinyin_activity_searchview.setOnQueryTextFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -60,13 +60,17 @@ class PinyinActivity(
         pinyin_activity_searchview_label.setOnClickListener {
             pinyin_activity_searchview.isIconified = false
         }
+
+        pinyin_activity_study_button.setOnClickListener {
+
+        }
     }
 
     override fun intents(): Observable<PinyinIntent> = Observable.merge(
-            Observable.just(PinyinIntent.Init),
-            RxTabLayout2
-                    .selectionEvents(pinyin_activity_tablayout)
-                    .map { PinyinIntent.TabSelected(Page.values()[it.tab().position]) }
+        Observable.just(PinyinIntent.Init),
+        RxTabLayout2
+            .selectionEvents(pinyin_activity_tablayout)
+            .map { PinyinIntent.TabSelected(Page.values()[it.tab().position]) }
     )
 
     private fun sendSearchEvent(terms: String = "") {

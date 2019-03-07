@@ -17,29 +17,52 @@
             android:orientation="vertical"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <FrameLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="64dp">
+                android:layout_height="@dimen/pinyin_activity_header">
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/pinyin_activity_searchview"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/padding_large_16dp"
-                    android:layout_gravity="center"/>
+                    android:layout_marginStart="@dimen/padding_large_16dp"
+                    android:layout_marginTop="@dimen/padding_large_16dp"
+                    android:layout_marginBottom="@dimen/padding_large_16dp"
+                    android:layout_gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/pinyin_activity_study_button"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <TextView
                     style="@style/Typography.Body1"
                     android:id="@+id/pinyin_activity_searchview_label"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/padding_large_16dp"
+                    android:layout_marginStart="@dimen/padding_large_16dp"
+                    android:layout_marginTop="@dimen/padding_large_16dp"
+                    android:layout_marginBottom="@dimen/padding_large_16dp"
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:text="@string/pinyin_activity_search_phonetic_hint"
-                    android:textColor="@color/colorTextInverse" />
+                    android:textColor="@color/colorTextInverse"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/pinyin_activity_study_button"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
-            </FrameLayout>
+                <ImageView
+                    android:id="@+id/pinyin_activity_study_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_large_16dp"
+                    android:src="@drawable/ic_study"
+                    app:layout_constraintStart_toEndOf="@+id/pinyin_activity_searchview_label"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.tabs.TabLayout
                 style="@style/TabLayout"
