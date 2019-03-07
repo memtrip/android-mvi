@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/study_no_results_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="study_no_results_title,study_no_results,kit_error_retry_button" />
+    
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_no_results_title"
+        style="@style/Typography.H6.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_small_4dp"
+        android:text="@string/study_no_results_title"
+        android:gravity="center"
+        android:textColor="@color/colorTextInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/study_no_results"/>
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_no_results"
+        style="@style/Typography.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/study_no_results"
+        android:gravity="center"
+        android:textColor="@color/colorTextInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/kit_error_retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/study_no_results_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_no_results" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

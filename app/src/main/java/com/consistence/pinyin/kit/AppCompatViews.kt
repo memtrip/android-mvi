@@ -22,4 +22,15 @@ class AppButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : AppCompatButton(context, attrs, defStyleAttr)
+) : AppCompatButton(context, attrs, defStyleAttr) {
+
+    override fun drawableStateChanged() {
+        super.drawableStateChanged()
+
+        if (isEnabled) {
+            alpha = 1.0f
+        } else {
+            alpha = 0.4f
+        }
+    }
+}

@@ -17,10 +17,10 @@ class EntryRenderTest : Spek({
     given("EntryRenderer") {
 
         on("EntryRenderAction.OnProgress") {
-            val layout: EntryLayout = mock()
-            val render = EntryRenderer()
+            val layout: StudyLayout = mock()
+            val render = StudyRenderer()
 
-            render.layout(layout, EntryViewState(view = EntryViewState.View.OnProgress))
+            render.layout(layout, StudyViewState(view = StudyViewState.View.OnProgress))
 
             it("shows progress indicator") {
                 verify(layout).showProgress()
@@ -28,10 +28,10 @@ class EntryRenderTest : Spek({
         }
 
         on("EntryRenderAction.OnError") {
-            val layout: EntryLayout = mock()
-            val render = EntryRenderer()
+            val layout: StudyLayout = mock()
+            val render = StudyRenderer()
 
-            render.layout(layout, EntryViewState(view = EntryViewState.View.OnError))
+            render.layout(layout, StudyViewState(view = StudyViewState.View.OnError))
 
             it("hides layout indicator and shows the showError") {
                 verify(layout).showError()
@@ -39,10 +39,10 @@ class EntryRenderTest : Spek({
         }
 
         on("EntryRenderAction.OnPinyinLoaded") {
-            val layout: EntryLayout = mock()
-            val render = EntryRenderer()
+            val layout: StudyLayout = mock()
+            val render = StudyRenderer()
 
-            render.layout(layout, EntryViewState(view = EntryViewState.View.OnPinyinLoaded))
+            render.layout(layout, StudyViewState(view = StudyViewState.View.OnPinyinLoaded))
 
             it("hides layout indicator and navigate to pinyin list") {
                 verify(layout).navigateToPinyin()

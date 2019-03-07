@@ -2,6 +2,10 @@ package com.consistence.pinyin.app
 
 import android.app.Application
 import com.consistence.pinyin.R
+import com.consistence.pinyin.app.pinyin.Page
+import com.consistence.pinyin.app.pinyin.PinyinIntent
+import com.consistence.pinyin.app.pinyin.PinyinViewModel
+import com.consistence.pinyin.app.pinyin.PinyinViewState
 import com.consistence.pinyin.get
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock

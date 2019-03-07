@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <!-- region Activity -->
         <activity
             android:name=".app.EntryActivity"
             android:screenOrientation="portrait">
@@ -25,12 +26,17 @@
         </activity>
 
         <activity
-            android:name=".app.PinyinActivity"
+            android:name=".app.pinyin.PinyinActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".app.detail.PinyinDetailActivity"
+            android:name="com.consistence.pinyin.app.pinyin.detail.PinyinDetailActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.study.StudyActivity"
+            android:screenOrientation="portrait"/>
+        <!-- endregion -->
 
         <service
             android:name=".audio.PinyinStreamingService"

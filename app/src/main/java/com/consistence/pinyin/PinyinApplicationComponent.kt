@@ -5,11 +5,11 @@ import com.consistence.pinyin.domain.ApiModule
 import com.consistence.pinyin.domain.DatabaseModule
 import com.consistence.pinyin.domain.NetworkModule
 import com.consistence.pinyin.app.EntryActivityModule
-import com.consistence.pinyin.app.PinyinActivityModule
-import com.consistence.pinyin.app.detail.PinyinDetailActivityModule
-import com.consistence.pinyin.app.list.PinyinCharacterFragmentModule
-import com.consistence.pinyin.app.list.PinyinEnglishFragmentModule
-import com.consistence.pinyin.app.list.PinyinPhoneticFragmentModule
+import com.consistence.pinyin.app.pinyin.PinyinActivityModule
+import com.consistence.pinyin.app.pinyin.detail.PinyinDetailActivityModule
+import com.consistence.pinyin.app.pinyin.list.PinyinCharacterFragmentModule
+import com.consistence.pinyin.app.pinyin.list.PinyinEnglishFragmentModule
+import com.consistence.pinyin.app.pinyin.list.PinyinPhoneticFragmentModule
 import dagger.BindsInstance
 import dagger.Component
 

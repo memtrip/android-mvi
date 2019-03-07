@@ -3,6 +3,7 @@ package com.consistence.pinyin.app
 import android.os.Bundle
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
+import com.consistence.pinyin.app.pinyin.PinyinActivity
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView
@@ -24,9 +25,8 @@ class EntryActivity : MxViewActivity<EntryIntent, EntryRenderAction, EntryViewSt
     }
 
     override fun intents(): Observable<EntryIntent> = Observable.merge(
-            Observable.just(EntryIntent.Init),
-            RxView.clicks(entry_activity_error.kit_error_retry_button)
-                    .map({ EntryIntent.Retry })
+        Observable.just(EntryIntent.Init),
+        RxView.clicks(entry_activity_error.kit_error_retry_button).map { EntryIntent.Retry }
     )
 
     override fun showProgress() {

@@ -20,9 +20,9 @@ class ErrorRetryView @JvmOverloads constructor(
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.ErrorRetryView)
             kit_error_retry_message.text = resources.getText(
-                    typedArray.getResourceId(
-                            R.styleable.ErrorRetryView_ErrorRetryView_text,
-                            R.string.kit_error_retry_default_message))
+                typedArray.getResourceId(
+                    R.styleable.ErrorRetryView_ErrorRetryView_text,
+                    R.string.kit_error_retry_default_message))
             typedArray.recycle()
         }
     }
