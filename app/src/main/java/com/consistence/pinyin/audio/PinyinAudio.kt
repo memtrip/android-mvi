@@ -6,8 +6,6 @@ import com.consistence.pinyin.BuildConfig
 import com.memtrip.exoeasy.AudioResource
 import com.memtrip.exoeasy.AudioResourceIntent
 
-import com.memtrip.exoeasy.notification.NotificationConfig
-
 import com.memtrip.exoeasy.player.StreamingService
 
 data class PinyinAudio(

@@ -13,8 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <!-- region Activity -->
         <activity
             android:name=".app.EntryActivity"
             android:screenOrientation="portrait">
@@ -25,12 +27,29 @@
         </activity>
 
         <activity
-            android:name=".app.PinyinActivity"
+            android:name=".app.pinyin.PinyinActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".app.detail.PinyinDetailActivity"
+            android:name="com.consistence.pinyin.app.pinyin.detail.PinyinDetailActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.study.StudyActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".app.study.CreateStudyActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.train.TrainPhraseActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.train.RandomPhraseActivity"
+            android:screenOrientation="portrait" />
+        <!-- endregion -->
 
         <service
             android:name=".audio.PinyinStreamingService"

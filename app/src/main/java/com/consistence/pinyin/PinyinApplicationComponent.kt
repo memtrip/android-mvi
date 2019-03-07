@@ -1,15 +1,19 @@
 package com.consistence.pinyin
 
 import android.app.Application
-import com.consistence.pinyin.api.ApiModule
-import com.consistence.pinyin.api.DatabaseModule
-import com.consistence.pinyin.api.NetworkModule
+import com.consistence.pinyin.domain.ApiModule
+import com.consistence.pinyin.domain.DatabaseModule
+import com.consistence.pinyin.domain.NetworkModule
 import com.consistence.pinyin.app.EntryActivityModule
-import com.consistence.pinyin.app.PinyinActivityModule
-import com.consistence.pinyin.app.detail.PinyinDetailActivityModule
-import com.consistence.pinyin.app.list.PinyinCharacterFragmentModule
-import com.consistence.pinyin.app.list.PinyinEnglishFragmentModule
-import com.consistence.pinyin.app.list.PinyinPhoneticFragmentModule
+import com.consistence.pinyin.app.pinyin.PinyinActivityModule
+import com.consistence.pinyin.app.pinyin.detail.PinyinDetailActivityModule
+import com.consistence.pinyin.app.pinyin.list.PinyinCharacterFragmentModule
+import com.consistence.pinyin.app.pinyin.list.PinyinEnglishFragmentModule
+import com.consistence.pinyin.app.pinyin.list.PinyinPhoneticFragmentModule
+import com.consistence.pinyin.app.study.CreateStudyActivityModule
+import com.consistence.pinyin.app.study.StudyActivityModule
+import com.consistence.pinyin.app.train.RandomPhraseActivityModule
+import com.consistence.pinyin.app.train.TrainPhraseActivityModule
 import dagger.BindsInstance
 import dagger.Component
 
@@ -28,7 +32,11 @@ import javax.inject.Singleton
     PinyinPhoneticFragmentModule::class,
     PinyinEnglishFragmentModule::class,
     PinyinCharacterFragmentModule::class,
-    PinyinDetailActivityModule::class
+    PinyinDetailActivityModule::class,
+    StudyActivityModule::class,
+    CreateStudyActivityModule::class,
+    TrainPhraseActivityModule::class,
+    RandomPhraseActivityModule::class
 ])
 interface PinyinApplicationComponent : AndroidInjector<PinyinApplication> {
 

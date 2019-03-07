@@ -1,0 +1,78 @@
+<resources>
+
+    <!-- region study -->
+    <string name="study_title">Vocabulary</string>
+    <string name="study_train_vocabulary">Start vocabulary training</string>
+    <string name="study_no_results_title">It\'s study time!</string>
+    <string name="study_no_results">
+        You have not created any study vocabulary. Add your vocabulary to the app and test yourself everyday!
+    </string>
+    <string name="study_no_results_create">Create vocabulary</string>
+
+    <string name="study_item_chinese_phrase">Chinese phrase</string>
+    <string name="study_item_english_translation">English translation</string>
+    <string name="study_item_pinyin_translation">Pinyin</string>
+    <!-- endregion study -->
+
+    <string name="study_create_title">Create Phrase</string>
+    <string name="study_create_modify_title">Update Phrase</string>
+    <string name="study_create_lose_changes_title">Are you sure?</string>
+    <string name="study_create_lose_changes_body">You will lose your current changes if you exit now.</string>
+    <string name="study_create_error_title">Oops!</string>
+    <string name="study_create_generic_error">
+        Could not create study, unfortunately your database might corrupted. Please try again.
+    </string>
+    <string name="study_delete_generic_error">
+        Could not delete study, unfortunately your database might corrupted. Please try again.
+    </string>
+
+    <!-- region create study english translation -->
+    <string name="study_create_english_translation_title">
+        Let\'s memorise a phrase.
+    </string>
+    <string name="study_create_english_translation">
+        e.g; I went shopping.
+    </string>
+    <string name="study_create_english_translation_hint">Enter your phrase in English</string>
+    <string name="study_create_english_translation_cta">Next</string>
+    <string name="study_create_english_translation_validation_empty">
+        You must enter an english translation of your phrase.
+    </string>
+    <string name="study_create_english_translation_validation_more_than">
+        Your english translation cannot be more than 80 characters.
+    </string>
+    <string name="study_create_english_translation_delete">Delete phrase</string>
+    <string name="study_create_english_translation_delete_title">Are you sure?</string>
+    <string name="study_create_english_translation_delete_body">
+        Do you want to permanently delete this phrase?
+    </string>
+    <!-- endregion -->
+
+    <!-- region create study chinese phrase -->
+    <string name="study_create_chinese_phrase">
+        Search and select items
+    </string>
+    <string name="study_create_chinese_phrase_cta">Next</string>
+    <string name="study_create_chinese_phrase_validation_empty">
+        You must enter a Chinese phrase! Use the search below to choose the characters and build
+        your phrase.
+    </string>
+    <string name="study_create_chinese_phrase_validation_more_than">
+        You must enter a Chinese phrase cannot be more than 80 characters. It\'s better to learn in
+        smaller chunks!
+    </string>
+    <!-- endregion -->
+
+    <!-- region create study confirm -->
+    <string name="study_create_chinese_confirm_title">
+        Check the phrase is correct!
+    </string>
+    <string name="study_create_chinese_confirm">
+        Confirm with a tutor if you are in doubt.
+    </string>
+
+    <string name="study_create_confirm_cta">Create</string>
+    <string name="study_create_confirm_update_cta">Update</string>
+    <!-- endregion -->
+
+</resources>

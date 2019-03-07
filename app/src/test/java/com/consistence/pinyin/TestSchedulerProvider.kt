@@ -1,6 +1,6 @@
 package com.consistence.pinyin
 
-import com.consistence.pinyin.api.SchedulerProvider
+import com.consistence.pinyin.domain.SchedulerProvider
 import io.reactivex.observers.TestObserver
 
 import io.reactivex.schedulers.Schedulers

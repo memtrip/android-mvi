@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app
 
-import com.consistence.pinyin.api.CountPinyin
-import com.consistence.pinyin.api.FetchAndSavePinyin
+import com.consistence.pinyin.domain.pinyin.db.CountPinyin
+import com.consistence.pinyin.domain.pinyin.FetchAndSavePinyin
 import com.consistence.pinyin.get
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.doThrow
@@ -27,7 +27,7 @@ class EntryViewModelTest : Spek({
 
         val countPinyin by memoized { mock<CountPinyin>() }
 
-        val viewModel by memoized { EntryViewModel(fetchAndSavePinyin, countPinyin, mock()) }
+        val viewModel by memoized { StudyViewModel(fetchAndSavePinyin, countPinyin, mock()) }
 
         on("pinyin entries already exist") {
 
@@ -35,11 +35,11 @@ class EntryViewModelTest : Spek({
 
             val state = viewModel.states().test()
 
-            viewModel.processIntents(intents = Observable.just(EntryIntent.Init))
+            viewModel.processIntents(intents = Observable.just(StudyIntent.Init))
 
             it("should show pinyin loaded") {
-                assertEquals(EntryViewState(view = EntryViewState.View.OnProgress), state.get(0))
-                assertEquals(EntryViewState(view = EntryViewState.View.OnPinyinLoaded), state.get(1))
+                assertEquals(StudyViewState(view = StudyViewState.View.OnProgress), state.get(0))
+                assertEquals(StudyViewState(view = StudyViewState.View.OnPinyinLoaded), state.get(1))
             }
         }
 
@@ -49,11 +49,11 @@ class EntryViewModelTest : Spek({
 
             val state = viewModel.states().test()
 
-            viewModel.processIntents(intents = Observable.just(EntryIntent.Init))
+            viewModel.processIntents(intents = Observable.just(StudyIntent.Init))
 
             it("should show an error") {
-                assertEquals(EntryViewState(view = EntryViewState.View.OnProgress), state.get(0))
-                assertEquals(EntryViewState(view = EntryViewState.View.OnError), state.get(1))
+                assertEquals(StudyViewState(view = StudyViewState.View.OnProgress), state.get(0))
+                assertEquals(StudyViewState(view = StudyViewState.View.OnError), state.get(1))
             }
         }
 
@@ -64,11 +64,11 @@ class EntryViewModelTest : Spek({
 
             val state = viewModel.states().test()
 
-            viewModel.processIntents(intents = Observable.just(EntryIntent.Init))
+            viewModel.processIntents(intents = Observable.just(StudyIntent.Init))
 
             it("should show pinyin loaded") {
-                assertEquals(EntryViewState(view = EntryViewState.View.OnProgress), state.get(0))
-                assertEquals(EntryViewState(view = EntryViewState.View.OnPinyinLoaded), state.get(1))
+                assertEquals(StudyViewState(view = StudyViewState.View.OnProgress), state.get(0))
+                assertEquals(StudyViewState(view = StudyViewState.View.OnPinyinLoaded), state.get(1))
             }
         }
 
@@ -79,11 +79,11 @@ class EntryViewModelTest : Spek({
 
             val state = viewModel.states().test()
 
-            viewModel.processIntents(intents = Observable.just(EntryIntent.Init))
+            viewModel.processIntents(intents = Observable.just(StudyIntent.Init))
 
             it("should show an error") {
-                assertEquals(EntryViewState(view = EntryViewState.View.OnProgress), state.get(0))
-                assertEquals(EntryViewState(view = EntryViewState.View.OnError), state.get(1))
+                assertEquals(StudyViewState(view = StudyViewState.View.OnProgress), state.get(0))
+                assertEquals(StudyViewState(view = StudyViewState.View.OnError), state.get(1))
             }
         }
     }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <stroke
+        android:width="@dimen/viewButtonBorderStroke"
+        android:color="@color/viewButtonPrimaryBorder" />
+
+    <solid android:color="@color/viewButtonPrimaryBackground"/>
+
+    <corners android:radius="@dimen/viewButtonBorderRadius" />
+
+</shape>

@@ -14,6 +14,11 @@
         <item name="android:textColor">@color/colorText</item>
     </style>
 
+    <style name="Typography.H6.Inverse" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/typography_h6</item>
+        <item name="android:textColor">@color/colorTextInverse</item>
+    </style>
+
     <style name="Typography.H6.Bold" parent="Typography.H6">
         <item name="android:textStyle">bold</item>
     </style>
@@ -21,6 +26,10 @@
     <style name="Typography.Body1" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/typography_body1</item>
         <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="Typography.Body1.Inverse">
+        <item name="android:textColor">@color/colorTextInverse</item>
     </style>
 
     <style name="Typography.Body2" parent="TextAppearance.AppCompat">

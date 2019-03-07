@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/study_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.consistence.pinyin.kit.AppButton
+        style="@style/ButtonSecondary"
+        android:id="@+id/study_vocabulary_training"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/study_train_vocabulary"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_toolbar"/>
+    
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/study_no_results_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="study_no_results_title,study_no_results,study_create_button" />
+    
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_no_results_title"
+        style="@style/Typography.H6.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding_medium_8dp"
+        android:text="@string/study_no_results_title"
+        android:gravity="center"
+        android:textColor="@color/colorTextInverse"
+        android:drawableTop="@drawable/ic_study_accent"
+        android:drawablePadding="@dimen/padding_medium_8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/study_no_results"/>
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_no_results"
+        style="@style/Typography.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_large_16dp"
+        android:layout_marginTop="@dimen/padding_large_16dp"
+        android:layout_marginEnd="@dimen/padding_large_16dp"
+        android:layout_marginBottom="@dimen/study_no_results_offset"
+        android:text="@string/study_no_results"
+        android:gravity="center"
+        android:textColor="@color/colorTextInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/study_create_button"
+        style="@style/ButtonSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/study_no_results_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_no_results" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/study_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/padding_large_16dp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_vocabulary_training"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
