@@ -8,7 +8,7 @@ import android.view.ViewGroup
 
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
-import com.consistence.pinyin.api.PinyinEntity
+import com.consistence.pinyin.database.pinyin.PinyinEntity
 import com.consistence.pinyin.app.list.PinyinListFragment
 import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.app.list.PinyinListLayout

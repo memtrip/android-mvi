@@ -2,7 +2,7 @@ package com.consistence.pinyin
 
 import android.app.Application
 import com.consistence.pinyin.api.ApiModule
-import com.consistence.pinyin.api.DatabaseModule
+import com.consistence.pinyin.database.DatabaseModule
 import com.consistence.pinyin.api.NetworkModule
 import com.consistence.pinyin.app.EntryActivityModule
 import com.consistence.pinyin.app.PinyinActivityModule

@@ -2,7 +2,7 @@ package com.consistence.pinyin.app.detail
 
 import android.content.Intent
 import android.os.Parcelable
-import com.consistence.pinyin.api.PinyinEntity
+import com.consistence.pinyin.database.pinyin.PinyinEntity
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
-import com.consistence.pinyin.api.PinyinEntity
+import com.consistence.pinyin.database.pinyin.PinyinEntity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView

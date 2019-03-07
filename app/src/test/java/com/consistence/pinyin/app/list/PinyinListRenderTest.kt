@@ -1,6 +1,6 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.api.PinyinEntity
+import com.consistence.pinyin.database.pinyin.PinyinEntity
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import org.jetbrains.spek.api.Spek
