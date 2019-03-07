@@ -37,6 +37,10 @@
         <activity
             android:name=".app.study.StudyActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".app.study.CreateStudyActivity"
+            android:screenOrientation="portrait"/>
         <!-- endregion -->
 
         <service

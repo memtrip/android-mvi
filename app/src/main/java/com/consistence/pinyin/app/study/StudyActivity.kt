@@ -3,6 +3,7 @@ package com.consistence.pinyin.app.study
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.domain.study.Study
@@ -26,7 +27,22 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
             title = getString(R.string.study_title)
             setDisplayHomeAsUpEnabled(true)
         }
+        study_create_button.setOnClickListener {
+            startActivity(CreateStudyActivity.newIntent(this))
+        }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.study_menu, menu)
+
+        menu.findItem(R.id.study_menu_add).setOnMenuItemClickListener {
+            startActivity(CreateStudyActivity.newIntent(this))
+            true
+        }
+
+        return true
+    }
+
 
     override fun intents(): Observable<StudyIntent> = Observable.just(StudyIntent.Init)
 
