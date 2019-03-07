@@ -1,8 +1,8 @@
 package com.consistence.pinyin.app.list.english
 
 import android.app.Application
-import com.consistence.pinyin.domain.pinyin.db.EnglishSearch
 import com.consistence.pinyin.app.list.PinyinListViewModel
+import com.consistence.pinyin.domain.pinyin.db.EnglishSearch
 import javax.inject.Inject
 
 class PinyinEnglishViewModel @Inject internal constructor(

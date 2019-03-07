@@ -1,22 +1,22 @@
 package com.consistence.pinyin.app.list
 
-import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.memtrip.mxandroid.MxRenderAction
 import com.memtrip.mxandroid.MxViewLayout
 import com.memtrip.mxandroid.MxViewRenderer
 import javax.inject.Inject
 
 sealed class PinyinListRenderAction : MxRenderAction {
-    data class Populate(val pinyinList: List<PinyinEntity>) : PinyinListRenderAction()
+    data class Populate(val pinyinList: List<Pinyin>) : PinyinListRenderAction()
     object OnError : PinyinListRenderAction()
     data class PlayAudio(val audioSrc: String) : PinyinListRenderAction()
-    data class SelectItem(val pinyin: PinyinEntity) : PinyinListRenderAction()
+    data class SelectItem(val pinyin: Pinyin) : PinyinListRenderAction()
     object Idle : PinyinListRenderAction()
 }
 
 interface PinyinListLayout : MxViewLayout {
-    fun populate(pinyin: List<PinyinEntity>)
-    fun navigateToPinyinDetails(pinyinEntity: PinyinEntity)
+    fun populate(pinyin: List<Pinyin>)
+    fun navigateToPinyinDetails(Pinyin: Pinyin)
     fun showError()
     fun playAudio(audioSrc: String)
 }

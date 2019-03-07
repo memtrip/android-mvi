@@ -1,17 +1,15 @@
 package com.consistence.pinyin.app.list.character
 
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
-import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.consistence.pinyin.app.list.PinyinListFragment
 import com.consistence.pinyin.app.list.PinyinListIntent
 import com.consistence.pinyin.app.list.PinyinListLayout
+import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.kit.Interaction
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Observable
@@ -28,7 +26,7 @@ class PinyinCharacterFragment : PinyinListFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.pinyin_character_fragment, container, false)
 
-        val adapterInteraction: PublishSubject<Interaction<PinyinEntity>> = PublishSubject.create()
+        val adapterInteraction: PublishSubject<Interaction<Pinyin>> = PublishSubject.create()
         adapter = PinyinCharacterAdapter(context!!, adapterInteraction)
         view.pinyin_character_fragment_recyclerview.adapter = adapter
 
@@ -36,13 +34,13 @@ class PinyinCharacterFragment : PinyinListFragment() {
     }
 
     override fun intents(): Observable<PinyinListIntent> = Observable.merge(
-            super.intents(),
-            adapter.interaction.map({
-                when (it.id) {
-                    R.id.pinyin_list_audio_button -> PinyinListIntent.PlayAudio(it.data.audioSrc!!)
-                    else -> PinyinListIntent.SelectItem(it.data)
-                }
-            })
+        super.intents(),
+        adapter.interaction.map {
+            when (it.id) {
+                R.id.pinyin_list_audio_button -> PinyinListIntent.PlayAudio(it.data.audioSrc!!)
+                else -> PinyinListIntent.SelectItem(it.data)
+            }
+        }
     )
 
     override fun inject() {
@@ -53,7 +51,7 @@ class PinyinCharacterFragment : PinyinListFragment() {
 
     override fun model(): PinyinCharacterViewModel = getViewModel(model)
 
-    override fun populate(pinyin: List<PinyinEntity>) {
+    override fun populate(pinyin: List<Pinyin>) {
         adapter.clear()
         adapter.populate(pinyin)
     }

@@ -1,10 +1,10 @@
 package com.consistence.pinyin.app.list
 
 import android.os.Bundle
-import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.consistence.pinyin.app.PinyinLayout
 import com.consistence.pinyin.app.detail.PinyinDetailActivity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
+import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.memtrip.mxandroid.MxViewFragment
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -36,9 +36,9 @@ abstract class PinyinListFragment
 
     override fun render(): PinyinListRenderer = render
 
-    override fun navigateToPinyinDetails(pinyinEntity: PinyinEntity) {
+    override fun navigateToPinyinDetails(Pinyin: Pinyin) {
         model().publish(PinyinListIntent.Idle)
-        startActivity(PinyinDetailActivity.newIntent(context!!, pinyinEntity))
+        startActivity(PinyinDetailActivity.newIntent(context!!, Pinyin))
     }
 
     override fun playAudio(audioSrc: String) {

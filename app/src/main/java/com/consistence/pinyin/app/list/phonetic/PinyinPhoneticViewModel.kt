@@ -1,9 +1,9 @@
 package com.consistence.pinyin.app.list.phonetic
 
 import android.app.Application
-import com.consistence.pinyin.domain.pinyin.db.PhoneticSearch
-import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.consistence.pinyin.app.list.PinyinListViewModel
+import com.consistence.pinyin.domain.pinyin.Pinyin
+import com.consistence.pinyin.domain.pinyin.db.PhoneticSearch
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -14,5 +14,5 @@ class PinyinPhoneticViewModel @Inject internal constructor(
 
     override val defaultSearch = "pinyin"
 
-    override fun search(terms: String): Single<List<PinyinEntity>> = phoneticSearch.search(terms)
+    override fun search(terms: String): Single<List<Pinyin>> = phoneticSearch.search(terms)
 }

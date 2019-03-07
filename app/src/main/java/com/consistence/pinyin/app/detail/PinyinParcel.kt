@@ -2,7 +2,7 @@ package com.consistence.pinyin.app.detail
 
 import android.content.Intent
 import android.os.Parcelable
-import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.Pinyin
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -15,14 +15,15 @@ class PinyinParcel(
 
     companion object {
 
-        val PINYIN_PARCEL = "PINYIN_PARCEL"
+        private const val PINYIN_PARCEL = "PINYIN_PARCEL"
 
-        fun into(entity: PinyinEntity, intent: Intent) {
+        fun into(entity: Pinyin, intent: Intent) {
             intent.putExtra(PINYIN_PARCEL, PinyinParcel(
-                    entity.phoneticScriptText,
-                    entity.audioSrc,
-                    entity.englishTranslationText,
-                    entity.chineseCharacters))
+                entity.phoneticScriptText,
+                entity.audioSrc,
+                entity.englishTranslationText,
+                entity.chineseCharacters)
+            )
         }
 
         fun out(intent: Intent): PinyinParcel = intent.getParcelableExtra(PINYIN_PARCEL)

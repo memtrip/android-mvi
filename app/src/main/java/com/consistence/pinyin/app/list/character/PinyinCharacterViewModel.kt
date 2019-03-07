@@ -1,10 +1,8 @@
 package com.consistence.pinyin.app.list.character
 
 import android.app.Application
-import com.consistence.pinyin.domain.pinyin.db.CharacterSearch
-
 import com.consistence.pinyin.app.list.PinyinListViewModel
-
+import com.consistence.pinyin.domain.pinyin.db.CharacterSearch
 import javax.inject.Inject
 
 class PinyinCharacterViewModel @Inject internal constructor(

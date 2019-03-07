@@ -7,11 +7,12 @@ import androidx.room.RoomDatabase
 import com.consistence.pinyin.domain.pinyin.db.PinyinDao
 import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.consistence.pinyin.domain.study.db.StudyDao
+import com.consistence.pinyin.domain.study.db.StudyEntity
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Database(entities = [PinyinEntity::class], version = 3, exportSchema = false)
+@Database(entities = [PinyinEntity::class, StudyEntity::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun pinyinDao(): PinyinDao
     abstract fun studyDao(): StudyDao

@@ -1,7 +1,7 @@
 package com.consistence.pinyin.app.list
 
 import android.app.Application
-import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
+import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -13,7 +13,7 @@ abstract class PinyinListViewModel(
     application
 ) {
 
-    abstract fun search(terms: String = defaultSearch): Single<List<PinyinEntity>>
+    abstract fun search(terms: String = defaultSearch): Single<List<Pinyin>>
 
     abstract val defaultSearch: String
 

@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
-import com.consistence.pinyin.domain.pinyin.db.PinyinEntity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
+import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView
 import com.memtrip.mxandroid.MxViewActivity
@@ -80,9 +80,9 @@ class PinyinDetailActivity : MxViewActivity<PinyinDetailIntent, PinyinDetailRend
     }
 
     companion object {
-        fun newIntent(context: Context, pinyinEntity: PinyinEntity): Intent {
+        fun newIntent(context: Context, Pinyin: Pinyin): Intent {
             val intent = Intent(context, PinyinDetailActivity::class.java)
-            PinyinParcel.into(pinyinEntity, intent)
+            PinyinParcel.into(Pinyin, intent)
             return intent
         }
     }

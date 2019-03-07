@@ -1,8 +1,8 @@
 package com.consistence.pinyin.app
 
 import android.app.Application
-import com.consistence.pinyin.domain.pinyin.db.CountPinyin
 import com.consistence.pinyin.domain.pinyin.FetchAndSavePinyin
+import com.consistence.pinyin.domain.pinyin.db.CountPinyin
 import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
 import io.reactivex.Single
