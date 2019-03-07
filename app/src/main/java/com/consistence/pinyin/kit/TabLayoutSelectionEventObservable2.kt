@@ -31,21 +31,18 @@ internal class TabLayoutSelectionEventObservable2(val view: TabLayout) : Observa
             if (!this.isDisposed) {
                 this.observer.onNext(TabLayoutSelectionSelectedEvent.create(view, tab))
             }
-
         }
 
         override fun onTabUnselected(tab: TabLayout.Tab) {
             if (!this.isDisposed) {
                 this.observer.onNext(TabLayoutSelectionUnselectedEvent.create(view, tab))
             }
-
         }
 
         override fun onTabReselected(tab: TabLayout.Tab) {
             if (!this.isDisposed) {
                 this.observer.onNext(TabLayoutSelectionReselectedEvent.create(view, tab))
             }
-
         }
 
         override fun onDispose() {
@@ -62,5 +59,4 @@ internal class TabLayoutSelectionEventObservable2(val view: TabLayout) : Observa
         }
         return true
     }
-
 }

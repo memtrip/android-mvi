@@ -13,7 +13,8 @@ class FetchAndSavePinyin @Inject internal constructor(
 ) {
 
     fun save(): Single<List<PinyinEntity>> {
-        return fetchPinyin.values()
-            .flatMap { (savePinyin.insert(it.pinyin)) }
+        return fetchPinyin.values().flatMap { pinyinWrapper ->
+            savePinyin.insert(pinyinWrapper.pinyin)
+        }
     }
 }
