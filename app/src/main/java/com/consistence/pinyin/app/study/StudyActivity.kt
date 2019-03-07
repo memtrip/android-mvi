@@ -21,6 +21,11 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.study_activity)
+        setSupportActionBar(study_toolbar)
+        supportActionBar!!.apply {
+            title = getString(R.string.study_title)
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     override fun intents(): Observable<StudyIntent> = Observable.just(StudyIntent.Init)
