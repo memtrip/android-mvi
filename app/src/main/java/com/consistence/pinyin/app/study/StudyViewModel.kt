@@ -20,6 +20,8 @@ class StudyViewModel @Inject internal constructor(
 
     override fun dispatcher(intent: StudyIntent): Observable<StudyRenderAction> = when (intent) {
         StudyIntent.Init, StudyIntent.Retry, StudyIntent.Refresh -> getStudy()
+        is StudyIntent.DeleteStudy -> TODO()
+        is StudyIntent.SelectStudy -> TODO()
     }
 
     override fun reducer(previousState: StudyViewState, renderAction: StudyRenderAction): StudyViewState = when (renderAction) {

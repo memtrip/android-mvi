@@ -6,11 +6,17 @@ import android.os.Bundle
 import android.view.Menu
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
+import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
+import com.consistence.pinyin.app.pinyin.list.phonetic.PinyinPhoneticAdapter
+import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.domain.study.Study
+import com.consistence.pinyin.kit.Interaction
 import com.consistence.pinyin.kit.visible
 import com.memtrip.mxandroid.MxViewActivity
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.pinyin_phonetic_fragment.view.*
 import kotlinx.android.synthetic.main.study_activity.*
 import javax.inject.Inject
 
@@ -18,6 +24,8 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
 
     @Inject lateinit var viewModelFactory: ViewModelFactory<StudyViewModel>
     @Inject lateinit var render: StudyRenderer
+
+    private lateinit var adapter: StudyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +38,10 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
         study_create_button.setOnClickListener {
             startCreateStudyActivity()
         }
+
+        val adapterInteraction: PublishSubject<Interaction<Study>> = PublishSubject.create()
+        adapter = StudyAdapter(this, adapterInteraction)
+        study_recyclerview.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,7 +64,15 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
         startActivityForResult(CreateStudyActivity.newIntent(this), -1)
     }
 
-    override fun intents(): Observable<StudyIntent> = Observable.just(StudyIntent.Init)
+    override fun intents(): Observable<StudyIntent> = Observable.merge(
+        Observable.just(StudyIntent.Init),
+        adapter.interaction.map {
+            when (it.id) {
+                R.id.study_list_item_delete -> StudyIntent.DeleteStudy(it.data)
+                else -> StudyIntent.SelectStudy(it.data)
+            }
+        }
+    )
 
     override fun inject() {
         AndroidInjection.inject(this)
@@ -69,6 +89,8 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
     }
 
     override fun populate(study: List<Study>) {
+        adapter.clear()
+        adapter.populate(study)
     }
 
     companion object {

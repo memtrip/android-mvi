@@ -57,4 +57,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_no_results" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/study_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_toolbar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
