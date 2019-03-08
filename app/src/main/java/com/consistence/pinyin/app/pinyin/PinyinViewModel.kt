@@ -19,14 +19,14 @@ class PinyinViewModel @Inject internal constructor(
                 context().getString(R.string.pinyin_activity_search_phonetic_hint)))
         is PinyinIntent.TabSelected -> {
             observable(
-                    when (intent.page) {
-                        Page.PHONETIC -> PinyinRenderAction.SearchHint(
-                            context().getString(R.string.pinyin_activity_search_phonetic_hint))
-                        Page.ENGLISH -> PinyinRenderAction.SearchHint(
-                            context().getString(R.string.pinyin_activity_search_english_hint))
-                        Page.CHARACTER -> PinyinRenderAction.SearchHint(
-                            context().getString(R.string.pinyin_activity_search_character_hint))
-                    }
+                when (intent.page) {
+                    Page.PHONETIC -> PinyinRenderAction.SearchHint(
+                        context().getString(R.string.pinyin_activity_search_phonetic_hint))
+                    Page.ENGLISH -> PinyinRenderAction.SearchHint(
+                        context().getString(R.string.pinyin_activity_search_english_hint))
+                    Page.CHARACTER -> PinyinRenderAction.SearchHint(
+                        context().getString(R.string.pinyin_activity_search_character_hint))
+                }
             )
         }
     }

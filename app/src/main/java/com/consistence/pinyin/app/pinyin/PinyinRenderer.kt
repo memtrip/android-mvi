@@ -10,7 +10,6 @@ sealed class PinyinRenderAction : MxRenderAction {
 }
 
 interface PinyinLayout : MxViewLayout {
-    var currentSearchQuery: String
     fun updateSearchHint(hint: String)
 }
 

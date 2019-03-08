@@ -6,10 +6,11 @@ import android.os.Bundle
 import androidx.appcompat.widget.SearchView
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
+import com.consistence.pinyin.app.pinyin.list.PinyinListFragment
 import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
 import com.consistence.pinyin.app.study.StudyActivity
+import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.kit.RxTabLayout2
-import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.invisible
 import com.consistence.pinyin.kit.visible
 import com.memtrip.mxandroid.MxViewActivity
@@ -19,8 +20,9 @@ import kotlinx.android.synthetic.main.pinyin_activity.*
 import javax.inject.Inject
 
 class PinyinActivity(
-    override var currentSearchQuery: String = ""
-) : MxViewActivity<PinyinIntent, PinyinRenderAction, PinyinViewState, PinyinLayout>(), PinyinLayout {
+    override var currentSearchQuery: String = "",
+    override val consumeSelection: Boolean = false
+) : MxViewActivity<PinyinIntent, PinyinRenderAction, PinyinViewState, PinyinLayout>(), PinyinLayout, PinyinListFragment.PinyinListDelegate {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinViewModel>
     @Inject lateinit var render: PinyinRenderer
@@ -77,6 +79,9 @@ class PinyinActivity(
 
     private fun sendSearchEvent(terms: String = "") {
         fragmentAdapter.sendIntent(PinyinListIntent.Search(terms))
+    }
+
+    override fun pinyinSelection(pinyin: Pinyin) {
     }
 
     override fun inject() {

@@ -1,7 +1,6 @@
 package com.consistence.pinyin.app.pinyin.list
 
 import android.os.Bundle
-import com.consistence.pinyin.app.pinyin.PinyinLayout
 import com.consistence.pinyin.app.pinyin.detail.PinyinDetailActivity
 import com.consistence.pinyin.audio.PlayPinyAudioInPresenter
 import com.consistence.pinyin.domain.pinyin.Pinyin
@@ -16,9 +15,19 @@ abstract class PinyinListFragment
 
     private val pinyinAudio = PlayPinyAudioInPresenter()
 
+    private val delegate: PinyinListDelegate by lazy {
+        (context as PinyinListDelegate)
+    }
+
+    interface PinyinListDelegate {
+        var currentSearchQuery: String
+        val consumeSelection: Boolean
+        fun pinyinSelection(pinyin: Pinyin)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        model().publish(PinyinListIntent.Search((context as PinyinLayout).currentSearchQuery))
+        model().publish(PinyinListIntent.Search(delegate.currentSearchQuery))
     }
 
     override fun onStart() {
@@ -32,13 +41,17 @@ abstract class PinyinListFragment
     }
 
     override fun intents(): Observable<PinyinListIntent> =
-            Observable.just(PinyinListIntent.Init((context as PinyinLayout).currentSearchQuery))
+        Observable.just(PinyinListIntent.Init(delegate.currentSearchQuery))
 
     override fun render(): PinyinListRenderer = render
 
-    override fun navigateToPinyinDetails(Pinyin: Pinyin) {
-        model().publish(PinyinListIntent.Idle)
-        startActivity(PinyinDetailActivity.newIntent(context!!, Pinyin))
+    override fun pinyinItemSelected(pinyin: Pinyin) {
+        if (delegate.consumeSelection) {
+            delegate.pinyinSelection(pinyin)
+        } else {
+            model().publish(PinyinListIntent.Idle)
+            startActivity(PinyinDetailActivity.newIntent(context!!, pinyin))
+        }
     }
 
     override fun playAudio(audioSrc: String) {

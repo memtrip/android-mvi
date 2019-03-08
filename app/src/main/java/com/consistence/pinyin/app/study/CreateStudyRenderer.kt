@@ -11,9 +11,9 @@ sealed class CreateStudyRenderAction : MxRenderAction {
     data class EnterEnglishTranslation(
         val englishTranslation: String = ""
     ) : CreateStudyRenderAction()
-    data class EnterChinesePhrase(
-        val pinyin: List<Pinyin> = listOf()
-    ) : CreateStudyRenderAction()
+    object  DoneEnteringChinesePhrase : CreateStudyRenderAction()
+    data class AddPinyin(val pinyin: Pinyin) : CreateStudyRenderAction()
+    object RemovePinyin : CreateStudyRenderAction()
     object ConfirmPhrase : CreateStudyRenderAction()
     object GoBack : CreateStudyRenderAction()
     object LoseChangesAndExit : CreateStudyRenderAction()
@@ -22,7 +22,7 @@ sealed class CreateStudyRenderAction : MxRenderAction {
 
 interface CreateStudyLayout : MxViewLayout {
     fun enterEnglishTranslation(englishTranslation: String = "")
-    fun enterChinesePhrase(phrase: List<Pinyin>)
+    fun updateChinesePhrase(pinyin: List<Pinyin>)
     fun confirmPhrase(englishTranslation: String, pinyin: List<Pinyin>)
     fun exit()
     fun loseChanges()
@@ -36,7 +36,7 @@ class CreateStudyRenderer @Inject internal constructor() : MxViewRenderer<Create
             layout.enterEnglishTranslation(state.englishTranslation)
         }
         is CreateStudyViewState.View.ChinesePhraseForm -> {
-            layout.enterChinesePhrase(state.pinyin)
+            layout.updateChinesePhrase(state.pinyin)
         }
         is CreateStudyViewState.View.ConfirmPhrase -> {
             layout.confirmPhrase(state.englishTranslation, state.pinyin)

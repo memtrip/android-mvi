@@ -18,7 +18,11 @@ class CreateStudyViewModel @Inject internal constructor(
         is CreateStudyIntent.EnterEnglishTranslation ->
             Observable.just(CreateStudyRenderAction.EnterEnglishTranslation(intent.englishTranslation))
         is CreateStudyIntent.EnterChinesePhrase ->
-            Observable.just(CreateStudyRenderAction.EnterChinesePhrase(intent.chinesePhrase))
+            Observable.just(CreateStudyRenderAction.DoneEnteringChinesePhrase)
+        is CreateStudyIntent.AddPinyin ->
+            Observable.just(CreateStudyRenderAction.AddPinyin(intent.pinyin))
+        CreateStudyIntent.RemovePinyin ->
+            Observable.just(CreateStudyRenderAction.RemovePinyin)
         is CreateStudyIntent.Confirm ->
             Observable.just(CreateStudyRenderAction.Success)
         CreateStudyIntent.GoBack ->
@@ -36,16 +40,31 @@ class CreateStudyViewModel @Inject internal constructor(
         }
         is CreateStudyRenderAction.EnterEnglishTranslation ->
             previousState.copy(
-                view = CreateStudyViewState.View.ChinesePhraseForm,
+                view = CreateStudyViewState.View.ChinesePhraseForm(),
                 step = CreateStudyViewState.Step.CHINESE_PHRASE,
                 englishTranslation = renderAction.englishTranslation
             )
-        is CreateStudyRenderAction.EnterChinesePhrase ->
+        CreateStudyRenderAction.DoneEnteringChinesePhrase ->
             previousState.copy(
                 view = CreateStudyViewState.View.ConfirmPhrase,
-                step = CreateStudyViewState.Step.CONFIRM,
-                pinyin = renderAction.pinyin
+                step = CreateStudyViewState.Step.CONFIRM
             )
+        is CreateStudyRenderAction.AddPinyin -> {
+            previousState.copy(
+                pinyin = previousState.pinyin.apply {
+                    add(renderAction.pinyin)
+                }
+            )
+        }
+        is CreateStudyRenderAction.RemovePinyin -> {
+            previousState.copy(
+                pinyin = previousState.pinyin.apply {
+                    if (previousState.pinyin.size > 0) {
+                        removeAt(previousState.pinyin.size - 1)
+                    }
+                }
+            )
+        }
         is CreateStudyRenderAction.ConfirmPhrase ->
             previousState.copy(
                 view = CreateStudyViewState.View.Exit
@@ -67,7 +86,7 @@ class CreateStudyViewModel @Inject internal constructor(
             }
             CreateStudyViewState.Step.CONFIRM -> {
                 previousState.copy(
-                    view = CreateStudyViewState.View.ChinesePhraseForm,
+                    view = CreateStudyViewState.View.ChinesePhraseForm(),
                     step = CreateStudyViewState.Step.CHINESE_PHRASE
                 )
             }

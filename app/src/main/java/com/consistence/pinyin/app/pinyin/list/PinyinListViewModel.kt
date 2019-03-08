@@ -19,9 +19,9 @@ abstract class PinyinListViewModel(
 
     private fun searchQuery(terms: String = defaultSearch): Observable<PinyinListRenderAction> {
         return search(if (terms.isEmpty()) defaultSearch else terms)
-                .map<PinyinListRenderAction> { PinyinListRenderAction.Populate(it) }
-                .onErrorReturnItem(PinyinListRenderAction.OnError)
-                .toObservable()
+            .map<PinyinListRenderAction> { PinyinListRenderAction.Populate(it) }
+            .onErrorReturnItem(PinyinListRenderAction.OnError)
+            .toObservable()
     }
 
     override fun dispatcher(intent: PinyinListIntent): Observable<PinyinListRenderAction> = when (intent) {
@@ -41,9 +41,9 @@ abstract class PinyinListViewModel(
     }
 
     override fun filterIntents(intents: Observable<PinyinListIntent>): Observable<PinyinListIntent> = Observable.merge(
-            intents.ofType(PinyinListIntent.Init::class.java).take(1),
-            intents.filter {
-                !PinyinListIntent.Init::class.java.isInstance(it)
-            }
+        intents.ofType(PinyinListIntent.Init::class.java).take(1),
+        intents.filter {
+            !PinyinListIntent.Init::class.java.isInstance(it)
+        }
     )
 }

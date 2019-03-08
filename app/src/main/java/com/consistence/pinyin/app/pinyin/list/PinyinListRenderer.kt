@@ -16,7 +16,7 @@ sealed class PinyinListRenderAction : MxRenderAction {
 
 interface PinyinListLayout : MxViewLayout {
     fun populate(pinyin: List<Pinyin>)
-    fun navigateToPinyinDetails(Pinyin: Pinyin)
+    fun pinyinItemSelected(pinyin: Pinyin)
     fun showError()
     fun playAudio(audioSrc: String)
 }
@@ -33,7 +33,7 @@ class PinyinListRenderer @Inject internal constructor() : MxViewRenderer<PinyinL
             layout.playAudio(state.view.audioSrc)
         }
         is PinyinListViewState.View.SelectItem -> {
-            layout.navigateToPinyinDetails(state.view.pinyin)
+            layout.pinyinItemSelected(state.view.pinyin)
         }
         PinyinListViewState.View.Idle -> {
         }

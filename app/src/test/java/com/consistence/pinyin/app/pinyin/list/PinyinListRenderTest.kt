@@ -30,7 +30,7 @@ class PinyinListRenderTest : Spek({
             }
         }
 
-        on("navigateToPinyinDetails") {
+        on("pinyinItemSelected") {
 
             val layout: PinyinListLayout = mock()
             val render = PinyinListRenderer()
@@ -40,7 +40,7 @@ class PinyinListRenderTest : Spek({
             render.layout(layout, PinyinListViewState(view = PinyinListViewState.View.SelectItem(pinyinItem)))
 
             it("navigates to pinyin details with the selected pinyin item") {
-                verify(layout).navigateToPinyinDetails(pinyinItem)
+                verify(layout).pinyinItemSelected(pinyinItem)
             }
         }
 
