@@ -53,7 +53,8 @@ class CreateStudyViewModel @Inject internal constructor(
             previousState.copy(
                 pinyin = previousState.pinyin.apply {
                     add(renderAction.pinyin)
-                }
+                },
+                view = CreateStudyViewState.View.ChinesePhraseForm()
             )
         }
         is CreateStudyRenderAction.RemovePinyin -> {
@@ -62,7 +63,8 @@ class CreateStudyViewModel @Inject internal constructor(
                     if (previousState.pinyin.size > 0) {
                         removeAt(previousState.pinyin.size - 1)
                     }
-                }
+                },
+                view = CreateStudyViewState.View.ChinesePhraseForm()
             )
         }
         is CreateStudyRenderAction.ConfirmPhrase ->
