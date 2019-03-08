@@ -83,9 +83,11 @@ class CreateStudyActivity(
     override fun intents(): Observable<CreateStudyIntent> = Observable.mergeArray(
         Observable.just(CreateStudyIntent.Init),
         RxView.clicks(study_create_english_translation_cta).map {
+            closeKeyboard(study_create_english_translation_input)
             CreateStudyIntent.EnterEnglishTranslation(study_create_english_translation_input.text.toString())
         },
         RxView.clicks(study_create_chinese_phrase_cta).map {
+            closeKeyboard(study_create_english_translation_input)
             CreateStudyIntent.EnterChinesePhrase(pinyinValues)
         },
         RxView.clicks(study_create_chinese_phrase_composition_remove).map {
@@ -125,7 +127,6 @@ class CreateStudyActivity(
 
     // region CreateStudyLayout
     override fun enterEnglishTranslation(englishTranslation: String) {
-        closeKeyboard(study_create_english_translation_input)
         hideAllGroups()
         study_create_english_translation_group.visible()
         study_create_english_translation_input.setText(englishTranslation)
@@ -144,7 +145,6 @@ class CreateStudyActivity(
     }
 
     override fun confirmPhrase(englishTranslation: String, pinyin: List<Pinyin>) {
-        closeKeyboard(study_create_confirm_chinese_translation)
         hideAllGroups()
         study_create_confirm_group.visible()
         study_create_confirm_chinese_translation.text = pinyin.createString()
