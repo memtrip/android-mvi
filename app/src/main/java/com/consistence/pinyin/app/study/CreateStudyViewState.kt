@@ -18,6 +18,7 @@ data class CreateStudyViewState(
         object Exit : View()
         object LoseChangesConfirmation : View()
         object Success : View()
+        data class ValidationError(val message: String) : View()
     }
 
     enum class Step {

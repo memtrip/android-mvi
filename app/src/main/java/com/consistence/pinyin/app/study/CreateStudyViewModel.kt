@@ -1,6 +1,8 @@
 package com.consistence.pinyin.app.study
 
 import android.app.Application
+import com.consistence.pinyin.R
+import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -16,14 +18,14 @@ class CreateStudyViewModel @Inject internal constructor(
         CreateStudyIntent.Init ->
             Observable.just(CreateStudyRenderAction.Initial)
         is CreateStudyIntent.EnterEnglishTranslation ->
-            Observable.just(CreateStudyRenderAction.EnterEnglishTranslation(intent.englishTranslation))
+            validateEnglishTranslation(intent.englishTranslation)
         is CreateStudyIntent.EnterChinesePhrase ->
-            Observable.just(CreateStudyRenderAction.DoneEnteringChinesePhrase)
+            validateChinesePhrase(intent.chinesePhrase)
         is CreateStudyIntent.AddPinyin ->
             Observable.just(CreateStudyRenderAction.AddPinyin(intent.pinyin))
         CreateStudyIntent.RemovePinyin ->
             Observable.just(CreateStudyRenderAction.RemovePinyin)
-        is CreateStudyIntent.Confirm ->
+        CreateStudyIntent.Confirm ->
             Observable.just(CreateStudyRenderAction.Success)
         CreateStudyIntent.GoBack ->
             Observable.just(CreateStudyRenderAction.GoBack)
@@ -99,6 +101,9 @@ class CreateStudyViewModel @Inject internal constructor(
         CreateStudyRenderAction.Success -> previousState.copy(
             view = CreateStudyViewState.View.Success
         )
+        is CreateStudyRenderAction.ValidationError -> previousState.copy(
+            view = CreateStudyViewState.View.ValidationError(renderAction.message)
+        )
     }
 
     override fun filterIntents(intents: Observable<CreateStudyIntent>): Observable<CreateStudyIntent> = Observable.merge(
@@ -107,4 +112,24 @@ class CreateStudyViewModel @Inject internal constructor(
             !CreateStudyIntent.Init.javaClass.isInstance(it)
         }
     )
+
+    private fun validateEnglishTranslation(englishTranslation: String): Observable<CreateStudyRenderAction> {
+       return Observable.just(when {
+           englishTranslation.isEmpty() -> CreateStudyRenderAction.ValidationError(
+               context().getString(R.string.study_create_english_translation_validation_empty))
+           englishTranslation.length > 30 -> CreateStudyRenderAction.ValidationError(
+               context().getString(R.string.study_create_english_translation_validation_more_than))
+           else -> CreateStudyRenderAction.EnterEnglishTranslation(englishTranslation)
+       })
+    }
+
+    private fun validateChinesePhrase(pinyin: List<Pinyin>): Observable<CreateStudyRenderAction> {
+        return Observable.just(when {
+            pinyin.isEmpty() -> CreateStudyRenderAction.ValidationError(
+                context().getString(R.string.study_create_chinese_phrase_validation_empty))
+            pinyin.joinToString { it.chineseCharacters }.length > 30 -> CreateStudyRenderAction.ValidationError(
+                context().getString(R.string.study_create_chinese_phrase_validation_more_than))
+            else -> CreateStudyRenderAction.DoneEnteringChinesePhrase
+        })
+    }
 }

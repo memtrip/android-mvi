@@ -128,7 +128,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_create_chinese_phrase_search_view" />
 
-    <TextView
+    <com.consistence.pinyin.kit.AppTextView
         style="@style/Typography.Body1"
         android:id="@+id/study_create_chinese_phrase_search_view_label"
         android:layout_width="0dp"

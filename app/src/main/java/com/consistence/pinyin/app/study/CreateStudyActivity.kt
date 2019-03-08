@@ -19,12 +19,14 @@ import androidx.appcompat.widget.SearchView
 import com.consistence.pinyin.app.pinyin.PinyinFragmentAdapter
 import com.consistence.pinyin.app.pinyin.list.PinyinListFragment
 import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
+import com.consistence.pinyin.kit.closeKeyboard
 import com.consistence.pinyin.kit.invisible
 import com.jakewharton.rxbinding2.view.RxView
 
 class CreateStudyActivity(
     override var currentSearchQuery: String = "",
-    override val consumeSelection: Boolean = true
+    override val consumeSelection: Boolean = true,
+    override val fullListStyle: Boolean = false
 ) : MxViewActivity<CreateStudyIntent, CreateStudyRenderAction, CreateStudyViewState, CreateStudyLayout>(),
     CreateStudyLayout, PinyinListFragment.PinyinListDelegate {
 
@@ -117,12 +119,14 @@ class CreateStudyActivity(
 
     // region CreateStudyLayout
     override fun enterEnglishTranslation(englishTranslation: String) {
+        closeKeyboard(study_create_english_translation_input)
         hideAllGroups()
         study_create_english_translation_group.visible()
         study_create_english_translation_input.setText(englishTranslation)
     }
 
     override fun updateChinesePhrase(pinyin: List<Pinyin>) {
+        closeKeyboard(study_create_chinese_phrase_composition_text)
         hideAllGroups()
         study_create_chinese_phrase_group.visible().run {
             study_create_chinese_phrase_search_view_label.visible()
@@ -134,6 +138,7 @@ class CreateStudyActivity(
     }
 
     override fun confirmPhrase(englishTranslation: String, pinyin: List<Pinyin>) {
+        closeKeyboard(study_create_confirm_chinese_translation)
         hideAllGroups()
         study_create_confirm_group.visible()
         study_create_confirm_chinese_translation.text = pinyin.joinToString(" ") {
@@ -153,6 +158,16 @@ class CreateStudyActivity(
             .setPositiveButton(android.R.string.yes) { _, _ ->
                 finish()
             }
+            .setNegativeButton(android.R.string.no, null)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show()
+    }
+
+    override fun validationError(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.study_create_error_title))
+            .setMessage(message)
+            .setPositiveButton(android.R.string.yes, null)
             .setNegativeButton(android.R.string.no, null)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show()

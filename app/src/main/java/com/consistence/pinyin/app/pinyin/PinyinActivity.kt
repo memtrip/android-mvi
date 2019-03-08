@@ -21,7 +21,8 @@ import javax.inject.Inject
 
 class PinyinActivity(
     override var currentSearchQuery: String = "",
-    override val consumeSelection: Boolean = false
+    override val consumeSelection: Boolean = false,
+    override val fullListStyle: Boolean = true
 ) : MxViewActivity<PinyinIntent, PinyinRenderAction, PinyinViewState, PinyinLayout>(), PinyinLayout, PinyinListFragment.PinyinListDelegate {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory<PinyinViewModel>

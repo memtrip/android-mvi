@@ -15,13 +15,14 @@ abstract class PinyinListFragment
 
     private val pinyinAudio = PlayPinyAudioInPresenter()
 
-    private val delegate: PinyinListDelegate by lazy {
+    internal val delegate: PinyinListDelegate by lazy {
         (context as PinyinListDelegate)
     }
 
     interface PinyinListDelegate {
         var currentSearchQuery: String
         val consumeSelection: Boolean
+        val fullListStyle: Boolean
         fun pinyinSelection(pinyin: Pinyin)
     }
 

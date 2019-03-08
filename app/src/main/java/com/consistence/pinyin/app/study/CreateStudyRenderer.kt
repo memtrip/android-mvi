@@ -18,6 +18,7 @@ sealed class CreateStudyRenderAction : MxRenderAction {
     object GoBack : CreateStudyRenderAction()
     object LoseChangesAndExit : CreateStudyRenderAction()
     object Success : CreateStudyRenderAction()
+    data class ValidationError(val message: String) : CreateStudyRenderAction()
 }
 
 interface CreateStudyLayout : MxViewLayout {
@@ -26,6 +27,7 @@ interface CreateStudyLayout : MxViewLayout {
     fun confirmPhrase(englishTranslation: String, pinyin: List<Pinyin>)
     fun exit()
     fun loseChanges()
+    fun validationError(message: String)
 }
 
 class CreateStudyRenderer @Inject internal constructor() : MxViewRenderer<CreateStudyLayout, CreateStudyViewState> {
@@ -49,6 +51,9 @@ class CreateStudyRenderer @Inject internal constructor() : MxViewRenderer<Create
         }
         CreateStudyViewState.View.Success -> {
             layout.exit()
+        }
+        is CreateStudyViewState.View.ValidationError -> {
+            layout.validationError(state.view.message)
         }
     }
 }

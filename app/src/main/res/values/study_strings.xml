@@ -12,6 +12,7 @@
     <string name="study_create_title">Create Phrase</string>
     <string name="study_create_lose_changes_title">Are you sure?</string>
     <string name="study_create_lose_changes_body">You will lose your current changes if you exit now.</string>
+    <string name="study_create_error_title">Oops!</string>
 
     <!-- region create study english translation -->
     <string name="study_create_english_translation">
@@ -20,6 +21,12 @@
     </string>
     <string name="study_create_english_translation_hint">Enter your phrase in English</string>
     <string name="study_create_english_translation_cta">Next</string>
+    <string name="study_create_english_translation_validation_empty">
+        You must enter an english translation of your phrase.
+    </string>
+    <string name="study_create_english_translation_validation_more_than">
+        Your english translation cannot be more than 30 characters.
+    </string>
     <!-- endregion -->
 
     <!-- region create study chinese phrase -->
@@ -27,6 +34,14 @@
         Search and select items to create a phrase
     </string>
     <string name="study_create_chinese_phrase_cta">Next</string>
+    <string name="study_create_chinese_phrase_validation_empty">
+        You must enter a Chinese phrase! Use the search below to choose the characters and build
+        your phrase.
+    </string>
+    <string name="study_create_chinese_phrase_validation_more_than">
+        You must enter a Chinese phrase cannot be more than 30 characters. It\'s better to learn in
+        smaller chunks!
+    </string>
     <!-- endregion -->
 
     <!-- region create study confirm -->

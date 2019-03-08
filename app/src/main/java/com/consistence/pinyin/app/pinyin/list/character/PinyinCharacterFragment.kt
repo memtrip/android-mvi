@@ -27,7 +27,7 @@ class PinyinCharacterFragment : PinyinListFragment() {
         val view = inflater.inflate(R.layout.pinyin_character_fragment, container, false)
 
         val adapterInteraction: PublishSubject<Interaction<Pinyin>> = PublishSubject.create()
-        adapter = PinyinCharacterAdapter(context!!, adapterInteraction)
+        adapter = PinyinCharacterAdapter(context!!, delegate.fullListStyle, adapterInteraction)
         view.pinyin_character_fragment_recyclerview.adapter = adapter
 
         return view

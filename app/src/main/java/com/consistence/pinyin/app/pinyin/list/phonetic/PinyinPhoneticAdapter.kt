@@ -13,12 +13,13 @@ import kotlinx.android.synthetic.main.pinyin_phonetic_list_item.view.*
 
 class PinyinPhoneticAdapter(
     context: Context,
+    private val fullListStyle: Boolean,
     interaction: PublishSubject<Interaction<Pinyin>>
 ) : SimpleAdapter<Pinyin>(context, interaction) {
 
     override fun createViewHolder(parent: ViewGroup): SimpleAdapterViewHolder<Pinyin> {
         val viewHolder = PinyinPhoneticViewHolder(inflater.inflate(
-                R.layout.pinyin_phonetic_list_item, parent, false))
+                R.layout.pinyin_phonetic_list_item, parent, false), fullListStyle)
 
         RxView.clicks(viewHolder.audioButton).map {
             Interaction(viewHolder.audioButton.id, data[viewHolder.adapterPosition])
@@ -28,7 +29,10 @@ class PinyinPhoneticAdapter(
     }
 }
 
-class PinyinPhoneticViewHolder(itemView: View) : SimpleAdapterViewHolder<Pinyin>(itemView) {
+class PinyinPhoneticViewHolder(
+    itemView: View,
+    private val fullListStyle: Boolean
+) : SimpleAdapterViewHolder<Pinyin>(itemView) {
 
     val audioButton: ImageButton = itemView.pinyin_list_audio_button
 
@@ -37,5 +41,13 @@ class PinyinPhoneticViewHolder(itemView: View) : SimpleAdapterViewHolder<Pinyin>
         itemView.pinyin_phonetic_list_item_english_translation_value.text = value.englishTranslationText
         itemView.pinyin_phonetic_list_item_chinese_character_value.text = value.chineseCharacters
         value.audioSrc?.let { audioButton.visible() } ?: audioButton.gone()
+
+        if (!fullListStyle) {
+            itemView.pinyin_phonetic_list_item_english_translation.gone()
+            itemView.pinyin_phonetic_list_item_english_translation_value.gone()
+            itemView.pinyin_phonetic_list_item_chinese_character.gone()
+            itemView.pinyin_phonetic_list_item_chinese_character_value.gone()
+            itemView.pinyin_list_audio_button.gone()
+        }
     }
 }

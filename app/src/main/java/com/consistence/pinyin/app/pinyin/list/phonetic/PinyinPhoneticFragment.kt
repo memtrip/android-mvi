@@ -27,7 +27,7 @@ class PinyinPhoneticFragment : PinyinListFragment() {
         val view = inflater.inflate(R.layout.pinyin_phonetic_fragment, container, false)
 
         val adapterInteraction: PublishSubject<Interaction<Pinyin>> = PublishSubject.create()
-        adapter = PinyinPhoneticAdapter(context!!, adapterInteraction)
+        adapter = PinyinPhoneticAdapter(context!!, delegate.fullListStyle, adapterInteraction)
         view.pinyin_phonetic_fragment_recyclerview.adapter = adapter
 
         return view
