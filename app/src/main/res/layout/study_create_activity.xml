@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
         android:hint="@string/study_create_english_translation_hint"
+        android:imeOptions="actionDone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_create_english_translation_label"/>

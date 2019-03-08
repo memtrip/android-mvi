@@ -12,9 +12,9 @@ class GetStudy @Inject internal constructor(
         return getStudyOrderedByDesc.get().map { studyItems ->
             studyItems.map {
                 Study(
-                    it.uid,
                     it.englishTranslation,
-                    listOf()
+                    listOf(),
+                    it.uid
                 )
             }
         }

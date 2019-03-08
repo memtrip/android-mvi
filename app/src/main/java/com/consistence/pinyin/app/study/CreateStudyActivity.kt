@@ -86,7 +86,7 @@ class CreateStudyActivity(
             CreateStudyIntent.EnterEnglishTranslation(study_create_english_translation_input.text.toString())
         },
         RxView.clicks(study_create_chinese_phrase_cta).map {
-            CreateStudyIntent.EnterChinesePhrase(listOf()) // TODO pinyin here
+            CreateStudyIntent.EnterChinesePhrase(pinyinValues)
         },
         RxView.clicks(study_create_chinese_phrase_composition_remove).map {
             CreateStudyIntent.RemovePinyin
@@ -164,7 +164,6 @@ class CreateStudyActivity(
                 finish()
             }
             .setNegativeButton(android.R.string.no, null)
-            .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
     }
 
@@ -173,8 +172,6 @@ class CreateStudyActivity(
             .setTitle(getString(R.string.study_create_error_title))
             .setMessage(message)
             .setPositiveButton(android.R.string.yes, null)
-            .setNegativeButton(android.R.string.no, null)
-            .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
     }
     // endregion
