@@ -47,6 +47,14 @@ class CreateStudyActivity(
         study != null
     }
 
+    private val toolBarTitle by lazy {
+        if (study != null) {
+            getString(R.string.study_create_modify_title)
+        } else {
+            getString(R.string.study_create_title)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.study_create_activity)
@@ -55,7 +63,7 @@ class CreateStudyActivity(
         study_create_toolbar.setNavigationOnClickListener {
             model().publish(CreateStudyIntent.GoBack)
         }
-        study_create_toolbar.title = getString(R.string.study_create_title)
+        study_create_toolbar.title = toolBarTitle
 
         fragmentAdapter = PinyinFragmentAdapter(
             R.id.study_create_chinese_phrase_fragment_container,

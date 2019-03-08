@@ -10,6 +10,7 @@
     <!-- endregion study -->
 
     <string name="study_create_title">Create Phrase</string>
+    <string name="study_create_modify_title">Update Phrase</string>
     <string name="study_create_lose_changes_title">Are you sure?</string>
     <string name="study_create_lose_changes_body">You will lose your current changes if you exit now.</string>
     <string name="study_create_error_title">Oops!</string>
