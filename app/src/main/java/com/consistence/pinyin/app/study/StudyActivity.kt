@@ -28,7 +28,7 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
             setDisplayHomeAsUpEnabled(true)
         }
         study_create_button.setOnClickListener {
-            startActivity(CreateStudyActivity.newIntent(this))
+            startCreateStudyActivity()
         }
     }
 
@@ -36,13 +36,21 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
         menuInflater.inflate(R.menu.study_menu, menu)
 
         menu.findItem(R.id.study_menu_add).setOnMenuItemClickListener {
-            startActivity(CreateStudyActivity.newIntent(this))
+            startCreateStudyActivity()
             true
         }
 
         return true
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        model().publish(StudyIntent.Refresh)
+    }
+
+    private fun startCreateStudyActivity() {
+        startActivityForResult(CreateStudyActivity.newIntent(this), -1)
+    }
 
     override fun intents(): Observable<StudyIntent> = Observable.just(StudyIntent.Init)
 

@@ -152,10 +152,14 @@ class CreateStudyActivity(
     }
 
     override fun exit() {
+        setResult(-1)
         finish()
     }
 
     override fun loseChanges() {
+
+        model().publish(CreateStudyIntent.Idle)
+
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.study_create_lose_changes_title))
             .setMessage(getString(R.string.study_create_lose_changes_body))
