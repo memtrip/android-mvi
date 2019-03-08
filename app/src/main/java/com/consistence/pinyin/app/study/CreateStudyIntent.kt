@@ -7,7 +7,7 @@ sealed class CreateStudyIntent : MxViewIntent {
     object Init : CreateStudyIntent()
     data class EnterEnglishTranslation(val englishTranslation: String) : CreateStudyIntent()
     data class EnterChinesePhrase(val chinesePhrase: List<Pinyin>) : CreateStudyIntent()
-    object ConfirmPhrase: CreateStudyIntent()
+    object Confirm: CreateStudyIntent()
     object GoBack : CreateStudyIntent()
     object LoseChangesAndExit : CreateStudyIntent()
 }

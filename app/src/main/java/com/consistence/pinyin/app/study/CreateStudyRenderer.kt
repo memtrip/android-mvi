@@ -1,22 +1,23 @@
 package com.consistence.pinyin.app.study
 
 import com.consistence.pinyin.domain.pinyin.Pinyin
-import com.consistence.pinyin.domain.study.Study
 import com.memtrip.mxandroid.MxRenderAction
 import com.memtrip.mxandroid.MxViewLayout
 import com.memtrip.mxandroid.MxViewRenderer
 import javax.inject.Inject
 
 sealed class CreateStudyRenderAction : MxRenderAction {
+    object Initial : CreateStudyRenderAction()
     data class EnterEnglishTranslation(
         val englishTranslation: String = ""
     ) : CreateStudyRenderAction()
     data class EnterChinesePhrase(
         val pinyin: List<Pinyin> = listOf()
     ) : CreateStudyRenderAction()
-    object ConfirmPhrase: CreateStudyRenderAction()
+    object ConfirmPhrase : CreateStudyRenderAction()
     object GoBack : CreateStudyRenderAction()
     object LoseChangesAndExit : CreateStudyRenderAction()
+    object Success : CreateStudyRenderAction()
 }
 
 interface CreateStudyLayout : MxViewLayout {
@@ -31,11 +32,11 @@ class CreateStudyRenderer @Inject internal constructor() : MxViewRenderer<Create
     override fun layout(layout: CreateStudyLayout, state: CreateStudyViewState) = when (state.view) {
         CreateStudyViewState.View.Idle -> {
         }
-        is CreateStudyViewState.View.EnterEnglishTranslation -> {
-            layout.enterEnglishTranslation(state.view.englishTranslation)
+        is CreateStudyViewState.View.EnglishTranslationForm -> {
+            layout.enterEnglishTranslation(state.englishTranslation)
         }
-        is CreateStudyViewState.View.EnterChinesePhrase -> {
-            layout.enterChinesePhrase(state.view.pinyin)
+        is CreateStudyViewState.View.ChinesePhraseForm -> {
+            layout.enterChinesePhrase(state.pinyin)
         }
         is CreateStudyViewState.View.ConfirmPhrase -> {
             layout.confirmPhrase(state.englishTranslation, state.pinyin)
@@ -43,8 +44,11 @@ class CreateStudyRenderer @Inject internal constructor() : MxViewRenderer<Create
         CreateStudyViewState.View.Exit -> {
             layout.exit()
         }
-        CreateStudyViewState.View.LoseChanges -> {
+        CreateStudyViewState.View.LoseChangesConfirmation -> {
             layout.loseChanges()
+        }
+        CreateStudyViewState.View.Success -> {
+            layout.exit()
         }
     }
 }

@@ -27,10 +27,10 @@ class AppButton @JvmOverloads constructor(
     override fun drawableStateChanged() {
         super.drawableStateChanged()
 
-        if (isEnabled) {
-            alpha = 1.0f
+        alpha = if (isEnabled) {
+            1.0f
         } else {
-            alpha = 0.4f
+            0.4f
         }
     }
 }

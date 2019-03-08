@@ -38,10 +38,10 @@ class CreateStudyActivity : MxViewActivity<CreateStudyIntent, CreateStudyRenderA
             CreateStudyIntent.EnterEnglishTranslation(study_create_english_translation_input.text.toString())
         },
         RxView.clicks(study_create_chinese_phrase_cta).map {
-            CreateStudyIntent.EnterChinesePhrase(listOf())
+            CreateStudyIntent.EnterChinesePhrase(listOf()) // TODO pinyin here
         },
         RxView.clicks(study_create_confirm_cta).map {
-            CreateStudyIntent.ConfirmPhrase
+            CreateStudyIntent.Confirm
         }
     )
 
@@ -96,6 +96,7 @@ class CreateStudyActivity : MxViewActivity<CreateStudyIntent, CreateStudyRenderA
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
     }
+
     // endregion
 
     private fun hideAllGroups() {

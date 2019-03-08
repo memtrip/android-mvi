@@ -3,8 +3,6 @@ package com.consistence.pinyin.app.study
 import android.app.Application
 import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
-import io.reactivex.Single
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class CreateStudyViewModel @Inject internal constructor(
@@ -16,13 +14,13 @@ class CreateStudyViewModel @Inject internal constructor(
 
     override fun dispatcher(intent: CreateStudyIntent): Observable<CreateStudyRenderAction> = when (intent) {
         CreateStudyIntent.Init ->
-            Observable.just(CreateStudyRenderAction.EnterEnglishTranslation())
+            Observable.just(CreateStudyRenderAction.Initial)
         is CreateStudyIntent.EnterEnglishTranslation ->
             Observable.just(CreateStudyRenderAction.EnterEnglishTranslation(intent.englishTranslation))
         is CreateStudyIntent.EnterChinesePhrase ->
             Observable.just(CreateStudyRenderAction.EnterChinesePhrase(intent.chinesePhrase))
-        is CreateStudyIntent.ConfirmPhrase ->
-            Observable.just(CreateStudyRenderAction.ConfirmPhrase)
+        is CreateStudyIntent.Confirm ->
+            Observable.just(CreateStudyRenderAction.Success)
         CreateStudyIntent.GoBack ->
             Observable.just(CreateStudyRenderAction.GoBack)
         CreateStudyIntent.LoseChangesAndExit ->
@@ -30,40 +28,55 @@ class CreateStudyViewModel @Inject internal constructor(
     }
 
     override fun reducer(previousState: CreateStudyViewState, renderAction: CreateStudyRenderAction): CreateStudyViewState = when (renderAction) {
+        CreateStudyRenderAction.Initial -> {
+            previousState.copy(
+                view = CreateStudyViewState.View.EnglishTranslationForm,
+                step = CreateStudyViewState.Step.ENGLISH_TRANSLATION
+            )
+        }
         is CreateStudyRenderAction.EnterEnglishTranslation ->
             previousState.copy(
-                view = CreateStudyViewState.View.EnterEnglishTranslation(renderAction.englishTranslation),
-                step = CreateStudyViewState.Step.ENGLISH_TRANSLATION
+                view = CreateStudyViewState.View.ChinesePhraseForm,
+                step = CreateStudyViewState.Step.CHINESE_PHRASE,
+                englishTranslation = renderAction.englishTranslation
             )
         is CreateStudyRenderAction.EnterChinesePhrase ->
             previousState.copy(
-                view = CreateStudyViewState.View.EnterChinesePhrase(renderAction.pinyin),
-                step = CreateStudyViewState.Step.ENGLISH_TRANSLATION
+                view = CreateStudyViewState.View.ConfirmPhrase,
+                step = CreateStudyViewState.Step.CONFIRM,
+                pinyin = renderAction.pinyin
             )
         is CreateStudyRenderAction.ConfirmPhrase ->
             previousState.copy(
-                view = CreateStudyViewState.View.ConfirmPhrase,
-                step = CreateStudyViewState.Step.CONFIRM
+                view = CreateStudyViewState.View.Exit
             )
-        CreateStudyRenderAction.GoBack -> previousState.copy(
-            view = when (previousState.step) {
-                CreateStudyViewState.Step.ENGLISH_TRANSLATION -> {
-                    if (previousState.englishTranslation.isEmpty() && previousState.pinyin.isEmpty()) {
-                        CreateStudyViewState.View.LoseChanges
-                    } else {
-                        CreateStudyViewState.View.Exit
-                    }
-                }
-                CreateStudyViewState.Step.CHINESE_PHRASE -> {
-                    CreateStudyViewState.View.EnterEnglishTranslation(previousState.englishTranslation)
-                }
-                CreateStudyViewState.Step.CONFIRM -> {
-                    CreateStudyViewState.View.EnterChinesePhrase(previousState.pinyin)
+        CreateStudyRenderAction.GoBack -> when (previousState.step) {
+            CreateStudyViewState.Step.INITIAL,
+            CreateStudyViewState.Step.ENGLISH_TRANSLATION -> {
+                if (previousState.englishTranslation.isEmpty() && previousState.pinyin.isEmpty()) {
+                    previousState.copy(view = CreateStudyViewState.View.Exit)
+                } else {
+                    previousState.copy(view = CreateStudyViewState.View.LoseChangesConfirmation)
                 }
             }
-        )
+            CreateStudyViewState.Step.CHINESE_PHRASE -> {
+                previousState.copy(
+                    view = CreateStudyViewState.View.EnglishTranslationForm,
+                    step = CreateStudyViewState.Step.ENGLISH_TRANSLATION
+                )
+            }
+            CreateStudyViewState.Step.CONFIRM -> {
+                previousState.copy(
+                    view = CreateStudyViewState.View.ChinesePhraseForm,
+                    step = CreateStudyViewState.Step.CHINESE_PHRASE
+                )
+            }
+        }
         CreateStudyRenderAction.LoseChangesAndExit -> previousState.copy(
             view = CreateStudyViewState.View.Exit
+        )
+        CreateStudyRenderAction.Success -> previousState.copy(
+            view = CreateStudyViewState.View.Success
         )
     }
 
