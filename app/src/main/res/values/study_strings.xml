@@ -1,12 +1,42 @@
 <resources>
 
+    <!-- region study -->
     <string name="study_title">Vocabulary</string>
     <string name="study_no_results_title">It\'s study time!</string>
     <string name="study_no_results">
         You have not created any study vocabulary. Add your vocabulary to the app and test yourself everyday!
     </string>
     <string name="study_no_results_create">Create vocabulary</string>
+    <!-- endregion study -->
 
-    <string name="study_create_title">Create Vocabulary</string>
+    <string name="study_create_title">Create Phrase</string>
+    <string name="study_create_lose_changes_title">Are you sure?</string>
+    <string name="study_create_lose_changes_body">You will lose your current changes if you exit now.</string>
+
+    <!-- region create study english translation -->
+    <string name="study_create_english_translation">
+        Enter the phrase you are memorising in English. When we test your vocabulary, you will be
+        asked to enter this as the translation of the chinese characters you enter in the next step.
+    </string>
+    <string name="study_create_english_translation_hint">Enter your phrase in English</string>
+    <string name="study_create_english_translation_cta">Next</string>
+    <!-- endregion -->
+
+    <!-- region create study chinese phrase -->
+    <string name="study_create_chinese_phrase">
+        Use the search below to create a phrase in Chinese, you can select multiple items to create full sentences.
+        We recommend working with your tutor, or finding popular phrases on the Internet.
+    </string>
+    <string name="study_create_chinese_phrase_cta">Next</string>
+    <!-- endregion -->
+
+    <!-- region create study confirm -->
+    <string name="study_create_chinese_confirm">
+        Please confirm that the phrase you have entered is correct. We recommend double checking
+        this with your tutor.
+    </string>
+
+    <string name="study_create_confirm_cta">Create</string>
+    <!-- endregion -->
 
 </resources>

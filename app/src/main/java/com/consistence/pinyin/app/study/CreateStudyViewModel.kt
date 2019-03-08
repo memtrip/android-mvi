@@ -15,13 +15,56 @@ class CreateStudyViewModel @Inject internal constructor(
 ) {
 
     override fun dispatcher(intent: CreateStudyIntent): Observable<CreateStudyRenderAction> = when (intent) {
-        CreateStudyIntent.Init, CreateStudyIntent.Retry -> Observable.just(CreateStudyRenderAction.NoResults)
+        CreateStudyIntent.Init ->
+            Observable.just(CreateStudyRenderAction.EnterEnglishTranslation())
+        is CreateStudyIntent.EnterEnglishTranslation ->
+            Observable.just(CreateStudyRenderAction.EnterEnglishTranslation(intent.englishTranslation))
+        is CreateStudyIntent.EnterChinesePhrase ->
+            Observable.just(CreateStudyRenderAction.EnterChinesePhrase(intent.chinesePhrase))
+        is CreateStudyIntent.ConfirmPhrase ->
+            Observable.just(CreateStudyRenderAction.ConfirmPhrase)
+        CreateStudyIntent.GoBack ->
+            Observable.just(CreateStudyRenderAction.GoBack)
+        CreateStudyIntent.LoseChangesAndExit ->
+            Observable.just(CreateStudyRenderAction.LoseChangesAndExit)
     }
 
     override fun reducer(previousState: CreateStudyViewState, renderAction: CreateStudyRenderAction): CreateStudyViewState = when (renderAction) {
-        is CreateStudyRenderAction.Populate -> previousState.copy(view = CreateStudyViewState.View.Populate(renderAction.study))
-        CreateStudyRenderAction.NoResults -> previousState.copy(view = CreateStudyViewState.View.NoResults)
-        CreateStudyRenderAction.Error -> previousState.copy(CreateStudyViewState.View.Error)
+        is CreateStudyRenderAction.EnterEnglishTranslation ->
+            previousState.copy(
+                view = CreateStudyViewState.View.EnterEnglishTranslation(renderAction.englishTranslation),
+                step = CreateStudyViewState.Step.ENGLISH_TRANSLATION
+            )
+        is CreateStudyRenderAction.EnterChinesePhrase ->
+            previousState.copy(
+                view = CreateStudyViewState.View.EnterChinesePhrase(renderAction.pinyin),
+                step = CreateStudyViewState.Step.ENGLISH_TRANSLATION
+            )
+        is CreateStudyRenderAction.ConfirmPhrase ->
+            previousState.copy(
+                view = CreateStudyViewState.View.ConfirmPhrase,
+                step = CreateStudyViewState.Step.CONFIRM
+            )
+        CreateStudyRenderAction.GoBack -> previousState.copy(
+            view = when (previousState.step) {
+                CreateStudyViewState.Step.ENGLISH_TRANSLATION -> {
+                    if (previousState.englishTranslation.isEmpty() && previousState.pinyin.isEmpty()) {
+                        CreateStudyViewState.View.LoseChanges
+                    } else {
+                        CreateStudyViewState.View.Exit
+                    }
+                }
+                CreateStudyViewState.Step.CHINESE_PHRASE -> {
+                    CreateStudyViewState.View.EnterEnglishTranslation(previousState.englishTranslation)
+                }
+                CreateStudyViewState.Step.CONFIRM -> {
+                    CreateStudyViewState.View.EnterChinesePhrase(previousState.pinyin)
+                }
+            }
+        )
+        CreateStudyRenderAction.LoseChangesAndExit -> previousState.copy(
+            view = CreateStudyViewState.View.Exit
+        )
     }
 
     override fun filterIntents(intents: Observable<CreateStudyIntent>): Observable<CreateStudyIntent> = Observable.merge(

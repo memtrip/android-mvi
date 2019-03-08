@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/study_create_toolbar"
@@ -12,5 +12,170 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- region english translation step -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/study_create_english_translation_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="study_create_english_translation_label,study_create_english_translation_input,study_create_english_translation_cta" />
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_create_english_translation_label"
+        style="@style/Typography.Body1.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/study_create_english_translation"
+        android:textColor="@color/colorTextInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_toolbar"/>
+    
+    <com.consistence.pinyin.kit.AppEditText
+        android:id="@+id/study_create_english_translation_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:hint="@string/study_create_english_translation_hint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_english_translation_label"/>
+
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/study_create_english_translation_cta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium_8dp"
+        android:text="@string/study_create_english_translation_cta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/study_create_toolbar"/>
+    <!-- endregion english translation step -->
+
+    <!-- region chinese phrase step -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/study_create_chinese_phrase_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="study_create_chinese_phrase_label,study_create_chinese_phrase_composition,study_create_chinese_phrase_tab_layout,study_create_chinese_phrase_search_view,study_create_chinese_phrase_fragment_container,study_create_chinese_phrase_cta"
+        android:visibility="gone" />
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_create_chinese_phrase_label"
+        style="@style/Typography.Body1.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/study_create_chinese_phrase"
+        android:textColor="@color/colorTextInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_toolbar"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/study_create_chinese_phrase_composition"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_chinese_phrase_label" />
+    
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/study_create_chinese_phrase_tab_layout"
+        style="@style/TabLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_chinese_phrase_composition" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/study_create_chinese_phrase_search_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:layout_gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_chinese_phrase_tab_layout"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/study_create_chinese_phrase_fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/padding_large_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_chinese_phrase_search_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/study_create_chinese_phrase_cta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium_8dp"
+        android:text="@string/study_create_chinese_phrase_cta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/study_create_toolbar"/>
+    <!-- endregion chinese phrase step -->
+
+    <!-- region confirm phrase step -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/study_create_confirm_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="study_create_confirm_cta,study_create_confirm_label,study_create_confirm_english_translation,study_create_confirm_chinese_translation"
+        android:visibility="gone" />
+
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/study_create_confirm_cta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium_8dp"
+        android:text="@string/study_create_confirm_cta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/study_create_toolbar"/>
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_create_confirm_label"
+        style="@style/Typography.Body1.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/study_create_chinese_confirm"
+        android:textColor="@color/colorTextInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_toolbar"/>
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_create_confirm_english_translation"
+        style="@style/Typography.Body1.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:textColor="@color/colorTextInverse"
+        tools:text="I went to the supermarket"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_confirm_label"/>
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_create_confirm_chinese_translation"
+        style="@style/Typography.Body1.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:textColor="@color/colorTextInverse"
+        tools:text="我去了超市"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_confirm_english_translation"/>
+    <!-- endregion confirm phrase step -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
