@@ -80,10 +80,8 @@
             android:id="@+id/study_list_item_delete"
             android:layout_width="@dimen/study_list_delete_size"
             android:layout_height="@dimen/study_list_delete_size"
-            android:layout_margin="@dimen/padding_large_16dp"
             android:background="@color/cardBackgroundColor"
             android:src="@drawable/ic_delete"
-            android:contentDescription="@string/app_audio_play_content_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 

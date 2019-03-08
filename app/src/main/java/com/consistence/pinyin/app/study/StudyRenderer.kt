@@ -7,14 +7,17 @@ import com.memtrip.mxandroid.MxViewRenderer
 import javax.inject.Inject
 
 sealed class StudyRenderAction : MxRenderAction {
+    object Idle : StudyRenderAction()
     data class Populate(val study: List<Study>) : StudyRenderAction()
     object NoResults : StudyRenderAction()
     object Error : StudyRenderAction()
+    data class NavigateToStudy(val study: Study) : StudyRenderAction()
 }
 
 interface StudyLayout : MxViewLayout {
     fun noResults()
     fun populate(study: List<Study>)
+    fun navigateToStudy(study: Study)
 }
 
 class StudyRenderer @Inject internal constructor() : MxViewRenderer<StudyLayout, StudyViewState> {
@@ -28,6 +31,9 @@ class StudyRenderer @Inject internal constructor() : MxViewRenderer<StudyLayout,
             layout.noResults()
         }
         StudyViewState.View.Error -> {
+        }
+        is StudyViewState.View.NavigateToStudy -> {
+            layout.navigateToStudy(state.view.study)
         }
     }
 }

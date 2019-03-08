@@ -178,7 +178,7 @@ class CreateStudyActivity(
     }
 
     override fun exit() {
-        setResult(-1)
+        setResult(1)
         finish()
     }
 

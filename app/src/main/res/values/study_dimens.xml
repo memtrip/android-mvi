@@ -1,5 +1,5 @@
 <resources>
 
-    <dimen name="study_list_delete_size">52dp</dimen>
+    <dimen name="study_list_delete_size">64dp</dimen>
 
 </resources>

@@ -61,7 +61,7 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
     }
 
     private fun startCreateStudyActivity() {
-        startActivityForResult(CreateStudyActivity.newIntent(this), -1)
+        startActivityForResult(CreateStudyActivity.newIntent(this), 1)
     }
 
     override fun intents(): Observable<StudyIntent> = Observable.merge(
@@ -73,6 +73,11 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
             }
         }
     )
+
+    override fun navigateToStudy(study: Study) {
+        model().publish(StudyIntent.Idle)
+        startActivityForResult(CreateStudyActivity.newIntent(this, study), 1)
+    }
 
     override fun inject() {
         AndroidInjection.inject(this)

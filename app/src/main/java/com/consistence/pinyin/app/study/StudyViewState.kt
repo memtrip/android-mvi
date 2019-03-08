@@ -9,5 +9,6 @@ data class StudyViewState(val view: View) : MxViewState {
         data class Populate(val study: List<Study>) : View()
         object NoResults : View()
         object Error : View()
+        data class NavigateToStudy(val study: Study) : View()
     }
 }
