@@ -20,6 +20,7 @@ import com.consistence.pinyin.app.pinyin.PinyinFragmentAdapter
 import com.consistence.pinyin.app.pinyin.list.PinyinListFragment
 import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
 import com.consistence.pinyin.domain.pinyin.createString
+import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.closeKeyboard
 import com.consistence.pinyin.kit.invisible
 import com.jakewharton.rxbinding2.view.RxView
@@ -37,6 +38,14 @@ class CreateStudyActivity(
     private lateinit var fragmentAdapter: PinyinFragmentAdapter
 
     private var pinyinValues: List<Pinyin> = listOf()
+
+    private val study: Study? by lazy {
+        intent.getParcelableExtra<Study>(ARG_STUDY)
+    }
+
+    private val updateMode by lazy {
+        study != null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +90,7 @@ class CreateStudyActivity(
     }
 
     override fun intents(): Observable<CreateStudyIntent> = Observable.mergeArray(
-        Observable.just(CreateStudyIntent.Init),
+        initWith(study),
         RxView.clicks(study_create_english_translation_cta).map {
             closeKeyboard(study_create_english_translation_input)
             CreateStudyIntent.EnterEnglishTranslation(study_create_english_translation_input.text.toString())
@@ -96,10 +105,19 @@ class CreateStudyActivity(
         RxView.clicks(study_create_confirm_cta).map {
             CreateStudyIntent.Confirm(
                 study_create_english_translation_input.text.toString(),
-                pinyinValues
+                pinyinValues,
+                updateMode
             )
         }
     )
+
+    private fun initWith(study: Study?): Observable<CreateStudyIntent> {
+        return if (study != null) {
+            Observable.just(CreateStudyIntent.InitWithData(study))
+        } else {
+            Observable.just(CreateStudyIntent.Init)
+        }
+    }
 
     override fun onBackPressed() {
         model().publish(CreateStudyIntent.GoBack)
@@ -191,6 +209,17 @@ class CreateStudyActivity(
     }
 
     companion object {
-        fun newIntent(context: Context) = Intent(context, CreateStudyActivity::class.java)
+
+        private const val ARG_STUDY = "ARG_STUDY"
+
+        fun newIntent(context: Context): Intent  {
+            return Intent(context, CreateStudyActivity::class.java)
+        }
+
+        fun newIntent(context: Context, study: Study): Intent  {
+            return Intent(context, CreateStudyActivity::class.java).apply {
+                putExtra(ARG_STUDY, study)
+            }
+        }
     }
 }

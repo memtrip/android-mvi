@@ -5,12 +5,14 @@ import com.consistence.pinyin.R
 import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.domain.study.db.SaveStudy
+import com.consistence.pinyin.domain.study.db.UpdateStudy
 import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class CreateStudyViewModel @Inject internal constructor(
     private val saveStudy: SaveStudy,
+    private val updateStudy: UpdateStudy,
     application: Application
 ) : MxViewModel<CreateStudyIntent, CreateStudyRenderAction, CreateStudyViewState>(
     CreateStudyViewState(CreateStudyViewState.View.Idle),
@@ -19,7 +21,9 @@ class CreateStudyViewModel @Inject internal constructor(
 
     override fun dispatcher(intent: CreateStudyIntent): Observable<CreateStudyRenderAction> = when (intent) {
         CreateStudyIntent.Init ->
-            Observable.just(CreateStudyRenderAction.Initial)
+            Observable.just(CreateStudyRenderAction.Init)
+        is CreateStudyIntent.InitWithData ->
+            Observable.just(CreateStudyRenderAction.InitWithData(intent.study))
         CreateStudyIntent.Idle -> Observable.just(CreateStudyRenderAction.Idle)
         is CreateStudyIntent.EnterEnglishTranslation ->
             validateEnglishTranslation(intent.englishTranslation)
@@ -29,7 +33,7 @@ class CreateStudyViewModel @Inject internal constructor(
             Observable.just(CreateStudyRenderAction.AddPinyin(intent.pinyin))
         CreateStudyIntent.RemovePinyin ->
             Observable.just(CreateStudyRenderAction.RemovePinyin)
-        is CreateStudyIntent.Confirm -> saveStudy(intent.englishTranslation, intent.pinyin)
+        is CreateStudyIntent.Confirm -> persistStudy(intent.englishTranslation, intent.pinyin, intent.updateMode)
         CreateStudyIntent.GoBack ->
             Observable.just(CreateStudyRenderAction.GoBack)
         CreateStudyIntent.LoseChangesAndExit ->
@@ -37,10 +41,20 @@ class CreateStudyViewModel @Inject internal constructor(
     }
 
     override fun reducer(previousState: CreateStudyViewState, renderAction: CreateStudyRenderAction): CreateStudyViewState = when (renderAction) {
-        CreateStudyRenderAction.Initial -> {
+        CreateStudyRenderAction.Init -> {
             previousState.copy(
                 view = CreateStudyViewState.View.EnglishTranslationForm,
                 step = CreateStudyViewState.Step.ENGLISH_TRANSLATION
+            )
+        }
+        is CreateStudyRenderAction.InitWithData -> {
+            previousState.copy(
+                view = CreateStudyViewState.View.EnglishTranslationForm,
+                step = CreateStudyViewState.Step.ENGLISH_TRANSLATION,
+                englishTranslation = renderAction.study.englishTranslation,
+                pinyin = previousState.pinyin.apply {
+                    addAll(renderAction.study.pinyin)
+                }
             )
         }
         CreateStudyRenderAction.Idle -> previousState.copy(
@@ -139,11 +153,23 @@ class CreateStudyViewModel @Inject internal constructor(
         })
     }
 
-    private fun saveStudy(englishTranslation: String, pinyin: List<Pinyin>): Observable<CreateStudyRenderAction> {
-        return saveStudy.insert(Study(englishTranslation, pinyin)).map<CreateStudyRenderAction> {
-            CreateStudyRenderAction.Success
-        }.toObservable().onErrorReturn {
-            CreateStudyRenderAction.ValidationError(context().getString(R.string.study_create_generic_error))
+    private fun persistStudy(
+        englishTranslation: String,
+        pinyin: List<Pinyin>,
+        updateMode: Boolean
+    ): Observable<CreateStudyRenderAction> {
+        if (updateMode) {
+            return updateStudy.update(Study(englishTranslation, pinyin)).map<CreateStudyRenderAction> {
+                CreateStudyRenderAction.Success
+            }.toObservable().onErrorReturn {
+                CreateStudyRenderAction.ValidationError(context().getString(R.string.study_create_generic_error))
+            }
+        } else {
+            return saveStudy.insert(Study(englishTranslation, pinyin)).map<CreateStudyRenderAction> {
+                CreateStudyRenderAction.Success
+            }.toObservable().onErrorReturn {
+                CreateStudyRenderAction.ValidationError(context().getString(R.string.study_create_generic_error))
+            }
         }
     }
 }

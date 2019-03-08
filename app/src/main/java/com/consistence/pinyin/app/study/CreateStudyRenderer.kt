@@ -1,13 +1,15 @@
 package com.consistence.pinyin.app.study
 
 import com.consistence.pinyin.domain.pinyin.Pinyin
+import com.consistence.pinyin.domain.study.Study
 import com.memtrip.mxandroid.MxRenderAction
 import com.memtrip.mxandroid.MxViewLayout
 import com.memtrip.mxandroid.MxViewRenderer
 import javax.inject.Inject
 
 sealed class CreateStudyRenderAction : MxRenderAction {
-    object Initial : CreateStudyRenderAction()
+    object Init : CreateStudyRenderAction()
+    data class InitWithData(val study: Study) : CreateStudyRenderAction()
     object Idle : CreateStudyRenderAction()
     data class EnterEnglishTranslation(
         val englishTranslation: String = ""
