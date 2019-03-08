@@ -15,8 +15,14 @@ data class Pinyin(
     val characterImageSrc: String
 ) : Parcelable
 
-fun List<Pinyin>.createString(): String {
+fun List<Pinyin>.formatPinyinString(): String {
     return joinToString(" ") {
         it.chineseCharacters
+    }
+}
+
+fun List<Pinyin>.pinyinForDatabase(): String {
+    return joinToString("-") {
+        it.uid.toString()
     }
 }
