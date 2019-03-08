@@ -3,11 +3,14 @@ package com.consistence.pinyin.app.study
 import android.app.Application
 import com.consistence.pinyin.R
 import com.consistence.pinyin.domain.pinyin.Pinyin
+import com.consistence.pinyin.domain.study.Study
+import com.consistence.pinyin.domain.study.db.SaveStudy
 import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class CreateStudyViewModel @Inject internal constructor(
+    private val saveStudy: SaveStudy,
     application: Application
 ) : MxViewModel<CreateStudyIntent, CreateStudyRenderAction, CreateStudyViewState>(
     CreateStudyViewState(CreateStudyViewState.View.Idle),
@@ -25,8 +28,7 @@ class CreateStudyViewModel @Inject internal constructor(
             Observable.just(CreateStudyRenderAction.AddPinyin(intent.pinyin))
         CreateStudyIntent.RemovePinyin ->
             Observable.just(CreateStudyRenderAction.RemovePinyin)
-        CreateStudyIntent.Confirm ->
-            Observable.just(CreateStudyRenderAction.Success)
+        is CreateStudyIntent.Confirm -> saveStudy(intent.englishTranslation, intent.pinyin)
         CreateStudyIntent.GoBack ->
             Observable.just(CreateStudyRenderAction.GoBack)
         CreateStudyIntent.LoseChangesAndExit ->
@@ -131,5 +133,13 @@ class CreateStudyViewModel @Inject internal constructor(
                 context().getString(R.string.study_create_chinese_phrase_validation_more_than))
             else -> CreateStudyRenderAction.DoneEnteringChinesePhrase
         })
+    }
+
+    private fun saveStudy(englishTranslation: String, pinyin: List<Pinyin>): Observable<CreateStudyRenderAction> {
+        return saveStudy.insert(Study(englishTranslation, pinyin)).map<CreateStudyRenderAction> {
+            CreateStudyRenderAction.Success
+        }.toObservable().onErrorReturn {
+            CreateStudyRenderAction.ValidationError(context().getString(R.string.study_create_generic_error))
+        }
     }
 }

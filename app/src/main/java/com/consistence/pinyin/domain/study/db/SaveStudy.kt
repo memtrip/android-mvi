@@ -1,6 +1,7 @@
 package com.consistence.pinyin.domain.study.db
 
 import com.consistence.pinyin.domain.SchedulerProvider
+import com.consistence.pinyin.domain.pinyin.createString
 import com.consistence.pinyin.domain.study.Study
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -11,11 +12,11 @@ class SaveStudy @Inject internal constructor(
     private val schedulerProvider: SchedulerProvider
 ) {
 
-    fun insert(study: Study): Single<StudyEntity> {
+    fun insert(study: Study): Single<Boolean> {
 
         val studyEntity = StudyEntity(
             study.englishTranslation,
-            "",
+            study.pinyin.createString(),
             0,
             0
         )
@@ -24,6 +25,6 @@ class SaveStudy @Inject internal constructor(
             .fromAction { studyDao.insert(studyEntity) }
             .observeOn(schedulerProvider.main())
             .subscribeOn(schedulerProvider.thread())
-            .toSingle { studyEntity }
+            .toSingle { true }
     }
 }

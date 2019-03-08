@@ -13,6 +13,9 @@
     <string name="study_create_lose_changes_title">Are you sure?</string>
     <string name="study_create_lose_changes_body">You will lose your current changes if you exit now.</string>
     <string name="study_create_error_title">Oops!</string>
+    <string name="study_create_generic_error">
+        Could not create study, unfortunately your database might corrupted. Please try again.
+    </string>
 
     <!-- region create study english translation -->
     <string name="study_create_english_translation">

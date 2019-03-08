@@ -19,6 +19,7 @@ import androidx.appcompat.widget.SearchView
 import com.consistence.pinyin.app.pinyin.PinyinFragmentAdapter
 import com.consistence.pinyin.app.pinyin.list.PinyinListFragment
 import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
+import com.consistence.pinyin.domain.pinyin.createString
 import com.consistence.pinyin.kit.closeKeyboard
 import com.consistence.pinyin.kit.invisible
 import com.jakewharton.rxbinding2.view.RxView
@@ -34,6 +35,8 @@ class CreateStudyActivity(
     @Inject lateinit var render: CreateStudyRenderer
 
     private lateinit var fragmentAdapter: PinyinFragmentAdapter
+
+    private var pinyinValues: List<Pinyin> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +92,10 @@ class CreateStudyActivity(
             CreateStudyIntent.RemovePinyin
         },
         RxView.clicks(study_create_confirm_cta).map {
-            CreateStudyIntent.Confirm
+            CreateStudyIntent.Confirm(
+                study_create_english_translation_input.text.toString(),
+                pinyinValues
+            )
         }
     )
 
@@ -126,24 +132,23 @@ class CreateStudyActivity(
     }
 
     override fun updateChinesePhrase(pinyin: List<Pinyin>) {
+
+        pinyinValues = pinyin
+
         closeKeyboard(study_create_chinese_phrase_composition_text)
         hideAllGroups()
         study_create_chinese_phrase_group.visible().run {
             study_create_chinese_phrase_search_view_label.visible()
         }
 
-        study_create_chinese_phrase_composition_text.text = pinyin.joinToString(" ") {
-            it.chineseCharacters
-        }
+        study_create_chinese_phrase_composition_text.text = pinyin.createString()
     }
 
     override fun confirmPhrase(englishTranslation: String, pinyin: List<Pinyin>) {
         closeKeyboard(study_create_confirm_chinese_translation)
         hideAllGroups()
         study_create_confirm_group.visible()
-        study_create_confirm_chinese_translation.text = pinyin.joinToString(" ") {
-            it.chineseCharacters
-        }
+        study_create_confirm_chinese_translation.text = pinyin.createString()
         study_create_confirm_english_translation.text = englishTranslation
     }
 

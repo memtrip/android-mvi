@@ -10,3 +10,9 @@ data class Pinyin(
     val chineseCharacters: String,
     val characterImageSrc: String
 )
+
+fun List<Pinyin>.createString(): String {
+    return joinToString(" ") {
+        it.chineseCharacters
+    }
+}
