@@ -168,6 +168,9 @@ class CreateStudyActivity(
     }
 
     override fun validationError(message: String) {
+
+        model().publish(CreateStudyIntent.Init)
+
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.study_create_error_title))
             .setMessage(message)

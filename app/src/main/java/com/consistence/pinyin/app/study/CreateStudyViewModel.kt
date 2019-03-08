@@ -20,6 +20,7 @@ class CreateStudyViewModel @Inject internal constructor(
     override fun dispatcher(intent: CreateStudyIntent): Observable<CreateStudyRenderAction> = when (intent) {
         CreateStudyIntent.Init ->
             Observable.just(CreateStudyRenderAction.Initial)
+        CreateStudyIntent.Idle -> Observable.just(CreateStudyRenderAction.Idle)
         is CreateStudyIntent.EnterEnglishTranslation ->
             validateEnglishTranslation(intent.englishTranslation)
         is CreateStudyIntent.EnterChinesePhrase ->
@@ -42,6 +43,9 @@ class CreateStudyViewModel @Inject internal constructor(
                 step = CreateStudyViewState.Step.ENGLISH_TRANSLATION
             )
         }
+        CreateStudyRenderAction.Idle -> previousState.copy(
+            view = CreateStudyViewState.View.Idle
+        )
         is CreateStudyRenderAction.EnterEnglishTranslation ->
             previousState.copy(
                 view = CreateStudyViewState.View.ChinesePhraseForm(),

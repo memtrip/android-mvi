@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 sealed class CreateStudyRenderAction : MxRenderAction {
     object Initial : CreateStudyRenderAction()
+    object Idle : CreateStudyRenderAction()
     data class EnterEnglishTranslation(
         val englishTranslation: String = ""
     ) : CreateStudyRenderAction()
