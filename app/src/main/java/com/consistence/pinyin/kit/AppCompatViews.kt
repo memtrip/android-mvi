@@ -6,11 +6,6 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 
-class AppEditText @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null
-) : AppCompatEditText(context, attrs)
-
 class AppTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

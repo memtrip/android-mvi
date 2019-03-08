@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="study_no_results_title,study_no_results,kit_error_retry_button" />
+        app:constraint_referenced_ids="study_no_results_title,study_no_results,study_create_button" />
     
     <com.consistence.pinyin.kit.AppTextView
         android:id="@+id/study_no_results_title"

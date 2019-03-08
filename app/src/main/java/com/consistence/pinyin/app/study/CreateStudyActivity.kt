@@ -135,7 +135,6 @@ class CreateStudyActivity(
 
         pinyinValues = pinyin
 
-        closeKeyboard(study_create_chinese_phrase_composition_text)
         hideAllGroups()
         study_create_chinese_phrase_group.visible().run {
             study_create_chinese_phrase_search_view_label.visible()
@@ -169,7 +168,7 @@ class CreateStudyActivity(
 
     override fun validationError(message: String) {
 
-        model().publish(CreateStudyIntent.Init)
+        model().publish(CreateStudyIntent.Idle)
 
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.study_create_error_title))
