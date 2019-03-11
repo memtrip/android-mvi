@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="study_create_english_translation_title,study_create_english_translation_label,study_create_english_translation_input,study_create_english_translation_cta,study_create_english_translation_delete" />
+        app:constraint_referenced_ids="study_create_english_translation_title,study_create_english_translation_label,study_create_english_translation_input,study_create_english_translation_cta" />
 
     <com.consistence.pinyin.kit.AppTextView
         android:id="@+id/study_create_english_translation_title"
@@ -76,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
         android:text="@string/study_create_english_translation_delete"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

@@ -108,12 +108,6 @@ class CreateStudyActivity(
         study_create_english_translation_input.requestFocus()
 
         study_create_confirm_cta.text = ctaText
-
-        if (updateMode) {
-            study_create_english_translation_delete.visible()
-        } else {
-            study_create_english_translation_delete.gone()
-        }
     }
 
     override fun intents(): Observable<CreateStudyIntent> = Observable.mergeArray(
@@ -134,7 +128,11 @@ class CreateStudyActivity(
         },
         RxView.clicks(study_create_confirm_cta).map {
             CreateStudyIntent.Confirm(
-                Study(study_create_english_translation_input.text.toString(), pinyinValues),
+                Study(
+                    study_create_english_translation_input.text.toString(),
+                    pinyinValues,
+                    studyToUpdate!!.uid
+                ),
                 updateMode
             )
         },
@@ -181,6 +179,12 @@ class CreateStudyActivity(
         hideAllGroups()
         study_create_english_translation_group.visible()
         study_create_english_translation_input.setText(englishTranslation)
+
+        if (updateMode) {
+            study_create_english_translation_delete.visible()
+        } else {
+            study_create_english_translation_delete.gone()
+        }
     }
 
     override fun confirmDeleteStudy() {
@@ -247,7 +251,9 @@ class CreateStudyActivity(
     // endregion
 
     private fun hideAllGroups() {
-        study_create_english_translation_group.gone()
+        study_create_english_translation_group.gone().run {
+            study_create_english_translation_delete.gone()
+        }
         study_create_chinese_phrase_group.gone().run {
             study_create_chinese_phrase_search_view_label.gone()
         }
