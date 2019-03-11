@@ -1,6 +1,7 @@
 package com.consistence.pinyin.app.train
 
 import android.app.Application
+import com.consistence.pinyin.app.study.CreateStudyIntent
 import com.consistence.pinyin.domain.pinyin.FetchAndSavePinyin
 import com.consistence.pinyin.domain.pinyin.db.CountPinyin
 import com.consistence.pinyin.domain.study.Study
@@ -34,6 +35,13 @@ class TrainPhraseViewModel @Inject internal constructor(
             view = TrainPhraseViewState.View.Incorrect(renderAction.entered, renderAction.answer)
         )
     }
+
+    override fun filterIntents(intents: Observable<TrainPhraseIntent>): Observable<TrainPhraseIntent> = Observable.merge(
+        intents.ofType(TrainPhraseIntent.Init::class.java).take(1),
+        intents.filter {
+            !TrainPhraseIntent.Init::class.java.isInstance(it)
+        }
+    )
 
     private fun pickQuestion(study: Study): Observable<TrainPhraseRenderAction> {
         return Observable.just(if (useChinese()) {
