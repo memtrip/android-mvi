@@ -15,7 +15,7 @@ class GetPinyin @Inject internal constructor(
             .observeOn(schedulerProvider.main())
             .subscribeOn(schedulerProvider.thread())
             .map { entities ->
-                entities.map {
+                entities.reversed().map {
                     Pinyin(
                         it.uid,
                         it.sourceUrl,
