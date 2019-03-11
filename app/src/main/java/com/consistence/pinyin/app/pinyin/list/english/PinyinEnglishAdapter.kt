@@ -42,11 +42,17 @@ class PinyinEnglishViewHolder(
         itemView.pinyin_english_list_item_chinese_character_value.text = value.chineseCharacters
         value.audioSrc?.let { itemView.pinyin_list_audio_button.visible() } ?: itemView.pinyin_list_audio_button.gone()
 
-        if (!fullListStyle) {
+        if (fullListStyle) {
+            itemView.pinyin_english_list_item_phonetic_translation.visible()
+            itemView.pinyin_english_list_item_phonetic_translation_value.visible()
+            itemView.pinyin_english_list_item_chinese_character.visible()
+            itemView.pinyin_english_list_item_chinese_character_value.visible()
+            itemView.pinyin_list_audio_button.visible()
+        } else {
             itemView.pinyin_english_list_item_phonetic_translation.gone()
             itemView.pinyin_english_list_item_phonetic_translation_value.gone()
-            itemView.pinyin_english_list_item_chinese_character.gone()
-            itemView.pinyin_english_list_item_chinese_character_value.gone()
+            itemView.pinyin_english_list_item_chinese_character.visible()
+            itemView.pinyin_english_list_item_chinese_character_value.visible()
             itemView.pinyin_list_audio_button.gone()
         }
     }

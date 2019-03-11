@@ -33,7 +33,7 @@ class CreateStudyViewModel @Inject internal constructor(
             Observable.just(CreateStudyRenderAction.AddPinyin(intent.pinyin))
         CreateStudyIntent.RemovePinyin ->
             Observable.just(CreateStudyRenderAction.RemovePinyin)
-        is CreateStudyIntent.Confirm -> persistStudy(intent.englishTranslation, intent.pinyin, intent.updateMode)
+        is CreateStudyIntent.Confirm -> persistStudy(intent.study, intent.updateMode)
         CreateStudyIntent.GoBack ->
             Observable.just(CreateStudyRenderAction.GoBack)
         CreateStudyIntent.LoseChangesAndExit ->
@@ -153,19 +153,15 @@ class CreateStudyViewModel @Inject internal constructor(
         })
     }
 
-    private fun persistStudy(
-        englishTranslation: String,
-        pinyin: List<Pinyin>,
-        updateMode: Boolean
-    ): Observable<CreateStudyRenderAction> {
-        if (updateMode) {
-            return updateStudy.update(Study(englishTranslation, pinyin)).map<CreateStudyRenderAction> {
+    private fun persistStudy(study: Study, updateMode: Boolean): Observable<CreateStudyRenderAction> {
+        return if (updateMode) {
+            updateStudy.update(study).map<CreateStudyRenderAction> {
                 CreateStudyRenderAction.Success
             }.toObservable().onErrorReturn {
                 CreateStudyRenderAction.ValidationError(context().getString(R.string.study_create_generic_error))
             }
         } else {
-            return saveStudy.insert(Study(englishTranslation, pinyin)).map<CreateStudyRenderAction> {
+            saveStudy.insert(study).map<CreateStudyRenderAction> {
                 CreateStudyRenderAction.Success
             }.toObservable().onErrorReturn {
                 CreateStudyRenderAction.ValidationError(context().getString(R.string.study_create_generic_error))

@@ -54,9 +54,11 @@
     <!-- endregion -->
 
     <!-- region create study confirm -->
+    <string name="study_create_chinese_confirm_title">
+        Check the phrase is correct!
+    </string>
     <string name="study_create_chinese_confirm">
-        Please confirm that the phrase you have entered is correct. We recommend double checking
-        this with your tutor.
+        Confirm with a tutor if you are in doubt.
     </string>
 
     <string name="study_create_confirm_cta">Create</string>

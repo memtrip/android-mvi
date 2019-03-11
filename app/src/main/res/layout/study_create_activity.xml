@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="study_create_english_translation_label,study_create_english_translation_input,study_create_english_translation_cta" />
+        app:constraint_referenced_ids="study_create_english_translation_title,study_create_english_translation_label,study_create_english_translation_input,study_create_english_translation_cta" />
 
     <com.consistence.pinyin.kit.AppTextView
         android:id="@+id/study_create_english_translation_title"
@@ -181,6 +181,7 @@
 
     <com.consistence.pinyin.kit.AppButton
         android:id="@+id/study_create_chinese_phrase_cta"
+        style="@style/ButtonSecondary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_medium_8dp"
@@ -195,11 +196,12 @@
         android:id="@+id/study_create_confirm_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="study_create_confirm_cta,study_create_confirm_label,study_create_confirm_english_translation,study_create_confirm_chinese_translation"
+        app:constraint_referenced_ids="study_create_confirm_cta,study_create_confirm_title,study_create_confirm_label,study_create_confirm_english_translation,study_create_confirm_chinese_translation"
         android:visibility="gone" />
 
     <com.consistence.pinyin.kit.AppButton
         android:id="@+id/study_create_confirm_cta"
+        style="@style/ButtonPrimary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_medium_8dp"
@@ -207,6 +209,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/study_create_toolbar"/>
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_create_confirm_title"
+        style="@style/Typography.H6.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/study_create_chinese_confirm_title"
+        android:textColor="@color/colorTextInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_toolbar"/>
 
     <com.consistence.pinyin.kit.AppTextView
         android:id="@+id/study_create_confirm_label"
@@ -218,14 +232,15 @@
         android:textColor="@color/colorTextInverse"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/study_create_toolbar"/>
+        app:layout_constraintTop_toBottomOf="@+id/study_create_confirm_title"/>
 
     <com.consistence.pinyin.kit.AppTextView
         android:id="@+id/study_create_confirm_english_translation"
         style="@style/Typography.Body1.Inverse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_large_16dp"
+        android:layout_marginStart="@dimen/padding_large_16dp"
+        android:layout_marginEnd="@dimen/padding_large_16dp"
         android:textColor="@color/colorTextInverse"
         tools:text="I went to the supermarket"
         app:layout_constraintStart_toStartOf="parent"

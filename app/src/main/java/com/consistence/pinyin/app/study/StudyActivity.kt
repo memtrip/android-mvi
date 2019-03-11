@@ -11,6 +11,7 @@ import com.consistence.pinyin.app.pinyin.list.phonetic.PinyinPhoneticAdapter
 import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.Interaction
+import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
 import com.memtrip.mxandroid.MxViewActivity
 import dagger.android.AndroidInjection
@@ -91,9 +92,11 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
 
     override fun noResults() {
         study_no_results_group.visible()
+        study_recyclerview.gone()
     }
 
     override fun populate(study: List<Study>) {
+        study_no_results_group.gone()
         study_recyclerview.visible()
         adapter.clear()
         adapter.populate(study)

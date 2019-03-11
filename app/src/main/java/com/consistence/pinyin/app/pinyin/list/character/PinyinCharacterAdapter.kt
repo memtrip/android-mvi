@@ -42,11 +42,17 @@ class PinyinCharacterViewHolder(
         itemView.pinyin_character_list_item_phonetic_translation_value.text = value.phoneticScriptText
         value.audioSrc?.let { audioButton.visible() } ?: audioButton.gone()
 
-        if (!fullListStyle) {
+        if (fullListStyle) {
+            itemView.pinyin_character_list_item_phonetic_translation.visible()
+            itemView.pinyin_character_list_item_phonetic_translation_value.visible()
+            itemView.pinyin_character_list_item_english_translation.visible()
+            itemView.pinyin_character_list_item_english_translation_value.visible()
+            itemView.pinyin_list_audio_button.visible()
+        } else {
             itemView.pinyin_character_list_item_phonetic_translation.gone()
             itemView.pinyin_character_list_item_phonetic_translation_value.gone()
-            itemView.pinyin_character_list_item_english_translation.gone()
-            itemView.pinyin_character_list_item_english_translation_value.gone()
+            itemView.pinyin_character_list_item_english_translation.visible()
+            itemView.pinyin_character_list_item_english_translation_value.visible()
             itemView.pinyin_list_audio_button.gone()
         }
     }

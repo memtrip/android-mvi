@@ -114,8 +114,7 @@ class CreateStudyActivity(
         },
         RxView.clicks(study_create_confirm_cta).map {
             CreateStudyIntent.Confirm(
-                study_create_english_translation_input.text.toString(),
-                pinyinValues,
+                Study(study_create_english_translation_input.text.toString(), pinyinValues),
                 updateMode
             )
         }
