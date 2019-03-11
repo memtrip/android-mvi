@@ -94,6 +94,7 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
     }
 
     override fun populate(study: List<Study>) {
+        study_recyclerview.visible()
         adapter.clear()
         adapter.populate(study)
     }

@@ -3,7 +3,6 @@ package com.consistence.pinyin.app.study
 import android.app.Application
 import com.consistence.pinyin.domain.study.GetStudy
 import com.consistence.pinyin.domain.study.db.CountStudy
-import com.consistence.pinyin.domain.study.db.GetStudyOrderedByDesc
 import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
 import io.reactivex.Single

@@ -12,3 +12,7 @@ data class StudyEntity(
     @ColumnInfo(name = "incorrect") val incorrect: Int,
     @PrimaryKey(autoGenerate = true) val uid: Int = 0
 )
+
+fun String.listOfUid(): List<Int> = split("-").map {
+    Integer.parseInt(it)
+}

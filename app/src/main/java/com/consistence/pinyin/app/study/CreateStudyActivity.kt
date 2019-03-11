@@ -19,7 +19,7 @@ import androidx.appcompat.widget.SearchView
 import com.consistence.pinyin.app.pinyin.PinyinFragmentAdapter
 import com.consistence.pinyin.app.pinyin.list.PinyinListFragment
 import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
-import com.consistence.pinyin.domain.pinyin.formatPinyinString
+import com.consistence.pinyin.domain.pinyin.formatChineseCharacterString
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.closeKeyboard
 import com.consistence.pinyin.kit.invisible
@@ -95,6 +95,8 @@ class CreateStudyActivity(
         study_create_chinese_phrase_search_view_label.setOnClickListener {
             study_create_chinese_phrase_search_view.isIconified = false
         }
+
+        study_create_english_translation_input.requestFocus()
     }
 
     override fun intents(): Observable<CreateStudyIntent> = Observable.mergeArray(
@@ -167,13 +169,13 @@ class CreateStudyActivity(
             study_create_chinese_phrase_search_view_label.visible()
         }
 
-        study_create_chinese_phrase_composition_text.text = pinyin.formatPinyinString()
+        study_create_chinese_phrase_composition_text.text = pinyin.formatChineseCharacterString()
     }
 
     override fun confirmPhrase(englishTranslation: String, pinyin: List<Pinyin>) {
         hideAllGroups()
         study_create_confirm_group.visible()
-        study_create_confirm_chinese_translation.text = pinyin.formatPinyinString()
+        study_create_confirm_chinese_translation.text = pinyin.formatChineseCharacterString()
         study_create_confirm_english_translation.text = englishTranslation
     }
 

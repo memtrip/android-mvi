@@ -3,8 +3,8 @@ package com.consistence.pinyin.kit
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
+import com.consistence.pinyin.R
 
 class AppTextView @JvmOverloads constructor(
     context: Context,
@@ -15,7 +15,7 @@ class AppTextView @JvmOverloads constructor(
 class AppButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = R.style.ButtonPrimary
 ) : AppCompatButton(context, attrs, defStyleAttr) {
 
     override fun drawableStateChanged() {

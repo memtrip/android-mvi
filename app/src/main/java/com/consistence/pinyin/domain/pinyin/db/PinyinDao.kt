@@ -16,6 +16,9 @@ interface PinyinDao {
     @Query("SELECT * FROM Pinyin WHERE englishTranslationText LIKE :terms ORDER BY englishTranslationText ASC LIMIT 0, 100")
     fun englishSearch(terms: String): List<PinyinEntity>
 
+    @Query("SELECT * FROM Pinyin WHERE uid IN(:listOfUid)")
+    fun getByUid(listOfUid: List<Int>): List<PinyinEntity>
+
     @Insert
     fun insertAll(pinyin: List<PinyinEntity>)
 

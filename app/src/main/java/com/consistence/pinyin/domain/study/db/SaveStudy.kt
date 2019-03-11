@@ -1,8 +1,7 @@
 package com.consistence.pinyin.domain.study.db
 
 import com.consistence.pinyin.domain.SchedulerProvider
-import com.consistence.pinyin.domain.pinyin.formatPinyinString
-import com.consistence.pinyin.domain.pinyin.pinyinForDatabase
+import com.consistence.pinyin.domain.pinyin.pinyinUidForDatabase
 import com.consistence.pinyin.domain.study.Study
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -17,7 +16,7 @@ class SaveStudy @Inject internal constructor(
 
         val studyEntity = StudyEntity(
             study.englishTranslation,
-            study.pinyin.pinyinForDatabase(),
+            study.pinyin.pinyinUidForDatabase(),
             0,
             0
         )

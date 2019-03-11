@@ -22,9 +22,11 @@
     </string>
 
     <!-- region create study english translation -->
+    <string name="study_create_english_translation_title">
+        Let\'s memorise a phrase.
+    </string>
     <string name="study_create_english_translation">
-        Enter the phrase you are memorising in English. When we test your vocabulary, you will be
-        asked to enter this as the translation of the chinese characters you enter in the next step.
+        e.g; I went shopping.
     </string>
     <string name="study_create_english_translation_hint">Enter your phrase in English</string>
     <string name="study_create_english_translation_cta">Next</string>

@@ -22,16 +22,29 @@
         app:constraint_referenced_ids="study_create_english_translation_label,study_create_english_translation_input,study_create_english_translation_cta" />
 
     <com.consistence.pinyin.kit.AppTextView
-        android:id="@+id/study_create_english_translation_label"
-        style="@style/Typography.Body1.Inverse"
+        android:id="@+id/study_create_english_translation_title"
+        style="@style/Typography.H6.Inverse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
-        android:text="@string/study_create_english_translation"
+        android:text="@string/study_create_english_translation_title"
         android:textColor="@color/colorTextInverse"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_create_toolbar"/>
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/study_create_english_translation_label"
+        style="@style/Typography.Body1.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_large_16dp"
+        android:layout_marginEnd="@dimen/padding_large_16dp"
+        android:text="@string/study_create_english_translation"
+        android:textColor="@color/colorTextInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_create_english_translation_title"/>
     
     <EditText
         android:id="@+id/study_create_english_translation_input"
@@ -47,6 +60,7 @@
 
     <com.consistence.pinyin.kit.AppButton
         android:id="@+id/study_create_english_translation_cta"
+        style="@style/ButtonSecondary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_medium_8dp"

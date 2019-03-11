@@ -7,8 +7,21 @@
     <color name="windowBackgroundColor">#2D3047</color>
 
     <color name="colorText">@color/colorPrimary</color>
-    <color name="colorTextInverse">#AAFFFFFF</color>
+    <color name="colorTextInverse">#DDFFFFFF</color>
 
     <color name="cardBackgroundColor">#FFFFFF</color>
+
+    <color name="viewUtilDrawableMask">#FFFFFF</color>
+
+    <!-- region Button -->
+    <color name="viewButtonPrimaryBackground">@color/colorAccent</color>
+    <color name="viewButtonPrimaryBackgroundSelected">#55FFFFFF</color>
+    <color name="viewButtonPrimaryBorder">@color/colorAccent</color>
+    <color name="viewButtonPrimaryText">#FFFFFF</color>
+
+    <color name="viewButtonSecondaryBackgroundSelected">#33FFFFFF</color>
+    <color name="viewButtonSecondaryBorder">@color/colorTextInverse</color>
+    <color name="viewButtonSecondaryText">@color/colorTextInverse</color>
+    <!-- endregion -->
 
 </resources>
