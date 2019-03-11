@@ -38,6 +38,7 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
         super.onCreate(savedInstanceState)
         setContentView(R.layout.train_phrase_activity)
 
+        train_phrase_toolbar.title = getString(R.string.train_phrase_title)
         train_phrase_toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         train_phrase_toolbar.setNavigationOnClickListener {
             finish()
@@ -64,11 +65,13 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     override fun englishQuestion(englishTranslation: String) {
         train_phrase_english.visible()
         train_phrase_english_question_label.text = englishTranslation
+        train_phrase_english_question_input.requestFocus()
     }
 
     override fun chineseQuestion(chineseQuestion: List<Pinyin>) {
         train_phrase_chinese.visible()
         train_phrase_chinese_question_label.text = chineseQuestion.formatChineseCharacterString()
+        train_phrase_chinese_question_input.requestFocus()
     }
 
     override fun correct(study: Study) {

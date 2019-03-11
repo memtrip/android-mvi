@@ -19,10 +19,12 @@
         android:id="@+id/train_phrase_english"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:constraint_referenced_ids="train_phrase_english_label,train_phrase_english_question_card,train_phrase_english_question_input,train_phrase_english_cta"/>
 
     <com.consistence.pinyin.kit.AppTextView
         android:id="@+id/train_phrase_english_label"
+        style="@style/Typography.Body1.Inverse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
@@ -35,6 +37,9 @@
         android:id="@+id/train_phrase_english_question_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_large_16dp"
+        android:layout_marginTop="@dimen/padding_large_16dp"
+        android:layout_marginEnd="@dimen/padding_large_16dp"
         app:cardBackgroundColor="@color/cardBackgroundColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,21 +61,22 @@
         android:layout_marginStart="@dimen/padding_large_16dp"
         android:layout_marginTop="@dimen/padding_large_16dp"
         android:layout_marginEnd="@dimen/padding_large_16dp"
+        android:hint="@string/train_phrase_answer_hint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/train_phrase_english_question_card"/>
 
     <com.consistence.pinyin.kit.AppButton
         android:id="@+id/train_phrase_english_cta"
-        style="@style/ButtonPrimary"
+        style="@style/ButtonSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
         android:text="@string/train_phrase_cta"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/train_phrase_toolbar"  />
     <!-- endregion -->
 
     <!-- region Answer chinese -->
@@ -78,10 +84,12 @@
         android:id="@+id/train_phrase_chinese"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:constraint_referenced_ids="train_phrase_chinese_label,train_phrase_chinese_question_card,train_phrase_chinese_question_input,train_phrase_chinese_cta"/>
 
     <com.consistence.pinyin.kit.AppTextView
         android:id="@+id/train_phrase_chinese_label"
+        style="@style/Typography.Body1.Inverse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
@@ -94,10 +102,13 @@
         android:id="@+id/train_phrase_chinese_question_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_large_16dp"
+        android:layout_marginTop="@dimen/padding_medium_8dp"
+        android:layout_marginEnd="@dimen/padding_large_16dp"
         app:cardBackgroundColor="@color/cardBackgroundColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/train_phrase_english_label">
+        app:layout_constraintTop_toBottomOf="@id/train_phrase_chinese_label">
 
         <com.consistence.pinyin.kit.AppTextView
             android:id="@+id/train_phrase_chinese_question_label"
@@ -115,21 +126,22 @@
         android:layout_marginStart="@dimen/padding_large_16dp"
         android:layout_marginTop="@dimen/padding_large_16dp"
         android:layout_marginEnd="@dimen/padding_large_16dp"
+        android:hint="@string/train_phrase_answer_hint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/train_phrase_chinese_question_card"/>
 
     <com.consistence.pinyin.kit.AppButton
         android:id="@+id/train_phrase_chinese_cta"
-        style="@style/ButtonPrimary"
+        style="@style/ButtonSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
         android:text="@string/train_phrase_cta"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/train_phrase_toolbar" />
     <!-- endregion -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
