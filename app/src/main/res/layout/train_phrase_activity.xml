@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/train_phrase_container"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/train_phrase_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- region Answer english -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/train_phrase_english"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="train_phrase_english_label,train_phrase_english_question_card,train_phrase_english_question_input,train_phrase_english_cta"/>
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/train_phrase_english_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/train_phrase_english_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_phrase_toolbar"/>
+    
+    <androidx.cardview.widget.CardView
+        android:id="@+id/train_phrase_english_question_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_phrase_english_label">
+
+        <com.consistence.pinyin.kit.AppTextView
+            android:id="@+id/train_phrase_english_question_label"
+            style="@style/Typography.H6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding_medium_8dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:id="@+id/train_phrase_english_question_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_large_16dp"
+        android:layout_marginTop="@dimen/padding_large_16dp"
+        android:layout_marginEnd="@dimen/padding_large_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_phrase_english_question_card"/>
+
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/train_phrase_english_cta"
+        style="@style/ButtonPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/train_phrase_cta"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    <!-- endregion -->
+
+    <!-- region Answer chinese -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/train_phrase_chinese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="train_phrase_chinese_label,train_phrase_chinese_question_card,train_phrase_chinese_question_input,train_phrase_chinese_cta"/>
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/train_phrase_chinese_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/train_phrase_chinese_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_phrase_toolbar"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/train_phrase_chinese_question_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_phrase_english_label">
+
+        <com.consistence.pinyin.kit.AppTextView
+            android:id="@+id/train_phrase_chinese_question_label"
+            style="@style/Typography.H6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding_medium_8dp"/>
+
+    </androidx.cardview.widget.CardView>
+    
+    <EditText
+        android:id="@+id/train_phrase_chinese_question_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_large_16dp"
+        android:layout_marginTop="@dimen/padding_large_16dp"
+        android:layout_marginEnd="@dimen/padding_large_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_phrase_chinese_question_card"/>
+
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/train_phrase_chinese_cta"
+        style="@style/ButtonPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/train_phrase_cta"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    <!-- endregion -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

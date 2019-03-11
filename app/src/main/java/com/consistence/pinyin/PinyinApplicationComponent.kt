@@ -12,6 +12,7 @@ import com.consistence.pinyin.app.pinyin.list.PinyinEnglishFragmentModule
 import com.consistence.pinyin.app.pinyin.list.PinyinPhoneticFragmentModule
 import com.consistence.pinyin.app.study.CreateStudyActivityModule
 import com.consistence.pinyin.app.study.StudyActivityModule
+import com.consistence.pinyin.app.train.TrainPhraseActivityModule
 import dagger.BindsInstance
 import dagger.Component
 
@@ -32,6 +33,7 @@ import javax.inject.Singleton
     PinyinCharacterFragmentModule::class,
     PinyinDetailActivityModule::class,
     StudyActivityModule::class,
+    TrainPhraseActivityModule::class,
     CreateStudyActivityModule::class
 ])
 interface PinyinApplicationComponent : AndroidInjector<PinyinApplication> {

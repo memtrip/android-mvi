@@ -10,5 +10,6 @@ data class StudyViewState(val view: View) : MxViewState {
         object NoResults : View()
         object Error : View()
         data class NavigateToStudy(val study: Study) : View()
+        data class NavigateToTrainPhrase(val study: Study) : View()
     }
 }

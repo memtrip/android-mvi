@@ -20,7 +20,7 @@ class StudyViewModel @Inject internal constructor(
     override fun dispatcher(intent: StudyIntent): Observable<StudyRenderAction> = when (intent) {
         StudyIntent.Init, StudyIntent.Retry, StudyIntent.Refresh -> getStudy()
         StudyIntent.Idle -> Observable.just(StudyRenderAction.Idle)
-        is StudyIntent.StudyPhrase -> TODO()
+        is StudyIntent.TrainPhrase -> Observable.just(StudyRenderAction.TrainPhrase(intent.study))
         is StudyIntent.SelectStudy -> Observable.just(StudyRenderAction.NavigateToStudy(intent.study))
     }
 
@@ -30,6 +30,7 @@ class StudyViewModel @Inject internal constructor(
         StudyRenderAction.NoResults -> previousState.copy(view = StudyViewState.View.NoResults)
         StudyRenderAction.Error -> previousState.copy(view = StudyViewState.View.Error)
         is StudyRenderAction.NavigateToStudy -> previousState.copy(view = StudyViewState.View.NavigateToStudy(renderAction.study))
+        is StudyRenderAction.TrainPhrase -> previousState.copy(view = StudyViewState.View.NavigateToTrainPhrase(renderAction.study))
     }
 
     override fun filterIntents(intents: Observable<StudyIntent>): Observable<StudyIntent> = Observable.merge(

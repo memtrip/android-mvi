@@ -131,7 +131,7 @@ class CreateStudyActivity(
                 Study(
                     study_create_english_translation_input.text.toString(),
                     pinyinValues,
-                    studyToUpdate!!.uid
+                    if (studyToUpdate != null) studyToUpdate!!.uid else -1
                 ),
                 updateMode
             )

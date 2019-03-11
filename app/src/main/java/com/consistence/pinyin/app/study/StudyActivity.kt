@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
+import com.consistence.pinyin.app.train.TrainPhraseActivity
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.Interaction
 import com.consistence.pinyin.kit.gone
@@ -65,7 +66,7 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
         Observable.just(StudyIntent.Init),
         adapter.interaction.map {
             when (it.id) {
-                R.id.study_card_item_train -> StudyIntent.StudyPhrase(it.data)
+                R.id.study_card_item_train -> StudyIntent.TrainPhrase(it.data)
                 else -> StudyIntent.SelectStudy(it.data)
             }
         }
@@ -74,6 +75,11 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
     override fun navigateToStudy(study: Study) {
         model().publish(StudyIntent.Idle)
         startActivityForResult(CreateStudyActivity.newIntent(this, study), 1)
+    }
+
+    override fun navigateToTrainPhrase(study: Study) {
+        model().publish(StudyIntent.Idle)
+        startActivityForResult(TrainPhraseActivity.newIntent(this, study), 1)
     }
 
     override fun inject() {

@@ -8,6 +8,6 @@ sealed class StudyIntent : MxViewIntent {
     object Idle : StudyIntent()
     object Refresh : StudyIntent()
     object Retry : StudyIntent()
-    data class StudyPhrase(val study: Study) : StudyIntent()
+    data class TrainPhrase(val study: Study) : StudyIntent()
     data class SelectStudy(val study: Study) : StudyIntent()
 }
