@@ -1,6 +1,7 @@
 package com.consistence.pinyin.domain.study.db
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
@@ -15,6 +16,9 @@ interface StudyDao {
 
     @Query("UPDATE Study SET englishTranslation = :englishTranslation, chineseSentence = :chineseSentence WHERE uid = :uid")
     fun update(englishTranslation: String, chineseSentence: String, uid: Int)
+
+    @Query("DELETE FROM Study WHERE uid = :uid")
+    fun deleteStudy(uid: Int)
 
     @Query("SELECT COUNT(*) FROM Study")
     fun count(): Int

@@ -24,6 +24,7 @@ import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.closeKeyboard
 import com.consistence.pinyin.kit.invisible
 import com.jakewharton.rxbinding2.view.RxView
+import com.jakewharton.rxbinding2.widget.RxTextView
 
 class CreateStudyActivity(
     override var currentSearchQuery: String = "",
@@ -39,19 +40,27 @@ class CreateStudyActivity(
 
     private var pinyinValues: List<Pinyin> = listOf()
 
-    private val study: Study? by lazy {
+    private val studyToUpdate: Study? by lazy {
         intent.getParcelableExtra<Study>(ARG_STUDY)
     }
 
     private val updateMode by lazy {
-        study != null
+        studyToUpdate != null
     }
 
     private val toolBarTitle by lazy {
-        if (study != null) {
+        if (studyToUpdate != null) {
             getString(R.string.study_create_modify_title)
         } else {
             getString(R.string.study_create_title)
+        }
+    }
+
+    private val ctaText by lazy {
+        if (studyToUpdate != null) {
+            getString(R.string.study_create_confirm_update_cta)
+        } else {
+            getString(R.string.study_create_confirm_cta)
         }
     }
 
@@ -97,11 +106,22 @@ class CreateStudyActivity(
         }
 
         study_create_english_translation_input.requestFocus()
+
+        study_create_confirm_cta.text = ctaText
+
+        if (updateMode) {
+            study_create_english_translation_delete.visible()
+        } else {
+            study_create_english_translation_delete.gone()
+        }
     }
 
     override fun intents(): Observable<CreateStudyIntent> = Observable.mergeArray(
-        initWith(study),
-        RxView.clicks(study_create_english_translation_cta).map {
+        initWith(studyToUpdate),
+        Observable.merge(
+            RxTextView.editorActions(study_create_english_translation_input),
+            RxView.clicks(study_create_english_translation_cta)
+        ).map {
             closeKeyboard(study_create_english_translation_input)
             CreateStudyIntent.EnterEnglishTranslation(study_create_english_translation_input.text.toString())
         },
@@ -117,6 +137,9 @@ class CreateStudyActivity(
                 Study(study_create_english_translation_input.text.toString(), pinyinValues),
                 updateMode
             )
+        },
+        RxView.clicks(study_create_english_translation_delete).map {
+            CreateStudyIntent.DeleteStudy
         }
     )
 
@@ -148,6 +171,7 @@ class CreateStudyActivity(
 
     // region PinyinListFragment.PinyinListDelegate
     override fun pinyinSelection(pinyin: Pinyin) {
+        study_create_chinese_phrase_search_view.setQuery("", false)
         model().publish(CreateStudyIntent.AddPinyin(pinyin))
     }
     // endregion
@@ -157,6 +181,20 @@ class CreateStudyActivity(
         hideAllGroups()
         study_create_english_translation_group.visible()
         study_create_english_translation_input.setText(englishTranslation)
+    }
+
+    override fun confirmDeleteStudy() {
+
+        model().publish(CreateStudyIntent.Idle)
+
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.study_create_english_translation_delete_title))
+            .setMessage(getString(R.string.study_create_english_translation_delete_body))
+            .setPositiveButton(android.R.string.yes) { _, _ ->
+                model().publish(CreateStudyIntent.ConfirmDeleteStudy(studyToUpdate!!))
+            }
+            .setNegativeButton(android.R.string.no, null)
+            .show()
     }
 
     override fun updateChinesePhrase(pinyin: List<Pinyin>) {
@@ -174,8 +212,7 @@ class CreateStudyActivity(
     override fun confirmPhrase(englishTranslation: String, pinyin: List<Pinyin>) {
         hideAllGroups()
         study_create_confirm_group.visible()
-        study_create_confirm_chinese_translation.text = pinyin.formatChineseCharacterString()
-        study_create_confirm_english_translation.text = englishTranslation
+        study_create_details.populate(Study(englishTranslation, pinyin))
     }
 
     override fun exit() {

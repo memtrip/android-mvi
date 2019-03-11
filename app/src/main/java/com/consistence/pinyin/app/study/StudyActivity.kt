@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
-import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
-import com.consistence.pinyin.app.pinyin.list.phonetic.PinyinPhoneticAdapter
-import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.Interaction
 import com.consistence.pinyin.kit.gone
@@ -17,7 +14,6 @@ import com.memtrip.mxandroid.MxViewActivity
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.pinyin_phonetic_fragment.view.*
 import kotlinx.android.synthetic.main.study_activity.*
 import javax.inject.Inject
 
@@ -69,7 +65,7 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
         Observable.just(StudyIntent.Init),
         adapter.interaction.map {
             when (it.id) {
-                R.id.study_list_item_delete -> StudyIntent.DeleteStudy(it.data)
+                R.id.study_card_item_train -> StudyIntent.StudyPhrase(it.data)
                 else -> StudyIntent.SelectStudy(it.data)
             }
         }

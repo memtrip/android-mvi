@@ -20,6 +20,9 @@
     <string name="study_create_generic_error">
         Could not create study, unfortunately your database might corrupted. Please try again.
     </string>
+    <string name="study_delete_generic_error">
+        Could not delete study, unfortunately your database might corrupted. Please try again.
+    </string>
 
     <!-- region create study english translation -->
     <string name="study_create_english_translation_title">
@@ -35,6 +38,11 @@
     </string>
     <string name="study_create_english_translation_validation_more_than">
         Your english translation cannot be more than 30 characters.
+    </string>
+    <string name="study_create_english_translation_delete">Delete phrase</string>
+    <string name="study_create_english_translation_delete_title">Are you sure?</string>
+    <string name="study_create_english_translation_delete_body">
+        Do you want to permanently delete this phrase?
     </string>
     <!-- endregion -->
 
@@ -62,6 +70,7 @@
     </string>
 
     <string name="study_create_confirm_cta">Create</string>
+    <string name="study_create_confirm_update_cta">Update</string>
     <!-- endregion -->
 
 </resources>

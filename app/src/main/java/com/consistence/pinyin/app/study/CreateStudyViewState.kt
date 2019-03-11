@@ -13,6 +13,7 @@ data class CreateStudyViewState(
     sealed class View : MxViewState {
         object Idle : View()
         object EnglishTranslationForm : View()
+        object DeleteStudyConfirmation : View()
         data class ChinesePhraseForm(val unique: Int = id()) : View()
         object ConfirmPhrase : View()
         object Exit : View()

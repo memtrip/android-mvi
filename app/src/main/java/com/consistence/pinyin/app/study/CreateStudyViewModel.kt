@@ -4,6 +4,7 @@ import android.app.Application
 import com.consistence.pinyin.R
 import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.domain.study.Study
+import com.consistence.pinyin.domain.study.db.DeleteStudy
 import com.consistence.pinyin.domain.study.db.SaveStudy
 import com.consistence.pinyin.domain.study.db.UpdateStudy
 import com.memtrip.mxandroid.MxViewModel
@@ -13,6 +14,7 @@ import javax.inject.Inject
 class CreateStudyViewModel @Inject internal constructor(
     private val saveStudy: SaveStudy,
     private val updateStudy: UpdateStudy,
+    private val deleteStudy: DeleteStudy,
     application: Application
 ) : MxViewModel<CreateStudyIntent, CreateStudyRenderAction, CreateStudyViewState>(
     CreateStudyViewState(CreateStudyViewState.View.Idle),
@@ -27,6 +29,10 @@ class CreateStudyViewModel @Inject internal constructor(
         CreateStudyIntent.Idle -> Observable.just(CreateStudyRenderAction.Idle)
         is CreateStudyIntent.EnterEnglishTranslation ->
             validateEnglishTranslation(intent.englishTranslation)
+        CreateStudyIntent.DeleteStudy ->
+            Observable.just(CreateStudyRenderAction.DeleteStudy)
+        is CreateStudyIntent.ConfirmDeleteStudy ->
+            deleteStudy(intent.study)
         is CreateStudyIntent.EnterChinesePhrase ->
             validateChinesePhrase(intent.chinesePhrase)
         is CreateStudyIntent.AddPinyin ->
@@ -66,6 +72,12 @@ class CreateStudyViewModel @Inject internal constructor(
                 step = CreateStudyViewState.Step.CHINESE_PHRASE,
                 englishTranslation = renderAction.englishTranslation
             )
+        CreateStudyRenderAction.DeleteStudy -> previousState.copy(
+            view = CreateStudyViewState.View.DeleteStudyConfirmation
+        )
+        is CreateStudyRenderAction.StudyDeleted -> previousState.copy(
+            view = CreateStudyViewState.View.Exit
+        )
         CreateStudyRenderAction.DoneEnteringChinesePhrase ->
             previousState.copy(
                 view = CreateStudyViewState.View.ConfirmPhrase,
@@ -166,6 +178,14 @@ class CreateStudyViewModel @Inject internal constructor(
             }.toObservable().onErrorReturn {
                 CreateStudyRenderAction.ValidationError(context().getString(R.string.study_create_generic_error))
             }
+        }
+    }
+
+    private fun deleteStudy(study: Study): Observable<CreateStudyRenderAction> {
+        return deleteStudy.remove(study).map<CreateStudyRenderAction> {
+            CreateStudyRenderAction.StudyDeleted
+        }.toObservable().onErrorReturn {
+            CreateStudyRenderAction.ValidationError(context().getString(R.string.study_delete_generic_error))
         }
     }
 }

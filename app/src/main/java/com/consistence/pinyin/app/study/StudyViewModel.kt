@@ -20,7 +20,7 @@ class StudyViewModel @Inject internal constructor(
     override fun dispatcher(intent: StudyIntent): Observable<StudyRenderAction> = when (intent) {
         StudyIntent.Init, StudyIntent.Retry, StudyIntent.Refresh -> getStudy()
         StudyIntent.Idle -> Observable.just(StudyRenderAction.Idle)
-        is StudyIntent.DeleteStudy -> TODO()
+        is StudyIntent.StudyPhrase -> TODO()
         is StudyIntent.SelectStudy -> Observable.just(StudyRenderAction.NavigateToStudy(intent.study))
     }
 

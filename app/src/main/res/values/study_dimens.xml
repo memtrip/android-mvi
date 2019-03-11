@@ -2,6 +2,6 @@
 
     <dimen name="study_no_results_offset">72dp</dimen>
 
-    <dimen name="study_list_delete_size">64dp</dimen>
+    <dimen name="study_card_train_size">64dp</dimen>
 
 </resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/study_create_toolbar"
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="study_create_english_translation_title,study_create_english_translation_label,study_create_english_translation_input,study_create_english_translation_cta" />
+        app:constraint_referenced_ids="study_create_english_translation_title,study_create_english_translation_label,study_create_english_translation_input,study_create_english_translation_cta,study_create_english_translation_delete" />
 
     <com.consistence.pinyin.kit.AppTextView
         android:id="@+id/study_create_english_translation_title"
@@ -68,6 +68,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/study_create_toolbar"/>
+
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/study_create_english_translation_delete"
+        style="@style/ButtonPrimary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/study_create_english_translation_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
     <!-- endregion english translation step -->
 
     <!-- region chinese phrase step -->
@@ -196,7 +207,7 @@
         android:id="@+id/study_create_confirm_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="study_create_confirm_cta,study_create_confirm_title,study_create_confirm_label,study_create_confirm_english_translation,study_create_confirm_chinese_translation"
+        app:constraint_referenced_ids="study_create_confirm_cta,study_create_confirm_title,study_create_confirm_label,study_create_details"
         android:visibility="gone" />
 
     <com.consistence.pinyin.kit.AppButton
@@ -227,37 +238,22 @@
         style="@style/Typography.Body1.Inverse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_large_16dp"
+        android:layout_marginStart="@dimen/padding_large_16dp"
+        android:layout_marginEnd="@dimen/padding_large_16dp"
         android:text="@string/study_create_chinese_confirm"
         android:textColor="@color/colorTextInverse"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_create_confirm_title"/>
 
-    <com.consistence.pinyin.kit.AppTextView
-        android:id="@+id/study_create_confirm_english_translation"
-        style="@style/Typography.Body1.Inverse"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_large_16dp"
-        android:layout_marginEnd="@dimen/padding_large_16dp"
-        android:textColor="@color/colorTextInverse"
-        tools:text="I went to the supermarket"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/study_create_confirm_label"/>
-
-    <com.consistence.pinyin.kit.AppTextView
-        android:id="@+id/study_create_confirm_chinese_translation"
-        style="@style/Typography.Body1.Inverse"
+    <com.consistence.pinyin.app.study.StudyCardView
+        android:id="@+id/study_create_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
-        android:textColor="@color/colorTextInverse"
-        tools:text="我去了超市"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/study_create_confirm_english_translation"/>
+        app:layout_constraintTop_toBottomOf="@+id/study_create_confirm_label" />
     <!-- endregion confirm phrase step -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

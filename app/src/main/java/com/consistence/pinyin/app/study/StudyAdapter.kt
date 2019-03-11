@@ -9,6 +9,7 @@ import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.*
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.study_card_view.view.*
 import kotlinx.android.synthetic.main.study_list_item.view.*
 
 class StudyAdapter(
@@ -20,8 +21,8 @@ class StudyAdapter(
         val viewHolder = StudyViewHolder(inflater.inflate(
             R.layout.study_list_item, parent, false))
 
-        RxView.clicks(viewHolder.deleteButton).map {
-            Interaction(viewHolder.deleteButton.id, data[viewHolder.adapterPosition])
+        RxView.clicks(viewHolder.itemView.study_list_card.study_card_item_train).map {
+            Interaction(viewHolder.itemView.study_list_card.study_card_item_train.id, data[viewHolder.adapterPosition])
         }.subscribe(interaction)
 
         return viewHolder
@@ -30,10 +31,7 @@ class StudyAdapter(
 
 class StudyViewHolder(itemView: View) : SimpleAdapterViewHolder<Study>(itemView) {
 
-    val deleteButton = itemView.study_list_item_delete
-
     override fun populate(position: Int, value: Study) {
-        itemView.study_list_item_chinese_phrase_value.text = value.pinyin.formatChineseCharacterString()
-        itemView.study_list_item_english_translation_value.text = value.englishTranslation
+        itemView.study_list_card.populate(value, true)
     }
 }
