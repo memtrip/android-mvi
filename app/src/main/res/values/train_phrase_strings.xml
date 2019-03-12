@@ -7,6 +7,9 @@
 
     <string name="train_phrase_chinese_label">Translate the following into English:</string>
     <string name="train_phrase_english_label">Translate the following into Chinese:</string>
+
+    <string name="train_phrase_correct_title">Correct</string>
+    <string name="train_phrase_incorrect_title">Incorrect</string>
     <!-- endregion train phrase -->
 
 </resources>

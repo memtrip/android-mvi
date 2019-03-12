@@ -1,9 +1,7 @@
 package com.consistence.pinyin.app.train
 
 import android.app.Application
-import com.consistence.pinyin.app.study.CreateStudyIntent
-import com.consistence.pinyin.domain.pinyin.FetchAndSavePinyin
-import com.consistence.pinyin.domain.pinyin.db.CountPinyin
+import com.consistence.pinyin.domain.pinyin.formatChineseCharacterString
 import com.consistence.pinyin.domain.study.Study
 import com.memtrip.mxandroid.MxViewModel
 import io.reactivex.Observable
@@ -17,8 +15,8 @@ class TrainPhraseViewModel @Inject internal constructor(
 ) {
     override fun dispatcher(intent: TrainPhraseIntent): Observable<TrainPhraseRenderAction> = when (intent) {
         is TrainPhraseIntent.Init -> pickQuestion(intent.study)
-        is TrainPhraseIntent.AnswerEnglish -> TODO()
-        is TrainPhraseIntent.AnswerChinese -> TODO()
+        is TrainPhraseIntent.AnswerEnglishToChinese -> checkChineseAnswer(intent.translation, intent.study)
+        is TrainPhraseIntent.AnswerChineseToEnglish -> checkEnglishAnswer(intent.translation, intent.study)
     }
 
     override fun reducer(previousState: TrainPhraseViewState, renderAction: TrainPhraseRenderAction): TrainPhraseViewState = when (renderAction) {
@@ -31,8 +29,13 @@ class TrainPhraseViewModel @Inject internal constructor(
         is TrainPhraseRenderAction.Correct -> previousState.copy(
             view = TrainPhraseViewState.View.Correct(renderAction.study)
         )
-        is TrainPhraseRenderAction.Incorrect -> previousState.copy(
-            view = TrainPhraseViewState.View.Incorrect(renderAction.entered, renderAction.answer)
+        is TrainPhraseRenderAction.IncorrectEnglish -> previousState.copy(
+            view = TrainPhraseViewState.View.IncorrectEnglish(
+                renderAction.englishTranslation, renderAction.answer)
+        )
+        is TrainPhraseRenderAction.IncorrectChinese -> previousState.copy(
+            view = TrainPhraseViewState.View.IncorrectChinese(
+                renderAction.chineseTranslation, renderAction.answer)
         )
     }
 
@@ -53,5 +56,33 @@ class TrainPhraseViewModel @Inject internal constructor(
 
     private fun useChinese(): Boolean {
         return (Math.random() * 50 + 1).toInt() % 2 == 0
+    }
+
+    private fun checkEnglishAnswer(
+        englishTranslation: String,
+        study: Study
+    ): Observable<TrainPhraseRenderAction> {
+        return Observable.just(
+            if (englishTranslation.toLowerCase().trim() == study.englishTranslation.toLowerCase().trim()) {
+                TrainPhraseRenderAction.Correct(study)
+            } else {
+                TrainPhraseRenderAction.IncorrectEnglish(englishTranslation, study)
+            }
+        )
+    }
+
+    private fun checkChineseAnswer(
+        chineseTranslation: String,
+        study: Study
+    ): Observable<TrainPhraseRenderAction> {
+        return Observable.just(
+            if (chineseTranslation == study.pinyin.formatChineseCharacterString()) {
+                TrainPhraseRenderAction.Correct(study)
+            } else {
+                TrainPhraseRenderAction.IncorrectChinese(
+                    chineseTranslation,
+                    study)
+            }
+        )
     }
 }

@@ -15,7 +15,7 @@ class GetPinyin @Inject internal constructor(
             .observeOn(schedulerProvider.main())
             .subscribeOn(schedulerProvider.thread())
             .map { entities ->
-                entities.reversed().map {
+                entities.asSequence().map {
                     Pinyin(
                         it.uid,
                         it.sourceUrl,
@@ -26,7 +26,9 @@ class GetPinyin @Inject internal constructor(
                         it.chineseCharacters,
                         it.characterImageSrc
                     )
-                }
+                }.sortedWith(Comparator { left, right ->
+                    Integer.compare(listOfUid.indexOf(left.uid), listOfUid.indexOf(right.uid))
+                }).toList()
             }
     }
 }

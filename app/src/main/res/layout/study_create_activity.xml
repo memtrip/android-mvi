@@ -148,6 +148,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_medium_8dp"
         android:layout_gravity="center"
+        app:queryHint="@string/study_create_chinese_phrase"
+        app:defaultQueryHint="@string/study_create_chinese_phrase"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_create_chinese_phrase_composition"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -162,24 +164,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_create_chinese_phrase_search_view" />
-
-    <com.consistence.pinyin.kit.AppTextView
-        style="@style/Typography.Body1"
-        android:id="@+id/study_create_chinese_phrase_search_view_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_large_16dp"
-        android:layout_marginTop="@dimen/padding_large_16dp"
-        android:layout_marginBottom="@dimen/padding_large_16dp"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:text="@string/study_create_chinese_phrase"
-        android:textColor="@color/colorTextInverse"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/study_create_chinese_phrase_search_view"
-        app:layout_constraintTop_toTopOf="@+id/study_create_chinese_phrase_search_view"
-        app:layout_constraintEnd_toEndOf="@+id/study_create_chinese_phrase_search_view"
-        app:layout_constraintBottom_toBottomOf="@+id/study_create_chinese_phrase_search_view"/>
 
     <FrameLayout
         android:id="@+id/study_create_chinese_phrase_fragment_container"

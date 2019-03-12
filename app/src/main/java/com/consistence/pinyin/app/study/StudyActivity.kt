@@ -59,6 +59,7 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
     }
 
     private fun startCreateStudyActivity() {
+        model().publish(StudyIntent.Idle)
         startActivityForResult(CreateStudyActivity.newIntent(this), 1)
     }
 
@@ -66,8 +67,8 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
         Observable.just(StudyIntent.Init),
         adapter.interaction.map {
             when (it.id) {
-                R.id.study_card_item_train -> StudyIntent.TrainPhrase(it.data)
-                else -> StudyIntent.SelectStudy(it.data)
+                R.id.study_card_item_edit -> StudyIntent.SelectStudy(it.data)
+                else -> StudyIntent.TrainPhrase(it.data)
             }
         }
     )

@@ -17,8 +17,12 @@ sealed class TrainPhraseRenderAction : MxRenderAction {
     data class Correct(
         val study: Study
     ) : TrainPhraseRenderAction()
-    data class Incorrect(
-        val entered: Study,
+    data class IncorrectEnglish(
+        val englishTranslation: String,
+        val answer: Study
+    ) : TrainPhraseRenderAction()
+    data class IncorrectChinese(
+        val chineseTranslation: String,
         val answer: Study
     ) : TrainPhraseRenderAction()
 }
@@ -27,7 +31,8 @@ interface TrainPhraseLayout : MxViewLayout {
     fun englishQuestion(englishTranslation: String)
     fun chineseQuestion(chineseQuestion: List<Pinyin>)
     fun correct(study: Study)
-    fun incorrect(entered: Study, answer: Study)
+    fun incorrectEnglish(englishTranslation: String, answer: Study)
+    fun incorrectChinese(chineseTranslation: String, answer: Study)
 }
 
 class TrainPhraseRenderer @Inject internal constructor() : MxViewRenderer<TrainPhraseLayout, TrainPhraseViewState> {
@@ -43,8 +48,11 @@ class TrainPhraseRenderer @Inject internal constructor() : MxViewRenderer<TrainP
         is TrainPhraseViewState.View.Correct -> {
             layout.correct(state.view.study)
         }
-        is TrainPhraseViewState.View.Incorrect -> {
-            layout.incorrect(state.view.entered, state.view.answer)
+        is TrainPhraseViewState.View.IncorrectEnglish -> {
+            layout.incorrectEnglish(state.view.englishTranslation, state.view.answer)
+        }
+        is TrainPhraseViewState.View.IncorrectChinese -> {
+            layout.incorrectChinese(state.view.chineseTranslation, state.view.answer)
         }
     }
 }

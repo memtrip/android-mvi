@@ -5,10 +5,12 @@ import com.memtrip.mxandroid.MxViewIntent
 
 sealed class TrainPhraseIntent : MxViewIntent {
     data class Init(val study: Study) : TrainPhraseIntent()
-    data class AnswerEnglish(
-        val englishTranslation: String
+    data class AnswerEnglishToChinese(
+        val translation: String,
+        val study: Study
     ) : TrainPhraseIntent()
-    data class AnswerChinese(
-        val chineseTranslation: String
+    data class AnswerChineseToEnglish(
+        val translation: String,
+        val study: Study
     ) : TrainPhraseIntent()
 }

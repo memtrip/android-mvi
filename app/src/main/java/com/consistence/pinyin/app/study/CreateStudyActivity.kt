@@ -22,7 +22,6 @@ import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
 import com.consistence.pinyin.domain.pinyin.formatChineseCharacterString
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.closeKeyboard
-import com.consistence.pinyin.kit.invisible
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 
@@ -80,12 +79,6 @@ class CreateStudyActivity(
             supportFragmentManager,
             this)
 
-        study_create_chinese_phrase_search_view.setOnQueryTextFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                study_create_chinese_phrase_search_view_label.invisible()
-            }
-        }
-
         study_create_chinese_phrase_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p: String): Boolean { return false }
             override fun onQueryTextChange(terms: String): Boolean {
@@ -97,12 +90,7 @@ class CreateStudyActivity(
 
         study_create_chinese_phrase_search_view.setOnCloseListener {
             sendSearchEvent()
-            study_create_chinese_phrase_search_view_label.visible()
             false
-        }
-
-        study_create_chinese_phrase_search_view_label.setOnClickListener {
-            study_create_chinese_phrase_search_view.isIconified = false
         }
 
         study_create_english_translation_input.requestFocus()
@@ -170,6 +158,7 @@ class CreateStudyActivity(
     // region PinyinListFragment.PinyinListDelegate
     override fun pinyinSelection(pinyin: Pinyin) {
         study_create_chinese_phrase_search_view.setQuery("", false)
+        study_create_chinese_phrase_search_view.requestFocus()
         model().publish(CreateStudyIntent.AddPinyin(pinyin))
     }
     // endregion
@@ -203,12 +192,12 @@ class CreateStudyActivity(
 
     override fun updateChinesePhrase(pinyin: List<Pinyin>) {
 
+        model().publish(CreateStudyIntent.Idle)
+
         pinyinValues = pinyin
 
         hideAllGroups()
-        study_create_chinese_phrase_group.visible().run {
-            study_create_chinese_phrase_search_view_label.visible()
-        }
+        study_create_chinese_phrase_group.visible()
 
         study_create_chinese_phrase_composition_text.text = pinyin.formatChineseCharacterString()
     }
@@ -254,9 +243,7 @@ class CreateStudyActivity(
         study_create_english_translation_group.gone().run {
             study_create_english_translation_delete.gone()
         }
-        study_create_chinese_phrase_group.gone().run {
-            study_create_chinese_phrase_search_view_label.gone()
-        }
+        study_create_chinese_phrase_group.gone()
         study_create_confirm_group.gone()
     }
 

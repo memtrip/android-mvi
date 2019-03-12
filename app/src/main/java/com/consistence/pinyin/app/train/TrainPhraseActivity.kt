@@ -6,12 +6,8 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
-import com.consistence.pinyin.app.pinyin.PinyinActivity
-import com.consistence.pinyin.app.study.CreateStudyActivity
-import com.consistence.pinyin.app.study.StudyActivity
 import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.domain.pinyin.formatChineseCharacterString
-import com.consistence.pinyin.domain.pinyin.pinyinUidForDatabase
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
@@ -20,8 +16,6 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.memtrip.mxandroid.MxViewActivity
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.entry_activity.*
-import kotlinx.android.synthetic.main.kit_error_retry.view.*
 import kotlinx.android.synthetic.main.train_phrase_activity.*
 import javax.inject.Inject
 
@@ -51,13 +45,17 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
             RxView.clicks(train_phrase_english_cta),
             RxTextView.editorActions(train_phrase_english_question_input)
         ).map {
-            TrainPhraseIntent.AnswerEnglish(train_phrase_english_question_input.text.toString())
+            TrainPhraseIntent.AnswerEnglishToChinese(
+                train_phrase_english_question_input.text.toString(),
+                study)
         },
         Observable.merge(
             RxView.clicks(train_phrase_chinese_cta),
             RxTextView.editorActions(train_phrase_chinese_question_input)
         ).map {
-            TrainPhraseIntent.AnswerChinese(train_phrase_chinese_question_input.text.toString())
+            TrainPhraseIntent.AnswerChineseToEnglish(
+                train_phrase_chinese_question_input.text.toString(),
+                study)
         }
     )
 
@@ -75,11 +73,26 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     }
 
     override fun correct(study: Study) {
-        train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorTextInverse))
+        train_phrase_english_cta.gone()
+        train_phrase_chinese_cta.gone()
+        train_phrase_english_question_input.isEnabled = false
+        train_phrase_chinese_question_input.isEnabled = false
+        train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPositive))
+        train_phrase_toolbar.title = getString(R.string.train_phrase_correct_title)
     }
 
-    override fun incorrect(entered: Study, answer: Study) {
+    override fun incorrectEnglish(englishTranslation: String, answer: Study) {
+        train_phrase_english_cta.gone()
+        train_phrase_english_question_input.isEnabled = false
         train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
+        train_phrase_toolbar.title = getString(R.string.train_phrase_incorrect_title)
+    }
+
+    override fun incorrectChinese(chineseTranslation: String, answer: Study) {
+        train_phrase_chinese_cta.gone()
+        train_phrase_chinese_question_input.isEnabled = false
+        train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
+        train_phrase_toolbar.title = getString(R.string.train_phrase_incorrect_title)
     }
     // endregion
 

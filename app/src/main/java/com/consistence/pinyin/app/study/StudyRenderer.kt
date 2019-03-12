@@ -12,7 +12,7 @@ sealed class StudyRenderAction : MxRenderAction {
     object NoResults : StudyRenderAction()
     object Error : StudyRenderAction()
     data class NavigateToStudy(val study: Study) : StudyRenderAction()
-    data class TrainPhrase(val study: Study) : StudyRenderAction()
+    data class NavigateTrainPhrase(val study: Study) : StudyRenderAction()
 }
 
 interface StudyLayout : MxViewLayout {

@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.consistence.pinyin.R
 import com.consistence.pinyin.domain.pinyin.formatChineseCharacterString
+import com.consistence.pinyin.domain.pinyin.formatPinyinString
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
@@ -27,11 +28,12 @@ class StudyCardView @JvmOverloads constructor(
     fun populate(study: Study, showTrainIcon: Boolean = false) {
         study_card_item_chinese_phrase_value.text = study.pinyin.formatChineseCharacterString()
         study_card_item_english_translation_value.text = study.englishTranslation
+        study_card_item_pinyin_translation_value.text = study.pinyin.formatPinyinString()
 
         if (showTrainIcon) {
-            study_card_item_train.visible()
+            study_card_item_edit.visible()
         } else {
-            study_card_item_train.gone()
+            study_card_item_edit.gone()
         }
     }
 }

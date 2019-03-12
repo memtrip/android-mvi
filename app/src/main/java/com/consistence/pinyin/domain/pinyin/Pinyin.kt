@@ -21,6 +21,13 @@ fun List<Pinyin>.formatChineseCharacterString(): String {
     }
 }
 
+fun List<Pinyin>.formatPinyinString(): String {
+    return joinToString(" ") {
+        it.phoneticScriptText
+    }
+}
+
+
 fun List<Pinyin>.pinyinUidForDatabase(): String {
     return joinToString("-") {
         it.uid.toString()

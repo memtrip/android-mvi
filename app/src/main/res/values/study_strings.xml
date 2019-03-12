@@ -10,6 +10,7 @@
 
     <string name="study_item_chinese_phrase">Chinese phrase</string>
     <string name="study_item_english_translation">English translation</string>
+    <string name="study_item_pinyin_translation">Pinyin</string>
     <!-- endregion study -->
 
     <string name="study_create_title">Create Phrase</string>

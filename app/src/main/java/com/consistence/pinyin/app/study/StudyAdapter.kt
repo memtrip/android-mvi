@@ -21,8 +21,8 @@ class StudyAdapter(
         val viewHolder = StudyViewHolder(inflater.inflate(
             R.layout.study_list_item, parent, false))
 
-        RxView.clicks(viewHolder.itemView.study_list_card.study_card_item_train).map {
-            Interaction(viewHolder.itemView.study_list_card.study_card_item_train.id, data[viewHolder.adapterPosition])
+        RxView.clicks(viewHolder.itemView.study_list_card.study_card_item_edit).map {
+            Interaction(viewHolder.itemView.study_list_card.study_card_item_edit.id, data[viewHolder.adapterPosition])
         }.subscribe(interaction)
 
         return viewHolder

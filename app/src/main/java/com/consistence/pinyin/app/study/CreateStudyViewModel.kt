@@ -60,7 +60,8 @@ class CreateStudyViewModel @Inject internal constructor(
                 englishTranslation = renderAction.study.englishTranslation,
                 pinyin = previousState.pinyin.apply {
                     addAll(renderAction.study.pinyin)
-                }
+                },
+                originalStudy = renderAction.study
             )
         }
         CreateStudyRenderAction.Idle -> previousState.copy(
@@ -108,7 +109,9 @@ class CreateStudyViewModel @Inject internal constructor(
         CreateStudyRenderAction.GoBack -> when (previousState.step) {
             CreateStudyViewState.Step.INITIAL,
             CreateStudyViewState.Step.ENGLISH_TRANSLATION -> {
-                if (previousState.englishTranslation.isEmpty() && previousState.pinyin.isEmpty()) {
+                if (previousState.englishTranslation.isEmpty() && previousState.pinyin.isEmpty()
+                    || studyHasNotChanged(previousState.originalStudy, previousState.englishTranslation, previousState.pinyin)
+                ) {
                     previousState.copy(view = CreateStudyViewState.View.Exit)
                 } else {
                     previousState.copy(view = CreateStudyViewState.View.LoseChangesConfirmation)
@@ -136,6 +139,16 @@ class CreateStudyViewModel @Inject internal constructor(
         is CreateStudyRenderAction.ValidationError -> previousState.copy(
             view = CreateStudyViewState.View.ValidationError(renderAction.message)
         )
+    }
+
+    private fun studyHasNotChanged(
+        originalStudy: Study?,
+        currentEnglishPhrase: String,
+        currentPinyin: List<Pinyin>
+    ): Boolean {
+       return originalStudy != null
+            && originalStudy.englishTranslation == currentEnglishPhrase
+            && originalStudy.pinyin == currentPinyin
     }
 
     override fun filterIntents(intents: Observable<CreateStudyIntent>): Observable<CreateStudyIntent> = Observable.merge(

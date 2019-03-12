@@ -16,8 +16,12 @@ data class TrainPhraseViewState(val view: View) : MxViewState {
         data class Correct(
             val study: Study
         ) : View()
-        data class Incorrect(
-            val entered: Study,
+        data class IncorrectEnglish(
+            val englishTranslation: String,
+            val answer: Study
+        ) : View()
+        data class IncorrectChinese(
+            val chineseTranslation: String,
             val answer: Study
         ) : View()
     }

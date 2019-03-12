@@ -38,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding_large_16dp"
-        android:layout_marginTop="@dimen/padding_large_16dp"
+        android:layout_marginTop="@dimen/padding_medium_8dp"
         android:layout_marginEnd="@dimen/padding_large_16dp"
         app:cardBackgroundColor="@color/cardBackgroundColor"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +62,7 @@
         android:layout_marginTop="@dimen/padding_large_16dp"
         android:layout_marginEnd="@dimen/padding_large_16dp"
         android:hint="@string/train_phrase_answer_hint"
+        android:imeOptions="actionDone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/train_phrase_english_question_card"/>
