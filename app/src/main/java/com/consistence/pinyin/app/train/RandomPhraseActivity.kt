@@ -7,6 +7,7 @@ import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.gone
+import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView
 import com.memtrip.mxandroid.MxViewActivity
 import dagger.android.AndroidInjection
@@ -52,7 +53,9 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
     }
 
     override fun finished(results: List<Pair<Study, Boolean>>) {
-        print("")
+        train_random_results.visible()
+        train_random_results_value.text = getString(
+            R.string.train_random_results_value, results.count { it.second }, results.size)
     }
     // endregion
 

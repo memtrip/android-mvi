@@ -24,6 +24,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/train_random_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="train_random_results_title,train_random_results_value"/>
 
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/train_random_results_title"
+        style="@style/Typography.H6.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:gravity="center_horizontal"
+        android:text="@string/train_random_results"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/train_random_toolbar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/train_random_results_value"
+        style="@style/Typography.Body1.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/train_random_results_title"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

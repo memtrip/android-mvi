@@ -15,5 +15,7 @@
 
     <string name="train_random_title">Train your vocabulary</string>
     <string name="train_random_start_cta">Start</string>
+    <string name="train_random_results">Results</string>
+    <string name="train_random_results_value">%1$d / %2$d</string>
 
 </resources>
