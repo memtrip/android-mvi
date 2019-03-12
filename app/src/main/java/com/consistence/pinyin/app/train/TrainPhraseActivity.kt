@@ -9,6 +9,7 @@ import com.consistence.pinyin.ViewModelFactory
 import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.domain.pinyin.formatChineseCharacterString
 import com.consistence.pinyin.domain.study.Study
+import com.consistence.pinyin.kit.closeKeyboard
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
 import com.jakewharton.rxbinding2.view.RxView
@@ -73,28 +74,40 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     }
 
     override fun correct(study: Study) {
-        train_phrase_english_cta.gone()
-        train_phrase_chinese_cta.gone()
-        train_phrase_english_question_input.isEnabled = false
-        train_phrase_chinese_question_input.isEnabled = false
-        train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPositive))
-        train_phrase_toolbar.title = getString(R.string.train_phrase_correct_title)
+        result {
+            train_phrase_toolbar.title = getString(R.string.train_phrase_correct_title)
+            train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPositive))
+        }
     }
 
     override fun incorrectEnglish(englishTranslation: String, answer: Study) {
-        train_phrase_english_cta.gone()
-        train_phrase_english_question_input.isEnabled = false
-        train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
-        train_phrase_toolbar.title = getString(R.string.train_phrase_incorrect_title)
+        result {
+            train_phrase_toolbar.title = getString(R.string.train_phrase_incorrect_title)
+            train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
+        }
     }
 
     override fun incorrectChinese(chineseTranslation: String, answer: Study) {
-        train_phrase_chinese_cta.gone()
-        train_phrase_chinese_question_input.isEnabled = false
-        train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
-        train_phrase_toolbar.title = getString(R.string.train_phrase_incorrect_title)
+        result {
+            train_phrase_toolbar.title = getString(R.string.train_phrase_incorrect_title)
+            train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
+        }
     }
     // endregion
+
+    private fun result(changeCorrectOrIncorrectStatus: () -> Unit) {
+        train_phrase_chinese.gone()
+        train_phrase_english.gone()
+
+        train_phrase_result_study_card.run {
+            visible()
+            populate(study)
+        }
+
+        closeKeyboard(train_phrase_result_study_card)
+
+        changeCorrectOrIncorrectStatus()
+    }
 
     override fun inject() {
         AndroidInjection.inject(this)

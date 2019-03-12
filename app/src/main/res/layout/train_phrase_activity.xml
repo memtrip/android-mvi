@@ -145,4 +145,28 @@
         app:layout_constraintBottom_toBottomOf="@+id/train_phrase_toolbar" />
     <!-- endregion -->
 
+    <!-- region Result -->
+    <com.consistence.pinyin.app.study.StudyCardView
+        android:id="@+id/train_phrase_result_study_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/train_phrase_toolbar"/>
+
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/train_phrase_result_next_cta"
+        style="@style/ButtonSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/train_phrase_cta"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/train_phrase_toolbar" />
+    <!-- endregion -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

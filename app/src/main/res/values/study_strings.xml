@@ -49,7 +49,7 @@
 
     <!-- region create study chinese phrase -->
     <string name="study_create_chinese_phrase">
-        Search and select items to create a phrase
+        Search and select items
     </string>
     <string name="study_create_chinese_phrase_cta">Next</string>
     <string name="study_create_chinese_phrase_validation_empty">
