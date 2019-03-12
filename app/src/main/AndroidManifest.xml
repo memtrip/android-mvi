@@ -45,6 +45,10 @@
         <activity
             android:name=".app.train.TrainPhraseActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".app.train.RandomPhraseActivity"
+            android:screenOrientation="portrait" />
         <!-- endregion -->
 
         <service

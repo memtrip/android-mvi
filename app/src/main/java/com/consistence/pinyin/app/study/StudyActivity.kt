@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
+import com.consistence.pinyin.app.train.RandomPhraseActivity
 import com.consistence.pinyin.app.train.TrainPhraseActivity
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.Interaction
@@ -33,8 +34,13 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
             title = getString(R.string.study_title)
             setDisplayHomeAsUpEnabled(true)
         }
+
         study_create_button.setOnClickListener {
             startCreateStudyActivity()
+        }
+
+        study_vocabulary_training.setOnClickListener {
+            startActivity(RandomPhraseActivity.newIntent(this))
         }
 
         val adapterInteraction: PublishSubject<Interaction<Study>> = PublishSubject.create()
@@ -101,6 +107,7 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
     override fun populate(study: List<Study>) {
         study_no_results_group.gone()
         study_recyclerview.visible()
+        study_vocabulary_training.visible()
         adapter.clear()
         adapter.populate(study)
     }

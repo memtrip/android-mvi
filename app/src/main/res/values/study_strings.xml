@@ -2,6 +2,7 @@
 
     <!-- region study -->
     <string name="study_title">Vocabulary</string>
+    <string name="study_train_vocabulary">Start vocabulary training</string>
     <string name="study_no_results_title">It\'s study time!</string>
     <string name="study_no_results">
         You have not created any study vocabulary. Add your vocabulary to the app and test yourself everyday!
