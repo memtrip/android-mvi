@@ -1,25 +1,21 @@
 package com.consistence.pinyin.domain.study
 
 import com.consistence.pinyin.domain.SchedulerProvider
-import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.domain.pinyin.db.GetPinyin
 import com.consistence.pinyin.domain.study.db.StudyDao
-import com.consistence.pinyin.domain.study.db.StudyEntity
-import com.consistence.pinyin.domain.study.db.listOfUid
 import com.consistence.pinyin.domain.study.db.withPinyin
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
-class GetStudy @Inject internal constructor(
+class GetRandomStudy @Inject internal constructor(
     private val studyDao: StudyDao,
     private val getPinyin: GetPinyin,
     private val schedulerProvider: SchedulerProvider
 ) {
 
-    fun get(): Single<List<Study>> {
-        return Observable.fromCallable { studyDao.studyOrderByDesc() }
+    fun random(): Single<List<Study>> {
+        return Observable.fromCallable { studyDao.randomStudy() }
             .observeOn(schedulerProvider.main())
             .subscribeOn(schedulerProvider.thread())
             .withPinyin(getPinyin)

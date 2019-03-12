@@ -11,6 +11,9 @@ interface StudyDao {
     @Query("SELECT * FROM Study ORDER BY uid DESC LIMIT 0, 50")
     fun studyOrderByDesc(): List<StudyEntity>
 
+    @Query("SELECT * FROM Study ORDER BY RANDOM() LIMIT 10")
+    fun randomStudy(): List<StudyEntity>
+
     @Insert
     fun insert(study: StudyEntity)
 

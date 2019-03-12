@@ -3,6 +3,7 @@ package com.consistence.pinyin.app.train
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.core.content.ContextCompat
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
@@ -29,6 +30,8 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
         intent.getParcelableExtra<Study>(ARG_STUDY)
     }
 
+    private var correct: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.train_phrase_activity)
@@ -36,7 +39,11 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
         train_phrase_toolbar.title = getString(R.string.train_phrase_title)
         train_phrase_toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         train_phrase_toolbar.setNavigationOnClickListener {
-            finish()
+            finishWithResult()
+        }
+
+        train_phrase_result_next_cta.setOnClickListener {
+            finishWithResult()
         }
     }
 
@@ -64,17 +71,24 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     override fun englishQuestion(englishTranslation: String) {
         train_phrase_english.visible()
         train_phrase_english_question_label.text = englishTranslation
-        train_phrase_english_question_input.requestFocus()
+
+        Handler().post {
+            train_phrase_english_question_input.requestFocus()
+        }
     }
 
     override fun chineseQuestion(chineseQuestion: List<Pinyin>) {
         train_phrase_chinese.visible()
         train_phrase_chinese_question_label.text = chineseQuestion.formatChineseCharacterString()
-        train_phrase_chinese_question_input.requestFocus()
+
+        Handler().post {
+            train_phrase_chinese_question_input.requestFocus()
+        }
     }
 
     override fun correct(study: Study) {
         result {
+            correct = true
             train_phrase_toolbar.title = getString(R.string.train_phrase_correct_title)
             train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPositive))
         }
@@ -98,6 +112,7 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     private fun result(changeCorrectOrIncorrectStatus: () -> Unit) {
         train_phrase_chinese.gone()
         train_phrase_english.gone()
+        train_phrase_result_next_cta.visible()
 
         train_phrase_result_study_card.run {
             visible()
@@ -107,6 +122,13 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
         closeKeyboard(train_phrase_result_study_card)
 
         changeCorrectOrIncorrectStatus()
+    }
+
+    private fun finishWithResult() {
+        setResult(0, Intent().apply {
+            putExtra(RESULT_STATUS, correct)
+        })
+        finish()
     }
 
     override fun inject() {
@@ -122,6 +144,7 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     companion object {
 
         private const val ARG_STUDY = "ARG_STUDY"
+        const val RESULT_STATUS = "RESULT_STATUS"
 
         fun newIntent(context: Context, study: Study): Intent  {
             return Intent(context, TrainPhraseActivity::class.java).apply {

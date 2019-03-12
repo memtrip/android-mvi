@@ -7,6 +7,7 @@ import com.memtrip.mxandroid.MxViewRenderer
 import javax.inject.Inject
 
 sealed class RandomPhraseRenderAction : MxRenderAction {
+    object Idle : RandomPhraseRenderAction()
     data class PickRandomPhrases(val study: List<Study>) : RandomPhraseRenderAction()
     data class Result(val correct: Boolean) : RandomPhraseRenderAction()
 }
