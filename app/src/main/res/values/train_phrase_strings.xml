@@ -10,6 +10,9 @@
 
     <string name="train_phrase_correct_title">Correct</string>
     <string name="train_phrase_incorrect_title">Incorrect</string>
+
+    <string name="train_phrase_lose_changes_title">Are you sure?</string>
+    <string name="train_phrase_lose_changes_body">You are about to exit your current training session</string>
     <!-- endregion train phrase -->
 
     <!-- region train random -->

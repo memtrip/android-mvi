@@ -43,7 +43,11 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        model().publish(RandomPhraseIntent.Result(result(data)))
+        if (forceQuit(data)) {
+            finish()
+        } else {
+            model().publish(RandomPhraseIntent.Result(result(data)))
+        }
     }
 
     override fun intents(): Observable<RandomPhraseIntent> = Observable.merge(
@@ -71,6 +75,10 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
 
     private fun result(intent: Intent?): Boolean {
         return intent?.getBooleanExtra(TrainPhraseActivity.RESULT_STATUS, false) ?: false
+    }
+
+    private fun forceQuit(intent: Intent?): Boolean {
+        return intent?.getBooleanExtra(TrainPhraseActivity.RESULT_FORCE_QUIT, false) ?: false
     }
 
     private fun studyLimit(): Int = when (train_random_start_limit_tab_layout.selectedTabPosition) {

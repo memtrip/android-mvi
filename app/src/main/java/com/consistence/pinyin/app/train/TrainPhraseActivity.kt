@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
@@ -43,7 +44,17 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
         train_phrase_toolbar.title = getString(R.string.train_phrase_title)
         train_phrase_toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         train_phrase_toolbar.setNavigationOnClickListener {
-            finishWithResult()
+            AlertDialog.Builder(this)
+                .setTitle(getString(R.string.train_phrase_lose_changes_title))
+                .setMessage(getString(R.string.train_phrase_lose_changes_body))
+                .setPositiveButton(android.R.string.yes) { _, _ ->
+                    setResult(0, Intent().apply {
+                        putExtra(RESULT_FORCE_QUIT, true)
+                    })
+                    finish()
+                }
+                .setNegativeButton(android.R.string.no, null)
+                .show()
         }
     }
 
@@ -143,6 +154,7 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
         private const val ARG_STUDY = "ARG_STUDY"
         private const val ARG_SHOW_RESULT = "ARG_SHOW_RESULT"
         const val RESULT_STATUS = "RESULT_STATUS"
+        const val RESULT_FORCE_QUIT = "RESULT_FORCE_QUIT"
 
         fun newIntent(context: Context, study: Study, showResult: Boolean = false): Intent  {
             return Intent(context, TrainPhraseActivity::class.java).apply {
