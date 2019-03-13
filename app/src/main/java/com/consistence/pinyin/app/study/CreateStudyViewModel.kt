@@ -109,8 +109,8 @@ class CreateStudyViewModel @Inject internal constructor(
         CreateStudyRenderAction.GoBack -> when (previousState.step) {
             CreateStudyViewState.Step.INITIAL,
             CreateStudyViewState.Step.ENGLISH_TRANSLATION -> {
-                if (previousState.englishTranslation.isEmpty() && previousState.pinyin.isEmpty()
-                    || studyHasNotChanged(previousState.originalStudy, previousState.englishTranslation, previousState.pinyin)
+                if (previousState.englishTranslation.isEmpty() && previousState.pinyin.isEmpty() ||
+                    studyHasNotChanged(previousState.originalStudy, previousState.englishTranslation, previousState.pinyin)
                 ) {
                     previousState.copy(view = CreateStudyViewState.View.Exit)
                 } else {
@@ -146,9 +146,9 @@ class CreateStudyViewModel @Inject internal constructor(
         currentEnglishPhrase: String,
         currentPinyin: List<Pinyin>
     ): Boolean {
-       return originalStudy != null
-            && originalStudy.englishTranslation == currentEnglishPhrase
-            && originalStudy.pinyin == currentPinyin
+        return originalStudy != null &&
+            originalStudy.englishTranslation == currentEnglishPhrase &&
+            originalStudy.pinyin == currentPinyin
     }
 
     override fun filterIntents(intents: Observable<CreateStudyIntent>): Observable<CreateStudyIntent> = Observable.merge(
@@ -159,13 +159,13 @@ class CreateStudyViewModel @Inject internal constructor(
     )
 
     private fun validateEnglishTranslation(englishTranslation: String): Observable<CreateStudyRenderAction> {
-       return Observable.just(when {
-           englishTranslation.isEmpty() -> CreateStudyRenderAction.ValidationError(
-               context().getString(R.string.study_create_english_translation_validation_empty))
-           englishTranslation.length > 80 -> CreateStudyRenderAction.ValidationError(
-               context().getString(R.string.study_create_english_translation_validation_more_than))
-           else -> CreateStudyRenderAction.EnterEnglishTranslation(englishTranslation)
-       })
+        return Observable.just(when {
+            englishTranslation.isEmpty() -> CreateStudyRenderAction.ValidationError(
+                context().getString(R.string.study_create_english_translation_validation_empty))
+            englishTranslation.length > 80 -> CreateStudyRenderAction.ValidationError(
+                context().getString(R.string.study_create_english_translation_validation_more_than))
+            else -> CreateStudyRenderAction.EnterEnglishTranslation(englishTranslation)
+        })
     }
 
     private fun validateChinesePhrase(pinyin: List<Pinyin>): Observable<CreateStudyRenderAction> {

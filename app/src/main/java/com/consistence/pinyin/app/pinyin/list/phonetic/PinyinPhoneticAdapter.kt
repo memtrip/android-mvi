@@ -6,7 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import com.consistence.pinyin.R
 import com.consistence.pinyin.domain.pinyin.Pinyin
-import com.consistence.pinyin.kit.*
+import com.consistence.pinyin.kit.Interaction
+import com.consistence.pinyin.kit.SimpleAdapter
+import com.consistence.pinyin.kit.SimpleAdapterViewHolder
+import com.consistence.pinyin.kit.visible
+import com.consistence.pinyin.kit.gone
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.pinyin_phonetic_list_item.view.*

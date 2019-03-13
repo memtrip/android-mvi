@@ -4,7 +4,11 @@ import android.content.Context
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import com.consistence.pinyin.R
-import com.consistence.pinyin.app.pinyin.list.*
+import com.consistence.pinyin.app.pinyin.list.PinyinListIntent
+import com.consistence.pinyin.app.pinyin.list.PinyinListLayout
+import com.consistence.pinyin.app.pinyin.list.PinyinListRenderAction
+import com.consistence.pinyin.app.pinyin.list.PinyinListViewState
+import com.consistence.pinyin.app.pinyin.list.PinyinListFragment
 import com.consistence.pinyin.app.pinyin.list.character.PinyinCharacterFragment
 import com.consistence.pinyin.app.pinyin.list.english.PinyinEnglishFragment
 import com.consistence.pinyin.app.pinyin.list.phonetic.PinyinPhoneticFragment

@@ -27,7 +27,6 @@ fun List<Pinyin>.formatPinyinString(): String {
     }
 }
 
-
 fun List<Pinyin>.pinyinUidForDatabase(): String {
     return joinToString("-") {
         it.uid.toString()

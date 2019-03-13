@@ -4,9 +4,10 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import com.consistence.pinyin.R
-import com.consistence.pinyin.domain.pinyin.formatChineseCharacterString
 import com.consistence.pinyin.domain.study.Study
-import com.consistence.pinyin.kit.*
+import com.consistence.pinyin.kit.Interaction
+import com.consistence.pinyin.kit.SimpleAdapter
+import com.consistence.pinyin.kit.SimpleAdapterViewHolder
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.study_card_view.view.*

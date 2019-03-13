@@ -251,11 +251,11 @@ class CreateStudyActivity(
 
         private const val ARG_STUDY = "ARG_STUDY"
 
-        fun newIntent(context: Context): Intent  {
+        fun newIntent(context: Context): Intent {
             return Intent(context, CreateStudyActivity::class.java)
         }
 
-        fun newIntent(context: Context, study: Study): Intent  {
+        fun newIntent(context: Context, study: Study): Intent {
             return Intent(context, CreateStudyActivity::class.java).apply {
                 putExtra(ARG_STUDY, study)
             }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
-import com.consistence.pinyin.app.study.StudyAdapter
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
@@ -13,7 +12,6 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.memtrip.mxandroid.MxViewActivity
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.study_activity.*
 import kotlinx.android.synthetic.main.train_random_activity.*
 import javax.inject.Inject
 

@@ -1,15 +1,11 @@
 package com.consistence.pinyin.domain.study
 
 import com.consistence.pinyin.domain.SchedulerProvider
-import com.consistence.pinyin.domain.pinyin.Pinyin
 import com.consistence.pinyin.domain.pinyin.db.GetPinyin
 import com.consistence.pinyin.domain.study.db.StudyDao
-import com.consistence.pinyin.domain.study.db.StudyEntity
-import com.consistence.pinyin.domain.study.db.listOfUid
 import com.consistence.pinyin.domain.study.db.withPinyin
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
 class GetStudy @Inject internal constructor(
