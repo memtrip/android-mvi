@@ -81,8 +81,8 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     }
 
     override fun correct(study: Study) {
+        correct = true
         result {
-            correct = true
             train_phrase_toolbar.title = getString(R.string.train_phrase_correct_title)
             train_phrase_container.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPositive))
         }
