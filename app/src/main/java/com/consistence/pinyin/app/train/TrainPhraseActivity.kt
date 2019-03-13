@@ -45,10 +45,6 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
         train_phrase_toolbar.setNavigationOnClickListener {
             finishWithResult()
         }
-
-        train_phrase_result_next_cta.setOnClickListener {
-            finishWithResult()
-        }
     }
 
     override fun intents(): Observable<TrainPhraseIntent> = Observable.merge(
@@ -111,7 +107,6 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
         if (showResult) {
             train_phrase_chinese.gone()
             train_phrase_english.gone()
-            train_phrase_result_next_cta.visible()
 
             train_phrase_result_study_card.run {
                 visible()

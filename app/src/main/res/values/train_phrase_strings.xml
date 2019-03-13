@@ -4,7 +4,6 @@
     <string name="train_phrase_title">Train phrase</string>
     <string name="train_phrase_answer_hint">Enter your answer</string>
     <string name="train_phrase_cta">Answer</string>
-    <string name="train_phrase_next_cta">Next</string>
 
     <string name="train_phrase_chinese_label">Translate the following into English:</string>
     <string name="train_phrase_english_label">Translate the following into Chinese:</string>
