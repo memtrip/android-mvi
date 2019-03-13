@@ -39,7 +39,7 @@
         You must enter an english translation of your phrase.
     </string>
     <string name="study_create_english_translation_validation_more_than">
-        Your english translation cannot be more than 50 characters.
+        Your english translation cannot be more than 80 characters.
     </string>
     <string name="study_create_english_translation_delete">Delete phrase</string>
     <string name="study_create_english_translation_delete_title">Are you sure?</string>
@@ -58,7 +58,7 @@
         your phrase.
     </string>
     <string name="study_create_chinese_phrase_validation_more_than">
-        You must enter a Chinese phrase cannot be more than 50 characters. It\'s better to learn in
+        You must enter a Chinese phrase cannot be more than 80 characters. It\'s better to learn in
         smaller chunks!
     </string>
     <!-- endregion -->

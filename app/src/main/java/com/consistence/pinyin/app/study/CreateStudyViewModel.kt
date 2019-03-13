@@ -162,7 +162,7 @@ class CreateStudyViewModel @Inject internal constructor(
        return Observable.just(when {
            englishTranslation.isEmpty() -> CreateStudyRenderAction.ValidationError(
                context().getString(R.string.study_create_english_translation_validation_empty))
-           englishTranslation.length > 50 -> CreateStudyRenderAction.ValidationError(
+           englishTranslation.length > 80 -> CreateStudyRenderAction.ValidationError(
                context().getString(R.string.study_create_english_translation_validation_more_than))
            else -> CreateStudyRenderAction.EnterEnglishTranslation(englishTranslation)
        })
@@ -172,7 +172,7 @@ class CreateStudyViewModel @Inject internal constructor(
         return Observable.just(when {
             pinyin.isEmpty() -> CreateStudyRenderAction.ValidationError(
                 context().getString(R.string.study_create_chinese_phrase_validation_empty))
-            pinyin.joinToString { it.chineseCharacters }.length > 50 -> CreateStudyRenderAction.ValidationError(
+            pinyin.joinToString { it.chineseCharacters }.length > 80 -> CreateStudyRenderAction.ValidationError(
                 context().getString(R.string.study_create_chinese_phrase_validation_more_than))
             else -> CreateStudyRenderAction.DoneEnteringChinesePhrase
         })
