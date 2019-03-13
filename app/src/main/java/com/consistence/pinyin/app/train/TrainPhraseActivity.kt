@@ -46,18 +46,16 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
             if (showResult) {
                 finish()
             } else {
-                AlertDialog.Builder(this)
-                    .setTitle(getString(R.string.train_phrase_lose_changes_title))
-                    .setMessage(getString(R.string.train_phrase_lose_changes_body))
-                    .setPositiveButton(android.R.string.yes) { _, _ ->
-                        setResult(0, Intent().apply {
-                            putExtra(RESULT_FORCE_QUIT, true)
-                        })
-                        finish()
-                    }
-                    .setNegativeButton(android.R.string.no, null)
-                    .show()
+                exitPrompt()
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (showResult) {
+            super.onBackPressed()
+        } else {
+            exitPrompt()
         }
     }
 
@@ -140,6 +138,20 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
             putExtra(RESULT_STATUS, correct)
         })
         finish()
+    }
+
+    private fun exitPrompt() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.train_phrase_lose_changes_title))
+            .setMessage(getString(R.string.train_phrase_lose_changes_body))
+            .setPositiveButton(android.R.string.yes) { _, _ ->
+                setResult(0, Intent().apply {
+                    putExtra(RESULT_FORCE_QUIT, true)
+                })
+                finish()
+            }
+            .setNegativeButton(android.R.string.no, null)
+            .show()
     }
 
     override fun inject() {
