@@ -30,6 +30,10 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
         intent.getParcelableExtra<Study>(ARG_STUDY)
     }
 
+    private val showResult: Boolean by lazy {
+        intent.getBooleanExtra(ARG_SHOW_RESULT, false)
+    }
+
     private var correct: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,19 +75,13 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     override fun englishQuestion(englishTranslation: String) {
         train_phrase_english.visible()
         train_phrase_english_question_label.text = englishTranslation
-
-        Handler().post {
-            train_phrase_english_question_input.requestFocus()
-        }
+        train_phrase_english_question_input.requestFocus()
     }
 
     override fun chineseQuestion(chineseQuestion: List<Pinyin>) {
         train_phrase_chinese.visible()
         train_phrase_chinese_question_label.text = chineseQuestion.formatChineseCharacterString()
-
-        Handler().post {
-            train_phrase_chinese_question_input.requestFocus()
-        }
+        train_phrase_chinese_question_input.requestFocus()
     }
 
     override fun correct(study: Study) {
@@ -110,18 +108,22 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     // endregion
 
     private fun result(changeCorrectOrIncorrectStatus: () -> Unit) {
-        train_phrase_chinese.gone()
-        train_phrase_english.gone()
-        train_phrase_result_next_cta.visible()
+        if (showResult) {
+            train_phrase_chinese.gone()
+            train_phrase_english.gone()
+            train_phrase_result_next_cta.visible()
 
-        train_phrase_result_study_card.run {
-            visible()
-            populate(study)
+            train_phrase_result_study_card.run {
+                visible()
+                populate(study)
+            }
+
+            closeKeyboard(train_phrase_result_study_card)
+
+            changeCorrectOrIncorrectStatus()
+        } else {
+            finishWithResult()
         }
-
-        closeKeyboard(train_phrase_result_study_card)
-
-        changeCorrectOrIncorrectStatus()
     }
 
     private fun finishWithResult() {
@@ -144,11 +146,13 @@ class TrainPhraseActivity : MxViewActivity<TrainPhraseIntent, TrainPhraseRenderA
     companion object {
 
         private const val ARG_STUDY = "ARG_STUDY"
+        private const val ARG_SHOW_RESULT = "ARG_SHOW_RESULT"
         const val RESULT_STATUS = "RESULT_STATUS"
 
-        fun newIntent(context: Context, study: Study): Intent  {
+        fun newIntent(context: Context, study: Study, showResult: Boolean = false): Intent  {
             return Intent(context, TrainPhraseActivity::class.java).apply {
                 putExtra(ARG_STUDY, study)
+                putExtra(ARG_SHOW_RESULT, showResult)
             }
         }
     }

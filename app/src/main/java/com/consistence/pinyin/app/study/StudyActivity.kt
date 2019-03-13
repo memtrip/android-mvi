@@ -86,7 +86,7 @@ class StudyActivity : MxViewActivity<StudyIntent, StudyRenderAction, StudyViewSt
 
     override fun navigateToTrainPhrase(study: Study) {
         model().publish(StudyIntent.Idle)
-        startActivityForResult(TrainPhraseActivity.newIntent(this, study), 1)
+        startActivityForResult(TrainPhraseActivity.newIntent(this, study, true), 1)
     }
 
     override fun inject() {
