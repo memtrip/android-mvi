@@ -19,6 +19,7 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory<RandomPhraseViewModel>
+
     @Inject
     lateinit var render: RandomPhraseRenderer
 
@@ -41,7 +42,7 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
     override fun intents(): Observable<RandomPhraseIntent> = Observable.merge(
         Observable.just(RandomPhraseIntent.Init),
         RxView.clicks(train_random_start_cta).map {
-            RandomPhraseIntent.Start
+            RandomPhraseIntent.Start(studyLimit())
         }
     )
 
@@ -61,6 +62,14 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
 
     private fun result(intent: Intent?): Boolean {
         return intent?.getBooleanExtra(TrainPhraseActivity.RESULT_STATUS, false) ?: false
+    }
+
+    private fun studyLimit(): Int = when (train_random_start_limit_tab_layout.selectedTabPosition) {
+        0 -> 5
+        1 -> 10
+        2 -> 20
+        3 -> 50
+        else -> 20
     }
 
     override fun inject() {

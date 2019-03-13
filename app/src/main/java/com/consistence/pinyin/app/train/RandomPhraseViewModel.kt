@@ -16,7 +16,7 @@ class RandomPhraseViewModel @Inject internal constructor(
     override fun dispatcher(intent: RandomPhraseIntent): Observable<RandomPhraseRenderAction> = when (intent) {
         RandomPhraseIntent.Idle -> Observable.just(RandomPhraseRenderAction.Idle)
         RandomPhraseIntent.Init -> Observable.just(RandomPhraseRenderAction.Idle)
-        RandomPhraseIntent.Start -> randomStudy()
+        is RandomPhraseIntent.Start -> randomStudy(intent.limit)
         is RandomPhraseIntent.Result -> Observable.just(RandomPhraseRenderAction.Result(intent.correct))
     }
 
@@ -43,8 +43,8 @@ class RandomPhraseViewModel @Inject internal constructor(
         }
     )
 
-    private fun randomStudy(): Observable<RandomPhraseRenderAction> {
-        return getRandomStudy.random().map<RandomPhraseRenderAction> {
+    private fun randomStudy(limit: Int): Observable<RandomPhraseRenderAction> {
+        return getRandomStudy.random(limit).map<RandomPhraseRenderAction> {
             RandomPhraseRenderAction.PickRandomPhrases(it)
         }.toObservable()
     }

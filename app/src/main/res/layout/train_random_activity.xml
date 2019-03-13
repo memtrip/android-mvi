@@ -42,10 +42,11 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/train_random_start_number_of_questions"
+        android:id="@+id/train_random_start_limit_tab_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_large_16dp"
+        app:tabGravity="fill"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/train_random_start_how_many_label"
         app:layout_constraintEnd_toEndOf="parent">
@@ -53,22 +54,22 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5" />
+            android:text="@string/train_random_start_limit_tab_5" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10" />
+            android:text="@string/train_random_start_limit_tab_10" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20" />
+            android:text="@string/train_random_start_limit_tab_20" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="50" />
+            android:text="@string/train_random_start_limit_tab_50" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -80,7 +81,7 @@
         android:layout_margin="@dimen/padding_large_16dp"
         android:text="@string/train_random_start_cta"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/train_random_start_number_of_questions"
+        app:layout_constraintTop_toBottomOf="@+id/train_random_start_limit_tab_layout"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.Group

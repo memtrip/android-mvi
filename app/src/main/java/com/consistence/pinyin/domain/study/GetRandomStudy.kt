@@ -14,8 +14,8 @@ class GetRandomStudy @Inject internal constructor(
     private val schedulerProvider: SchedulerProvider
 ) {
 
-    fun random(): Single<List<Study>> {
-        return Observable.fromCallable { studyDao.randomStudy() }
+    fun random(limit: Int): Single<List<Study>> {
+        return Observable.fromCallable { studyDao.randomStudy(limit) }
             .observeOn(schedulerProvider.main())
             .subscribeOn(schedulerProvider.thread())
             .withPinyin(getPinyin)

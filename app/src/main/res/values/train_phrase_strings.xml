@@ -16,11 +16,13 @@
     <!-- region train random -->
     <string name="train_random_title">Train your vocabulary</string>
     <string name="train_random_instruction_label">
-        We will prompt you with an English or Chinese phrase to translate.
+        We will prompt you with either an English or Chinese phrase to translate.
     </string>
-    <string name="train_random_how_many_label">
-        How many phrases do you want to study?
-    </string>
+    <string name="train_random_how_many_label">How many phrases do you want to study?</string>
+    <string name="train_random_start_limit_tab_5">5</string>
+    <string name="train_random_start_limit_tab_10">10</string>
+    <string name="train_random_start_limit_tab_20">20</string>
+    <string name="train_random_start_limit_tab_50">50</string>
     <string name="train_random_start_cta">Start training</string>
     <string name="train_random_results">Results</string>
     <string name="train_random_results_value">%1$d / %2$d</string>
