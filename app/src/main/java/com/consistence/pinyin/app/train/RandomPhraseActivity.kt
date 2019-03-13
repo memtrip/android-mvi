@@ -40,14 +40,14 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
 
     override fun intents(): Observable<RandomPhraseIntent> = Observable.merge(
         Observable.just(RandomPhraseIntent.Init),
-        RxView.clicks(train_random_start).map {
+        RxView.clicks(train_random_start_cta).map {
             RandomPhraseIntent.Start
         }
     )
 
     // region RandomPhraseLayout
     override fun next(study: Study) {
-        train_random_start.gone()
+        train_random_start_cta.gone()
         model().publish(RandomPhraseIntent.Idle)
         startActivityForResult(TrainPhraseActivity.newIntent(this, study), 0)
     }

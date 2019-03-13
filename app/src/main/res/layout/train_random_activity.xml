@@ -13,16 +13,75 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.consistence.pinyin.kit.AppButton
-        android:id="@+id/train_random_start"
-        style="@style/ButtonPrimary"
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/train_random_start_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/train_random_start_cta"
+        app:constraint_referenced_ids="train_random_start_cta,train_random_start_number_of_questions" />
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/train_random_start_instruction_label"
+        style="@style/Typography.Body1.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/train_random_instruction_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/train_random_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.consistence.pinyin.kit.AppTextView
+        android:id="@+id/train_random_start_how_many_label"
+        style="@style/Typography.H6.Inverse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/train_random_how_many_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/train_random_start_instruction_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/train_random_start_number_of_questions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/train_random_start_how_many_label"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <com.consistence.pinyin.kit.AppButton
+        android:id="@+id/train_random_start_cta"
+        style="@style/ButtonPrimary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large_16dp"
+        android:text="@string/train_random_start_cta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/train_random_start_number_of_questions"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/train_random_results"
