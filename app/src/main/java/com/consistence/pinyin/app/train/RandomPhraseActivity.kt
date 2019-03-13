@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.consistence.pinyin.R
 import com.consistence.pinyin.ViewModelFactory
+import com.consistence.pinyin.app.study.StudyAdapter
 import com.consistence.pinyin.domain.study.Study
 import com.consistence.pinyin.kit.gone
 import com.consistence.pinyin.kit.visible
@@ -12,6 +13,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.memtrip.mxandroid.MxViewActivity
 import dagger.android.AndroidInjection
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.study_activity.*
 import kotlinx.android.synthetic.main.train_random_activity.*
 import javax.inject.Inject
 
@@ -23,6 +25,8 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
     @Inject
     lateinit var render: RandomPhraseRenderer
 
+    private lateinit var adapter: RandomPhraseResultsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.train_random_activity)
@@ -32,6 +36,9 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
         train_random_toolbar.setNavigationOnClickListener {
             finish()
         }
+
+        adapter = RandomPhraseResultsAdapter(this)
+        train_random_results_recycler_view.adapter = adapter
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -54,9 +61,11 @@ class RandomPhraseActivity : MxViewActivity<RandomPhraseIntent, RandomPhraseRend
     }
 
     override fun finished(results: List<Pair<Study, Boolean>>) {
-        train_random_results.visible()
-        train_random_results_value.text = getString(
-            R.string.train_random_results_value, results.count { it.second }, results.size)
+        train_random_start_group.gone()
+        train_random_results_recycler_view.visible()
+
+        train_random_toolbar.title = getString(R.string.train_random_results_title, results.count { it.second }, results.size)
+        adapter.populate(results)
     }
     // endregion
 

@@ -24,8 +24,7 @@
     <string name="train_random_start_limit_tab_20">20</string>
     <string name="train_random_start_limit_tab_50">50</string>
     <string name="train_random_start_cta">Start training</string>
-    <string name="train_random_results">Results</string>
-    <string name="train_random_results_value">%1$d / %2$d</string>
+    <string name="train_random_results_title">Results (%1$d/%2$d)</string>
     <!-- endregion -->
 
 </resources>
