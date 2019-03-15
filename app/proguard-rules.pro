@@ -37,7 +37,7 @@
 -dontwarn retrofit2.Platform$Java8
 -keepattributes Signature
 -keepattributes Exceptions
--keepclassmembers class com.consistence.pinyin.domain.pinyin.api.** {
+-keepclassmembers class com.consistence.pinyin.domain.** {
   <init>(...);
   <fields>;
 }
