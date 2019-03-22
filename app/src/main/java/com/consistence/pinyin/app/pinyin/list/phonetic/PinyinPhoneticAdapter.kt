@@ -48,7 +48,8 @@ class PinyinPhoneticViewHolder(
             itemView.pinyin_phonetic_list_item_english_translation_value.visible()
             itemView.pinyin_phonetic_list_item_chinese_character.visible()
             itemView.pinyin_phonetic_list_item_chinese_character_value.visible()
-            value.audioSrc?.let { itemView.pinyin_list_audio_button.visible() } ?: itemView.pinyin_list_audio_button.gone()
+            value.audioSrc?.let { itemView.pinyin_list_audio_button.visible() }
+                ?: itemView.pinyin_list_audio_button.gone()
         } else {
             itemView.pinyin_phonetic_list_item_english_translation.visible()
             itemView.pinyin_phonetic_list_item_english_translation_value.visible()
